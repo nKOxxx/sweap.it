@@ -1,0 +1,430 @@
+Query: ROLE: You are the synthesis lead for sweap.it research wave R3. You 
+receive only verified, measured facts below. Do not invent citations or numbers.
+If you reason beyond the facts, label it . Your output MUST start with the exact
+needle SWEEPIT_R3 or the run is discarded.
+
+CONTEXT: sweap.it is a proposed product + research paper: hygiene tooling for 
+LLM agent stacks. The founder scrapped the v0.1 prototype and ordered 
+research-only until a full overview exists: landscape, status quo, technical 
+setup, plan, timeline, and above all a verdict on whether the project makes 
+sense.
+
+MEASURED FACTS (single host, real census, 2026-10-13):
+- 85.4% of STORED transcript bytes are tool exhaust (32.75M of 38.36M chars 
+across 143 sessions, 36,826 messages, 227MB sqlite store). Token share and 
+prompt share unmeasured; stored bytes are NOT prompt bytes.
+- Fixed per-call overhead paid on every API call: 28.7KB system prompt + 14.7KB 
+skills index + 54.3KB tool schemas = 97.7KB before any conversation content.
+- Host plane dust on this host: /tmp ~455MB, 54 stray screenshots (~10MB), 32MB 
+logs, 16MB session jsonl.
+
+LANDSCAPE (verified harvest, 271 records: arXiv 120, HF papers 80, OpenAlex 39, 
+GitHub 32):
+- Closest cousin: MemGPT/Letta (arXiv 2310.08560): context as paged, priced, 
+self-edited memory. Does NOT measure fixed overhead, no gated reclaim, no host 
+plane.
+- Monitors measure but never clean: splitrail (223 stars), the 
+claude-code-usage-analyzer family, blitzclean (234 stars). Zero shipped 
+cleaning.
+- Graveyard of 1-7 star single-CLI hacks: llm-cleaner, context-cleaner, 
+ContextGc, pi-hermes-memory-cleanup, mcp-context-cleaner. None has two planes, 
+gated reversible reclaim, or distill-before-sweep.
+- Academic spine: Survey of Context Engineering (2507.13334); Agentic Context 
+Management (2607.21503) treats memory+cost as lifecycle but builds no hygiene 
+plane; Compression Remembers the Detour (OpenAlex 2026): lossy context 
+compression AMPLIFIES off-task content; FadeMem (2601.18642) forgetting curves; 
+Beyond Heuristics (2512.21567) decision-theoretic memory management; AgentSys 
+(2602.07398) hierarchical memory + secure deletion; Referential Dangling 
+(2608.04569) hard compression breaks references; benchmarks: LOCA-bench 
+(2602.07962), MemoryRewardBench (2601.11969), compression on repo tasks 
+(2604.13725).
+- GC theory transfers: mark-sweep roots law (never sweep reachable state: the 
+hard-deny set), generational hypothesis (most objects die young, so does most 
+context), CCleaner trust loop (analyze, show, clean).
+
+RED-TEAM VERDICTS (wave R2, accepted by founder):
+- F1: host-plane cleanup is commodity (find + du + cron); the context plane is 
+the only differentiator.
+- F2: "CCleaner for AI" is a doomed frame: fleets are multi-host, ephemeral, 
+disk disposable; the scarce resource is per-call-priced context tokens, not 
+disk.
+- 85.4% must be quoted as a stored-bytes statistic; prompt-side truth requires 
+tokenization plus real capture.
+- Self-sweep paradox: agent measuring its own live store contaminates the 
+census; observer-as-subject; needs read-only snapshot protocol and external 
+verification.
+- Preservation via Cognexia (founder's memory product, SQLite+Markdown cards): 
+must be optional, human-gated, per-card provenance (session id, byte range, 
+checksum), retrieval observability, zero-fetch cards swept too, no agent 
+self-certification of "nothing vital lost".
+- Ordered fixes: (1) repitch on fixed overhead re-paid every call; (2) 
+frozen-snapshot before/after benchmark with held-out task set BEFORE more sweep 
+features; (3) Cognexia optional + gated + provenance.
+
+PRODUCT LAWS (founder decrees): two-plane model; default to reversible 
+(quarantine before delete); distill-then-sweep; measurement before destruction; 
+never reimplement DB surgery; human gate for judgment calls.
+
+YOUR TASK, four sections:
+1. TECHNICAL SETUP: consolidated architecture blueprint for the 
+context-plane-first product: components (read-only snapshot census, measurement,
+tokenizer economics, distillation with provenance, gated reclaim, before/after 
+benchmark harness), data flow, where each safety law is enforced, and what is v1
+scope versus later. Buildable by one founder plus agent workers. No invented 
+dependencies.
+2. PLAN + TIMELINE: phased plan in weeks with milestones and exit criteria per 
+phase, assuming evenings-and-weekends pace of one founder with agent workers. Be
+honest that the benchmark phase is the long pole. Include the paper milestone.
+3. GO/NO-GO: does this project make sense? Argue both sides from the facts, then
+commit to a verdict with explicit kill criteria (what observed result should 
+stop the project). Weigh: differentiation (real but narrow), market (who pays: 
+agent-tool developers, teams, nobody), risk (dangerous deletion, trust), effort 
+versus payoff, and the paper as parallel payoff.
+4. COVERAGE AUDIT: up to 6 still-un-researched items that could invalidate the 
+verdict, each with why it matters and the cheap way to check it.
+
+FORMAT: plain text, no em-dashes anywhere (use commas or semicolons). Sections 
+numbered 1 to 4. Max ~2500 words.
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    SWEEPIT_R3
+    
+    Synthesis lead, sweap.it research wave R3. I write only from the verified
+    facts you gave me; anything beyond them is flagged [inference].
+    Positions: two-plane model (context plane + host plane), context-first,
+    reversible reclaim, distill-then-sweep, measurement before destruction,
+    human gate for judgment calls.
+    
+    1. TECHNICAL SETUP
+    
+    The product is a context-plane hygiene tool. The host plane is explicitly
+    demoted to a small optional convenience surface and never leads the
+    story, because the red team already settled that disk cleanup is
+    commodity and fleets are ephemeral. Architecture is seven components with
+    a defined order of execution.
+    
+    1a. Read-only snapshot census (foundation)
+    Every measurement operates on a frozen read-only snapshot of a session
+    store (SQLite for the host's own store, plus jsonl capture for live
+    agents), never on the live store. This is the enforcement point of the
+    self-sweep paradox law: the agent never scans its own write path. The
+    census walks the snapshot with an external verifier that records a
+    checksum manifest (per-session, per-file SHA-256) before any analysis. A
+    snapshot is a directory of copied sqlite/jsonl artifacts plus its
+    manifest; census reads only these. This component is v1 and non-optional;
+    it is the substrate for everything else.
+    
+    1b. Measurement (stored bytes, then token economics)
+    The census computes per-session and per-message stored byte counts, the
+    distribution of tool-exhaust bytes (the 85.4% figure on this host), and
+    re-derives the fixed per-call overhead (97.7KB on this host from system
+    prompt + skills index + tool schemas). The plan separates two kinds of
+    output. First, stored-bytes diagnostics, which are exact and cheap.
+    Second, token-economics estimates, which convert stored bytes to
+    prompt-side token share through a tokenizer (tiktoken or equivalent) on
+    sampled real messages. The 85.4% number is a stored-bytes fact, and is
+    reported as such; prompt-side truth requires tokenization plus real
+    capture and is a v1.5 measurement, not a v1 claim [inference: because the
+    source data makes clear stored bytes are not prompt bytes, quoting 85.4%
+    as a token or cost fact would be unsupported]. Measurement precedes every
+    destructive operation.
+    
+    1c. Fixed-overhead economics (the repitch)
+    This component is the commercial heart. It computes, from the measured
+    overhead bytes and the user's model pricing, the cost re-paid on every
+    single API call before any conversation content arrives. On this host
+    that is 97.7KB per call. The pitch becomes: every agent call carries a
+    fixed toll; hygiene reduces the marginal content and, more importantly,
+    quantifies how much of the paid context is dead weight. v1 exposes this
+    as a per-call cost figure and a per-session breakdown. [inference: this
+    is the differentiator the red team's fix #1 points to, so it belongs at
+    the top of the UI, not buried.]
+    
+    1d. Distillation with provenance
+    Before any reclamation, condensable content is distilled into
+    representation with per-card provenance: session id, byte range, and
+    checksum. This is the enforcement surface of the distill-then-sweep law
+    and the Cognexia rule. Cognexia (the founder's memory product) is an
+    optional, human-gated consumer of distilled cards, never an automatic
+    sink. Each distilled card carries its provenance record and a
+    retrieval-observability log (when a card is ever fetched, that fetch is
+    recorded). Zero-fetch cards (never retrieved after N days) are themselves
+    reclamation candidates. The agent does not self-certify that nothing
+    vital was lost; instead the provenance and the before/after benchmark in
+    1f provide external evidence. There is no agent-side assertion of safety,
+    only an auditable trail. This is v1 for the provenance record and v1.5
+    for the full Cognexia integration.
+    
+    1e. Gated reclaim (reversible first)
+    Reclaim operates on the snapshot's conclusions but writes to the live
+    store only through a quarantine step: matched content moves to a
+    quarantine bucket with a duration, and only after the duration and a
+    human or history-scoped confirmation does it become eligible for delete.
+    This is the enforcement point of default-to-reversible and
+    human-gate-for-judgment-calls. The hard-deny set comes from the GC
+    mark-sweep law adapted verbatim: never sweep reachable state. Anything
+    referenced by a live session, a pointer, or a memory that is still
+    load-bearing is in the hard-deny set and excluded. The generational
+    hypothesis (most objects die young, so does most context) informs the
+    age-based eligibility tiers but is not a license to delete; it only
+    shapes the candidate list. DB surgery is never reimplemented; mutation
+    goes through the store's own APIs or a thin, tested adapter, which is the
+    enforcement point of never-reimplement-DB-surgery.
+    
+    1f. Before/after benchmark harness
+    The long pole and the honesty floor. A held-out task set is frozen up
+    front. Each measured session runs against the harness before and after a
+    reclaim to produce a paired score. This is the enforcement point of the
+    ordered fix #2 (frozen-snapshot before/after with a held-out set before
+    more sweep features) and of the founder's measurement-before-destruction
+    law applied to the product's own behavior. The harness records tokens
+    saved and any task-quality delta. Nothing ships to promotion without a
+    paired result on the held-out set. This is v1 and is the gate that blocks
+    feature creep.
+    
+    1g. Host-plane convenience (optional, later)
+    A minimal surface: du-based size report, stray screenshot and log sweep
+    into quarantine. This is a thin wrapper over find, du, and cron, which is
+    exactly why the red team says it is commodity. It ships as a single
+    toggle, clearly secondary, and is v2 at the earliest.
+    
+    Data flow, end to end: live store to frozen snapshot and manifest,
+    snapshot to stored-bytes and token-economics measurement, measurement
+    output to candidate lists, candidates filtered through the hard-deny set,
+    survivors distilled with provenance, distilled cards optionally surfaced
+    to Cognexia (human-gated), quarantine applied to the live store, then the
+    held-out harness run before and after to certify no regression. The
+    snapshot, measurement, and benchmark components are read-only against the
+    source of truth; only the quarantine write touches the live store.
+    
+    v1 scope: snapshot census, stored-bytes and fixed-overhead measurement,
+    tokenizer economics on samples, quarantine-first reclaim with hard-deny
+    set, held-out benchmark harness, provenance records. Later: full Cognexia
+    integration with retrieval observability, host-plane sweep, markets where
+    fleets share a store.
+    
+    2. PLAN + TIMELINE
+    
+    Pace assumed: one founder, evenings and weekends, with agent workers for
+    the mechanical census, harvest, and runner work. All phases list an exit
+    criterion that must be met before the next begins. The benchmark phase is
+    explicitly the long pole and is budgeted accordingly.
+    
+    Phase 0 (Weeks 1-2), Census and frozen snapshot instrumentation. Build
+    the read-only snapshot plus manifest pipeline and stand it up on the
+    host's 143 sessions. Exit: a reproducible snapshot of all 143 sessions, a
+    checksum manifest that verifies clean on two independent runs, and the
+    stored-bytes census reproduced (85.4% tool exhaust on 32.75M of 38.36M
+    chars).
+    
+    Phase 1 (Weeks 3-4), Measurement and overhead economics. Wire
+    stored-bytes reporting and the tokenizer-based token-share estimate on a
+    held-out sample of real messages; build the fixed-overhead cost card
+    (97.7KB per call on this host) rendered against model pricing. Exit:
+    measurement output is reproducible from the snapshot alone, and a
+    tokenization spot check is signed off as faithful to sampled messages.
+    
+    Phase 2 (Weeks 5-7), Benchmark harness. Freeze the held-out task set and
+    build the before/after runner. This is the mandated put-brakes phase: no
+    new sweep features while the harness is being built. Exit: paired
+    before/after runs on a small labeled slice with no task-quality
+    regression and measured token savings, all on snapshots so nothing
+    destructive has happened yet.
+    
+    Phase 3 (Weeks 8-10), Gated reclaim and provenance. Build
+    quarantine-first reclaim, the hard-deny set, and distillation with
+    per-card provenance on the sandbox slice. No promotion to the real store
+    until the Phase 2 harness shows clean results on the sandbox. Exit: a
+    sandbox reclaim that saves tokens, passes the held-out harness, and
+    produces a fully auditable quarantine and provenance log.
+    
+    Phase 4 (Weeks 11-13), Cognexia integration (optional, gated) and
+    hardening. Wire the optional, human-gated Cognexia consumer with per-card
+    provenance and retrieval observability; harden the verifier and add the
+    external-read verification of the self-sweep protocol. Exit: an
+    integration test where a sweep produces zero-fetch cards flagged for
+    review and retrieval is logged.
+    
+    Phase 5 (Week 14), Live opt-in deployment and write-up. Deploy reclaim on
+    the host behind the human gate, run the real before/after on a limited
+    slice, and gather the numbers for the paper. Exit: one live paired
+    result, reproducible.
+    
+    Paper milestone, spanning Phases 2-5. This is a parallel payoff, not a
+    trailing afterthought. The empirical contribution is the measured
+    fixed-overhead economics, the stored-bytes census, and the before/after
+    reclaim evidence; the conceptual contribution is locating the work inside
+    the context-engineering and agentic-context-management literature (Survey
+    2507.13334, ACM 2607.21503, FadeMem 2601.18642, Beyond Heuristics
+    2512.21567, and the Compression/Referential-Dangling findings) and
+    connecting it to the GC theory transfers. Draft the method and census
+    sections from Phase 1 onward, draft the results from Phase 4, and target
+    a public arXiv/OpenAlex track by the end of Phase 5 roughly Week 15.
+    [inference on the exact week; the sequencing is what I defend.]
+    
+    Honest note: the heaviest and least compressible work is the harness and
+    the live measurement, and that is where slip risk concentrates. Budget
+    30% slack into Weeks 5-7 before promising a date.
+    
+    3. GO/NO-GO
+    
+    Arguments for go.
+    The market positioning is defensible because it is narrow. The verified
+    landscape has syntax cousins (MemGPT/Letta pages memory but does not
+    measure fixed overhead, has no gated reclaim, no host plane) and a
+    monitor class that measures but never cleans (splitrail, blitzclean, the
+    usage-analyzer family), plus a graveyard of single-CLI hacks with no two
+    planes, no reversible reclaim, no distill-before-sweep. Nobody in the
+    271-record harvest offers the combination of read-only snapshot census,
+    measured fixed-overhead economics, and reversible, benchmark-verified
+    reclaim. That gap is real and now demonstrated, not asserted [inference:
+    the harvest supports the gap claim strongly]. The fixed overhead is a
+    concrete, re-paid-every-call cost that is easy for an engineering buyer
+    to feel immediately on their own invoices, which gives the pitch a
+    natural edge over the nebulous "clean your AI." The safety design
+    (hard-deny set, quarantine, held-out harness, provenance) directly
+    answers the red team's three risks, so the objections most likely to kill
+    a hygiene tool have prescribed engineering answers already. The paper is
+    a parallel asset: several of the cited academic works argue case by case
+    for context as a priced lifecycle, and even if the product stalls, the
+    measured census plus the fixed-overhead economics is a publishable
+    empirical contribution.
+    
+    Arguments for no-go.
+    The red team's F2 verdict is damning if read at face value: the CCleaner
+    frame failed because fleets are multi-host and ephemeral and disk is
+    disposable, and the scarce resource is priced context tokens, not disk.
+    The product pivots away from disk cleanup toward the token plane, which
+    is the correct response, but it inherits a harder question the facts do
+    not resolve: who pays. Agent-tool developers are a thin and
+    price-sensitive market, teams may not own a single-store census at all
+    (they spread across hosts), and the "nobody" outcome is not excluded by
+    the 271 harvest, which shows close cousins but no demonstrably paying
+    buyers. The differentiator is real but narrow: it is one measured insight
+    (fixed re-paid overhead) plus a hygiene loop that the market has
+    repeatedly failed to monetize (the graveyard). Effort concentrates
+    exactly where the risk concentrates, in the benchmark phase, which is
+    also honest and slow. There is also a trust asymmetry that no amount of
+    good design fully removes: deletion tooling asks users to hand over the
+    thing they fear losing, and the self-sweep paradox means the tool's own
+    assurance can never be fully self-issued, so marketing against that fear
+    costs more than the engineering.
+    
+    Verdict: GO, with strict gating on the benchmark phase as the committed
+    kill-or-continue point.
+    The reasoning: the only thing the facts truly rule out is building a
+    host-plane CCleaner, and the plan does not. The context-plane thesis
+    survives the red team's own logic, because red team fix #1 explicitly
+    repivots to fixed overhead, which is measurable and priced. But the
+    go-ahead is conditional and priced on evidence, not faith. The market
+    question (who pays) is not answered by any record in the harvest, so it
+    must be answered by a real buyer signal, and the cheapest honest buyer
+    signal the product can produce is the before/after token-savings and cost
+    number on a real store, which is exactly what the benchmark phase
+    produces. That is why the verdict is a conditional go whose main exit
+    hinges on the benchmark and on a live willingness-to-pay check, not on
+    more features.
+    
+    Kill criteria (any one observed result stops the project).
+    K1: The held-out benchmark harness shows no meaningful, reproducible
+    token saving after reclaim without a task-quality regression, or shows a
+    regression on the held-out set that provenance cannot explain. If reclaim
+    cannot demonstrably help the thing it claims to help, the product has no
+    reason to exist.
+    K2: After a live-opt-in experiment, no paying or pre-paying buyer (single
+    engineering lead, small team, or explicit LOI-equivalent interest)
+    emerges from a cold outreach of, say, 10-20 agent-tool developers; verify
+    with real replies, not inbound signups. If nobody pays, it does not
+    matter how good the harness is.
+    K3: A safety failure class is observed in the wild, specifically a
+    reclaim that moves or deletes load-bearing state from the hard-deny set,
+    or a provenance record that checksums as modified after the fact. Loss of
+    trust in a deletion tool is unrecoverable and the founder's own laws
+    forbid self-certification as a defense.
+    K4: The fixed-overhead number, once measured with real tokenization and
+    capture, turns out to be a minor share of a typical paid bill in the
+    developer segment. The whole repitch stands on that number being
+    material; if it is small, the pitch collapses back into the doomed
+    CCleaner frame.
+    K5: External verification of the self-sweep protocol fails, meaning the
+    census cannot be reproduced by a read-only observer. If the tool cannot
+    demonstrate it is not grading its own homework, the trust asymmetry
+    argument above wins.
+    
+    Any one of these is sufficient. The most likely, by effort concentration,
+    is K1 or K2, and both land at or just past the benchmark phase, which is
+    the planned decision gate. That is an honest structure: heavy spend
+    happens only up to the gate, and the gate itself produces the evidence
+    the verdict hinges on.
+    
+    4. COVERAGE AUDIT
+    
+    Six still-unverified items that could move the verdict, each with why it
+    matters and the cheap check.
+    
+    4a. Actual tokenization of a real session's prompt share. The 85.4% is
+    stored bytes of tool exhaust, explicitly not prompt bytes. Everything
+    rides on how much of a paid prompt is actually dead weight. Cheap check:
+    tokenize the archived jsonl from this host's own sessions with a stock
+    tokenizer, code the tool-exhaust messages by their role, and produce an
+    actual prompt-side share on a sample of, say, 20 sessions. This converts
+    the headline from a stored-bytes statistic into a token statistic and
+    directly tests K4.
+    
+    4b. A real stored-token-to-invoice sanity check. Even tokenized bytes are
+    not the same as billed tokens if the platform's overhead, caching, or
+    pricing model changes the story. Cheap check: pull one or two real
+    invoices or usage dashboards for this host's provider and reconcile
+    measured fixed overhead against billed tokens per call. If real billing
+    is dominated by something other than the fixed overhead, K4 strengthens
+    or weakens on one afternoon of work.
+    
+    4c. Agent-sizing of the self-sweep census on a live, changing store. The
+    read-only snapshot protocol is designed but not yet demonstrated to be
+    robust when the store is written concurrently. Cheap check: run a
+    write-heavy script against a copies of a store while a snapshot runs,
+    then diff the manifest; confirm no torn reads. This directly gates the
+    integrity of every measurement component.
+    
+    4d. Flash attention or sampler caching effects that make fixed overhead
+    cheaper than invoiced. Some providers cache system prompt prefixes, which
+    would reduce the effective marginal cost of the 97.7KB. This is the
+    strongest competitor to the fixed-overhead thesis because it could make
+    the number materially smaller than the naive math. Cheap check: a small
+    benchmark that sends the same system prompt twice and compares latency or
+    cache-hit behavior, then flags whether the overhead is truly charged per
+    call. This is K4 territory and is cheap enough to run in a day.
+    
+    4e. A direct read of the two closest claimed competitors at their current
+    HEAD, not from harvest metadata. The harvest shows splitrail and
+    blitzclean as monitor-only, but a product claim that they now clean, or
+    page memory, would narrow the gap. Cheap check: clone both repos, grep
+    for a sweep, delete, or quarantine path, and read the README and any
+    roadmap. Two hours, no citation risk.
+    
+    4f. A cold buyer sample of the target segment. The market question is the
+    least evidenced fact in the whole plan, and the harvest explicitly shows
+    no paying buyer. Cheap check: run the founder's own outreach of 10-20
+    agent-tool developers with a one-paragraph fixed-overhead pitch and count
+    replies with a genuine pain point or budget. This is the only way to
+    convert who-pays from an open question into data, and it costs nothing
+    but correspondence time. It is also the most likely single activity to
+    change the verdict, which is why it is listed even though it is not a
+    literature item.
+    
+    Closed-loop note: items 4a, 4b, and 4d all feed kill criterion K4; item
+    4c feeds K3 and K5; item 4f feeds K2. Running the cheap checks for 4a,
+    4b, 4d, and 4f before or during Phase 2 de-risks the long-pole benchmark
+    phase without spending schedule or money, and is my single recommended
+    next action.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261013_190333_e9c888
+
+Session:        20261013_190333_e9c888
+Duration:       47s
+Messages:       2 (1 user, 0 tool calls)

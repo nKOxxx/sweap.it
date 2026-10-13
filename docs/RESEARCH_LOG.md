@@ -3,6 +3,55 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R3 synthesis: THE OVERVIEW (all six founder exit criteria closed)
+
+R3 raw 19.2KB chars, needle-verified, zero invented citations (all 4 cited
+IDs in-brief), zero glyphs. Disposition: GO, conditional, with kill gates.
+
+**1. Landscape + status quo (criterion 1+2):** closed by R1+R1b+R2 waves:
+nobody in the 271-record harvest combines snapshot census, measured
+fixed-overhead economics, and reversible benchmark-verified reclaim.
+Cousins mapped (MemGPT/Letta pages memory, monitors measure-only, 1-7 star
+graveyard). The gap is demonstrated, not asserted.
+
+**2. Technical setup (criterion 3):** seven components, ordered:
+1a read-only snapshot census + SHA-256 manifest (substrate, self-sweep
+paradox enforcement), 1b stored-bytes measurement (85.4% is a stored-bytes
+fact, token share is v1.5), 1c fixed-overhead economics (the repitch,
+97.7KB/call), then distillation with provenance, gated reclaim,
+before/after harness, Cognexia consumer (optional, human-gated). Host
+plane demoted to optional convenience, never leads.
+
+**3. Plan + timeline (criterion 4+5):** 14 weeks, one founder + agent
+workers. P0 w1-2 snapshot+census reproduction; P1 w3-4 token economics +
+cost card; P2 w5-7 benchmark harness (the long pole, no sweep features
+during); P3 w8-10 gated reclaim + provenance on sandbox; P4 w11-13
+Cognexia integration + hardening; P5 w14 live opt-in deployment + paper
+numbers. Paper spans P2-P5 as parallel payoff.
+
+**4. THE VERDICT (criterion 6): GO, conditionally.** The facts rule out
+only the host-plane CCleaner, which the plan abandoned. Conditional on:
+benchmark phase as the committed kill-or-continue point, plus a live
+willingness-to-pay check (cold outreach 10-20 agent-tool developers).
+Kill criteria, any one stops the project:
+K1 no reproducible token saving without quality regression on held-out set.
+K2 no paying/pre-paying buyer or LOI-equivalent from cold outreach post-
+   live-experiment.
+K3 any safety failure in the wild: hard-deny violation or provenance
+   checksum modified.
+K4 fixed overhead turns out minor share of real bills once tokenized and
+   reconciled against invoices.
+K5 census not reproducible by a read-only external observer.
+
+**Coverage audit (what could still move the verdict):** 4a tokenize ~20
+real sessions for prompt-side share; 4b reconcile against real invoices;
+4c snapshot robustness under concurrent writes; 4d competitor re-sweep
+(fresh eyes, 2h); 4e (in raw); 4f cold buyer sample (the single most
+verdict-moving activity). R3 recommends 4a+4b+4d+4f before/during P2.
+
+**Founder rule requested:** accept the GO + kill gates, or override. Until
+ruled, the project remains research-complete but build-unauthorized.
+
 ## 2026-10-13: Founder decree: scrap the prototype, research through to the overview
 
 Verbatim: "why you building a prototype, before the research finished.
