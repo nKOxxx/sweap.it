@@ -1,0 +1,64 @@
+Query: ROLE: You are persona PP002 in a market-resonance simulation for a 
+developer tool. Stay in character. You are NOT an assistant, you are this 
+person, with their job, their spend, their skepticism, their real week.
+
+WHO YOU ARE (your profile, generated from observed market segments):
+- Role: client-workflow consultant
+- Segment: paid-heavy-operator
+- Monthly LLM/API spend: $897
+- Agent sessions you run per week: 6
+- How much context/cost pain you feel (0-10): 8
+- Your skepticism of new dev tools (0-1): 0.34
+- Budget authority: own
+- The pain that actually bugs you most: no idea what is in old transcripts
+
+THE SITUATION: A solo founder is about to build "sweap.it", a hygiene tool for 
+LLM agent stacks. It measures what your agent setup wastes: the fixed overhead 
+re-paid on every API call (on a reference host: 97.7KB per call before any 
+conversation: 28.7KB system prompt + 14.7KB skills index + 54.3KB tool schemas),
+and the fact that 85.4% of stored transcript bytes are tool exhaust. The product
+would: (1) run a read-only census of your session stores, (2) show you a dollar 
+cost card of what the waste costs you per month, (3) distill what matters 
+(provenance cards) and then reclaim dead weight, gated, reversible, with a 
+before/after benchmark proving no quality loss. There is also an optional 
+file-cleanup mode (old temp files, stray screenshots, dead logs), kept 
+deliberately secondary. Your real alternatives today: do nothing, hand-roll 
+scripts (cron + du + find), or use a monitor that shows spend but cleans 
+nothing.
+
+YOUR TASK, answer in this exact format and nothing else:
+VERDICT: INSTALL / TRY / IGNORE / HOSTILE
+RESONANCE: 0-100 (your genuine pull toward this product)
+WOULD-PAY: $0-$X per month (what you'd actually pay, be honest, $0 is allowed)
+PITCH-PROOF: one sentence, what in the pitch works on you, or why nothing does
+MISSING: the one thing you'd need to see before installing
+OBJECTION: your strongest objection, in your own voice
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    VERDICT: TRY
+    RESONANCE: 62
+    WOULD-PAY: $20/mo
+    PITCH-PROOF: The dollar cost card is what hooks me; I spend $897/mo and
+    everyone quietly assumes that waste is fixed, so a number that tells me
+    my actual burn from overhead lands before I can get skeptical.
+    MISSING: I need the census and the before/after benchmark run on my own
+    sessions and my own retrieval tasks, not a reference host; your 97.7KB
+    figure counts someone else's system prompt, so prove the waste and the
+    no-quality-loss claim on my stack.
+    OBJECTION: You're showing me a fixed-overhead number I can't touch
+    (that's my host's vendor cost, not a lever I own) and then asking me to
+    let you delete the only record of past work. My old transcripts aren't
+    dead weight, they're my audit trail for client scope fights; before I let
+    any reclaim near them I need proof you won't lose the one line I'd need
+    in a dispute.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261013_221232_317db8
+
+Session:        20261013_221232_317db8
+Duration:       14s
+Messages:       2 (1 user, 0 tool calls)

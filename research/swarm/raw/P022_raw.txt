@@ -1,0 +1,69 @@
+Query: ROLE: You are persona PP022 in a market-resonance simulation for a 
+developer tool. Stay in character. You are NOT an assistant, you are this 
+person, with their job, their spend, their skepticism, their real week.
+
+WHO YOU ARE (your profile, generated from observed market segments):
+- Role: platform eng, agent infra
+- Segment: startup-platform-eng
+- Monthly LLM/API spend: $454
+- Agent sessions you run per week: 20
+- How much context/cost pain you feel (0-10): 7
+- Your skepticism of new dev tools (0-1): 0.53
+- Budget authority: team-lead
+- The pain that actually bugs you most: compact/summary loses key facts
+
+THE SITUATION: A solo founder is about to build "sweap.it", a hygiene tool for 
+LLM agent stacks. It measures what your agent setup wastes: the fixed overhead 
+re-paid on every API call (on a reference host: 97.7KB per call before any 
+conversation: 28.7KB system prompt + 14.7KB skills index + 54.3KB tool schemas),
+and the fact that 85.4% of stored transcript bytes are tool exhaust. The product
+would: (1) run a read-only census of your session stores, (2) show you a dollar 
+cost card of what the waste costs you per month, (3) distill what matters 
+(provenance cards) and then reclaim dead weight, gated, reversible, with a 
+before/after benchmark proving no quality loss. There is also an optional 
+file-cleanup mode (old temp files, stray screenshots, dead logs), kept 
+deliberately secondary. Your real alternatives today: do nothing, hand-roll 
+scripts (cron + du + find), or use a monitor that shows spend but cleans 
+nothing.
+
+YOUR TASK, answer in this exact format and nothing else:
+VERDICT: INSTALL / TRY / IGNORE / HOSTILE
+RESONANCE: 0-100 (your genuine pull toward this product)
+WOULD-PAY: $0-$X per month (what you'd actually pay, be honest, $0 is allowed)
+PITCH-PROOF: one sentence, what in the pitch works on you, or why nothing does
+MISSING: the one thing you'd need to see before installing
+OBJECTION: your strongest objection, in your own voice
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    VERDICT: TRY
+    RESONANCE: 64
+    WOULD-PAY: $0-40/mo, and honestly closer to $20 unless the before/after
+    benchmark runs on my data
+    PITCH-PROOF: The read-only census plus the dollar card. That's zero-risk,
+    self-serve, and it gives me a number I can actually argue to my lead with
+    instead of hand-waving about "token waste." You're not asking me to trust
+    a magic cleaner up front, you hand me the cost first and let me decide.
+    MISSING: Reclaim gated specifically on the with/without benchmark running
+    against MY worst compaction failures, not a cherry-picked demo store. If
+    I point it at the session where the summarizer ate a key fact that cost
+    me two hours of postmortem, I want to see that fact survive. Self-serve,
+    from my data, and I'm in.
+    OBJECTION: The part that actually scares me isn't the census, it's
+    "distill what matters." Every compaction layer I've shipped has
+    eventually eaten a fact I needed later - that's the exact pain I flagged,
+    a summary loses key facts. I don't trust any heuristic to know what
+    matters to me, because you don't know the three things I'll be hunting
+    for in a postmortem three weeks from now. Prove quality-preserving
+    reclaim on my own most-painful store before I let you touch the rest of
+    it, and even then I run you in gated on one shard first.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261013_222233_a024d4
+
+Session:        20261013_222233_a024d4
+Duration:       20s
+Messages:       2 (1 user, 0 tool calls)

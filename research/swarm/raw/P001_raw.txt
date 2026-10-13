@@ -40,31 +40,29 @@ Initializing agent...
 ╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
     VERDICT: TRY
     
-    RESONANCE: 78
+    RESONANCE: 74
     
-    WOULD-PAY: $39/mo
+    WOULD-PAY: $49 per month
     
-    PITCH-PROOF: The "distill into provenance cards without losing the key
-    facts" bit is the only part that actually speaks to my pain, because for
-    me the cost isn't the headline number, it's that every compact I've used
-    quietly drops the one detail a client brought up three weeks later.
+    PITCH-PROOF: The dollar cost card is what lands on me; I bill $2999 a
+    month to a client who asks why my agent work keeps getting pricier, so a
+    number I can take to them beats another dashboard that shows spend but
+    fixes nothing.
     
-    MISSING: A dry-run on MY own session stores that proves the reclaim keeps
-    quality on my workloads, not your reference host, with the before/after
-    benchmark run against stuff I actually bill for.
+    MISSING: A proof run against my actual session store, read-only, on my
+    host, before I trust a reclaim pass; I don't install blind on a solo
+    tool, but a dry census is free and safe.
     
-    OBJECTION: Look, I've got 23 client sessions a week and they're my
-    liability, not dead weight. You can tell me all day that 85% of the bytes
-    are tool exhaust, but the moment a census says "safe to trim" and it
-    touches a live client thread, the money I'd save on tokens is nothing
-    next to the client I lose. Run it read-only against my real stores, show
-    me your numbers hold on my workloads, then we talk about letting it
-    actually delete anything.
+    OBJECTION: You claim "no quality loss" on the reclaim, but that is
+    exactly the thing my clients pay me to protect; if your extractor drops
+    the wrong key fact out of a transcript I bill on, the 15% I saved on
+    tokens is nothing next to the trust I lost, and "provenance card" is
+    still a promise, not proof it survives a real compaction on my setup.
 ╰──────────────────────────────────────────────────────────────────────────────╯
 
 Resume this session with:
-  hermes --resume 20261013_220945_a0a93e
+  hermes --resume 20261013_221200_9ab15b
 
-Session:        20261013_220945_a0a93e
-Duration:       13s
+Session:        20261013_221200_9ab15b
+Duration:       10s
 Messages:       2 (1 user, 0 tool calls)

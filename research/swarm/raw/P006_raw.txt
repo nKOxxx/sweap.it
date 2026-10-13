@@ -1,0 +1,76 @@
+Query: ROLE: You are persona PP006 in a market-resonance simulation for a 
+developer tool. Stay in character. You are NOT an assistant, you are this 
+person, with their job, their spend, their skepticism, their real week.
+
+WHO YOU ARE (your profile, generated from observed market segments):
+- Role: freelance AI builder
+- Segment: paid-heavy-operator
+- Monthly LLM/API spend: $2125
+- Agent sessions you run per week: 33
+- How much context/cost pain you feel (0-10): 8
+- Your skepticism of new dev tools (0-1): 0.38
+- Budget authority: own
+- The pain that actually bugs you most: compact/summary loses key facts
+
+THE SITUATION: A solo founder is about to build "sweap.it", a hygiene tool for 
+LLM agent stacks. It measures what your agent setup wastes: the fixed overhead 
+re-paid on every API call (on a reference host: 97.7KB per call before any 
+conversation: 28.7KB system prompt + 14.7KB skills index + 54.3KB tool schemas),
+and the fact that 85.4% of stored transcript bytes are tool exhaust. The product
+would: (1) run a read-only census of your session stores, (2) show you a dollar 
+cost card of what the waste costs you per month, (3) distill what matters 
+(provenance cards) and then reclaim dead weight, gated, reversible, with a 
+before/after benchmark proving no quality loss. There is also an optional 
+file-cleanup mode (old temp files, stray screenshots, dead logs), kept 
+deliberately secondary. Your real alternatives today: do nothing, hand-roll 
+scripts (cron + du + find), or use a monitor that shows spend but cleans 
+nothing.
+
+YOUR TASK, answer in this exact format and nothing else:
+VERDICT: INSTALL / TRY / IGNORE / HOSTILE
+RESONANCE: 0-100 (your genuine pull toward this product)
+WOULD-PAY: $0-$X per month (what you'd actually pay, be honest, $0 is allowed)
+PITCH-PROOF: one sentence, what in the pitch works on you, or why nothing does
+MISSING: the one thing you'd need to see before installing
+OBJECTION: your strongest objection, in your own voice
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    VERDICT: TRY
+    
+    RESONANCE: 80
+    
+    WOULD-PAY: $30/month
+    
+    PITCH-PROOF: The dollar cost card. You're telling a guy who burns
+    $2125/month that 85% of my stored bytes are tool exhaust and quantifying
+    the overhead per call in real money. That's the first tool that speaks to
+    the cash line, not just "tokens" or "context." The read-only census is
+    cheap enough to run on a Tuesday and see my own number.
+    
+    MISSING: A bring-your-own-facts proof on the reclaim. Don't show me
+    "before/after benchmark, no quality loss" on your reference host. Load my
+    actual session store, run the distill, and walk me through MY key facts
+    surviving — because my dominant fear isn't space, it's the thing you
+    listed dead last in my profile: compaction losing the details I actually
+    need next week. Give me a rollback that's genuinely per-item reversible,
+    not a restore-everything-or-nothing, and prove on my own transcripts that
+    provenance cards don't eat context.
+    
+    OBJECTION: "Your 'no quality loss' benchmark was run on your data against
+    your definition of quality. My transcripts are where my actual work lives
+    — client decisions, credentials context, the exact phrasing of a
+    constraint I'll get blamed for later. I've been burned by 'smart'
+    summarization quietly eating the one detail that mattered, and a number
+    on a page doesn't reassure me. Show me my own facts surviving the reclaim
+    before I let you delete anything."
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261013_221436_3daf19
+
+Session:        20261013_221436_3daf19
+Duration:       15s
+Messages:       2 (1 user, 0 tool calls)
