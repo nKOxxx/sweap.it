@@ -1,0 +1,33 @@
+ROLE: You are the synthesis lead for sweap.it research wave R3. You receive only verified, measured facts below. Do not invent citations or numbers. If you reason beyond the facts, label it [inference]. Your output MUST start with the exact needle SWEEPIT_R3 or the run is discarded.
+
+CONTEXT: sweap.it is a proposed product + research paper: hygiene tooling for LLM agent stacks. The founder scrapped the v0.1 prototype and ordered research-only until a full overview exists: landscape, status quo, technical setup, plan, timeline, and above all a verdict on whether the project makes sense.
+
+MEASURED FACTS (single host, real census, 2026-10-13):
+- 85.4% of STORED transcript bytes are tool exhaust (32.75M of 38.36M chars across 143 sessions, 36,826 messages, 227MB sqlite store). Token share and prompt share unmeasured; stored bytes are NOT prompt bytes.
+- Fixed per-call overhead paid on every API call: 28.7KB system prompt + 14.7KB skills index + 54.3KB tool schemas = 97.7KB before any conversation content.
+- Host plane dust on this host: /tmp ~455MB, 54 stray screenshots (~10MB), 32MB logs, 16MB session jsonl.
+
+LANDSCAPE (verified harvest, 271 records: arXiv 120, HF papers 80, OpenAlex 39, GitHub 32):
+- Closest cousin: MemGPT/Letta (arXiv 2310.08560): context as paged, priced, self-edited memory. Does NOT measure fixed overhead, no gated reclaim, no host plane.
+- Monitors measure but never clean: splitrail (223 stars), the claude-code-usage-analyzer family, blitzclean (234 stars). Zero shipped cleaning.
+- Graveyard of 1-7 star single-CLI hacks: llm-cleaner, context-cleaner, ContextGc, pi-hermes-memory-cleanup, mcp-context-cleaner. None has two planes, gated reversible reclaim, or distill-before-sweep.
+- Academic spine: Survey of Context Engineering (2507.13334); Agentic Context Management (2607.21503) treats memory+cost as lifecycle but builds no hygiene plane; Compression Remembers the Detour (OpenAlex 2026): lossy context compression AMPLIFIES off-task content; FadeMem (2601.18642) forgetting curves; Beyond Heuristics (2512.21567) decision-theoretic memory management; AgentSys (2602.07398) hierarchical memory + secure deletion; Referential Dangling (2608.04569) hard compression breaks references; benchmarks: LOCA-bench (2602.07962), MemoryRewardBench (2601.11969), compression on repo tasks (2604.13725).
+- GC theory transfers: mark-sweep roots law (never sweep reachable state: the hard-deny set), generational hypothesis (most objects die young, so does most context), CCleaner trust loop (analyze, show, clean).
+
+RED-TEAM VERDICTS (wave R2, accepted by founder):
+- F1: host-plane cleanup is commodity (find + du + cron); the context plane is the only differentiator.
+- F2: "CCleaner for AI" is a doomed frame: fleets are multi-host, ephemeral, disk disposable; the scarce resource is per-call-priced context tokens, not disk.
+- 85.4% must be quoted as a stored-bytes statistic; prompt-side truth requires tokenization plus real capture.
+- Self-sweep paradox: agent measuring its own live store contaminates the census; observer-as-subject; needs read-only snapshot protocol and external verification.
+- Preservation via Cognexia (founder's memory product, SQLite+Markdown cards): must be optional, human-gated, per-card provenance (session id, byte range, checksum), retrieval observability, zero-fetch cards swept too, no agent self-certification of "nothing vital lost".
+- Ordered fixes: (1) repitch on fixed overhead re-paid every call; (2) frozen-snapshot before/after benchmark with held-out task set BEFORE more sweep features; (3) Cognexia optional + gated + provenance.
+
+PRODUCT LAWS (founder decrees): two-plane model; default to reversible (quarantine before delete); distill-then-sweep; measurement before destruction; never reimplement DB surgery; human gate for judgment calls.
+
+YOUR TASK, four sections:
+1. TECHNICAL SETUP: consolidated architecture blueprint for the context-plane-first product: components (read-only snapshot census, measurement, tokenizer economics, distillation with provenance, gated reclaim, before/after benchmark harness), data flow, where each safety law is enforced, and what is v1 scope versus later. Buildable by one founder plus agent workers. No invented dependencies.
+2. PLAN + TIMELINE: phased plan in weeks with milestones and exit criteria per phase, assuming evenings-and-weekends pace of one founder with agent workers. Be honest that the benchmark phase is the long pole. Include the paper milestone.
+3. GO/NO-GO: does this project make sense? Argue both sides from the facts, then commit to a verdict with explicit kill criteria (what observed result should stop the project). Weigh: differentiation (real but narrow), market (who pays: agent-tool developers, teams, nobody), risk (dangerous deletion, trust), effort versus payoff, and the paper as parallel payoff.
+4. COVERAGE AUDIT: up to 6 still-un-researched items that could invalidate the verdict, each with why it matters and the cheap way to check it.
+
+FORMAT: plain text, no em-dashes anywhere (use commas or semicolons). Sections numbered 1 to 4. Max ~2500 words.

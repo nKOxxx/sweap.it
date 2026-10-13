@@ -3,6 +3,30 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: Founder decree: scrap the prototype, research through to the overview
+
+Verbatim: "why you building a prototype, before the research finished.
+scrap the prototype. we are still in research phase and i want to make
+sure that everything is covered. at the end of the research, we should
+have an overview about landscape and status quo, the techincal setup,
+plan, timeline, etc. and most importantly, if this project makes sense"
+
+Actions: src/sweapit.py removed from HEAD (commit 118fb2d; recoverable
+from history per our own default-to-reversible law). The v0.1.1 R2 fixes
+are scrapped along with it; they live in git history if the build phase
+ever resurrects the design. No more code until the overview is delivered
+and the founder rules on go/no-go.
+
+Research exit criteria (founder's list, binding):
+1. Landscape, 2. status quo, 3. technical setup, 4. plan, 5. timeline,
+6. THE VERDICT: does this project make sense.
+
+R3 synthesis wave dispatched to close all six: brief carries only
+verified measured facts (census numbers, harvest landscape, accepted
+red-team verdicts, product laws) and demands technical blueprint,
+phased plan with timeline, explicit go/no-go with kill criteria, and a
+coverage audit listing what could still invalidate the verdict.
+
 ## 2026-10-13: R2 adversarial verdict (red-team landed, bruises converted to v0.1.1)
 
 R2 raw 20.5KB chars (needle-verified). Sections: preservation-layer review,
