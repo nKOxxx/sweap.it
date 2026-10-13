@@ -1,0 +1,85 @@
+RESEARCH BRIEF: sweap.it adversarial design review (wave R2)
+
+ROLE: You are a hostile-but-fair senior reviewer. Red-team the product and
+the research program. The founder wants bruises now, not at review time.
+
+SYSTEM UNDER REVIEW: sweap.it, "the sweeper for your LLM stack". Built today,
+v0.1.0. Commands:
+- sweapit doctor: read-only two-plane manifest.
+  host plane: /tmp scratch (age+size+keep-list), stray images at agent dir
+  root, cron output debris, store sizes (state.db, logs, sessions, skills)
+  context plane: fixed prompt overhead via `hermes prompt-size` (measured:
+  28.7 KB system prompt, 14.7 KB skills index, 54.3 KB tool schemas, 28
+  tools), session census via read-only sqlite (143 sessions, 36,826 messages,
+  tool-output share of transcript bytes = 85.4%)
+- sweapit sweep: gated cleanup, DRY-RUN BY DEFAULT, real run needs --no-dry.
+  Actions: quarantine stray images (moved, dated folder), delete /tmp scratch
+  older than N days minus keep-list, delete cron outputs older than 30 days.
+  Hard denials: com.apple.* in /tmp; keep-list (rea, hf_paper).
+- --json for machine consumption. Native `hermes sessions prune/optimize`
+  are surfaced as recommendations, NOT reimplemented.
+
+DESIGN LAWS CLAIMED: inventory never lies (all numbers measured); default to
+reversible; quarantine before delete; never reimplement DB surgery; report-
+only for judgment calls (human says go).
+
+ROADMAP INTENT: host-plane sweep is done soil; context-plane cleaning is the
+differentiator (transcript GC with archive-never-amputate semantics, memory
+dedup, prompt/toolset slimming) plus a multi-host census and a pre/post
+performance benchmark (RQ4: does cleaning measurably change task success and
+token burn?).
+
+DESIGN UPDATE (mid-build, treat as part of the spec): the founder has framed
+the product as "CCleaner or disk cleanup for AI models run on machines, with
+huge potential for optimization, cleanup, SUMMARY". The action triad is now:
+ANALYZE (manifests), CLEAN (gated sweep), OPTIMIZE (summary/slimming). And a
+preservation layer lands before any context-plane sweep: vital information
+gets distilled into a local memory store (the founder's Cognexia: SQLite +
+Markdown, importance-scored memory cards, 100% local) so cleanup provably
+loses nothing vital. Sweep-then-distill is a design crime under this spec;
+distill-then-sweep is the product.
+
+DELIVER (numbered, plain text):
+
+0. PRESERVATION-LAYER REVIEW: is distill-into-memory-before-sweep sound?
+   Attack it: summarization is lossy and unauditable at scale; importance
+   scores assigned by the same agent that made the mess is a conflict of
+   interest; retrieval decay (stored vital info nobody will ever fetch
+   again) can make memory stores the NEW dump. For each attack: the design
+   countermeasure, or the admission that it is fatal.
+
+1. FATAL FLAWS: ways this product is wrong, useless, or already dead on
+   arrival. Rank by severity. No hedging.
+
+2. SAFETY HOLES in the sweep semantics: what could --no-dry destroy that it
+   must never destroy? What race conditions or TOCTOU windows exist (e.g.
+   keep-list entries modified between inventory and sweep)? What does the
+   quarantine design miss (disk-quota blindness, permission churn, symlinks,
+   hardlinks, cross-volume moves)?
+
+3. MEASUREMENT VALIDITY attacks on the 85.4% claim: chars is not tokens; 85%
+   of STORED bytes may not be 85% of PROMPT bytes (APIs drop or compress old
+   tool outputs); one host is not a census; role='tool' may be the wrong
+   classifier. For each attack: the cheap fix or honest caveat.
+
+4. RQ AUDIT: the four research questions are (RQ1) waste composition and
+   growth law across hosts and contexts, (RQ2) safe deletion semantics for
+   conversation state, (RQ3) can an agent self-sweep without corrupting its
+   own memory, (RQ4) does cleaning measurably improve task performance. Which
+   are publishable, which are toy, which are already answered in literature?
+
+5. THE SELF-SWEEP PARADOX: sweap.it is built by and for agents; the research
+   log itself lives in the agent's repo; the agent writing the paper is the
+   measured system. Where does this invalidate findings, and what protocol
+   separations fix it?
+
+6. VERDICT: if the founder could only fix three things this week, which
+   three? One line each, concrete.
+
+RULES:
+- Be specific to THIS design, not generic advice.
+- ASCII only. No em-dashes; commas or colons. No markdown tables.
+- Do not praise. Do not summarize the design back to me.
+
+Your final message MUST begin with this exact line and nothing before it:
+SWEEPIT_R2

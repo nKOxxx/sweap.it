@@ -1,0 +1,52 @@
+RESEARCH BRIEF: sweap.it landscape and prior-art sweep (wave R1)
+
+ROLE: You are a research analyst. Produce a serious prior-art and landscape
+report. This feeds a real research paper, so precision beats volume.
+
+SUBJECT: sweap.it, "the sweeper for your LLM stack". Agent tooling accumulates
+waste on two planes:
+- host plane: session stores (one host measured: 227 MB DB, 36,810 messages),
+  logs, scratch files, stray screenshots from agent work
+- context plane: fixed prompt overhead (measured: 28.7 KB system prompt,
+  54.3 KB tool schemas for 28 tools, paid on every API call), and transcript
+  composition (measured: 85.4% of stored transcript bytes are tool outputs)
+
+The product measures this waste, gates cleanup behind dry-run + quarantine,
+and proves the reclaim. The paper studies waste composition, safe deletion
+semantics for conversation state, agent self-sweeping, and whether cleaning
+improves task performance.
+
+DELIVER (numbered sections, plain text):
+
+1. PRODUCTS AND TOOLS that manage LLM context, agent memory, or transcript
+   hygiene. For each: name, what it does, what it does NOT do (esp. no
+   measurement, no gated cleanup). Include agent-memory systems (e.g.
+   MemGPT-style OS-memory approaches), context-window managers, session
+   compaction features built into agent CLIs/frameworks, and any product
+   literally marketing "cleanup for AI agent workspaces".
+
+2. RESEARCH LITERATURE: context engineering; context rot/decay and
+   long-context degradation; compaction/summarization of agent history and
+   its failure modes (amnesia, silent information loss); memory architectures
+   for LLM agents; token-cost economics of system prompts and tool schemas.
+
+3. INHERITABLE OLDER FIELDS: log management and retention policy, garbage
+   collection theory (generational, mark-sweep), storage deduplication, disk-
+   cleaner product history (what made e.g. disk cleanup utilities trusted or
+   distrusted). What laws from these fields transfer to LLM stacks?
+
+4. WHITESPACE: what is NOT measured or sold by anyone in section 1; where
+   sweap.it's two-plane framing and "default to reversible" gating is novel;
+   where it is NOT novel (be brutal).
+
+5. THE TEN SHARPEST ATTACK QUESTIONS on novelty: for each, one line on who
+   could claim prior art and why.
+
+RULES:
+- Cite only work you are confident exists. Tag every item [high], [med], or
+  [low] confidence. NEVER invent titles, venues, or years. If unsure of a
+  year, give the range or omit it.
+- ASCII only. No em-dashes; use commas or colons. No markdown tables.
+
+Your final message MUST begin with this exact line and nothing before it:
+SWEEPIT_R1

@@ -3,6 +3,38 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: Founder reframe #3: the CCleaner analogy + Cognexia preservation layer
+
+**Founder's restatement:** the basic idea is "something like CCleaner or disk
+cleanup for AI models that are run on machines. There must be a shit ton of
+potential for optimization, cleanup, summary, etc." And: use his memory
+product Cognexia (github.com/nKOxxx/Cognexia, MIT, local-first SQLite +
+Markdown, importance-scored memory cards, 37 REST endpoints, 183 tests) so
+cleanup does not lose "vital or important information".
+
+**What this changes in the design:**
+
+1. The action triad is now ANALYZE / CLEAN / OPTIMIZE, where OPTIMIZE =
+   summary + slimming, not just deletion. CCleaner's genius was the trust
+   loop (analyze, show, then clean); sweap.it inherits that loop and adds a
+   third C the disk world never had: distillation, because context waste is
+   information, and information can be summarized instead of dropped.
+2. Deletion semantics upgrade: nothing context-plane gets swept until a
+   distillation pass offers to extract its vital content into Cognexia.
+   "Archive, never amputate" (RQ2) now has a concrete substrate: memory
+   cards with importance scores + provenance back to the swept artifact.
+3. Trust architecture: Cognexia is 100% local (no cloud, no telemetry), so
+   the combined product can honestly claim "nothing leaves the machine",
+   matching sweapit's quarantine-first ethos.
+4. Vendor-adjacency risk (logged for the paper): sweapit integrating only
+   Cognexia looks self-dealing; design the preservation layer as a pluggable
+   interface (Cognexia = reference adapter, others pluggable).
+
+**Paper lineage sharpened:** paper #1 built the institution (hub, mandates,
+measurement); paper #2 studies the metabolism of the machine itself (what
+accumulates, what must be kept, what can be distilled, what must go) and
+ships the janitor + the album (sweapit + Cognexia) as instruments.
+
 ## 2026-10-13: Name + v0.1.0
 
 **Name (user decree): sweap.it.** Sweep + AI. Domain check via whois.nic.it:
