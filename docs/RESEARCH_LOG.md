@@ -3,6 +3,44 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R4B gate redesign: thresholds, product-led market gate, death schedule
+
+R4B report 13.3K chars, needle-verified, glyph-clean. Founder's K2
+(founder-personal outreach) replaced wholesale by product-led signals.
+
+**Gate variants (strict / moderate / loose), R4B recommendations:**
+- K1 token saving: strict >=20% + zero regression + 3 categories + 2 hosts;
+  MODERATE recommended: >=15% reduction, <=3% quality tolerance, 2
+  categories, reference host + 1 external re-run; loose >=10%/5%/1 host.
+- K3 safety: strict = any single violation kills; moderate (recommended):
+  kill only if reproducible AND executed (reached real artifacts); one-off
+  aborts = logged findings, 1-week fix deadline.
+- K4 REFRAMED from "fixed overhead minor" to "reclaimable share of bill"
+  (fixed overhead + reclaimable tool-exhaust tokens vs real invoice):
+  strict >=25%; moderate (recommended) >=15% or fixed-overhead >=10%;
+  loose >=8%.
+- K5 external reproducibility: strict 99% bit-exact; moderate
+  (recommended) >=95% byte-identical with all divergence documented and no
+  divergence flipping a safety verdict; loose >=90% decision-level.
+
+**The committed market gate (replaces K2):** by end of P5, >=100 distinct
+organic installers (registry-verified, deduped, bot-stripped) AND
+activation >=40% (installer completes first successful census) AND
+second-week return >=30% of completers. Kill: <25 installers, or
+activation <30%, or return <15%. Why activation carries the gate: it
+directly tests "a product people want to use and which actually optimises
+their LLM setup", it is measurable as soon as the artifact is listed, and
+it needs zero founder outbound. Stars are vanity, installs are attention;
+activation converts attention into the core act.
+
+**Death schedule (die cheap, die early):** K5 fires week 2 (snapshot
+reproducibility, cheapest), K4 week 4 (tokenized invoice reconciliation),
+market pre-signal week 7 (listing + early activation), K1 week 10
+(benchmark), K3 + full market gate weeks 11-14. The two costliest phases
+(P2 harness, P3 reclaim) are built ONLY after K5 + K4 + market pre-signal
+all return continue. Worst case early death = two cheap-token phases, not
+the full build.
+
 ## 2026-10-13: R4A Cognexia verdict: SKIP-BUILD-NATIVE (the ordered pushback)
 
 R4A raw on disk, needle-verified, glyph-clean, no citations (none in brief).
