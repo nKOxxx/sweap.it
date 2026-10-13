@@ -1,0 +1,261 @@
+Query: ROLE: Research lead, sweap.it wave R4C. You receive only verified facts 
+below. Do not invent citations or numbers. Reasoning beyond facts must be 
+labeled . Output MUST start with the exact needle SWEEPIT_R4C or the run is 
+discarded.
+
+CONTEXT: sweap.it is a proposed product + paper: hygiene tooling for LLM agent 
+stacks. R3 produced a 7-component architecture and a 14-week plan. The founder 
+ordered scope variants and an MVP definition, with two binding amendments: the 
+host-plane capability to delete old or useless files must be KEPT as an option 
+("lets not drop this"), even though it must never lead the story; and the 
+product must be something "people will want to use and which will actually 
+optimise their llm setup".
+
+VERIFIED FACTS:
+- Reference host: 97.7KB fixed overhead per API call (28.7KB system prompt + 
+14.7KB skills index + 54.3KB tool schemas), re-paid every call; 85.4% of stored 
+transcript bytes are tool exhaust (32.75M of 38.36M chars, 143 sessions, 36,826 
+messages, 227MB sqlite); host-plane dust: /tmp ~455MB, 54 stray screenshots 
+~10MB, 32MB logs, 16MB session jsonl.
+- Landscape (271 records): monitors measure but never clean (up to 234 stars in 
+that class); hygiene hacks die at 1-7 stars; nothing ships census + 
+fixed-overhead economics + reversible benchmark-verified reclaim.
+- Red-team verdicts: host-plane cleanup alone is commodity (find + du + cron); 
+the CCleaner-for-disk frame is doomed because fleets are ephemeral; the context 
+plane is the differentiator. Compression research shows lossy context 
+compression amplifies off-task content, motivating distill-before-sweep.
+- Architecture components from R3: 1a read-only snapshot census with checksum 
+manifest, 1b stored-bytes measurement, 1c fixed-overhead economics cost card, 
+distillation with per-card provenance, gated quarantine-first reclaim, 
+before/after benchmark harness, optional memory-product consumer.
+- Product laws: default to reversible; measurement before destruction; human 
+gate for judgment; never reimplement DB surgery.
+
+YOUR TASK, four sections:
+1. WHAT OPTIMIZE MEANS OPERATIONALLY: enumerate the concrete user-visible 
+outcomes a hygiene product can deliver for an LLM stack (dollar receipts for 
+wasted tokens, smaller prompts, faster sessions, cleaner agent memory, audit 
+trail of what was removed and why, compliance-friendly reversibility). For each:
+is the effect measurable on day one, or only after weeks? Which are felt in the 
+wallet versus felt in workflow?
+2. SCOPE VARIANTS: price three variants. Variant A, context-plane only (census, 
+cost card, benchmark-verified gated reclaim). Variant B, A plus optional 
+host-plane file cleanup (the delete-old-or-useless-files option the founder 
+ordered kept: old tmp, stray screenshots, dead logs, with the same 
+quarantine-first laws). Variant C, B plus memory-product integration and fleet 
+features. For each variant: component list, week estimate at 
+one-founder-plus-agent-workers pace, risk concentration, what the user gets on 
+first run.
+3. MVP DEFINITION AND DESIRABILITY: from the variants, define the MVP, the 
+smallest thing a stranger would install and keep. Apply the desirability test 
+honestly: what does a user see in the first 5 minutes that makes them keep it? 
+Rank candidate first-run experiences by pull (dollar receipt on their own store,
+waste map, one-click safe reclaim with proof). Be honest if the evidence says 
+the pull is weak; the founder ordered pushback over cheerleading.
+4. TIMELINE DELTAS: week-by-week delta for each variant against the R3 14-week 
+plan. Where does the kept file-deletion option fit without delaying the 
+benchmark long pole?
+
+FORMAT: plain text, no em-dashes anywhere (commas or semicolons). Sections 1 to 
+4. Max 2000 words.
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    SWEEPIT_R4C
+    
+    SECTION 1: WHAT OPTIMIZE MEANS OPERATIONALLY
+    
+    Enumerated user-visible outcomes a hygiene product can deliver, with
+    measurability and felt-locus.
+    
+    O1. Dollar receipt for wasted tokens. The reference host re-pays a 97.7KB
+    fixed overhead (28.7KB system prompt + 14.7KB skills index + 54.3KB tool
+    schemas) on every API call, independent of conversation content. The
+    honest number is the product: overhead bytes x token price x call volume.
+    Measurable day one as a cost card computed from the user's own store and
+    session counts; actually landing the dollar saving requires the user to
+    act on the card, so the receipt is day one, the wallet saving realizes
+    over weeks of adoption. Felt in the wallet.
+    
+    O2. Smaller prompts. Distilling the fixed overhead (drop dead
+    skills-index entries, prune tool schemas no call uses) cuts input tokens
+    per call. The per-call delta is measurable day one on two before/after
+    runs; compounding into a real monthly figure needs call-volume history,
+    so weeks. Felt half in the wallet, half in workflow (the prompt is
+    lighter to read and audit).
+    
+    O3. Faster sessions. Fewer input tokens shorten TTFT and reduce context
+    re-processing. Day one measurable and small (milliseconds per call), not
+    the selling point. Felt in workflow.
+    
+    O4. Cleaner agent memory. Tool exhaust is 85.4% of stored transcript
+    bytes (32.75M of 38.36M chars across 143 sessions, 36,826 messages).
+    Distilling exhaust into per-card provenance keeps context from
+    re-inflating over time. This is the only effect that compounds as the
+    store grows; it is essentially unobservable in the first minutes and only
+    felt after weeks. Felt in workflow first, then in the wallet as future
+    sessions stop paying to re-read dead exhaust.
+    
+    O5. Audit trail of what was removed and why. Every reclaim action records
+    what, why, provenance card, and the benchmark delta. Day one: the audit
+    log exists and is inspectable; the value grows with trust over weeks.
+    Felt in workflow and compliance posture.
+    
+    O6. Compliance-friendly reversibility. Quarantine-first reclaim with full
+    restore. Day one: capabilities present and demonstrable; the
+    psychological permission it grants is immediate. Felt in workflow and in
+    risk reduction.
+    
+    Verdict on the frame: what optimize means here is primarily O1 and O2
+    (wallet, day one as a card, weeks as a saving) with O4 as the compounding
+    moat. O5 and O6 are not optimizations, they are the permissions that let
+    a stranger press delete on their own machine. Skip or bury them and no
+    one clicks.
+    
+    SECTION 2: SCOPE VARIANTS
+    
+    Variant A, context-plane only.
+    Components: 1a read-only snapshot census with checksum manifest, 1b
+    stored-bytes measurement, 1c fixed-overhead economics cost card,
+    distillation with per-card provenance, gated quarantine-first context
+    reclaim, before/after benchmark harness. No host-plane files, no memory
+    product, no fleet. Week estimate: 8 weeks at
+    one-founder-plus-agent-workers. Risk concentration: distillation
+    correctness (lossy compression amplifies off-task content, per red team),
+    and benchmark-harness validity (a weak harness makes reclaim unprovable
+    and the whole trust story collapses). First run: the census produces the
+    waste map and the dollar cost card on the user's own store, followed by a
+    single benchmark-verified, reversible context reclaim with proof.
+    
+    Variant B, A plus optional host-plane file cleanup (the kept option).
+    Adds: host-plane census (old /tmp dust, 54 stray screenshots, dead logs),
+    quarantine-first file reclaim with restore, plus the same checksum
+    manifest and benchmark gate for the files touched by agents. Week
+    estimate: 10 weeks (A at 8, plus 2). Risk concentration: all of A's
+    risks, plus the red-team verdict that host cleanup alone is commodity
+    (find + du + cron) and the CCleaner-for-disk frame is doomed because
+    fleets are ephemeral. Mitigation is placement, not scope: the file option
+    lives behind the context plane and never leads messaging or first-run.
+    First run: everything in A, and a secondary panel showing disk dust that
+    can be quarantined and restored, clearly subordinate to the token story.
+    
+    Variant C, B plus memory-product integration and fleet features.
+    Adds: the optional memory-product consumer (write distilled cards into
+    the user's agent memory), multi-host/fleet census, remote agent delivery
+    of reclaim. Week estimate: 14 to 15 weeks (B at 10, plus 4 to 5). Risk
+    concentration: fleet ephemerality (if hosts are throwaway, cross-host
+    cleanup is moot and the CCleaner trap returns), a new integration surface
+    and dependency on a memory product's user base, and diluted focus across
+    three stories. First run: same as B, plus the option to push distilled
+    cards into memory.
+    
+    SECTION 3: MVP DEFINITION AND DESIRABILITY
+    
+    MVP: the smallest thing a stranger would install and keep. One command
+    install, a read-only census that runs on the user's real store, a dollar
+    cost card and waste map, and one benchmark-verified, gated, reversible
+    reclaim of context dust with an audit trail. That is Variant A shaved to
+    its spine. The host-plane file option stays in the codebase behind a flag
+    (per the founder's binding amendment) but is not part of the MVP install
+    path. No memory product, no fleet, no dashboards beyond the card.
+    
+    Desirability test, applied honestly. Candidate first-run experiences
+    ranked by pull:
+    
+    Rank 1: the dollar receipt on the user's own store. Running the census
+    and showing real wasted dollars from fixed overhead on their actual call
+    volume is the only pull that is specific, quantified, and true to their
+    data. It is also honest: for a heavy paid-API operator the number is
+    large and motivating; for a light or free-tier user it is small, and the
+    product must not inflate it.
+    
+    Rank 2: the waste map. 85.4% of bytes as tool exhaust, visualized, is
+    satisfying and immediate. But it is a diagnosis with no action, which the
+    234-star monitor class already ships, and monitors demonstrably get
+    abandoned. Map alone is not a keep.
+    
+    Rank 3: one-click safe reclaim with proof. This is where retention
+    actually lives, but it is not a 5-minute experience: the benchmark
+    harness must run before and after, so the proof takes minutes, not the
+    first five. It is the reason a user stays past day one, not the reason
+    they click install.
+    
+    Pushback, per the founder's order: the honest reading of the landscape is
+    that the pull is real but narrow and fragile. Hygiene hacks die at 1 to 7
+    stars, meaning the amateur market punishes exactly this category. The
+    monitor class reaches 234 stars but never cleans, suggesting measurement
+    is easy to ship and hard to monetize, and cleaning is what nobody has
+    proven they will adopt. The evidence does not support a wave of organic
+    pull for any variant on day one. What the evidence does support: a
+    specific, underserved persona, the paid heavy agent operator who can read
+    their own dollar number, is the only group with a self-evident reason to
+    keep a hygiene tool. The MVP must be tuned to that persona and priced off
+    the receipt, not off a general "CCleaner for agents" appeal, which the
+    red team correctly calls doomed. If the receipt is small for a user, the
+    MVP should say so plainly rather than manufacture urgency; that honesty
+    is itself the trust moat that lets the later reclaim and memory steps
+    land.
+    
+    SECTION 4: TIMELINE DELTAS
+    
+    Baseline is the R3 14-week plan (census, measurement, cost economics,
+    distillation, reclaim, benchmark harness, memory consumer, fleet). Delts
+    below are additive deltas against that plan per variant.
+    
+    Variant A delta by week, delivered at 8:
+    W1 to W2: snapshot census + stored-bytes measurement (1a, 1b). No delta;
+    these were already the front of R3.
+    W3 to W4: fixed-overhead cost card (1c) pulled forward to be the first
+    user-visible artifact, because the receipt is the pull. Saves users
+    deciding earlier.
+    W5 to W6: distillation with per-card provenance.
+    W7 to W8: gated quarantine-first context reclaim + the before/after
+    harness. The harness is the long pole and must start as early as W5 in
+    parallel with distillation so it is ready to gate W8, not after.
+    Net: 6 weeks under the R3 plan because the memory consumer and fleet are
+    cut.
+    
+    Variant B delta by week, delivered at 10:
+    W1 to W8: identical to A. The host-plane file option is engineered in W6
+    to W7 as a parallel low-dependency workstream, behind its flag, sharing
+    the quarantine and checksum manifest already built for context reclaim.
+    It does not touch the benchmark long pole, so it cannot delay it.
+    W9 to W10: host-plane cleanup hardened, benchmark-gated, and surfaced as
+    the secondary panel, with the weekly delta being 2 weeks of integration
+    and QA, not new research.
+    Critical placement: because file deletion shares the quarantine,
+    manifest, and gate infrastructure with the context reclaim, the kept
+    option adds near-zero schedule risk; its entire risk is
+    product-positioning (leading the story), which is managed by messaging,
+    not by schedule.
+    
+    Variant C delta by week, delivered at 14 to 15:
+    W1 to W10: as B.
+    W11 to W12: memory-product consumer integration (write distilled cards
+    in), the highest coupling work because it depends on an external
+    product's contracts.
+    W13 to W14/15: fleet census and remote reclaim delivery. This is the
+    highest research risk, fleet ephemerality, and the place to insert a hard
+    go/no-go kill gate at end of W12: the founder's exit criteria apply; if
+    the fleet value case fails its own test, C collapses to B with the memory
+    integration already shipped as an option. That keeps a salvageable B at
+    12 weeks even if C as specified fails.
+    
+    Where the kept file-deletion option fits without delaying the benchmark
+    long pole: it lives in the W6 to W7 parallel slot of B, reusing the
+    reclaim and manifest primitives, and it is benchmark-gated by the same
+    harness that gates context reclaim. It never sits on the critical path of
+    the harness build and never leads the first-run experience, satisfying
+    the amendment while protecting the schedule. The benchmark harness, not
+    file deletion, remains the binding constraint at W5 to W8 for every
+    variant.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261013_195137_15f9c5
+
+Session:        20261013_195137_15f9c5
+Duration:       54s
+Messages:       2 (1 user, 0 tool calls)

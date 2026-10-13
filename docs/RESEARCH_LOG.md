@@ -3,6 +3,50 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R4C scope verdict: three variants priced, MVP defined, honest desirability
+
+R4C report 10.4K chars, needle-verified, glyph-clean.
+
+**What "optimize" means operationally (S1):** O1 dollar receipt (day one
+measurable from user's own store; wallet saving realizes over weeks, felt
+in the wallet), O2 smaller prompts (prune dead skills-index entries + call-
+unused tool schemas; measurable day one on before/after pairs), O3 faster
+sessions (real but milliseconds, not the selling point), O4 cleaner agent
+memory (distill exhaust so context stops re-inflating), plus audit trail
+and compliance-friendly reversibility.
+
+**Scope variants (S2):**
+- A context-plane only: census + cost card + distill + gated reclaim +
+  benchmark harness. 8 weeks. Risk: distillation correctness + harness
+  validity.
+- B = A + the KEPT file-deletion option (host dust: old tmp, 54
+  screenshots, dead logs; quarantine-first with restore, same manifest and
+  benchmark gate). 10 weeks (A + 2). Mitigation is placement, not scope:
+  lives behind the context plane, never leads messaging or first-run.
+- C = B + memory-product consumer + fleet census/remote reclaim. 14-15
+  weeks. Risk: fleet ephemerality (the CCleaner trap returns if hosts are
+  throwaway) + diluted focus. Hard go/no-go at end of W12: if the fleet
+  value case fails, C collapses to B with memory integration already
+  shipped as an option. Salvageable B always exists at 12 weeks.
+- File option placement: W6-W7 parallel slot of B, reuses reclaim+manifest
+  primitives, benchmark-gated by the same harness, NEVER on the harness
+  critical path. Amendment satisfied without touching the long pole.
+
+**MVP + desirability (S3, pushback delivered as ordered):** MVP = A shaved
+to its spine: one-command install, read-only census on the user's real
+store, dollar cost card + waste map, ONE benchmark-verified gated
+reversible reclaim with audit trail. File option stays in-codebase behind
+a flag, not in the MVP install path. First-run pull ranking:
+1. the dollar receipt on their own store (only specific, quantified, true
+   pull; must never be inflated for light users),
+2. the waste map (satisfying but diagnosis-only: the 234-star monitor
+   class already ships it and gets abandoned),
+3. reclaim-with-proof (where retention lives, but takes minutes, not
+   first-five-minutes).
+Honest pushback: organic pull is real but narrow and fragile; the only
+self-evidently motivated persona is the PAID HEAVY AGENT OPERATOR who can
+read their own dollar number. MVP must be tuned to that persona.
+
 ## 2026-10-13: R4B gate redesign: thresholds, product-led market gate, death schedule
 
 R4B report 13.3K chars, needle-verified, glyph-clean. Founder's K2
