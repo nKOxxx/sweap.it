@@ -1,0 +1,451 @@
+Query: RESEARCH BRIEF: sweap.it adversarial design review (wave R2)
+
+ROLE: You are a hostile-but-fair senior reviewer. Red-team the product and
+the research program. The founder wants bruises now, not at review time.
+
+SYSTEM UNDER REVIEW: sweap.it, "the sweeper for your LLM stack". Built today,
+v0.1.0. Commands:
+- sweapit doctor: read-only two-plane manifest.
+  host plane: /tmp scratch (age+size+keep-list), stray images at agent dir
+  root, cron output debris, store sizes (state.db, logs, sessions, skills)
+  context plane: fixed prompt overhead via `hermes prompt-size` (measured:
+  28.7 KB system prompt, 14.7 KB skills index, 54.3 KB tool schemas, 28
+  tools), session census via read-only sqlite (143 sessions, 36,826 messages,
+  tool-output share of transcript bytes = 85.4%)
+- sweapit sweep: gated cleanup, DRY-RUN BY DEFAULT, real run needs --no-dry.
+  Actions: quarantine stray images (moved, dated folder), delete /tmp scratch
+  older than N days minus keep-list, delete cron outputs older than 30 days.
+  Hard denials: com.apple.* in /tmp; keep-list (rea, hf_paper).
+- --json for machine consumption. Native `hermes sessions prune/optimize`
+  are surfaced as recommendations, NOT reimplemented.
+
+DESIGN LAWS CLAIMED: inventory never lies (all numbers measured); default to
+reversible; quarantine before delete; never reimplement DB surgery; report-
+only for judgment calls (human says go).
+
+ROADMAP INTENT: host-plane sweep is done soil; context-plane cleaning is the
+differentiator (transcript GC with archive-never-amputate semantics, memory
+dedup, prompt/toolset slimming) plus a multi-host census and a pre/post
+performance benchmark (RQ4: does cleaning measurably change task success and
+token burn?).
+
+DESIGN UPDATE (mid-build, treat as part of the spec): the founder has framed
+the product as "CCleaner or disk cleanup for AI models run on machines, with
+huge potential for optimization, cleanup, SUMMARY". The action triad is now:
+ANALYZE (manifests), CLEAN (gated sweep), OPTIMIZE (summary/slimming). And a
+preservation layer lands before any context-plane sweep: vital information
+gets distilled into a local memory store (the founder's Cognexia: SQLite +
+Markdown, importance-scored memory cards, 100% local) so cleanup provably
+loses nothing vital. Sweep-then-distill is a design crime under this spec;
+distill-then-sweep is the product.
+
+DELIVER (numbered, plain text):
+
+0. PRESERVATION-LAYER REVIEW: is distill-into-memory-before-sweep sound?
+   Attack it: summarization is lossy and unauditable at scale; importance
+   scores assigned by the same agent that made the mess is a conflict of
+   interest; retrieval decay (stored vital info nobody will ever fetch
+   again) can make memory stores the NEW dump. For each attack: the design
+   countermeasure, or the admission that it is fatal.
+
+1. FATAL FLAWS: ways this product is wrong, useless, or already dead on
+   arrival. Rank by severity. No hedging.
+
+2. SAFETY HOLES in the sweep semantics: what could --no-dry destroy that it
+   must never destroy? What race conditions or TOCTOU windows exist (e.g.
+   keep-list entries modified between inventory and sweep)? What does the
+   quarantine design miss (disk-quota blindness, permission churn, symlinks,
+   hardlinks, cross-volume moves)?
+
+3. MEASUREMENT VALIDITY attacks on the 85.4% claim: chars is not tokens; 85%
+   of STORED bytes may not be 85% of PROMPT bytes (APIs drop or compress old
+   tool outputs); one host is not a census; role='tool' may be the wrong
+   classifier. For each attack: the cheap fix or honest caveat.
+
+4. RQ AUDIT: the four research questions are (RQ1) waste composition and
+   growth law across hosts and contexts, (RQ2) safe deletion semantics for
+   conversation state, (RQ3) can an agent self-sweep without corrupting its
+   own memory, (RQ4) does cleaning measurably improve task performance. Which
+   are publishable, which are toy, which are already answered in literature?
+
+5. THE SELF-SWEEP PARADOX: sweap.it is built by and for agents; the research
+   log itself lives in the agent's repo; the agent writing the paper is the
+   measured system. Where does this invalidate findings, and what protocol
+   separations fix it?
+
+6. VERDICT: if the founder could only fix three things this week, which
+   three? One line each, concrete.
+
+RULES:
+- Be specific to THIS design, not generic advice.
+- ASCII only. No em-dashes; commas or colons. No markdown tables.
+- Do not praise. Do not summarize the design back to me.
+
+Your final message MUST begin with this exact line and nothing before it:
+SWEEPIT_R2
+Initializing agent...
+────────────────────────────────────────
+
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 skill     llm-stack-hygiene  0.0s
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 skill     llm-stack-hygiene → references/census-methods.md  0.0s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    SWEEPIT_R2
+    
+    0. PRESERVATION-LAYER REVIEW
+    
+    Attack (a): summarization is lossy and unauditable at scale. You compress
+    many KB of transcript into one memory card. At 36,826 messages on one
+    host, and more across a fleet, no human audits the cards. The failure is
+    not lossiness, it is silent lossiness: a card that reads complete while
+    quietly dropping the one fact needed in six months. Countermeasure that
+    makes this survivable: every card carries provenance (source session id,
+    exact byte range, a checksum) so any card is auditable on demand instead
+    of at scale, and the source transcript is NEVER deleted until the card
+    exists AND the source is quarantined, not hard-deleted. Add a
+    low-confidence bucket: cards the summarizer itself flags get held for a
+    human, never dropped. But the honest admission: full audited distillation
+    at fleet scale costs roughly what the transcript you were deleting cost.
+    You are swapping disk for a verification tax. The fatal variant is
+    distill as an irreversible redirect, transcript garbled into card, card
+    wrong, source gone. That must be prohibited by construction: the card is
+    a view, the source is a quarantined artifact until a human accepts the
+    card. That is your own report-only law applied one step earlier than you
+    planned.
+    
+    Attack (b): same-agent importance scoring is a conflict of interest. This
+    is the strongest attack in the section and it is not fully solvable. The
+    agent that accumulated the mess decides which parts of it are vital.
+    Every agent is incentivized to preserve its own past outputs and tool
+    traces and to be cavalier about the user's actual needs. Worse than
+    self-preservation: the score is calibrated to the model's own retrieval,
+    not to the user's long-term facts. The design countermeasure is to bound,
+    not remove, the conflict: a card's importance is metadata, not destiny
+    (promotable and demotable by the human or by observed usage); scoring
+    biases to false positives (when in doubt, keep and quarantine, do not
+    distill to a low-confidence card); and importance is scored against the
+    user's declared profile, not the agent's convenience. The fatal version
+    is the design that lets the agent self-certify "nothing vital was lost."
+    If the human is not the final gate for any card below a high confidence
+    bar, this feature is trust theater and should be cut. Given the roadmap
+    makes context-plane the differentiator and calls sweep-then-distill a
+    crime, the entire value proposition leans on a human gate that is not yet
+    specified. Specify it or abandon the claim.
+    
+    Attack (c): retrieval decay turns the memory store into the new dump.
+    This is the neatest and arguably the most fatal. You are replacing a
+    bounded, greppable artifact (a transcript) with an unbounded, scattered
+    artifact (cards nobody queries). A 36 MB transcript you can find with one
+    grep. Four thousand scored cards no future session ever pulls are
+    strictly harder to search than what you deleted. The name Cognexia,
+    "memory loss", is the tell: you have named the disease you are injecting
+    into your own product. Design countermeasure: the memory store needs the
+    opposite law from your /tmp sweeper. It needs retrieval hooks, not
+    retention rules. A card is only alive if it is wired into the thing that
+    actually reads memory (the agent's memory injection path that rides the
+    paid prompt); otherwise it is dead storage by definition. And the
+    preserve layer itself needs a sweep: cards with zero fetches in N get
+    demoted or re-attested, so the store is not unbounded. The admission: a
+    preserved-but-never-retrieved fact is indistinguishable from a deleted
+    fact except that you paid more for it. If there is no retrieval
+    observability on Cognexia, preservation is decorative deletion and the
+    feature is fatal. The fix is cheap: log every card fetch, sweep
+    zero-fetch cards. If a team member objects to logging the fetch path,
+    that objection is your sign the preserving is for show.
+    
+    Bottom line for 0: every attack has a countermeasure, but they stack into
+    a real operating tax, and the foundational rule is not stated anywhere: a
+    fact is only preserved if it is subsequently retrieved. Otherwise the
+    preservation layer is a second dump wearing a better name.
+    
+    1. FATAL FLAWS, RANKED
+    
+    F1, existential: the differentiator is unbuilt and the shipped half is
+    commodity. The host plane, everything v0.1.0 actually does, is a solved
+    problem. find /tmp -mtime +7 -delete plus du plus a cron job already does
+    it, on every Mac and in every agent stack. Quarantining screenshots and
+    pruning cron logs is CCleaner's category, and CCleaner's category is a
+    low-margin graveyard you are late to. The only thing that distinguishes
+    sweap.it from a shell script is the context plane, and the context plane
+    is precisely the part your own laws admit is dangerous: reversible,
+    quarantine, human gate, never reimplement DB surgery, report-only for
+    judgment. You built the safe, worthless half and shipped it, and describe
+    the risky, valuable half as roadmap. As shipped, the product has no
+    reason to exist: its audience can already do all of it, and its buyer
+    gets a manifest they could have grepped.
+    
+    F2, doomed market frame: "CCleaner for AI models run on machines." The
+    comparison's entire pitch is reclaiming disk on a personal PC the user
+    owns. But the scarce resource in an LLM stack is not disk, it is context
+    tokens with a per-call price and information loss on deletion. You
+    noticed this, the two-plane model is correct, then the design update
+    walked the product back to disk. And there is no "machine" in CCleaner
+    that the user owns: agent fleets are multi-host, ephemeral,
+    containerized, and the disk is disposable, you rebuild from image.
+    Sweeping a container's /tmp is theater, and nobody pays for theater. You
+    have miscalibrated the buyer by a category.
+    
+    F3, value vacuum: you have not shown cleaning improves anything, only
+    that it reduces stored bytes, and stored bytes are not prompt bytes
+    (section 3). If most of that 85.4% of stored tool bytes is never replayed
+    into a prompt, then deleting or summarizing it changes task success by
+    exactly zero. You are a cleaner that has not demonstrated that removing
+    the dirt changes the thing the buyer cares about. RQ4 is the only thing
+    that rescues this, and RQ4 has no method yet. Reframing to an ANALYZE,
+    CLEAN, OPTIMIZE triad with "summary and slimming" is hand-waving the hard
+    question: does trimming 54.3 KB of tool schemas or 14.7 KB of skills
+    index actually help, given the model may not attend to all of it
+    regardless. You do not know. A cleaner needs a cleanliness metric that
+    maps to money, and you do not have one.
+    
+    F4, n=1 self-measured vanity: 143 sessions and 36,826 messages on one
+    Mac, measured by the tool you are selling. That is a sample of one,
+    selected by being yours, and it is simultaneously your product demo and
+    your paper's only data. Every claim about "the LLM stack" generalizes
+    from a single host. A reviewer reads this as you measuring your own
+    bedroom and calling it a census. It undercuts the product pitch and the
+    research at the same time.
+    
+    F5, the memory codec is an unsolved problem sold as a feature:
+    compressing agent decision-relevant history into importance-scored cards
+    at scale, with the guarantee of no vital loss, is an open research
+    problem. You have proposed putting a lossy, conflict-of-interest codec
+    between an agent and its own memory and charging for it, and called it
+    the differentiator. That is a funded research program, not a v0.2
+    feature. It is the piece most likely to never work correctly, and it is
+    the piece you most depend on.
+    
+    Severity order: F1, F2, F3 kill it as a product; F4 and F5 kill it as
+    research.
+    
+    2. SAFETY HOLES
+    
+    Keep-list TOCTOU: the keep-list (rea, hf_paper) is matched by name at
+    inventory. An active work file not on the keep-list can carry an old
+    mtime (cp -p, a checkout, a restored file) and get swept. The deny and
+    keep lists are checked once, the deletion target is resolved later. Fix:
+    re-resolve the deny and keep lists against the actual inode (dev+ino) at
+    deletion time, not the name, and refuse to act on any entry whose inode
+    changed since inventory. Use lstat, not stat.
+    
+    Symlink escape: swap a sweepable name for a symlink pointing outside
+    /tmp, and a recursive delete or a recursive quarantine-move follows it
+    into a real directory and deletes real files. unlink of a symlink itself
+    is safe, but any use of shutil or recursion with follow-symlinks true
+    walks into the target. Every operation in the sweep must run with
+    symlinks=False and lstat, and directories containing symlinks must be
+    inventoried as links, not traversed.
+    
+    Hardlink trap: the fatal one. A file in /tmp hardlinked to a live log or
+    a working copy, nlink > 1. You quarantine and then hard-delete
+    /tmp/cron.out, and the live log at the other path name silently loses its
+    content, because you deleted the inode both names pointed to. Nothing in
+    the spec mentions nlink. Fix: refuse to act on any entry with link count
+    > 1, or copy-and-dedupe instead of move. It is a two-line stat check and
+    it is currently absent. Also nlink > 1 breaks your size accounting (du
+    counts it once).
+    
+    Cross-volume quarantine: os.rename raises EXDEV when source and
+    quarantine are on different volumes (APFS firmlinks, separate mounts).
+    The implementer falls back to copy-then-delete. A crash between copy and
+    delete leaves a truncated quarantine copy and then the original is gone.
+    Fix: make the move an explicit copy, fsync, verify byte size or hash,
+    then delete only after verification, or refuse cross-volume moves and
+    ask. Never trust a move that was actually a copy.
+    
+    Disk-quota blindness: the /tmp criterion is age, not space. On APFS /tmp
+    shares the volume and is rarely the constraint. You will delete many
+    young irrelevant files for zero reclaim, or preserve old tiny files while
+    a few huge young ones starve the volume. Fix: report actual volume
+    pressure, tag entries by size, and act only where age, size, and pressure
+    jointly justify it. Sweeping by mtime alone on a non-constrained volume
+    is cargo-cult cleanup.
+    
+    Permission churn and partial-run abort: an unreadable entry or one
+    deleted by another process mid-sweep can crash the run, leaving a
+    partially quarantined state where the deleted set no longer equals the
+    inventoried set, breaking "reversible" and "inventory never lies" at the
+    action level. Fix: make the sweep transactional per file, log every
+    action, never abort mid-list, and emit a final manifest of what actually
+    happened. Your inventory-never-lies law is currently true at emit time
+    only; it must be re-verified after the action or it is a marketing slogan.
+    
+    com.apple.* prefix deny is too blunt in both directions. It
+    over-preserves real user files that happen to start with that prefix
+    (safe but wrong), and if enforced by regex or case-insensitively it can
+    be drifted. More importantly, /tmp on macOS is /private/tmp and holds
+    launchd sockets and domain sockets; any size or empty-file heuristic must
+    be type-aware, never delete or act on socket, fifo, or symlink entries,
+    not just name-prefixed ones.
+    
+    The live-store race for the context plane: state.db is live behind the
+    gateway. A future sweep that truncates or optimizes rows races with the
+    writer. Read-only census is fine. Any store surgery requires an explicit
+    offline checkpoint first, and you must never mutate a store you are
+    concurrently reading. State it as an invariant, not an instruction, since
+    the sweep will be a robot calling the sweeper.
+    
+    3. MEASUREMENT VALIDITY, 85.4%
+    
+    Chars is not tokens. LENGTH(content) counts UTF-8 code points. Tool
+    output is code, JSON, paths, hex, and base64, which tokenize at a
+    different chars-per-token ratio than the prose in user and assistant
+    messages. The money metric, prompt cost, is tokens. The 85.4% is in
+    chars, and the direction of error is not even guaranteed. Cheap fix:
+    re-measure with the model's tokenizer over role=tool content versus total
+    and report both. If you will not tokenize, state "85.4% of stored message
+    bytes, token share unmeasured" and stop letting the number carry the
+    weight it currently does.
+    
+    Stored bytes is not prompt bytes, and this is the damaging one. 85% of
+    STORED transcript bytes being tool output does not imply 85% of PROMPT
+    bytes are tool output, because the consumption path drops, truncates, or
+    compresses old tool outputs when replaying history. The transcript stores
+    every tool output ever; a real prompt only carries the recent window,
+    with older outputs compressed or dropped. Consequence: your re-payment
+    law is true for the fixed overhead (28.7 + 14.7 + 54.3 KB ride every
+    call) but false or unestablished for tool-output bytes, which are paid
+    once at the turn they happened and mostly never re-paid. The headline
+    metric conflates a one-time storage cost with a recurring per-call cost,
+    and it is the per-call cost that justifies the product. Cheap fix:
+    instrument a session and measure which tool bytes actually re-enter
+    prompts, and report that number in the cost column while 85.4% stays in
+    the storage column. As written, 85.4% is a storage statistic dressed as
+    an economic finding.
+    
+    One host is not a census. You have a case study of one Mac,
+    self-selected. The word census implies a population and a method; you
+    have a sample of one. Cheap fix: in the paper call it a day-0 baseline on
+    one host, and make the multi-host count a real RQ1 deliverable, not an
+    input. Do not let the word census inflate n=1.
+    
+    role=tool may be the wrong classifier. It captures tool-result bytes but
+    misses tool-invocation JSON (request arguments) if stored under another
+    role, misses assistant messages that quote tool output into reasoning,
+    and can mis-classify any injected context (profile, memory, skills) that
+    arrives as a user or system message. The 85.4% is also of CONTENT bytes
+    only, excluding fixed overhead, so a reader hears "85% of everything"
+    when it is "85% of message content". Cheap fix: state the denominator on
+    every emission and validate the classifier against a hand-labeled sample
+    of roughly 100 messages. Ten minutes of labeling would tell you whether
+    85.4% is even a real number.
+    
+    4. RQ AUDIT
+    
+    RQ1, waste composition and growth law. Composition on one host is
+    measured and is a toy result: it is a single point. The growth law is not
+    measured at all; you have one snapshot, no time series, so there is no
+    rate, no exponent, nothing to fit. Cross-host composition is the
+    genuinely publishable piece, nobody has published an agent-waste census
+    across hosts, but it is currently roadmap. Verdict: composition = toy;
+    growth law = publishable but unmeasured; cross-host = the real
+    contribution, unbuilt.
+    
+    RQ2, safe deletion semantics for conversation state. Strongest and most
+    publishable, because your design laws already encode a serious answer:
+    quarantine, reversible, never reimplement DB surgery, hard-deny,
+    human-gate. But it is research only if you define and test the safety
+    property with an oracle: for example, deletion preserves the ability to
+    answer a held-out set of provenance queries, or never amputates a fact
+    needed to substantiate a made claim. Without that oracle, RQ2 is "our
+    tool has a dry-run flag", which is not publishable. Verdict: publishable
+    only if you operationalize safe as a testable property; the
+    archive-never-amputate idea is a restatement of git and append-only log
+    behavior and is not novel alone.
+    
+    RQ3, can an agent self-sweep without corrupting its own memory. Original
+    and publishable, this is the heart of section 5 and the best research in
+    the program. But it is entangled with RQ4 and with the Cognexia layer, so
+    it cannot be answered until you separate "self-sweep performed correctly"
+    from "self-sweep survived despite a lossy layer". Verdict: high value,
+    publishable, but only after that separation exists.
+    
+    RQ4, does cleaning measurably improve task performance. The question that
+    decides whether any of this matters, and it currently has no method. It
+    needs a controlled before/after benchmark on held-out tasks, cleaning
+    applied versus not, controlling for model, temperature, seed, and the
+    confound that re-running a task improves the agent regardless of
+    cleaning. There is a large long-context degradation and RAG
+    full-context-versus-retrieval literature that has mostly answered the
+    general form. Novelty is only in applying it to an agent's own runtime
+    state. Verdict: publishable but marginal, and high risk of a null result
+    (if most tool bytes are never replayed, cleaning changes nothing, which
+    is F3), at which point you are publishing a null on a product you are
+    selling.
+    
+    Ranking: RQ1 cross-host, then RQ3, then RQ2 if operationalized, then RQ4
+    as null-risk. RQ1 single-host composition and all pure host-plane
+    behavior are toy.
+    
+    5. THE SELF-SWEEP PARADOX
+    
+    The setup makes every finding self-attested: sweap.it is built by and for
+    agents, the research log lives in the agent's repo, the agent writing the
+    paper is the measured system, and it is the agent running the tool on its
+    own store. Where it invalidates:
+    
+    Contamination: the census reads state.db while Hermes is live, so the
+    measuring session writes new messages under test, and 36,826 and 85.4%
+    include the census's own traffic. Earlier sweeps can move files the tool
+    then reports as clean, making "inventory" self-fulfilling.
+    
+    Observer-as-subject: the agent decides what is vital and the agent's own
+    memory is what is being graded and being swept. The conflict of interest
+    in section 0b is not hypothetical here, it is the agent grading its own
+    homework while being graded on the homework.
+    
+    Selective reporting: the agent curates the research log and the paper. An
+    outside reviewer cannot audit whether the numbers are representative or
+    the cherry-picked happy path. A dramatic 85.4% and a recoverable host
+    plane are exactly the numbers a self-reported paper would lead with.
+    
+    Confounded RQ3: if self-sweep appears to work, the cause may be practice,
+    a lucky state, or the cleaning, and the tool and the measured improvement
+    share a cause (the agent), so any attribution is regression-to-mean.
+    
+    Protocol separations that fix it:
+    - Run the cleaner and the measured as different identities: the census
+    and cleanup execute as a separate, read-only-isolated instrument with its
+    own logging, never the agent under test mutating its own store then
+    reporting its own health.
+    - Freeze the artifact: snapshot state.db and config to a read-only
+    baseline before any sweep, and run every before/after benchmark against
+    the frozen snapshot, not the live store. This is the single strongest fix
+    in the program.
+    - Hold-out audit: a second agent or a human, out of the loop,
+    independently re-derives the headline numbers from the frozen raw
+    snapshot and checks the paper's claims against it, not against the
+    agent's summary.
+    - Separate writing from running: the process that runs sweap.it on itself
+    has a locked config and is a different named instrument from the one that
+    compiles results into the paper, both audited against the frozen snapshot.
+    - Log the instrument: an append-only, tamper-evident action log of every
+    sweep, so inventory-never-lies can be verified after the fact by an
+    external auditor instead of trusted from inside.
+    
+    Without these, RQ3 and the Cognexia "nothing vital lost" guarantee are
+    invalid on contact, because a hostile reviewer treats self-certified
+    results as unverified by default.
+    
+    6. VERDICT, THREE FIXES THIS WEEK
+    
+    1. Repitch on the fixed overhead re-paid every call, 28.7 plus 14.7 plus
+    54.3 KB, and demote 85.4% to a storage statistic, because the product
+    dies if it is framed as a disk cleaner.
+    2. Build the frozen-snapshot before/after benchmark protocol with a
+    held-out task set before any more sweep features, because without it the
+    value thesis is unfalsifiable.
+    3. Make Cognexia optional and human-gated with per-card provenance and
+    retrieval observability, zero-fetch cards swept, and no agent
+    self-certification of "nothing vital lost", because the conflict of
+    interest and retrieval decay are fatal without an external gate.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261013_184203_150b3c
+
+Session:        20261013_184203_150b3c
+Duration:       2m 21s
+Messages:       6 (1 user, 4 tool calls)

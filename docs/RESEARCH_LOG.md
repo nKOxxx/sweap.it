@@ -7,6 +7,9 @@ measured, nothing invented. Em-dashes banned per house law.
 
 **Integrity gate passed:** all 19 arXiv IDs + all named titles in R1b output
 verified present in the ledger the worker actually saw (zero inventions),
+extended post-receipt to cover the build-order tail: View-oriented
+Conversation Compiler, MemRefine, Mem2ActBench, DUET, MemLens, all in
+ledger. Audit coverage now 100% of named citations.
 and the three load-bearing cites spot-checked against live sources: A Survey
 of Context Engineering (2507.13334) resolves on arXiv API with exact title;
 Agentic Context Management (2607.21503) resolves on HF API + arXiv abs page
