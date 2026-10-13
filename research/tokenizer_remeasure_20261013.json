@@ -1,0 +1,42 @@
+{
+ "date": "2026-10-13",
+ "store": {
+  "bytes": 59787593,
+  "sessions": 353,
+  "messages": 37788
+ },
+ "sample_ratio_chars_per_token": {
+  "tool content": 3.3386177964230512,
+  "assistant tool_calls JSON": 3.040813380354307,
+  "assistant prose": 4.095536756126021,
+  "user content": 3.8234049175225646
+ },
+ "sample_sizes": {
+  "tool content": null,
+  "assistant tool_calls JSON": null,
+  "assistant prose": null,
+  "user content": null
+ },
+ "token_est": {
+  "tool content": 9932265.69256511,
+  "assistant tool_calls": 6606672.454742753,
+  "assistant prose": 730060.106414046,
+  "user": 927944.6139068427
+ },
+ "total_tokens_est": 18196942.86762875,
+ "exhaust_token_share_pct": 90.8885534653715,
+ "exhaust_byte_share_pct": 89.1,
+ "method": "stratified 150-row sample per class, deterministic seed 20261013, o200k_base, chars/token extrapolation to full store",
+ "exact_full_store": {
+  "tokens": {
+   "tool content": 9921737,
+   "assistant tool_calls": 6593594,
+   "assistant prose": 727576,
+   "user": 967157
+  },
+  "total": 18210064,
+  "exhaust_share_pct": 90.69,
+  "rows": 37813,
+  "method": "exact full-store o200k_base count"
+ }
+}

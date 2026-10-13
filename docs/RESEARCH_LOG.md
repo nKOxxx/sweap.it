@@ -530,3 +530,22 @@ is the cautionary dataset).
 ### R5 -> product deltas (PROPOSED, pending founder ruling)
 
 1. First-run = proof run: census + YOUR dollar card shipped first; distill/reclaim behind the proof gate. 2. Per-host numbers only in pitch/onboarding (reference stats demoted to context). 3. `restore-test` as a shipped, self-enforcing gate: reclaim refuses to run until a real round-trip restore passes on that host. 4. Read-only default mode, write path opt-in and permission-separated. 5. File cleanup stays, deeper quarantined: separate subcommand, never in first-run, --files flag. 6. Packaging: free proof-run wedge; paid = reclaim + benchmark + audit bundle (manifest/signed provenance export, compliance demand); target enterprise/paid-heavy/startup/eval, price $20-30 pro. 7. Plan tension: losslessness proof needs the benchmark harness, so harness moves onto the critical path of the first PUBLIC artifact (launch wedge w4 = dollar card only, full proof wedge w8-10), or launch slips right. Unchanged: two-plane model, native card store, R4B gates (swarm clears nothing), death schedule, reversible-by-default.
+
+## 2026-10-13 (late) - Tokenizer re-measure: token-shares EXACT (queued since R1b, closed)
+
+**Gap closed**: R1b demoted 85.4% to a storage statistic with "token share unmeasured, tokenizer re-measure queued". Done today, two passes: (a) stratified sample (150 rows/class, seed 20261013, o200k_base, chars/token extrapolation) then (b) EXACT full-store count, every row.
+
+**Results (exact, o200k_base, 37,813 rows, 353 sessions)**:
+- tool-role content: 9,921,737 tok (54.48%)
+- assistant tool_calls JSON: 6,593,594 tok (36.21%)
+- assistant prose: 727,576 tok (4.00%)
+- user content: 967,157 tok (5.31%)
+- TOTAL: 18,210,064 tokens. **TOOL EXHAUST = 90.69% of stored TOKENS** (sample estimate 90.9%, validated to 0.2pp).
+
+**Density finding (new, paper-grade)**: tool JSON tokenizes DENSER than prose (3.04 vs 4.10 chars/token), so exhaust token-share exceeds byte-share: 90.7% vs 89.1%. Compression-by-tokenization does not dilute the waste claim; it amplifies it.
+
+**Longitudinal finding (new)**: exhaust byte-share rose 85.4% -> 89.1% as the store grew 38.4MB -> 59.8MB (143 -> 353 sessions) during the research period itself: agent-heavy usage compounds exhaust share over time. The store's own growth during this research is a natural-experiment row.
+
+**Unchanged**: 97.7KB fixed overhead/call (28.7 sysprompt + 14.7 skills index + 54.3 tool schemas), re-paid every call.
+
+**Artifacts**: research/tokenizer_remeasure.py, tokenizer_exact.py, tokenizer_remeasure_20261013.json (sample + exact), tokenizer_exact_out.txt. Commits: this one.

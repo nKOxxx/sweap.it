@@ -1,0 +1,8 @@
+rows scanned: 37813
+  tool content                9,921,737 tokens  share=54.48%
+  assistant tool_calls        6,593,594 tokens  share=36.21%
+  assistant prose               727,576 tokens  share= 4.00%
+  user                          967,157 tokens  share= 5.31%
+TOTAL: 18,210,064 tokens
+TOOL EXHAUST TOKEN SHARE (EXACT): 90.69%
+updated JSON with exact pass
