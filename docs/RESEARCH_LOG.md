@@ -3,6 +3,36 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: Founder amendments to the R3 ruling (GO suspended, R4 set ordered)
+
+Founder reviewed the GO+gates fork and amended, verbatim where quoted:
+
+1. Cognexia must earn its place: "i would like to see that it makes sense
+to use cognexia, otherwise, push back." R4A evaluates fit honestly; if it
+does not make sense, the research must say so and propose the alternative.
+2. Gate redesign ordered: "run another research deep seek set with several
+R's concerning different gate thresholds, skip the buyer-outreach gate,
+shrink scope..." R4B reworks K1-K5 with threshold variants.
+3. K2 rejected as designed: "which buyer outreach? this is a product. we
+will use other products/crm's for buyer outreach." Founder-personal cold
+outreach is not a gate mechanism. Distribution is product-led and mediated
+by other products, CRMs, marketplaces. R4B redesigns the market gate
+around product-led signals.
+4. Host plane file deletion KEPT: "there should be an option to delete old
+or useless files, btw. lets not drop this." The R2 demotion stands (never
+leads) but the capability is back in scope as an option. R4C prices it.
+5. Product truth test: "we need to make sure that we build a product that
+people will want to use and which will actually optimise their llm
+setup." Desirability and measured optimization are the spine of R4C.
+
+R4 set dispatched (serial, DeepSeek lane, needle-locked):
+R4A Cognexia fit-or-pushback (integrate / extend / skip-build-native).
+R4B kill-gate redesign (thresholds, product-led market gate, distribution).
+R4C scope variants + MVP (context plane leads, file deletion kept as
+option, what optimize means operationally, desirability).
+
+GO ruling remains suspended until the R4 set is digested and presented.
+
 ## 2026-10-13: R3 synthesis: THE OVERVIEW (all six founder exit criteria closed)
 
 R3 raw 19.2KB chars, needle-verified, zero invented citations (all 4 cited

@@ -1,0 +1,25 @@
+ROLE: Research lead, sweap.it wave R4B. You receive only verified facts below. Do not invent citations or numbers. Reasoning beyond facts must be labeled [inference]. Output MUST start with the exact needle SWEEPIT_R4B or the run is discarded.
+
+CONTEXT: sweap.it is a proposed product + paper: hygiene tooling for LLM agent stacks. The R3 synthesis returned a conditional GO with five kill gates K1-K5. The founder rejected one gate as designed and ordered a redesign of all five with threshold variants.
+
+THE EXISTING GATES (R3):
+K1: no reproducible token saving without task-quality regression on a held-out benchmark set.
+K2: no paying or pre-paying buyer from a cold outreach of 10-20 agent-tool developers.
+K3: any safety failure in the wild (hard-deny set violation, or provenance record checksumming as modified after the fact).
+K4: fixed overhead (97.7KB per call on the reference host) turns out to be a minor share of real bills once tokenized and reconciled against invoices.
+K5: census not reproducible by a read-only external observer.
+
+FOUNDER AMENDMENTS (binding):
+- "which buyer outreach? this is a product. we will use other products/crm's for buyer outreach." Founder-personal cold outreach is rejected as a gate mechanism. Distribution is product-led: other products, CRMs, marketplaces, package registries, integration partners carry it.
+- Gates need threshold variants: the founder wants to see different strictness levels, not a single take-it-or-leave-it line per gate.
+- Overall test: "we need to make sure that we build a product that people will want to use and which will actually optimise their llm setup."
+
+VERIFIED FACTS: reference host pays 28.7KB system prompt + 14.7KB skills index + 54.3KB tool schemas per call; 85.4% of stored transcript bytes are tool exhaust (stored-bytes fact, token share unmeasured); 143 sessions, 227MB store, one host. Landscape: 271-record harvest shows monitors that measure but never clean, a graveyard of 1-7 star hygiene hacks, no product combining census + economics + reversible reclaim.
+
+YOUR TASK, four sections:
+1. GATE REDESIGN: for each of K1, K3, K4, K5 (K2 handled in section 2): propose a strict variant, a moderate variant, and a loose variant with concrete numeric thresholds where possible (savings percentage, regression tolerance, reproducibility tolerance). State which variant you recommend and why in one sentence each.
+2. THE MARKET GATE REPLACEMENT: design a replacement for K2 that needs zero founder-personal outreach. Candidate product-led signals: organic downloads or installs per week from registries, star or fork velocity, activation rate (install to first successful census), retention (second-week return), integration or marketplace listing acceptance, inbound from content (the paper itself as distribution). For each: how to measure cheaply, what threshold means kill versus continue. Then commit to ONE recommended market gate with numbers.
+3. DISTRIBUTION REALITY: where do developer hygiene tools actually get adopted? Rank the channels for this product: package registries (brew, npm, pip), agent-framework plugin marketplaces, MCP registries, CI integrations, content-led (paper, blog benchmarks), CRM-mediated partnerships. For each: cost to list, expected lag to signal, verdict fit.
+4. GATE ORDERING: which gate can fire earliest (cheapest evidence), which latest? Propose the check schedule across the 14-week plan phases (P0 w1-2 census, P1 w3-4 token economics, P2 w5-7 benchmark harness, P3 w8-10 sandbox reclaim, P4 w11-13 integration, P5 w14 live opt-in) so the project can die cheaply and early rather than expensively and late.
+
+FORMAT: plain text, no em-dashes anywhere (commas or semicolons). Sections 1 to 4. Max 2000 words.

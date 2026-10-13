@@ -1,0 +1,18 @@
+ROLE: Research lead, sweap.it wave R4C. You receive only verified facts below. Do not invent citations or numbers. Reasoning beyond facts must be labeled [inference]. Output MUST start with the exact needle SWEEPIT_R4C or the run is discarded.
+
+CONTEXT: sweap.it is a proposed product + paper: hygiene tooling for LLM agent stacks. R3 produced a 7-component architecture and a 14-week plan. The founder ordered scope variants and an MVP definition, with two binding amendments: the host-plane capability to delete old or useless files must be KEPT as an option ("lets not drop this"), even though it must never lead the story; and the product must be something "people will want to use and which will actually optimise their llm setup".
+
+VERIFIED FACTS:
+- Reference host: 97.7KB fixed overhead per API call (28.7KB system prompt + 14.7KB skills index + 54.3KB tool schemas), re-paid every call; 85.4% of stored transcript bytes are tool exhaust (32.75M of 38.36M chars, 143 sessions, 36,826 messages, 227MB sqlite); host-plane dust: /tmp ~455MB, 54 stray screenshots ~10MB, 32MB logs, 16MB session jsonl.
+- Landscape (271 records): monitors measure but never clean (up to 234 stars in that class); hygiene hacks die at 1-7 stars; nothing ships census + fixed-overhead economics + reversible benchmark-verified reclaim.
+- Red-team verdicts: host-plane cleanup alone is commodity (find + du + cron); the CCleaner-for-disk frame is doomed because fleets are ephemeral; the context plane is the differentiator. Compression research shows lossy context compression amplifies off-task content, motivating distill-before-sweep.
+- Architecture components from R3: 1a read-only snapshot census with checksum manifest, 1b stored-bytes measurement, 1c fixed-overhead economics cost card, distillation with per-card provenance, gated quarantine-first reclaim, before/after benchmark harness, optional memory-product consumer.
+- Product laws: default to reversible; measurement before destruction; human gate for judgment; never reimplement DB surgery.
+
+YOUR TASK, four sections:
+1. WHAT OPTIMIZE MEANS OPERATIONALLY: enumerate the concrete user-visible outcomes a hygiene product can deliver for an LLM stack (dollar receipts for wasted tokens, smaller prompts, faster sessions, cleaner agent memory, audit trail of what was removed and why, compliance-friendly reversibility). For each: is the effect measurable on day one, or only after weeks? Which are felt in the wallet versus felt in workflow?
+2. SCOPE VARIANTS: price three variants. Variant A, context-plane only (census, cost card, benchmark-verified gated reclaim). Variant B, A plus optional host-plane file cleanup (the delete-old-or-useless-files option the founder ordered kept: old tmp, stray screenshots, dead logs, with the same quarantine-first laws). Variant C, B plus memory-product integration and fleet features. For each variant: component list, week estimate at one-founder-plus-agent-workers pace, risk concentration, what the user gets on first run.
+3. MVP DEFINITION AND DESIRABILITY: from the variants, define the MVP, the smallest thing a stranger would install and keep. Apply the desirability test honestly: what does a user see in the first 5 minutes that makes them keep it? Rank candidate first-run experiences by pull (dollar receipt on their own store, waste map, one-click safe reclaim with proof). Be honest if the evidence says the pull is weak; the founder ordered pushback over cheerleading.
+4. TIMELINE DELTAS: week-by-week delta for each variant against the R3 14-week plan. Where does the kept file-deletion option fit without delaying the benchmark long pole?
+
+FORMAT: plain text, no em-dashes anywhere (commas or semicolons). Sections 1 to 4. Max 2000 words.

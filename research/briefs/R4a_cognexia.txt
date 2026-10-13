@@ -1,0 +1,18 @@
+ROLE: Research lead, sweap.it wave R4A. You receive only verified facts below. Do not invent citations or numbers. Reasoning beyond facts must be labeled [inference]. Output MUST start with the exact needle SWEEPIT_R4A or the run is discarded.
+
+CONTEXT: sweap.it is a proposed product + paper: hygiene tooling for LLM agent stacks. The R3 synthesis returned a conditional GO with a 7-component architecture, where component 1a is a read-only snapshot census, 1b is stored-bytes measurement, 1c is fixed-overhead economics (97.7KB paid before every API call on the reference host), and later components are distillation with provenance, gated reclaim, a before/after benchmark harness, and an optional Cognexia consumer. The founder now orders an honest verdict on whether Cognexia integration makes sense at all: if it does not, the research must push back and name the better alternative.
+
+VERIFIED FACTS:
+- Cognexia: founder-owned, MIT-licensed, 100% local memory product. SQLite plus Markdown storage, importance scores, project isolation, 37 HTTP endpoints.
+- Red-team conditions already accepted (wave R2): any preservation layer must be optional and human-gated; every distilled card must carry provenance (source session id, exact byte range, checksum); retrieval must be observable; cards that are never fetched must themselves get swept; no agent self-certification of "nothing vital lost", an external gate is mandatory. The fatal variant to prohibit by construction: distill as irreversible redirect (card wrong, source gone). The card is a view; the source stays quarantined until a human accepts.
+- Reference host census: 85.4% of stored transcript bytes are tool exhaust (32.75M of 38.36M chars, 143 sessions, 36,826 messages, 227MB sqlite store). Token share and prompt share unmeasured. Host-plane dust also exists but is a demoted optional surface.
+- Landscape harvest (271 records): memory systems exist as a category but none combines hygiene, gated reversible reclaim, and distill-before-sweep with provenance.
+- Product laws: default to reversible; measurement before destruction; distill-then-sweep; never reimplement DB surgery; human gate for judgment calls.
+
+YOUR TASK, four sections:
+1. FIT ANALYSIS: evaluate Cognexia as the distillation and preservation layer against the accepted red-team conditions, point by point. Which conditions does it already satisfy, which need extension work, which are impossible in its current architecture? Consider the 37-endpoint API surface, SQLite+Markdown duality, importance scores as a retention prior, project isolation versus fleet reality.
+2. DEPENDENCY RISK: founder-owned, single-maintainer product. Coupling sweap.it to it: what breaks if Cognexia stagnates, pivots, or breaks API? Is the MIT license sufficient protection? What is the exit cost if integration must be reverted?
+3. ALTERNATIVES: compare against (a) a minimal native card store built into sweap.it (schema: session id, byte range, checksum, card text, fetch counter), (b) other memory systems from the harvest category, generic: local-first memory products. Score each option on provenance support, observability, effort, risk.
+4. VERDICT: exactly one of INTEGRATE / INTEGRATE-WITH-EXTENSIONS (list the required extensions) / SKIP-BUILD-NATIVE. If the honest answer is SKIP, say so plainly; the founder explicitly ordered pushback over loyalty. Include the decision conditions that would flip the verdict.
+
+FORMAT: plain text, no em-dashes anywhere (commas or semicolons). Sections 1 to 4. Max 1800 words.
