@@ -3,6 +3,50 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R1b triage results (DeepSeek, 55s, needle-verified, citation-audited)
+
+**Integrity gate passed:** all 19 arXiv IDs + all named titles in R1b output
+verified present in the ledger the worker actually saw (zero inventions),
+and the three load-bearing cites spot-checked against live sources: A Survey
+of Context Engineering (2507.13334) resolves on arXiv API with exact title;
+Agentic Context Management (2607.21503) resolves on HF API + arXiv abs page
+(its arXiv *API* record lags, logged as a known mirror-lag gotcha);
+Compression Remembers the Detour resolves on OpenAlex (2026, DOI live).
+
+**The must-read ten (per R1b, verified against ledger):**
+1. 2507.13334 Survey of Context Engineering: the field map, borrow taxonomy.
+2. 2607.21503 Agentic Context Management: closest framing (memory+cost as
+   lifecycle), never builds the hygiene plane, differentiate head-on.
+3. 2602.07398 AgentSys: host-plane vs context-plane hierarchy + secure
+   deletion stance.
+4. Compression Remembers the Detour (OpenAlex): lossy compression AMPLIFIES
+   off-task content, the core motivation for distill-before-sweep.
+5. 2601.18642 FadeMem: retention curves as seed of deletion semantics.
+6. 2604.13725 compression effectiveness on repo tasks: backbone of our
+   pre/post benchmark.
+7. 2608.04569 Referential Dangling: hard compression leaves dangling refs,
+   motivates provenance-preserving preservation (never amputate).
+8. 2512.21567 Beyond Heuristics: decision-theoretic memory management,
+   formal frame for our gated-cleanup approval loop.
+9. LOCA-bench 2602.07962 + MemoryRewardBench 2601.11969: benchmark lane.
+10. Billing-audit method (OpenAlex): invert it, audit LOCAL waste instead
+    of vendor bills.
+
+**Competitor map (from ledger's GitHub section):** (a) measure-only monitors
+(splitrail 223 stars, usage analyzers), (b) single-CLI hacks (llm-cleaner,
+ContextGc, pi-hermes-memory-cleanup), (c) memory systems without hygiene,
+(d) no genuine overlap: nobody ships gated two-plane reclaim.
+
+**Build order (R1b, ranked by leverage/effort):**
+1. context-plane census hardening (measurement before destruction),
+2. transcript GC prototype behind the R1b decision framework,
+3. pre/post benchmark harness (2604.13725 + LOCA-bench methods),
+4. preservation store with provenance + undo (the moat, after sweep proves
+   value),
+5. benchmark automation for paper time.
+Safety invariant from R1b: measurement before destruction, every cleanup
+move evidenced.
+
 ## 2026-10-13: R1 grind results (DeepSeek R1 + internet harvest)
 
 **Harvest (real fetched metadata, all raw in research/raw/harvest/):**
