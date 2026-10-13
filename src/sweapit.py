@@ -33,9 +33,9 @@ STATE_DB = HERMES / "state.db"
 
 def du(p: Path) -> int:
     total = 0
-    for root, dirs, files in os.walk(p, onerror=lambda e: None):
+    for root, dirs, files in os.walk(p, onerror=lambda e: None, followlinks=False):
         for f in files:
-            try: total += os.path.getsize(os.path.join(root, f))
+            try: total += os.lstat(os.path.join(root, f)).st_size
             except OSError: pass
     return total
 
@@ -60,8 +60,14 @@ def tmp_entries():
     for p in Path("/tmp").iterdir():
         if any(p.name.startswith(x) for x in TMP_DENY_PREFIX): continue
         try:
-            out.append({"name": p.name, "size": du(p) if p.is_dir() else p.stat().st_size,
-                        "age_d": round(age_days(p), 1), "keep": p.name in KEEP_TMP})
+            st = os.lstat(p)
+            ident = (st.st_dev, st.st_ino)
+            is_link = p.is_symlink()
+            nlink = st.st_nlink
+            out.append({"name": p.name, "size": du(p) if (p.is_dir() and not is_link) else st.st_size,
+                        "age_d": round((time.time() - st.st_mtime) / 86400, 1),
+                        "keep": p.name in KEEP_TMP, "ident": ident,
+                        "symlink": is_link, "nlink": nlink})
         except OSError: pass
     return sorted(out, key=lambda e: -e["size"])
 
@@ -151,7 +157,7 @@ def doctor() -> dict:
     cz = cron_entries()
     return {
         "tool": "sweapit",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "generated": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "host_plane": {
             "tmp": {"entries": tz, "total": sum(e["size"] for e in tz),
@@ -220,10 +226,24 @@ def sweep(older_than: float, dry: bool) -> str:
     for e in tmp_entries():
         if e["keep"] or e["age_d"] <= older_than: continue
         p = Path("/tmp") / e["name"]
-        freed += e["size"]
-        acted.append(f"delete /tmp/{e['name']} ({human(e['size'])}, {e['age_d']}d)")
+        try:
+            st = os.lstat(p)
+        except OSError:
+            continue  # vanished between inventory and sweep
+        if (st.st_dev, st.st_ino) != tuple(e["ident"]):
+            acted.append(f"SKIP /tmp/{e['name']}: identity changed since inventory (TOCTOU guard)")
+            continue
+        if e["symlink"]:
+            freed += 0
+            acted.append(f"unlink symlink /tmp/{e['name']} (link only, target untouched)")
+            if not dry: p.unlink(missing_ok=True)
+            continue
+        hardlink = e["nlink"] > 1
+        freed += 0 if hardlink else e["size"]
+        note = ", hardlink: other links keep the data, 0B truly freed" if hardlink else ""
+        acted.append(f"delete /tmp/{e['name']} ({human(e['size'])}, {e['age_d']}d{note})")
         if not dry:
-            shutil.rmtree(p, ignore_errors=True) if p.is_dir() else p.unlink(missing_ok=True)
+            shutil.rmtree(p, ignore_errors=True) if (p.is_dir() and not p.is_symlink()) else p.unlink(missing_ok=True)
     for c in cron_entries():
         if c["age_d"] <= 30: continue
         freed += c["size"]

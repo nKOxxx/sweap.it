@@ -3,6 +3,55 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R2 adversarial verdict (red-team landed, bruises converted to v0.1.1)
+
+R2 raw 20.5KB chars (needle-verified). Sections: preservation-layer review,
+fatal flaws, safety holes, measurement validity, RQ audit, self-sweep
+paradox, verdict. The bruises, and what we did within the hour:
+
+**F1 (existential, accepted):** the shipped host plane is commodity
+(`find -mtime +delete` territory); the differentiator (context plane) is
+roadmap. Response: R2 is right, host plane is demoted to "trust-building
+surface", context plane becomes the product. This log entry IS the pivot.
+**F2 (accepted):** the CCleaner frame is a doomed market analogy (disk is
+disposable on fleets; the scarce resource is per-call-priced context).
+Repitch on the re-payment law, keep CCleaner only as the trust-loop lineage.
+**Safety holes (all three fixed in v0.1.1 same hour):**
+- TOCTOU on keep-list: sweep now re-`lstat`s every target and compares
+  (dev, ino) against inventory; identity change = SKIP, never delete.
+- Symlink escape: `lstat` + `is_symlink()` everywhere; symlinks are
+  unlinked as links, never traversed (`followlinks=False`, du uses lstat).
+- Hardlink trap ("the fatal one", confirmed real: 3 of our zombie tmp dirs
+  are nlink>1): hardlinked deletions report 0B truly freed and say so.
+**Measurement validity (85.4% downgraded honestly):** chars != tokens;
+stored bytes != prompt bytes (consumption path truncates old tool outputs).
+Law adopted: the number is now quoted as "85.4% of STORED transcript bytes;
+token share and prompt share unmeasured", and the tokenized re-measure plus
+a real prompt-side capture are queued (census hardening, build order #1).
+**RQ audit accepted:** RQ1 single-host composition = toy until time-series
++ cross-host; RQ2 (deletion semantics with a held-out-task oracle) = the
+publishable core; RQ3 needs protocol separation (external verifier runs the
+before/after task set, not the sweeping agent); RQ4 needs the frozen
+frozen-snapshot benchmark harness BEFORE more sweep features.
+**Self-sweep paradox (accepted, protocol designed):** census contamination
+(the measurer writes to the store it measures), observer-as-subject,
+selective reporting. Fixes: read-only snapshot at measure time (copy to
+quarantine-side archive, measure the copy), external verifier for claims,
+log laws above as pre-registration.
+**Verdict's three fixes this week (adopted as the backlog):**
+1. Repitch on fixed overhead re-paid every call (28.7 + 14.7 + 54.3 KB),
+   demote 85.4% to a storage statistic.
+2. Frozen-snapshot before/after benchmark protocol with held-out task set,
+   before any more sweep features.
+3. Cognexia integration: optional, human-gated, per-card provenance +
+   checksum + byte-range, retrieval observability, zero-fetch cards get
+   swept from the memory store too, and NO agent self-certification of
+   "nothing vital lost" (external gate only).
+
+**R-wave complete:** R1 landscape + R1b triage + R2 red-team, all
+needle-verified, citation-audited, raw preserved. 3 dispatches, ~10 min
+worker time, zero main-model burn.
+
 ## 2026-10-13: R1b triage results (DeepSeek, 55s, needle-verified, citation-audited)
 
 **Integrity gate passed:** all 19 arXiv IDs + all named titles in R1b output
