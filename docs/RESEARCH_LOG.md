@@ -3,6 +3,43 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: Name + v0.1.0
+
+**Name (user decree): sweap.it.** Sweep + AI. Domain check via whois.nic.it:
+`Status: AVAILABLE` (2026-10-13). Registration blocked by house no-purchase
+law; founder to register. Repo dir renamed ~/sweap.it; binary `sweapit`.
+
+**v0.1.0 shipped same day** (commit 8cbad4d): two-plane doctor + gated sweep.
+Design semantics locked: **sweep defaults to dry-run; destruction requires
+explicit --no-dry.** (Inverse of the usual CLI convention; for a product
+whose job is deletion, the safe path must be the default path. Log this as a
+product-law: "default to reversible".)
+
+**First context-plane census results (this host, day 0):**
+- Store-wide tool-output share of transcript bytes: **85.4%** (32.75M of
+  38.36M chars, 36,810 messages). Paper #1 measured 75.6% on one hub session;
+  the census says the infection is worse host-wide.
+- Heaviest session: the paper #1 hub itself, 18.3 MB / 29,627 messages.
+- Fixed prompt overhead confirmed: 28.7 KB system prompt; tool schemas
+  54.3 KB (28 tools) ride every call.
+
+**The one-line product pitch that fell out of the census:** "Your agent's
+transcripts are 85% tool exhaust. sweap.it measures it, gates the cleanup,
+and proves the reclaim."
+
+## Research questions crystallizing (for paper #2)
+
+- RQ1: What is the composition and growth law of LLM-stack waste, across
+  hosts (host plane) and contexts (context plane)?
+- RQ2: What deletion semantics are safe for conversation state? (Quarantine-
+  before-delete generalizes to transcript GC: archive, never amputate; paper
+  #1's INC-004 withdrawal doctrine is the same law applied to claims.)
+- RQ3: Can an agent self-sweep without corrupting its own memory/instruments?
+  (Our own incident log is the seed dataset.)
+- RQ4: Does context-plane cleaning measurably change task performance? (Test:
+  pre/post prompt-size, task success, token burn; the HF worker lane gives a
+  zero-cost benchmark.)
+
 ## 2026-10-13: Founding
 
 **Thesis (user decree):** build "Sweeper for LLMs", the way disk sweepers
