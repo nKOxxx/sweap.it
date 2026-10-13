@@ -163,7 +163,7 @@ SWEEPIT_R1B
 234 | blitzreels/blitzclean | Native macOS menu-bar monitor for CPU, memory, and disk, with reviewed cleanup for caches, builds, simulators, and AI agents. Local and open source.
 223 | Piebald-AI/splitrail | Fast, cross-platform, real-time token usage tracker and cost monitor for Claude Code / Codex CLI / Antigravity CLI / Qwen Code / Cline / Zoo Code / Kilo Code / 
 42 | xunmenglt/codura | Codura is an intelligent code assistant designed to supercharge your IDE with context-aware code completion, inline explanations, test case generation, and refa
-36 | alpertarhan/pi-smart-compact | Pi Continuity — context hygiene and session continuity for the Pi Coding Agent: recoverable cleanup, checkpoints, memory and verified compaction (npm: pi-smart-
+36 | alpertarhan/pi-smart-compact | Pi Continuity ;  context hygiene and session continuity for the Pi Coding Agent: recoverable cleanup, checkpoints, memory and verified compaction (npm: pi-smart-
 7 | sdeture/claude-rolling-context | Smart context window manager for ClaudeCode transcripts - maintains continuous conversations with intelligent trimming and optional LLM summaries
 6 | aarora79/claude-code-usage-analyzer | Comprehensive cost & token usage analyzer for Claude Code with detailed breakdowns by model and token type. Uses ccusage CLI tool and LiteLLM pricing data. The 
 5 | ericjuta/codex | Public fork of openai/codex with honcho-backed memory, expanded hook parity, hashline, compaction, code_mode and multi_agent_v2 tweaks/fixes and fork-focused ru
@@ -174,21 +174,21 @@ SWEEPIT_R1B
 2 | Dr-Vphuc/BranchChat | New way to interact with LLMs -- cleaner context, better workflow, and wallet-friendly.
 2 | Johnny95420/Report-Summarizer | This project draws inspiration from LangChain's open_deep_research, and specializes it for domain-specific research automation. It features task-tailored prompt
 2 | physicspackage/mcp-memory-manager | MCP server for agent memories (notes, tasks, results, blobs, cleanup).
-2 | matamong/memmd-mcp | A shared memory layer for AI agents — one memory.md synced across Claude Desktop, Cursor, Claude Code, and any MCP client. Auto-deduplication, contradiction res
+2 | matamong/memmd-mcp | A shared memory layer for AI agents ;  one memory.md synced across Claude Desktop, Cursor, Claude Code, and any MCP client. Auto-deduplication, contradiction res
 2 | kylebrodeur/mac-optimize | macOS disk, memory & shell hygiene for machines running many AI coding agents: safe disk reclaim, git-worktree audit/backup, Codex-session backup, and launchd a
 2 | khanak0509/ContextGc | context window manager for LLM chat applications
 2 | SanDiegoAIStudio/mcp-context-manager | Automated MCP discovery and context optimization for Claude Code. Save 90% of your context window with 5-minute setup and zero maintenance.
-2 | CookiRui/claude-usage-analyzer | Analyze Claude Code CLI session logs — track usage patterns, token consumption, and generate reports.
+2 | CookiRui/claude-usage-analyzer | Analyze Claude Code CLI session logs ;  track usage patterns, token consumption, and generate reports.
 1 | kkdrhn/context-cleaner | Lightweight CLI for sanitizing sensitive data before sending text to LLMs or external systems.
 1 | Watcher3056/llm-cleaner | LLM Cleaner: reclaim local AI chat storage with context-aware pruning, verified backups and interactive cleanup for Codex, Claude Code, Cursor, Gemini CLI and A
 1 | MStock2025/mcp-context-cleaner | A lightweight, zero-dependency middleware to trim, filter, and optimize JSON payloads from MCP (Model Context Protocol) servers before feeding them to LLM conte
 1 | vbiroshak/ai-dreamer-agent | Auto memory cleanup. For Claude Code.
 1 | jamiefutch/pi-hermes-memory-cleanup | A utility project for cleaning up and optimizing Hermes persistent memory storage used by the Pi coding agent.  Why
-1 | hijrahassalam/llm-context-manager | Prevent context window overflow in LLM apps — sliding window, compaction, token counting, zero dependencies
+1 | hijrahassalam/llm-context-manager | Prevent context window overflow in LLM apps ;  sliding window, compaction, token counting, zero dependencies
 1 | wabdull/Pane | Context window manager for LLMs. Memory for free.
 1 | arman81/context-manager | A pluggable context engine for LLM agents. Master the context window, beat the needle-in-a-haystack problem, intelligent per-agent compaction.
 1 | metadatastician/hvn-dehallucinator | External state manager for LLM agents: a Haskell engine keeps task state outside the context window, and completion is derived only from an independent verifier
 1 | rennanbadaro/cursor-usage-analyzer | Interactive Go CLI that analyzes Cursor usage CSV exports with daily/model token and cost insights.
 1 | nathandavismail-cmyk/codex-run-audit | Offline Codex run analyzer for token usage, command failures, timelines, and private HTML reports
-1 | gega-dkv/agent-usage-stats | Local-first usage analyzer for 20 AI coding agents — Claude Code, Codex, Gemini, OpenCode, GitHub Copilot CLI, Qwen, Goose, and more. Discover your session file
+1 | gega-dkv/agent-usage-stats | Local-first usage analyzer for 20 AI coding agents ;  Claude Code, Codex, Gemini, OpenCode, GitHub Copilot CLI, Qwen, Goose, and more. Discover your session file
 0 | nguyenminhduc9988/context-window | Smart context window manager for LLM conversations with intelligent compression
