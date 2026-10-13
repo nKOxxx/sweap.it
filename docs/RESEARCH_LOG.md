@@ -508,3 +508,21 @@ is the cautionary dataset).
 - Memory drift: chars in memory stores over time, duplicate/stale entries.
 - Compression events: count + payload delta in this host's history (Hermes
   compactions are logged in-session).
+
+## 2026-10-13 (late) - Persona Swarm R5: 100-persona resonance test (user-ordered)
+
+**Instrument**: deterministic 100-persona corpus, 8 segments (S1 paid-heavy x14, S2 startup-platform x14, S3 indie x14, S4 enterprise x10, S5 eval-MLE x13, S6 agent-maintainer x8, S7 consultant x12, S8 adversarial-skeptic x15), generated from harvest-observed segments + R4C persona, NOT from our pitch (anti-MiroFish circularity law). Stimulus = fixed sweap.it pitch (census, dollar card, distill+gated reclaim, benchmark proof, optional file cleanup). 100 serial free-lane DeepSeek-V4-Flash dispatches, JSONL ledger + per-persona raws. All 100 well-formed, zero failures. Known deviation, logged not patched mid-run: template omitted the dispatch needle so every persona ran twice (acceptance grep failed; format-parse gate held 100/100); 2x free-lane seconds, zero data impact.
+
+**Raw verdicts (hub recount from ledger)**: INSTALL 1, TRY 89, IGNORE 10, HOSTILE 0 -> install+try 90%. Resonance mean 57.3. Would-pay median $15; zeros 28/100.
+
+**Analyst wave** (DeepSeek, 2m24s, needle SWEEPIT_SWARM, report at research/swarm/analyst_report.txt; one arithmetic slip in analyst prose corrected against ledger: 86% -> 90%):
+
+- Segment pulls: paid-heavy 70.3 res / $25 median; enterprise 54.6 res / $60 median (top $500); startup $24.50; eval $25; maintainer 67.6 / $15; consultant $15; indie 57.3 / $5; skeptic 24.7 / $0 (10/15 IGNORE: the adversarial bloc worked).
+- Monetizable core = enterprise + paid-heavy + startup + eval. Indie + skeptic = negative-ROI launch market.
+- Objection clusters: (1) deletion/reclaim trust + reversibility 28, (2) reference-host numbers do not transfer 15, (3) build-it-myself cron+du 12, (4) wrong pain (forgetting not bytes) 12, (5) pocket change 12, (6) no-quality-loss unproven 9, (7) write path disqualifies 6, (8) two products one skin 4; residual vendor credibility 2.
+- Dominant MISSING (55-60 of 100): run census + benchmark READ-ONLY on MY stores, show MY dollar number and MY losslessness before anything writes. Proven restore test (11), local/no-write mode (6), audit artifact (manifest/signed provenance) for clients/compliance.
+- Bias audit: uniform 100% TRY in 7 of 8 non-skeptic segments, 1 INSTALL total, 0 HOSTILE = mode collapse toward the safe middle. One-step honesty haircut collapses install+try to 1%. Simulated intent cannot clear any market gate; it is a message/objection instrument only.
+
+**Verdict (R5)**: GO-signal unchanged and still gated on real activation (>=40%, R4B). Swarm deliverables: pitch must lead with proof-on-my-stack read-only wedge (dollar card + losslessness on THEIR data, before any write); deletion trust is the #1 objection cluster and the file-cleanup option must stay quarantined-first and never lead; reclaim positioning = "prove lossless on your stack, then act", merging objection clusters 1+6 into the wedge itself. Target segments: paid-heavy operators + enterprise first.
+
+**Artifacts**: research/swarm/{personas.json, persona_template.txt, analyst_brief.txt, analyst_payload.txt, run_swarm.py, swarm_ledger.jsonl (100), swarm_stats.tsv, raw/P001-P100_raw.txt, analyst_raw.txt, analyst_report.txt}; commits d62b7a1, 76c3354, + this one.

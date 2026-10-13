@@ -1,0 +1,181 @@
+1. VERDICT MATRIX
+
+Counts per segment (INSTALL / TRY / IGNORE / HOSTILE), install+try share:
+
+- paid-heavy-operator (n=14): 0 / 14 / 0 / 0, share 100%
+- startup-platform-eng (n=14): 0 / 14 / 0 / 0, share 100%
+- indie-hacker (n=14): 0 / 14 / 0 / 0, share 100%
+- enterprise-platform (n=10): 0 / 10 / 0 / 0, share 100%
+- eval-mle (n=13): 0 / 13 / 0 / 0, share 100%
+- agent-maintainer (n=8): 0 / 8 / 0 / 0, share 100%
+- ai-consultant (n=12): 1 / 11 / 0 / 0, share 100%
+- skeptic (n=15): 0 / 5 / 10 / 0, share 33%
+
+Overall: INSTALL 1, TRY 89, IGNORE 10, HOSTILE 0. Install+try share = 90%. [HUB CORRECTION: analyst prose said TRY 85 / 86%, its own segment table sums to 89; hub ledger recount confirms 89/1/10 = 90%.]
+
+Structural anomaly: 7 of 8 non-skeptic segments are uniformly 100% TRY,
+there is exactly one INSTALL in the entire set, and zero HOSTILE
+anywhere. Outside the skeptic bloc, no persona ever rejects. That
+uniformity is itself the loudest signal in this data.
+
+2. RESONANCE
+
+Mean per segment (and spread as max-min):
+- paid-heavy-operator: 70.3 (58-84)
+- startup-platform-eng: 65.1 (55-85)
+- indie-hacker: 57.3 (41-78)
+- enterprise-platform: 54.6 (34-72)
+- eval-mle: 62.8 (42-74)
+- agent-maintainer: 67.6 (58-78)
+- ai-consultant: 63.3 (52-82)
+- skeptic: 24.7 (9-44)
+
+Overall mean: 57.3.
+
+No segment exceeds 75, so no mean trips the inflation ceiling by that
+rule. But paid-heavy at 70.3 and agent-maintainer at 67.6 sit high while
+these same personas list their sharpest fear as the deletion/reclaim
+step, which is a verdict-vs-pain gap worth noting (see section 6). Only
+the skeptic bloc sits under 35 (24.7), a clean hard no. Indie (57.3) and
+enterprise (54.6) are the weakest non-skeptic pulls; enterprise is
+dragged down by low-pain, high-spend skeptics.
+
+3. PAY-WALL
+
+Median WOULD-PAY per segment:
+- paid-heavy-operator: $25 (zeros 2, top $49)
+- startup-platform-eng: $24.50 (zeros 4, top $99)
+- indie-hacker: $5 (zeros 3, top $15)
+- enterprise-platform: $60 (zeros 3, top $500)
+- eval-mle: $25 (zeros 0, top $45)
+- agent-maintainer: $15 (zeros 1, top $20)
+- ai-consultant: $15 (zeros 1, top $30)
+- skeptic: $0 (zeros 14, only one nonzero at $15)
+
+Overall median: $15. Zero-dollar count overall: 28 of 100.
+
+Which segments put real money down: enterprise is the outlier (median
+$60, four payers above $100 including $500, $250, $150, $100), then
+paid-heavy, startup, and eval all cluster at $24-25 with no soft ceiling.
+Indie is a $5 median, consultant $15, skeptic effectively $0.
+
+A $10-20/month tool is supported only by the top four segments
+(enterprise, paid-heavy, startup, eval). The overall median of $15 across
+an inflated sample does not cleanly clear $20, and a fifth of personas
+pay nothing at all. This is a pricing story that depends entirely on
+winning the high-spend segments and giving them their read-only wedge; it
+is not a broad free-to-paid ladder from the middle segments. Indie and
+skeptic are not a monetizable tier at launch.
+
+4. OBJECTION CLUSTERING
+
+Eight named clusters with counts and sharpest quote:
+
+1. Reclaim/deletion trust and reversibility (28). Sharpest, P009: "You're
+literally selling the thing I'm most afraid of: deleting my history."
+This cluster dominates every segment, including the highest spenders.
+2. Reference-host numbers don't apply to me (15). P016: "You quote me
+97.7KB and 85.4% from some reference host that is not mine."
+3. Build-it-myself: cron + du + find (12). P039: "I can write this in two
+evenings with cron + du + find."
+4. Wrong pain: agents forgetting decisions, not bytes (12). P069: "My
+agents forget things because the loop drops decision context."
+5. Not worth it: low spend, pocket change (12). P094: "You're selling me
+a delete button for pocket change."
+6. "No quality loss" unproven / self-reported (9). P025: "Your 'no
+quality loss' claim is doing all the heavy lifting."
+7. Security/compliance: write path disqualifies (6). P049: "The write
+path disqualifies me."
+8. Scope: two products in one skin (4). P015: "You're genuinely selling
+two products in one skin."
+
+(Minor residual: vendor credibility, 2, P021: "a hygiene tool for agent
+stacks, built by agents.")
+
+The sharpest pair is cluster 1 plus cluster 6: the two biggest pain
+objections are both about the reclaim step being unprovable on the
+buyer's own data. Deletion fear and unproven no-quality-loss are really
+one meta-objection: "I will only trust reclaim if you prove it lossless
+and reversible on MY stack first."
+
+5. MISSING-FEATURE CLUSTERING
+
+The single dominant demand, present in well over half of the 100 records:
+run the census and the before/after benchmark read-only against the
+buyer's OWN real session stores and show THEIR dollar figure and THEIR
+losslessness, not a "reference host" number. That is the most-demanded
+proof bar none; it is the entry condition for almost every persona
+regardless of segment.
+
+Named clusters:
+- Proof on my actual stores / not a reference host, read-only dry-run
+(dominant, roughly 55-60).
+- Proven revert/restore/reversibility, actual restore test (11): P098 "A
+real, demonstrated restore test, not a 'gated and reversible' line."
+- Self-hosted / fully local / zero-trust / no-write-required mode (6):
+P046 "A fully local/self-hosted mode."
+- Audit artifact: diff ledger / manifest / signed provenance for clients
+and compliance (5): P089 "show me the diff ledger."
+- Key facts preserved under distillation (part of the lossless cluster,
+folded in).
+- Benchmark methodology transparency (2), actionable-not-scary dollar
+card (3), security deployment spec (1).
+
+The missing-feature story is the mirror of the objection story:
+everything funnels to "prove the savings and the losslessness on my own
+real store, read-only, before any write."
+
+6. BIAS AUDIT
+
+Clear inflation signals:
+
+- The all-same-verdict structure. Seven segments at 100% TRY and exactly
+one INSTALL across 100 personas is not a neutral result, it is the LLM
+author, who knows the product, never permitting failure outside the
+skeptic bloc. The skeptic bloc is the only place reality leaked in (33%
+pull, 24.7 resonance, $0 median), and it is the only segment with any
+IGNORE.
+
+- Verdict/intonation mismatches. High-skepticism personas returning TRY
+with real dollars and mid resonance:
+P048 (skept 0.71) TRY $250, "you're a solo founder" objection;
+P045 (skept 0.67) TRY $150;
+P050 (skept 0.72) TRY $80;
+these are the textbook "0.7-skeptic at TRY with a three-figure price,"
+socially inflated.
+P025 (skept 0.44) RES 85 PAY $99 is the single highest resonance in the
+set and reads generous.
+Within the skeptic bloc, P098 (skept 0.97) TRY RES 44, P089 (0.81) TRY
+PAY 15, P099 (0.82) TRY RES 42 all contradict their stated 0.8-1.0
+resistance and low pain; they are inflated residual. No skeptic hit
+INSTALL, but any TRY on a 0.9+ skeptic and 1-2 pain is a mismatch.
+P014 (pain 9, RES 84) returning PAY $0, and P005 (pain 8) PAY $0, are
+lower-severity mismatches pushing in both directions.
+
+Honesty haircut: overall install+try starts at 86%. Downgrading every
+verdict one step (INSTALL to TRY, TRY to IGNORE, IGNORE unchanged)
+collapses the install+try share to exactly 1% (the single former INSTALL,
+now TRY). This is a deliberately punitive worst case, but it dramatizes
+the real finding: the funnel is almost entirely soft TRY with no INSTALL
+conviction to absorb even one step of skepticism, so any honest
+correction is devastating. The verdict mix is not a go signal on its own.
+
+7. IMPLICATIONS (three bullets)
+
+- MVP: the only wedge that survives every objection is the genuinely
+read-only census plus before/after benchmark run against the buyer's own
+real session stores, delivering their own dollar card before any write;
+reclaim and file-cleanup stay gated and secondary because they are the
+two trust killers (deletion fear 28, lossless proof 9).
+
+- Go decision: simulated intent is inflated and structurally hollow (86%
+install+try but ~1% after a one-step haircut), so it cannot clear the
+market gate on its own; the go decision still rests on real-world
+activation (>=40% installs from an actual read-only census cohort), not
+this panel.
+
+- Target first: paid-heavy operators and enterprise, the only segments
+with real dollars (median $25 and $60, top payers $99 and $500) and the
+strongest cost-card resonance, entering strictly through the read-only
+proof-on-my-stack wedge; indie (median $5) and skeptic (median $0) are a
+negative-ROI first market.
