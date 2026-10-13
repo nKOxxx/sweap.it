@@ -1,0 +1,194 @@
+RESEARCH BRIEF: sweap.it harvest triage and use-map (wave R1b)
+
+ROLE: You are the research lead. Below is a REAL harvested ledger (arXiv,
+Hugging Face papers, OpenAlex, GitHub) swept from the internet today for the
+sweap.it project: CCleaner-style hygiene for AI agent stacks, with
+analyze / clean / optimize semantics and a distill-before-sweep preservation
+layer. Every line is a real paper or repo; do not invent extras.
+
+YOUR JOB, numbered plain text:
+
+1. MUST-READ TEN: pick the ten items from the ledger most load-bearing for
+   building this product and writing the paper. For each: one line on WHAT
+   it gives us (technique to borrow, measurement to reuse, competitor to
+   differentiate from, or theory to cite).
+
+2. COMPETITOR MAP: using the GitHub section, map the field into (a) monitors
+   that measure but never clean, (b) single-CLI hacks, (c) memory systems
+   without hygiene, (d) genuine overlaps if any exist. Name the closest
+   threat and the exact differentiation.
+
+3. DESIGN USE-MAP: which harvest items map to each product layer:
+   host-plane sweep, context-plane census, transcript distillation,
+   preservation store, benchmarking (pre/post cleaning performance).
+
+4. GAP LIST: what the literature does NOT cover that sweapit's paper can
+   own. Be specific: e.g. no cross-host census, no deletion-semantics work,
+   no gated-cleanup UX study, no 85%-tool-exhaust measurements.
+
+5. BUILD ORDER: rank the next 5 engineering moves by (leverage / effort),
+   citing which papers de-risk each move.
+
+RULES: ASCII only, no em-dashes. Only use ledger items; tag anything you add
+from memory as [memory-unverified]. No markdown tables.
+
+Your final message MUST begin with this exact line and nothing before it:
+SWEEPIT_R1B
+
+=== HARVEST LEDGER FOLLOWS ===
+
+=== arXiv top-60 (id | year | title) ===
+2501.01625v1 | 2025 | ICPC: In-context Prompt Compression with Faster Inference
+2501.06730v1 | 2025 | Better Prompt Compression Without Multi-Layer Perceptrons
+2501.12959v2 | 2025 | Efficient Prompt Compression with Evaluator Heads for Long-Context Transformer Inference
+2503.18292v1 | 2025 | Jenga: Effective Memory Management for Serving LLM with Heterogeneity
+2504.08934v1 | 2025 | Long Context In-Context Compression by Getting to the Gist of Gisting
+2505.00019v1 | 2025 | An Empirical Study on Prompt Compression for Large Language Models
+2505.16067v2 | 2025 | How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior
+2505.24133v4 | 2025 | R-KV: Redundancy-aware KV Cache Compression for Reasoning Models
+2506.05813v2 | 2025 | MAPLE: Multi-Agent Adaptive Planning with Long-Term Memory for Table Reasoning
+2506.15155v2 | 2025 | eLLM: Elastic Memory Management Framework for Efficient LLM Serving
+2507.11942v1 | 2025 | DAC: A Dynamic Attention-aware Approach for Task-Agnostic Prompt Compression
+2507.13334v2 | 2025 | A Survey of Context Engineering for Large Language Models
+2507.22931v3 | 2025 | Enhancing RAG Efficiency with Adaptive Context Compression
+2508.11661v1 | 2025 | Sparse Attention across Multiple-context KV Cache
+2508.13171v1 | 2025 | Cognitive Workspace: Active Memory Management for LLMs -- An Empirical Study of Functional Infinite Context
+2508.09736v4 | 2025 | Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory
+2508.15813v2 | 2025 | SCOPE: A Generative Approach for LLM Prompt Compression
+2509.08315v1 | 2025 | EvolKV: Evolutionary KV Cache Compression for LLM Inference
+2510.02373v1 | 2025 | A-MemGuard: A Proactive Defense Framework for LLM-Based Agent Memory
+2510.05858v3 | 2025 | DACP: Domain-Adaptive Continual Pre-Training of Large Language Models for Phone Conversation Summarization
+2510.20797v2 | 2025 | No Mean Feat: Simple, Strong Baselines for Context Compression
+2510.23010v2 | 2025 | TALM: Dynamic Tree-Structured Multi-Agent Framework with Long-Term Memory for Scalable Code Generation
+2510.26493v1 | 2025 | Context Engineering 2.0: The Context of Context Engineering
+2510.27418v1 | 2025 | Dynamic Affective Memory Management for Personalized LLM Agents
+2511.18743v1 | 2025 | RhinoInsight: Improving Deep Research through Control Mechanisms for Model Behavior and Context
+2511.18832v1 | 2025 | Concept than Document: Context Compression via AMR-based Conceptual Entropy
+2512.03001v1 | 2025 | Invasive Context Engineering to Control Large Language Models
+2512.05470v1 | 2025 | Everything is Context: Agentic File System Abstraction for Context Engineering
+2512.21567v1 | 2025 | Beyond Heuristics: A Decision-Theoretic Framework for Agent Memory Management
+2512.25052v1 | 2025 | AdaGReS:Adaptive Greedy Context Selection via Redundancy-Aware Scoring for Token-Budgeted RAG
+2601.01885v3 | 2026 | Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents
+2601.06377v1 | 2026 | HiMem: Hierarchical Long-Term Memory for LLM Long-Horizon Agents
+2601.19935v1 | 2026 | Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents
+2601.12030v1 | 2026 | ARC: Active and Reflection-driven Context Management for Long-Horizon Information Seeking Agents
+2601.11969v2 | 2026 | MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models
+2601.18642v2 | 2026 | FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory
+2601.20465v1 | 2026 | BMAM: Brain-inspired Multi-Agent Memory Framework
+2601.21557v2 | 2026 | Meta Context Engineering via Agentic Skill Evolution
+2602.03784v4 | 2026 | Fix the Structural Bottleneck: Context Compression via Explicit Information Transmission
+2602.05665v1 | 2026 | Graph-based Agent Memory: Taxonomy, Techniques, and Applications
+2602.06025v3 | 2026 | Learning Query-Aware Budget-Tier Routing for Runtime Agent Memory
+2602.07321v2 | 2026 | Wireless Context Engineering for Efficient Mobile Agentic AI and Edge General Intelligence
+2602.07398v1 | 2026 | AgentSys: Secure and Dynamic LLM Agents Through Explicit Hierarchical Memory Management
+2602.09574v2 | 2026 | Aligning Tree-Search Policies with Fixed Token Budgets in Test-Time Scaling of LLMs
+2602.15654v2 | 2026 | Zombie Agents: Persistent Control of Self-Evolving LLM Agents via Self-Reinforcing Injections
+2604.09613v2 | 2026 | Token-Budget-Aware Pool Routing for Cost-Efficient LLM Inference
+2603.20105v1 | 2026 | The $\mathbf{Y}$-Combinator for LLMs: Solving Long-Context Rot with $λ$-Calculus
+2603.19733v1 | 2026 | PoC: Performance-oriented Context Compression for Large Language Models via Performance Prediction
+2603.25926v1 | 2026 | Density-aware Soft Context Compression with Semi-Dynamic Compression Ratio
+2604.20874v1 | 2026 | The Root Theorem of Context Engineering
+2603.29193v1 | 2026 | Developing Adaptive Context Compression Techniques for Large Language Models (LLMs) in Long-Running Interactions
+2604.03664v1 | 2026 | Document-Level Numerical Reasoning across Single and Multiple Tables in Financial Reports
+2604.07798v3 | 2026 | Lightweight LLM Agent Memory with Small Language Models
+2604.08075v1 | 2026 | Dual-Pool Token-Budget Routing for Cost-Efficient and Reliable LLM Serving
+2605.18768v1 | 2026 | ClinQueryAgent: A Conversational Agent for Population Health Management
+2604.12035v4 | 2026 | Confidence under Visual Token Pruning: Removed Evidence and Risk-Controlled Token Budgets for MLLMs
+2604.13725v1 | 2026 | On the Effectiveness of Context Compression for Repository-Level Tasks: An Empirical Investigation
+2604.20006v1 | 2026 | From Recall to Forgetting: Benchmarking Long-Term Memory for Personalized Agents
+2604.24971v1 | 2026 | PolyKV: A Shared Asymmetrically-Compressed KV Cache Pool for Multi-Agent LLM Inference
+2605.08441v1 | 2026 | DUET: Optimize Token-Budget Allocation for Reinforcement Learning with Verifiable Rewards
+
+=== HF top-15 extra (id | upvotes | title) ===
+2507.13334 | 264 | A Survey of Context Engineering for Large Language Models
+2510.04618 | 135 | Agentic Context Engineering: Evolving Contexts for Self-Improving
+  Language Models
+2603.28088 | 83 | GEMS: Agent-Native Multimodal Generation with Memory and Skills
+2602.02474 | 64 | MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents
+2608.07169 | 49 | Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory
+2507.08799 | 40 | KV Cache Steering for Inducing Reasoning in Small Language Models
+2603.20105 | 37 | The Y-Combinator for LLMs: Solving Long-Context Rot with λ-Calculus
+2605.13880 | 28 | PREPING: Building Agent Memory without Tasks
+2503.16257 | 28 | Plug-and-Play 1.x-Bit KV Cache Quantization for Video Large Language
+  Models
+2607.21503 | 28 | Agentic Context Management: Solving Agent Memory and Cost by Treating Them as Lifecycle and Architecture Problems
+2601.11969 | 27 | MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models
+2602.07962 | 26 | LOCA-bench: Benchmarking Language Agents Under Controllable and Extreme Context Growth
+2602.02007 | 20 | Beyond RAG for Agent Memory: Retrieval by Decoupling and Aggregation
+2602.03784 | 16 | Context Compression via Explicit Information Transmission
+2608.04569 | 12 | Relevant but Incomplete: Referential Dangling as a Paradigm-Level Failure Mode in Hard Prompt Compression
+
+=== OpenAlex titles (year | title) ===
+2026 | M.A.K.S: Multidimensional Access Knowledge Scoring for Long-Horizon LLM Agent Memory Management
+2026 | LLM Agent Memory: A Survey from a Unified Representation–Management Perspective
+2026 | LLM Agent Memory: A Survey from a Unified Representation–Management Perspective
+2026 | MemLens: A Value-Aware Memory Management System with Interactive Analytics for LLM-Based Agents
+2026 | Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents
+2026 | How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior
+2025 | ContextCache: Task-Aware Lifecycle Management for Memory-Efficient LLM Agent Deployment
+2026 | Active Context Compression: Autonomous Memory Management in LLM Agents
+2026 | FAMM: Future-Aware Adaptive Memory Management Framework for Long-Term Autonomous LLM Agents
+2026 | AgentSys: Secure and Dynamic LLM Agents Through Explicit Hierarchical Memory Management
+2026 | Beyond the Context Window: A Cost-Performance Analysis of Fact-Based Memory vs. Long-Context LLMs fo
+2023 | PoSE: Efficient Context Window Extension of LLMs via Positional Skip-wise Training
+2024 | Efficient Solutions For An Intriguing Failure of LLMs: Long Context Window Does Not Mean LLMs Can An
+2024 | Extending LLMs' Context Window with 100 Samples
+2026 | The Efficiency Frontier: A Unified Framework for Cost–Performance Optimization in LLM Context Manage
+2026 | The Missing Memory Hierarchy: Demand Paging for LLM Context Windows
+2024 | UIO-LLMs: Unbiased Incremental Optimization for Long-Context LLMs
+2026 | Adaptive Context Parallelism for Production LLM Serving
+2025 | Revisiting put-that-there, context aware window interactions via LLMs
+2026 | DYCP: Dynamic Context Pruning for Long-Form Dialogue with LLMs
+2026 | The Sleeping Agent: What Gist-Based Context Compression Loses and Why
+2026 | AgentOCR: Reimagining Agent History via Optical Self-Compression
+2026 | AgentOCR: Reimagining Agent History via Optical Self-Compression
+2026 | DAGC: Decision-Anchored Graph Compression for Reproducible Context Compression
+2026 | LatCom: Cross-Agent Latent Compression for Efficient Multi-Agent Collaboration
+2026 | Context-Driven Incremental Compression for Multi-Turn Dialogue Generation
+2026 | MemRefine: LLM-Guided Compression for Long-Term Agent Memory
+2026 | Compression Remembers the Detour: How Context Compression Amplifies Off-Task Content and Derails LLM
+2026 | View-oriented Conversation Compiler for Agent Trace Analysis
+2026 | An Empirical Comparison of Agentic AI Frameworks Across Six Language Models: Token Overhead, Interop
+2026 | LLM Token Estimation Benchmark Data
+2026 | Joint Semantic Token Selection and Prompt Optimization for Interpretable Prompt Learning
+2025 | FrugalPrompt: Reducing Contextual Overhead in Large Language Models via Token Attribution
+2025 | Learning a Single Token to Replace Long System Prompts in LLMs
+2026 | ClawGuard: A Runtime Security Framework for Tool-Augmented LLM Agents Against Indirect Prompt Inject
+2026 | Token-Economics for Agentic AI: A Cost Model and Tiered Routing Reference
+2026 | The Price of Safety: Benign-Case Utility and Token Overhead of Memory-Poisoning Defenses in LLM Agen
+2026 | An Independent Billing Audit of Claude's Production API: 4 Experiments Across Haiku, Sonnet, and Opu
+2026 | SelfGrader: LLM Jailbreak Detection via Anchored Token-Level Logits
+
+=== GitHub repos (stars | name | desc) ===
+234 | blitzreels/blitzclean | Native macOS menu-bar monitor for CPU, memory, and disk, with reviewed cleanup for caches, builds, simulators, and AI agents. Local and open source.
+223 | Piebald-AI/splitrail | Fast, cross-platform, real-time token usage tracker and cost monitor for Claude Code / Codex CLI / Antigravity CLI / Qwen Code / Cline / Zoo Code / Kilo Code / 
+42 | xunmenglt/codura | Codura is an intelligent code assistant designed to supercharge your IDE with context-aware code completion, inline explanations, test case generation, and refa
+36 | alpertarhan/pi-smart-compact | Pi Continuity — context hygiene and session continuity for the Pi Coding Agent: recoverable cleanup, checkpoints, memory and verified compaction (npm: pi-smart-
+7 | sdeture/claude-rolling-context | Smart context window manager for ClaudeCode transcripts - maintains continuous conversations with intelligent trimming and optional LLM summaries
+6 | aarora79/claude-code-usage-analyzer | Comprehensive cost & token usage analyzer for Claude Code with detailed breakdowns by model and token type. Uses ccusage CLI tool and LiteLLM pricing data. The 
+5 | ericjuta/codex | Public fork of openai/codex with honcho-backed memory, expanded hook parity, hashline, compaction, code_mode and multi_agent_v2 tweaks/fixes and fork-focused ru
+5 | SingggggYee/claude-usage-analyzer | Find where your Claude Code tokens go and how to cut usage. Analyzes sessions, finds token sinks, gives actionable fixes.
+5 | VAIXLNS/VAIXLNS | ╔════════════════════════════════════أرى أن هذا أصبح أقرب إلى Blueprint سيادي وليس مجرد مخطط نظام. ومع ذلك، إذا كان الهدف أن يكون هذا الرسم المرجعي النهائي (Mas
+3 | voku/TextCleaner | Clean noisy text from mobile web pages for LLM context.
+2 | Gupta-Aniket/branched-llms | Git style branched llms for better convos, cleaner context and deep dives
+2 | Dr-Vphuc/BranchChat | New way to interact with LLMs -- cleaner context, better workflow, and wallet-friendly.
+2 | Johnny95420/Report-Summarizer | This project draws inspiration from LangChain's open_deep_research, and specializes it for domain-specific research automation. It features task-tailored prompt
+2 | physicspackage/mcp-memory-manager | MCP server for agent memories (notes, tasks, results, blobs, cleanup).
+2 | matamong/memmd-mcp | A shared memory layer for AI agents — one memory.md synced across Claude Desktop, Cursor, Claude Code, and any MCP client. Auto-deduplication, contradiction res
+2 | kylebrodeur/mac-optimize | macOS disk, memory & shell hygiene for machines running many AI coding agents: safe disk reclaim, git-worktree audit/backup, Codex-session backup, and launchd a
+2 | khanak0509/ContextGc | context window manager for LLM chat applications
+2 | SanDiegoAIStudio/mcp-context-manager | Automated MCP discovery and context optimization for Claude Code. Save 90% of your context window with 5-minute setup and zero maintenance.
+2 | CookiRui/claude-usage-analyzer | Analyze Claude Code CLI session logs — track usage patterns, token consumption, and generate reports.
+1 | kkdrhn/context-cleaner | Lightweight CLI for sanitizing sensitive data before sending text to LLMs or external systems.
+1 | Watcher3056/llm-cleaner | LLM Cleaner: reclaim local AI chat storage with context-aware pruning, verified backups and interactive cleanup for Codex, Claude Code, Cursor, Gemini CLI and A
+1 | MStock2025/mcp-context-cleaner | A lightweight, zero-dependency middleware to trim, filter, and optimize JSON payloads from MCP (Model Context Protocol) servers before feeding them to LLM conte
+1 | vbiroshak/ai-dreamer-agent | Auto memory cleanup. For Claude Code.
+1 | jamiefutch/pi-hermes-memory-cleanup | A utility project for cleaning up and optimizing Hermes persistent memory storage used by the Pi coding agent.  Why
+1 | hijrahassalam/llm-context-manager | Prevent context window overflow in LLM apps — sliding window, compaction, token counting, zero dependencies
+1 | wabdull/Pane | Context window manager for LLMs. Memory for free.
+1 | arman81/context-manager | A pluggable context engine for LLM agents. Master the context window, beat the needle-in-a-haystack problem, intelligent per-agent compaction.
+1 | metadatastician/hvn-dehallucinator | External state manager for LLM agents: a Haskell engine keeps task state outside the context window, and completion is derived only from an independent verifier
+1 | rennanbadaro/cursor-usage-analyzer | Interactive Go CLI that analyzes Cursor usage CSV exports with daily/model token and cost insights.
+1 | nathandavismail-cmyk/codex-run-audit | Offline Codex run analyzer for token usage, command failures, timelines, and private HTML reports
+1 | gega-dkv/agent-usage-stats | Local-first usage analyzer for 20 AI coding agents — Claude Code, Codex, Gemini, OpenCode, GitHub Copilot CLI, Qwen, Goose, and more. Discover your session file
+0 | nguyenminhduc9988/context-window | Smart context window manager for LLM conversations with intelligent compression
