@@ -1,0 +1,16 @@
+ROLE: Simulation analyst for the sweap.it persona swarm. You receive 100 persona verdicts below as structured records. Your job is honest analysis, not cheerleading. Do not invent numbers: only aggregate what is present. Flag anomalies (all-same verdicts, verdict/intonation mismatches, posers). Output MUST start with the exact needle SWEEPIT_SWARM or the run is discarded.
+
+CONTEXT: 100 personas across 8 segments (paid-heavy operators, startup platform engineers, indie hackers, enterprise, eval MLEs, tool maintainers, consultants, and a 15-strong adversarial skeptic bloc). Stimulus: sweap.it, a hygiene tool for LLM agent stacks (census, dollar cost card, distill + gated reclaim, benchmark proof, optional secondary file cleanup). Each persona returned: VERDICT (INSTALL/TRY/IGNORE/HOSTILE), RESONANCE 0-100, WOULD-PAY $, PITCH-PROOF, MISSING, OBJECTION.
+
+KNOWN BIAS: personas were authored by an LLM that also knows the product, so social-desirability inflation is expected; treat RESONANCE as optimistic-biased. The market gate that matters is real-world activation (>=40%), not simulated intent. Your job is to extract structure: which segments pull, which objections repeat, which persona groups are fakeable, and what the verdict mix implies for the go decision.
+
+YOUR TASK:
+1. VERDICT MATRIX: counts per segment x verdict. Compute install+try share per segment and overall.
+2. RESONANCE: mean and spread per segment; overall mean; flag segments whose mean exceeds 75 (suspect inflation) or sits under 35 (hard no).
+3. PAY-WALL: median WOULD-PAY overall and per segment; count of $0. Which segments put real money on the table? Does the median support a tool at $10-20/month, or is this a free-tier product?
+4. OBJECTION CLUSTERING: group OBJECTION lines into at most 8 named clusters with counts; quote the single sharpest objection verbatim per cluster.
+5. MISSING-FEATURE CLUSTERING: same for MISSING lines; what is the single most-demanded proof or feature?
+6. BIAS AUDIT: list any personas whose verdict looks socially inflated versus their stated skepticism/pain (e.g. a 0.9-skeptic at INSTALL with $30 pay). Estimate an honesty haircut: if every verdict were downgraded one step (INSTALL->TRY, TRY->IGNORE), what would the overall install+try share become?
+7. IMPLICATIONS: three bullets max: what this changes for the MVP, for the go decision, and for which segment to target first.
+
+FORMAT: plain text, no em-dashes anywhere (commas or semicolons). Sections 1 to 7. Max 1600 words.
