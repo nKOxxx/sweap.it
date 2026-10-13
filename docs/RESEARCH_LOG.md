@@ -3,6 +3,31 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R4A Cognexia verdict: SKIP-BUILD-NATIVE (the ordered pushback)
+
+R4A raw on disk, needle-verified, glyph-clean, no citations (none in brief).
+Report 11.25K chars. The uncomfortable finding, delivered as ordered:
+
+"Cognexia is a retention product, not a hygiene product. The conditions
+that look like product gaps are not bugs in Cognexia, they are the entire
+product domain of sweap.it."
+
+- Fit: none of the accepted red-team conditions are native. Two that matter
+  most (never-fetched cards must get swept; source stays quarantined until
+  a human accepts) run COUNTER to Cognexia's retention design intent.
+- Dependency risk: coupling the safety backbone to a single-maintainer
+  product adds two-store consistency risk exactly where the guarantee must
+  be strongest.
+- Verdict: SKIP-BUILD-NATIVE. Backbone = native five-column card store
+  (session id, byte range, checksum, card text, fetch counter) with the
+  fetch counter and human gate as first-class schema, not conventions.
+- Cognexia demoted to optional downstream consumer (Markdown views,
+  importance-score priors), human-gated, fully removable without touching
+  the guarantee. Its genuine value survives, out of the safety path.
+- Flip conditions recorded: INTEGRATE-WITH-EXTENSIONS if provenance
+  columns + per-card fetch logging + quarantine write mode land in
+  Cognexia CORE; INTEGRATE (full) only if the fleet standardizes on it.
+
 ## 2026-10-13: Founder amendments to the R3 ruling (GO suspended, R4 set ordered)
 
 Founder reviewed the GO+gates fork and amended, verbatim where quoted:
