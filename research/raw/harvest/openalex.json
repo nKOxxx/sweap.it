@@ -1,0 +1,314 @@
+{
+ "W7162467516": {
+  "id": "https://openalex.org/W7162467516",
+  "title": "M.A.K.S: Multidimensional Access Knowledge Scoring for Long-Horizon LLM Agent Memory Management",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.64388/irev9i11-1718160",
+  "q": "LLM agent memory management"
+ },
+ "W7140163562": {
+  "id": "https://openalex.org/W7140163562",
+  "title": "LLM Agent Memory: A Survey from a Unified Representation\u2013Management Perspective",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.20944/preprints202603.0359.v2",
+  "q": "LLM agent memory management"
+ },
+ "W7133759627": {
+  "id": "https://openalex.org/W7133759627",
+  "title": "LLM Agent Memory: A Survey from a Unified Representation\u2013Management Perspective",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.20944/preprints202603.0359.v1",
+  "q": "LLM agent memory management"
+ },
+ "W7171733833": {
+  "id": "https://openalex.org/W7171733833",
+  "title": "MemLens: A Value-Aware Memory Management System with Interactive Analytics for LLM-Based Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.14778/3827998.3828077",
+  "q": "LLM agent memory management"
+ },
+ "W7168989166": {
+  "id": "https://openalex.org/W7168989166",
+  "title": "Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2607.13591",
+  "q": "LLM agent memory management"
+ },
+ "W7168398480": {
+  "id": "https://openalex.org/W7168398480",
+  "title": "How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48448/crna-3e86",
+  "q": "LLM agent memory management"
+ },
+ "W4416749229": {
+  "id": "https://openalex.org/W4416749229",
+  "title": "ContextCache: Task-Aware Lifecycle Management for Memory-Efficient LLM Agent Deployment",
+  "publication_year": 2025,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.1109/iros60139.2025.11247595",
+  "q": "LLM agent memory management"
+ },
+ "W7123666335": {
+  "id": "https://openalex.org/W7123666335",
+  "title": "Active Context Compression: Autonomous Memory Management in LLM Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2601.07190",
+  "q": "LLM agent memory management"
+ },
+ "W7167224705": {
+  "id": "https://openalex.org/W7167224705",
+  "title": "FAMM: Future-Aware Adaptive Memory Management Framework for Long-Term Autonomous LLM Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.5281/zenodo.21167999",
+  "q": "LLM agent memory management"
+ },
+ "W7128496244": {
+  "id": "https://openalex.org/W7128496244",
+  "title": "AgentSys: Secure and Dynamic LLM Agents Through Explicit Hierarchical Memory Management",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2602.07398",
+  "q": "LLM agent memory management"
+ },
+ "W7134039732": {
+  "id": "https://openalex.org/W7134039732",
+  "title": "Beyond the Context Window: A Cost-Performance Analysis of Fact-Based Memory vs. Long-Context LLMs for Persistent Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2603.04814",
+  "q": "context window LLM cost"
+ },
+ "W4386942555": {
+  "id": "https://openalex.org/W4386942555",
+  "title": "PoSE: Efficient Context Window Extension of LLMs via Positional Skip-wise Training",
+  "publication_year": 2023,
+  "cited_by_count": 2,
+  "doi": "https://doi.org/10.48550/arxiv.2309.10400",
+  "q": "context window LLM cost"
+ },
+ "W4403367765": {
+  "id": "https://openalex.org/W4403367765",
+  "title": "Efficient Solutions For An Intriguing Failure of LLMs: Long Context Window Does Not Mean LLMs Can Analyze Long Sequences Flawlessly",
+  "publication_year": 2024,
+  "cited_by_count": 1,
+  "doi": "https://doi.org/10.48550/arxiv.2408.01866",
+  "q": "context window LLM cost"
+ },
+ "W4390961337": {
+  "id": "https://openalex.org/W4390961337",
+  "title": "Extending LLMs' Context Window with 100 Samples",
+  "publication_year": 2024,
+  "cited_by_count": 1,
+  "doi": "https://doi.org/10.48550/arxiv.2401.07004",
+  "q": "context window LLM cost"
+ },
+ "W7162327227": {
+  "id": "https://openalex.org/W7162327227",
+  "title": "The Efficiency Frontier: A Unified Framework for Cost\u2013Performance Optimization in LLM Context Management",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.1109/lmiat70705.2026.11682707",
+  "q": "context window LLM cost"
+ },
+ "W7134977361": {
+  "id": "https://openalex.org/W7134977361",
+  "title": "The Missing Memory Hierarchy: Demand Paging for LLM Context Windows",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2603.09023",
+  "q": "context window LLM cost"
+ },
+ "W4400104513": {
+  "id": "https://openalex.org/W4400104513",
+  "title": "UIO-LLMs: Unbiased Incremental Optimization for Long-Context LLMs",
+  "publication_year": 2024,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2406.18173",
+  "q": "context window LLM cost"
+ },
+ "W7211893686": {
+  "id": "https://openalex.org/W7211893686",
+  "title": "Adaptive Context Parallelism for Production LLM Serving",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2609.04774",
+  "q": "context window LLM cost"
+ },
+ "W4416402292": {
+  "id": "https://openalex.org/W4416402292",
+  "title": "Revisiting put-that-there, context aware window interactions via LLMs",
+  "publication_year": 2025,
+  "cited_by_count": 1,
+  "doi": "https://doi.org/10.1109/ismar-adjunct68609.2025.00104",
+  "q": "context window LLM cost"
+ },
+ "W7124162267": {
+  "id": "https://openalex.org/W7124162267",
+  "title": "DYCP: Dynamic Context Pruning for Long-Form Dialogue with LLMs",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2601.07994",
+  "q": "context window LLM cost"
+ },
+ "W7202349267": {
+  "id": "https://openalex.org/W7202349267",
+  "title": "The Sleeping Agent: What Gist-Based Context Compression Loses and Why",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2608.11775",
+  "q": "conversation history compression agents"
+ },
+ "W7120272414": {
+  "id": "https://openalex.org/W7120272414",
+  "title": "AgentOCR: Reimagining Agent History via Optical Self-Compression",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": null,
+  "q": "conversation history compression agents"
+ },
+ "W7166852575": {
+  "id": "https://openalex.org/W7166852575",
+  "title": "AgentOCR: Reimagining Agent History via Optical Self-Compression",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.18653/v1/2026.acl-long.230",
+  "q": "conversation history compression agents"
+ },
+ "W7171417183": {
+  "id": "https://openalex.org/W7171417183",
+  "title": "DAGC: Decision-Anchored Graph Compression for Reproducible Context Compression",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.5281/zenodo.21621102",
+  "q": "conversation history compression agents"
+ },
+ "W7214970824": {
+  "id": "https://openalex.org/W7214970824",
+  "title": "LatCom: Cross-Agent Latent Compression for Efficient Multi-Agent Collaboration",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2609.37017",
+  "q": "conversation history compression agents"
+ },
+ "W7164380022": {
+  "id": "https://openalex.org/W7164380022",
+  "title": "Context-Driven Incremental Compression for Multi-Turn Dialogue Generation",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2606.12411",
+  "q": "conversation history compression agents"
+ },
+ "W7164557486": {
+  "id": "https://openalex.org/W7164557486",
+  "title": "MemRefine: LLM-Guided Compression for Long-Term Agent Memory",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2606.13177",
+  "q": "conversation history compression agents"
+ },
+ "W7208835751": {
+  "id": "https://openalex.org/W7208835751",
+  "title": "Compression Remembers the Detour: How Context Compression Amplifies Off-Task Content and Derails LLM Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.62177/apemr.v3i4.1704",
+  "q": "conversation history compression agents"
+ },
+ "W7147644167": {
+  "id": "https://openalex.org/W7147644167",
+  "title": "View-oriented Conversation Compiler for Agent Trace Analysis",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2603.29678",
+  "q": "conversation history compression agents"
+ },
+ "W7167905859": {
+  "id": "https://openalex.org/W7167905859",
+  "title": "An Empirical Comparison of Agentic AI Frameworks Across Six Language Models: Token Overhead, Interoperability, and Robustness",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.5281/zenodo.21300359",
+  "q": "prompt token overhead tools"
+ },
+ "W7143515514": {
+  "id": "https://openalex.org/W7143515514",
+  "title": "LLM Token Estimation Benchmark Data",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.5281/zenodo.19334607",
+  "q": "prompt token overhead tools"
+ },
+ "W7160670807": {
+  "id": "https://openalex.org/W7160670807",
+  "title": "Joint Semantic Token Selection and Prompt Optimization for Interpretable Prompt Learning",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": null,
+  "q": "prompt token overhead tools"
+ },
+ "W4415953504": {
+  "id": "https://openalex.org/W4415953504",
+  "title": "FrugalPrompt: Reducing Contextual Overhead in Large Language Models via Token Attribution",
+  "publication_year": 2025,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2510.16439",
+  "q": "prompt token overhead tools"
+ },
+ "W7108213773": {
+  "id": "https://openalex.org/W7108213773",
+  "title": "Learning a Single Token to Replace Long System Prompts in LLMs",
+  "publication_year": 2025,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2511.23271",
+  "q": "prompt token overhead tools"
+ },
+ "W7154221705": {
+  "id": "https://openalex.org/W7154221705",
+  "title": "ClawGuard: A Runtime Security Framework for Tool-Augmented LLM Agents Against Indirect Prompt Injection",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2604.11790",
+  "q": "prompt token overhead tools"
+ },
+ "W7220651516": {
+  "id": "https://openalex.org/W7220651516",
+  "title": "Token-Economics for Agentic AI: A Cost Model and Tiered Routing Reference",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.5281/zenodo.23195510",
+  "q": "prompt token overhead tools"
+ },
+ "W7214002639": {
+  "id": "https://openalex.org/W7214002639",
+  "title": "The Price of Safety: Benign-Case Utility and Token Overhead of Memory-Poisoning Defenses in LLM Agents",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2609.22818",
+  "q": "prompt token overhead tools"
+ },
+ "W7162343965": {
+  "id": "https://openalex.org/W7162343965",
+  "title": "An Independent Billing Audit of Claude's Production API: 4 Experiments Across Haiku, Sonnet, and Opus Confirm Mathematical Honesty; Tool-Definition Overhead and Silent Desktop-App Routing Remain Consumer Concerns",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.5281/zenodo.20373336",
+  "q": "prompt token overhead tools"
+ },
+ "W7149018500": {
+  "id": "https://openalex.org/W7149018500",
+  "title": "SelfGrader: LLM Jailbreak Detection via Anchored Token-Level Logits",
+  "publication_year": 2026,
+  "cited_by_count": 0,
+  "doi": "https://doi.org/10.48550/arxiv.2604.01473",
+  "q": "prompt token overhead tools"
+ }
+}

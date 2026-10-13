@@ -1,0 +1,258 @@
+[
+ {
+  "q": "llm context cleaner",
+  "full_name": "xunmenglt/codura",
+  "stars": 42,
+  "desc": "Codura is an intelligent code assistant designed to supercharge your IDE with context-aware code completion, inline explanations, test case generation, and refa",
+  "url": "https://github.com/xunmenglt/codura",
+  "pushed": "2025-07-13"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "voku/TextCleaner",
+  "stars": 3,
+  "desc": "Clean noisy text from mobile web pages for LLM context.",
+  "url": "https://github.com/voku/TextCleaner",
+  "pushed": "2026-10-13"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "Gupta-Aniket/branched-llms",
+  "stars": 2,
+  "desc": "Git style branched llms for better convos, cleaner context and deep dives",
+  "url": "https://github.com/Gupta-Aniket/branched-llms",
+  "pushed": "2026-04-20"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "Dr-Vphuc/BranchChat",
+  "stars": 2,
+  "desc": "New way to interact with LLMs -- cleaner context, better workflow, and wallet-friendly.",
+  "url": "https://github.com/Dr-Vphuc/BranchChat",
+  "pushed": "2026-06-17"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "Johnny95420/Report-Summarizer",
+  "stars": 2,
+  "desc": "This project draws inspiration from LangChain's open_deep_research, and specializes it for domain-specific research automation. It features task-tailored prompt",
+  "url": "https://github.com/Johnny95420/Report-Summarizer",
+  "pushed": "2026-03-08"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "kkdrhn/context-cleaner",
+  "stars": 1,
+  "desc": "Lightweight CLI for sanitizing sensitive data before sending text to LLMs or external systems.",
+  "url": "https://github.com/kkdrhn/context-cleaner",
+  "pushed": "2025-11-03"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "Watcher3056/llm-cleaner",
+  "stars": 1,
+  "desc": "LLM Cleaner: reclaim local AI chat storage with context-aware pruning, verified backups and interactive cleanup for Codex, Claude Code, Cursor, Gemini CLI and A",
+  "url": "https://github.com/Watcher3056/llm-cleaner",
+  "pushed": "2026-09-08"
+ },
+ {
+  "q": "llm context cleaner",
+  "full_name": "MStock2025/mcp-context-cleaner",
+  "stars": 1,
+  "desc": "A lightweight, zero-dependency middleware to trim, filter, and optimize JSON payloads from MCP (Model Context Protocol) servers before feeding them to LLM conte",
+  "url": "https://github.com/MStock2025/mcp-context-cleaner",
+  "pushed": "2026-07-05"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "blitzreels/blitzclean",
+  "stars": 234,
+  "desc": "Native macOS menu-bar monitor for CPU, memory, and disk, with reviewed cleanup for caches, builds, simulators, and AI agents. Local and open source.",
+  "url": "https://github.com/blitzreels/blitzclean",
+  "pushed": "2026-10-09"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "alpertarhan/pi-smart-compact",
+  "stars": 36,
+  "desc": "Pi Continuity \u2014 context hygiene and session continuity for the Pi Coding Agent: recoverable cleanup, checkpoints, memory and verified compaction (npm: pi-smart-",
+  "url": "https://github.com/alpertarhan/pi-smart-compact",
+  "pushed": "2026-10-11"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "ericjuta/codex",
+  "stars": 5,
+  "desc": "Public fork of openai/codex with honcho-backed memory, expanded hook parity, hashline, compaction, code_mode and multi_agent_v2 tweaks/fixes and fork-focused ru",
+  "url": "https://github.com/ericjuta/codex",
+  "pushed": "2026-07-22"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "physicspackage/mcp-memory-manager",
+  "stars": 2,
+  "desc": "MCP server for agent memories (notes, tasks, results, blobs, cleanup).",
+  "url": "https://github.com/physicspackage/mcp-memory-manager",
+  "pushed": "2025-09-05"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "matamong/memmd-mcp",
+  "stars": 2,
+  "desc": "A shared memory layer for AI agents \u2014 one memory.md synced across Claude Desktop, Cursor, Claude Code, and any MCP client. Auto-deduplication, contradiction res",
+  "url": "https://github.com/matamong/memmd-mcp",
+  "pushed": "2026-02-28"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "kylebrodeur/mac-optimize",
+  "stars": 2,
+  "desc": "macOS disk, memory & shell hygiene for machines running many AI coding agents: safe disk reclaim, git-worktree audit/backup, Codex-session backup, and launchd a",
+  "url": "https://github.com/kylebrodeur/mac-optimize",
+  "pushed": "2026-10-04"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "vbiroshak/ai-dreamer-agent",
+  "stars": 1,
+  "desc": "Auto memory cleanup. For Claude Code.",
+  "url": "https://github.com/vbiroshak/ai-dreamer-agent",
+  "pushed": "2026-08-10"
+ },
+ {
+  "q": "agent memory cleanup",
+  "full_name": "jamiefutch/pi-hermes-memory-cleanup",
+  "stars": 1,
+  "desc": "A utility project for cleaning up and optimizing Hermes persistent memory storage used by the Pi coding agent.  Why",
+  "url": "https://github.com/jamiefutch/pi-hermes-memory-cleanup",
+  "pushed": "2026-08-15"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "sdeture/claude-rolling-context",
+  "stars": 7,
+  "desc": "Smart context window manager for ClaudeCode transcripts - maintains continuous conversations with intelligent trimming and optional LLM summaries",
+  "url": "https://github.com/sdeture/claude-rolling-context",
+  "pushed": "2025-12-17"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "khanak0509/ContextGc",
+  "stars": 2,
+  "desc": "context window manager for LLM chat applications",
+  "url": "https://github.com/khanak0509/ContextGc",
+  "pushed": "2026-06-19"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "SanDiegoAIStudio/mcp-context-manager",
+  "stars": 2,
+  "desc": "Automated MCP discovery and context optimization for Claude Code. Save 90% of your context window with 5-minute setup and zero maintenance.",
+  "url": "https://github.com/SanDiegoAIStudio/mcp-context-manager",
+  "pushed": "2026-10-08"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "hijrahassalam/llm-context-manager",
+  "stars": 1,
+  "desc": "Prevent context window overflow in LLM apps \u2014 sliding window, compaction, token counting, zero dependencies",
+  "url": "https://github.com/hijrahassalam/llm-context-manager",
+  "pushed": "2026-05-22"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "wabdull/Pane",
+  "stars": 1,
+  "desc": "Context window manager for LLMs. Memory for free.",
+  "url": "https://github.com/wabdull/Pane",
+  "pushed": "2026-04-09"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "arman81/context-manager",
+  "stars": 1,
+  "desc": "A pluggable context engine for LLM agents. Master the context window, beat the needle-in-a-haystack problem, intelligent per-agent compaction.",
+  "url": "https://github.com/arman81/context-manager",
+  "pushed": "2026-09-02"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "metadatastician/hvn-dehallucinator",
+  "stars": 1,
+  "desc": "External state manager for LLM agents: a Haskell engine keeps task state outside the context window, and completion is derived only from an independent verifier",
+  "url": "https://github.com/metadatastician/hvn-dehallucinator",
+  "pushed": "2026-10-12"
+ },
+ {
+  "q": "context window manager llm",
+  "full_name": "nguyenminhduc9988/context-window",
+  "stars": 0,
+  "desc": "Smart context window manager for LLM conversations with intelligent compression",
+  "url": "https://github.com/nguyenminhduc9988/context-window",
+  "pushed": "2026-07-01"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "Piebald-AI/splitrail",
+  "stars": 223,
+  "desc": "Fast, cross-platform, real-time token usage tracker and cost monitor for Claude Code / Codex CLI / Antigravity CLI / Qwen Code / Cline / Zoo Code / Kilo Code / ",
+  "url": "https://github.com/Piebald-AI/splitrail",
+  "pushed": "2026-10-11"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "aarora79/claude-code-usage-analyzer",
+  "stars": 6,
+  "desc": "Comprehensive cost & token usage analyzer for Claude Code with detailed breakdowns by model and token type. Uses ccusage CLI tool and LiteLLM pricing data. The ",
+  "url": "https://github.com/aarora79/claude-code-usage-analyzer",
+  "pushed": "2026-08-02"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "SingggggYee/claude-usage-analyzer",
+  "stars": 5,
+  "desc": "Find where your Claude Code tokens go and how to cut usage. Analyzes sessions, finds token sinks, gives actionable fixes.",
+  "url": "https://github.com/SingggggYee/claude-usage-analyzer",
+  "pushed": "2026-06-10"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "VAIXLNS/VAIXLNS",
+  "stars": 5,
+  "desc": "\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u0623\u0631\u0649 \u0623\u0646 \u0647\u0630\u0627 \u0623\u0635\u0628\u062d \u0623\u0642\u0631\u0628 \u0625\u0644\u0649 Blueprint \u0633\u064a\u0627\u062f\u064a \u0648\u0644\u064a\u0633 \u0645\u062c\u0631\u062f \u0645\u062e\u0637\u0637 \u0646\u0638\u0627\u0645. \u0648\u0645\u0639 \u0630\u0644\u0643\u060c \u0625\u0630\u0627 \u0643\u0627\u0646 \u0627\u0644\u0647\u062f\u0641 \u0623\u0646 \u064a\u0643\u0648\u0646 \u0647\u0630\u0627 \u0627\u0644\u0631\u0633\u0645 \u0627\u0644\u0645\u0631\u062c\u0639\u064a \u0627\u0644\u0646\u0647\u0627\u0626\u064a (Mas",
+  "url": "https://github.com/VAIXLNS/VAIXLNS",
+  "pushed": "2026-09-02"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "CookiRui/claude-usage-analyzer",
+  "stars": 2,
+  "desc": "Analyze Claude Code CLI session logs \u2014 track usage patterns, token consumption, and generate reports.",
+  "url": "https://github.com/CookiRui/claude-usage-analyzer",
+  "pushed": "2026-03-19"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "rennanbadaro/cursor-usage-analyzer",
+  "stars": 1,
+  "desc": "Interactive Go CLI that analyzes Cursor usage CSV exports with daily/model token and cost insights.",
+  "url": "https://github.com/rennanbadaro/cursor-usage-analyzer",
+  "pushed": "2026-05-29"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "nathandavismail-cmyk/codex-run-audit",
+  "stars": 1,
+  "desc": "Offline Codex run analyzer for token usage, command failures, timelines, and private HTML reports",
+  "url": "https://github.com/nathandavismail-cmyk/codex-run-audit",
+  "pushed": "2026-10-12"
+ },
+ {
+  "q": "token usage analyzer cli",
+  "full_name": "gega-dkv/agent-usage-stats",
+  "stars": 1,
+  "desc": "Local-first usage analyzer for 20 AI coding agents \u2014 Claude Code, Codex, Gemini, OpenCode, GitHub Copilot CLI, Qwen, Goose, and more. Discover your session file",
+  "url": "https://github.com/gega-dkv/agent-usage-stats",
+  "pushed": "2026-06-25"
+ }
+]

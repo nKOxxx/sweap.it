@@ -1,0 +1,1773 @@
+{
+ "2510.26493v1": {
+  "id": "2510.26493v1",
+  "title": "Context Engineering 2.0: The Context of Context Engineering",
+  "year": "2025",
+  "published": "2025-10-30",
+  "authors": [
+   "Qishuo Hua",
+   "Lyumanshan Ye",
+   "Dayuan Fu"
+  ],
+  "abs": "Karl Marx once wrote that ``the human essence is the ensemble of social relations'', suggesting that individuals are not isolated entities but are fundamentally shaped by their interactions with other entities, within which contexts play a constitutive and ess",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2602.07321v2": {
+  "id": "2602.07321v2",
+  "title": "Wireless Context Engineering for Efficient Mobile Agentic AI and Edge General Intelligence",
+  "year": "2026",
+  "published": "2026-02-07",
+  "authors": [
+   "Changyuan Zhao",
+   "Jiacheng Wang",
+   "Yunting Xu"
+  ],
+  "abs": "Future wireless networks demand increasingly powerful intelligence to support sensing, communication, and autonomous decision-making. While scaling laws suggest improving performance by enlarging model capacity, practical edge deployments are fundamentally con",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2607.29422v1": {
+  "id": "2607.29422v1",
+  "title": "AgenticRepair: Multi-Faceted Program Context Engineering for Agentic Vulnerability Repair",
+  "year": "2026",
+  "published": "2026-07-31",
+  "authors": [
+   "Michael Fu",
+   "Qiyue Mei",
+   "Patanamon Thongtanunam"
+  ],
+  "abs": "Automated vulnerability repair aims to reduce the time and effort required to patch security flaws from a vulnerability triage report. Recent agentic AI approaches have shown promising results in automated program repair. However, vulnerability repair demands ",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2609.11728v1": {
+  "id": "2609.11728v1",
+  "title": "Reproducibility in the Age of Agentic AI: Context Engineering at the Timescale of a Codebase",
+  "year": "2026",
+  "published": "2026-09-10",
+  "authors": [
+   "Lorena A. Barba"
+  ],
+  "abs": "Reproducible research practices are context engineering for AI coding agents. I argue that agents lower the cost of maintaining tests, commit histories, repository structure, instructions, and decision records while making their benefits immediate. Researchers",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2512.05470v1": {
+  "id": "2512.05470v1",
+  "title": "Everything is Context: Agentic File System Abstraction for Context Engineering",
+  "year": "2025",
+  "published": "2025-12-05",
+  "authors": [
+   "Xiwei Xu",
+   "Robert Mao",
+   "Quan Bai"
+  ],
+  "abs": "Generative AI (GenAI) has reshaped software system design by introducing foundation models as pre-trained subsystems that redefine architectures and operations. The emerging challenge is no longer model fine-tuning but context engineering-how systems capture, ",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2512.03001v1": {
+  "id": "2512.03001v1",
+  "title": "Invasive Context Engineering to Control Large Language Models",
+  "year": "2025",
+  "published": "2025-12-02",
+  "authors": [
+   "Thomas Rivasseau"
+  ],
+  "abs": "Current research on operator control of Large Language Models improves model robustness against adversarial attacks and misbehavior by training on preference examples, prompting, and input/output filtering. Despite good results, LLMs remain susceptible to abus",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2605.15721v1": {
+  "id": "2605.15721v1",
+  "title": "Contexting as Recommendation: Evolutionary Collaborative Filtering for Context Engineering",
+  "year": "2026",
+  "published": "2026-05-15",
+  "authors": [
+   "Jiachen Zhu",
+   "Zhuoying Ou",
+   "Congmin Zheng"
+  ],
+  "abs": "Large Language Models (LLMs) are highly sensitive to their input contexts, motivating the development of automated context engineering. However, existing methods predominantly treat this as a global search problem, seeking a single context strategy that maximi",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2604.20874v1": {
+  "id": "2604.20874v1",
+  "title": "The Root Theorem of Context Engineering",
+  "year": "2026",
+  "published": "2026-03-29",
+  "authors": [
+   "Borja Odriozola Schick"
+  ],
+  "abs": "Every system that maintains a large language model conversation beyond a single session faces two inescapable constraints: the context window is finite, and information quality degrades with accumulated volume. We formalize these constraints as axioms and deri",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2609.27354v1": {
+  "id": "2609.27354v1",
+  "title": "Constraint-Driven Context Engineering: Designing Domain Interfaces for AI Systems",
+  "year": "2026",
+  "published": "2026-09-23",
+  "authors": [
+   "Xiwei Xu",
+   "Chen Wang",
+   "Mengmeng Yang"
+  ],
+  "abs": "Generative AI systems are increasingly deployed to address domain problems. These systems operate under technical, regulatory, institutional, and normative constraints that define acceptable AI behaviour and outcomes within their domains. We observe a recurrin",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2607.10532v1": {
+  "id": "2607.10532v1",
+  "title": "Implicit Fine-tuning via Context Engineering: A Curriculum Learning Framework for Multimodal Entity Alignment",
+  "year": "2026",
+  "published": "2026-07-12",
+  "authors": [
+   "Yunpeng Hong",
+   "Chenyang Bu",
+   "Di Wu"
+  ],
+  "abs": "Multimodal Entity Alignment (MMEA) aims to identify equivalent entities across different modalities. While existing methods enhance MMEA performance through black-box context engineering strategies, their reliance on LLM parameter capacity and lack of theoreti",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2507.13334v2": {
+  "id": "2507.13334v2",
+  "title": "A Survey of Context Engineering for Large Language Models",
+  "year": "2025",
+  "published": "2025-07-17",
+  "authors": [
+   "Lingrui Mei",
+   "Jiayu Yao",
+   "Yuyao Ge"
+  ],
+  "abs": "The performance of Large Language Models (LLMs) is fundamentally determined by the contextual information provided during inference. This survey introduces Context Engineering, a formal discipline that transcends simple prompt design to encompass the systemati",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2601.21557v2": {
+  "id": "2601.21557v2",
+  "title": "Meta Context Engineering via Agentic Skill Evolution",
+  "year": "2026",
+  "published": "2026-01-29",
+  "authors": [
+   "Haoran Ye",
+   "Xuning He",
+   "Vincent Arak"
+  ],
+  "abs": "The operational efficacy of large language models relies heavily on their inference-time context. This has established Context Engineering (CE) as a formal discipline for optimizing these inputs. Current CE methods rely on manually crafted harnesses, such as r",
+  "q": [
+   "\"context engineering\""
+  ]
+ },
+ "2606.09090v1": {
+  "id": "2606.09090v1",
+  "title": "Context Rot in AI-Assisted Software Development: Repurposing Documentation Consistency for AI Configuration Artifacts",
+  "year": "2026",
+  "published": "2026-06-08",
+  "authors": [
+   "Christoph Treude",
+   "Sebastian Baltes"
+  ],
+  "abs": "Developers increasingly provide AI coding assistants with persistent context through configuration files such as CLAUDE.md, AGENTS.md, and .cursorrules. These files describe code elements, architecture, and development conventions, forming the context that gui",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2606.29718v2": {
+  "id": "2606.29718v2",
+  "title": "Diagnosing and Mitigating Context Rot in Long-horizon Search",
+  "year": "2026",
+  "published": "2026-06-29",
+  "authors": [
+   "Shijie Xia",
+   "Yikun Wang",
+   "Zhen Huang"
+  ],
+  "abs": "Extensive context has become the norm as Large Language Models (LLMs) are increasingly deployed in long-horizon search tasks. The concern that increasing context length degrades model capabilities, known as context rot, has become a widely recognized issue for",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2607.17937v2": {
+  "id": "2607.17937v2",
+  "title": "When and How Context Rot Appears in Coding Agents: A White-Box Study of Agent Skills in Code Auditing",
+  "year": "2026",
+  "published": "2026-07-20",
+  "authors": [
+   "Yue Xue"
+  ],
+  "abs": "Agent Skills package procedural instructions and checks for use by general-purpose agents, but loading a skill does not guarantee that every requirement remains active throughout a long tool-using trajectory. We study this problem in a production-derived, whit",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2609.33485v1": {
+  "id": "2609.33485v1",
+  "title": "DISCO: Distributed Long Context Scaling with Grounding-Reasoning Disaggregation",
+  "year": "2026",
+  "published": "2026-09-27",
+  "authors": [
+   "Guanzheng Chen",
+   "Viet Dac Lai",
+   "Subhojyoti Mukherjee"
+  ],
+  "abs": "While Large Language Models (LLMs) advertise million-token context windows, reasoning quality often collapses as inputs grow -- a phenomenon termed context rot. This failure stems from a structural entanglement in monolithic architectures, where the massive se",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2605.12366v1": {
+  "id": "2605.12366v1",
+  "title": "Classifier Context Rot: Monitor Performance Degrades with Context Length",
+  "year": "2026",
+  "published": "2026-05-12",
+  "authors": [
+   "Sam Martin",
+   "Fabien Roger"
+  ],
+  "abs": "Monitoring coding agents for dangerous behavior using language models requires classifying transcripts that often exceed 500K tokens, but prior agent monitoring benchmarks rarely contain transcripts longer than 100K tokens. We show that when used as classifier",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2603.20105v1": {
+  "id": "2603.20105v1",
+  "title": "The $\\mathbf{Y}$-Combinator for LLMs: Solving Long-Context Rot with $\u03bb$-Calculus",
+  "year": "2026",
+  "published": "2026-03-20",
+  "authors": [
+   "Amartya Roy",
+   "Rasul Tutunov",
+   "Xiaotong Ji"
+  ],
+  "abs": "LLMs are increasingly used as general-purpose reasoners, but long inputs remain bottlenecked by a fixed context window. Recursive Language Models (RLMs) address this by externalising the prompt and recursively solving subproblems. Yet existing RLMs depend on a",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2608.10628v1": {
+  "id": "2608.10628v1",
+  "title": "InSight-doc: Agentic Visual Perception for Long-Document Understanding",
+  "year": "2026",
+  "published": "2026-08-11",
+  "authors": [
+   "Kaican Li",
+   "Weiyan Xie",
+   "Lewei Yao"
+  ],
+  "abs": "Long-document understanding often requires reasoning over many visually rich pages, making inference costly and prone to context rot. In this work, we propose InSight-doc, an agentic visual perception framework that treats visual resolution as an adaptive reas",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2601.12030v1": {
+  "id": "2601.12030v1",
+  "title": "ARC: Active and Reflection-driven Context Management for Long-Horizon Information Seeking Agents",
+  "year": "2026",
+  "published": "2026-01-17",
+  "authors": [
+   "Yilun Yao",
+   "Shan Huang",
+   "Elsie Dai"
+  ],
+  "abs": "Large language models are increasingly deployed as research agents for deep search and long-horizon information seeking, yet their performance often degrades as interaction histories grow. This degradation, known as context rot, reflects a failure to maintain ",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2511.18743v1": {
+  "id": "2511.18743v1",
+  "title": "RhinoInsight: Improving Deep Research through Control Mechanisms for Model Behavior and Context",
+  "year": "2025",
+  "published": "2025-11-24",
+  "authors": [
+   "Yu Lei",
+   "Shuzheng Si",
+   "Wei Wang"
+  ],
+  "abs": "Large language models are evolving from single-turn responders into tool-using agents capable of sustained reasoning and decision-making for deep research. Prevailing systems adopt a linear pipeline of plan to search to write to a report, which suffers from er",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2607.27283v1": {
+  "id": "2607.27283v1",
+  "title": "Benchmarking the Residual: What Long-Horizon Evaluations Add Beyond Matched Short-Task Performance",
+  "year": "2026",
+  "published": "2026-07-29",
+  "authors": [
+   "Chao Peng",
+   "Zhiheng Lyu",
+   "Peijie Dong"
+  ],
+  "abs": "Long-horizon benchmarks often show that agents fail more as tasks become longer. This observation is useful for deployment, but it does not by itself explain why failure occurs. More stages create more opportunities for ordinary errors to compound; longer task",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2605.18768v1": {
+  "id": "2605.18768v1",
+  "title": "ClinQueryAgent: A Conversational Agent for Population Health Management",
+  "year": "2026",
+  "published": "2026-04-13",
+  "authors": [
+   "Joseph S. Boyle",
+   "Anthony Dranfield",
+   "Mike O'Neil"
+  ],
+  "abs": "In this paper we introduce ClinQueryAgent, a system for translating natural language population health questions into executable database queries using agents with access to both local and external knowledge bases. Our novel architecture enables the use of pow",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2604.03664v1": {
+  "id": "2604.03664v1",
+  "title": "Document-Level Numerical Reasoning across Single and Multiple Tables in Financial Reports",
+  "year": "2026",
+  "published": "2026-04-04",
+  "authors": [
+   "Yi-Cheng Wang",
+   "Wei-An Wang",
+   "Chu-Song Chen"
+  ],
+  "abs": "Despite the strong language understanding abilities of large language models (LLMs), they still struggle with reliable question answering (QA) over long, structured documents, particularly for numerical reasoning. Financial annual reports exemplify this diffic",
+  "q": [
+   "\"context rot\""
+  ]
+ },
+ "2602.05665v1": {
+  "id": "2602.05665v1",
+  "title": "Graph-based Agent Memory: Taxonomy, Techniques, and Applications",
+  "year": "2026",
+  "published": "2026-02-05",
+  "authors": [
+   "Chang Yang",
+   "Chuang Zhou",
+   "Yilin Xiao"
+  ],
+  "abs": "Memory emerges as the core module in the Large Language Model (LLM)-based agents for long-horizon complex tasks (e.g., multi-turn dialogue, game playing, scientific discovery), where memory can enable knowledge accumulation, iterative reasoning and self-evolut",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2604.07798v3": {
+  "id": "2604.07798v3",
+  "title": "Lightweight LLM Agent Memory with Small Language Models",
+  "year": "2026",
+  "published": "2026-04-09",
+  "authors": [
+   "Jiaquan Zhang",
+   "Chaoning Zhang",
+   "Shuxu Chen"
+  ],
+  "abs": "Although LLM agents can leverage tools for complex tasks, they still need memory to maintain cross-turn consistency and accumulate reusable information in long-horizon interactions. However, retrieval-based external memory systems incur low online overhead but",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2601.20465v1": {
+  "id": "2601.20465v1",
+  "title": "BMAM: Brain-inspired Multi-Agent Memory Framework",
+  "year": "2026",
+  "published": "2026-01-28",
+  "authors": [
+   "Yang Li",
+   "Jiaxiang Liu",
+   "Yusong Wang"
+  ],
+  "abs": "Language-model-based agents operating over extended interaction horizons face persistent challenges in preserving temporally grounded information and maintaining behavioral consistency across sessions, a failure mode we term soul erosion. We present BMAM (Brai",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2601.18642v2": {
+  "id": "2601.18642v2",
+  "title": "FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory",
+  "year": "2026",
+  "published": "2026-01-26",
+  "authors": [
+   "Lei Wei",
+   "Xiao Peng",
+   "Xu Dong"
+  ],
+  "abs": "Large language models deployed as autonomous agents face critical memory limitations, lacking selective forgetting mechanisms that lead to either catastrophic forgetting at context boundaries or information overload within them. While human memory naturally ba",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2601.01885v3": {
+  "id": "2601.01885v3",
+  "title": "Agentic Memory: Learning Unified Long-Term and Short-Term Memory Management for Large Language Model Agents",
+  "year": "2026",
+  "published": "2026-01-05",
+  "authors": [
+   "Yi Yu",
+   "Liuyi Yao",
+   "Yuexiang Xie"
+  ],
+  "abs": "Large language model (LLM) agents face fundamental limitations in long-horizon reasoning due to finite context windows, making effective memory management critical. Existing methods typically handle long-term memory (LTM) and short-term memory (STM) as separat",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2606.23195v2": {
+  "id": "2606.23195v2",
+  "title": "Memory Contagion: Cross-Temporal Propagation of Evaluator Bias via Agent Memory",
+  "year": "2026",
+  "published": "2026-06-22",
+  "authors": [
+   "Zewen Liu"
+  ],
+  "abs": "Large Language Model (LLM) agents increasingly rely on memory systems to maintain long-term coherence. Recent work shows that agent memories degrade during continuous consolidation. However, existing research assumes memories are derived from unbiased experien",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2607.27773v2": {
+  "id": "2607.27773v2",
+  "title": "ChronoMem: Version Control and Semantic Rollback for Large Language Model Agent Memory",
+  "year": "2026",
+  "published": "2026-07-30",
+  "authors": [
+   "Yongye Su",
+   "Wujiang Xu",
+   "Chaoji Zuo"
+  ],
+  "abs": "LLM agents increasingly rely on long-term memory to support multi-session interaction and personalization. However, existing agent memory systems are designed around forward-only evolution, continuously accumulating, consolidating, and overwriting knowledge, w",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2605.15701v1": {
+  "id": "2605.15701v1",
+  "title": "H-Mem: A Novel Memory Mechanism for Evolving and Retrieving Agent Memory via a Hybrid Structure",
+  "year": "2026",
+  "published": "2026-05-15",
+  "authors": [
+   "Jiawei Yu",
+   "Yixiang Fang",
+   "Xilin Liu"
+  ],
+  "abs": "Memory data are ubiquitous in Large Language Model (LLM)-based agents (e.g., OpenClaw and Manus). A few recent works have attempted to exploit agents'memory for improving their performance on the question-answering (QA) task, but they lack a principled mechani",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2606.24775v1": {
+  "id": "2606.24775v1",
+  "title": "Are We Ready For An Agent-Native Memory System?",
+  "year": "2026",
+  "published": "2026-06-23",
+  "authors": [
+   "Wei Zhou",
+   "Xuanhe Zhou",
+   "Shaokun Han"
+  ],
+  "abs": "Memory for large language model (LLM) agents has rapidly evolved from simple retrieval-augmented mechanisms into a data management system that supports persistent information storage, retrieval, update, consolidation, and dynamic lifecycle governance throughou",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2605.18421v2": {
+  "id": "2605.18421v2",
+  "title": "EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective",
+  "year": "2026",
+  "published": "2026-05-18",
+  "authors": [
+   "Yuyao Wang",
+   "Zhongjian Zhang",
+   "Mo Chi"
+  ],
+  "abs": "Recent benchmarks for Large Language Model (LLM) agents mainly evaluate reasoning, planning, and execution. However, memory is also essential for agents, as it enables them to store, update, and retrieve information over time. This ability remains under-evalua",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2510.02373v1": {
+  "id": "2510.02373v1",
+  "title": "A-MemGuard: A Proactive Defense Framework for LLM-Based Agent Memory",
+  "year": "2025",
+  "published": "2025-09-29",
+  "authors": [
+   "Qianshan Wei",
+   "Tengchao Yang",
+   "Yaochen Wang"
+  ],
+  "abs": "Large Language Model (LLM) agents use memory to learn from past interactions, enabling autonomous planning and decision-making in complex environments. However, this reliance on memory introduces a critical security risk: an adversary can inject seemingly harm",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2602.06025v3": {
+  "id": "2602.06025v3",
+  "title": "Learning Query-Aware Budget-Tier Routing for Runtime Agent Memory",
+  "year": "2026",
+  "published": "2026-02-05",
+  "authors": [
+   "Haozhen Zhang",
+   "Haodong Yue",
+   "Tao Feng"
+  ],
+  "abs": "Memory is increasingly central to Large Language Model (LLM) agents operating beyond a single context window, yet most existing systems rely on offline, query-agnostic memory construction that can be inefficient and may discard query-critical information. Alth",
+  "q": [
+   "\"agent memory\" AND \"language model\""
+  ]
+ },
+ "2607.25992v1": {
+  "id": "2607.25992v1",
+  "title": "MemLens: A Value-Aware Memory Management System with Interactive Analytics for LLM-based Agents",
+  "year": "2026",
+  "published": "2026-07-28",
+  "authors": [
+   "Shuyue Wei",
+   "Chang Liu",
+   "Zimu Zhou"
+  ],
+  "abs": "Recently, memory management has become a key infrastructure for LLM-based agents, as it directly affects long-horizon reasoning, personalized responses, and knowledge reuse. However, existing LLM memory systems typically adopt a coarse-grained (utility-agnosti",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2609.01338v1": {
+  "id": "2609.01338v1",
+  "title": "mzCache: On-Device LLM Memory Management under Multitasking",
+  "year": "2026",
+  "published": "2026-09-01",
+  "authors": [
+   "Hongseung Yu",
+   "Minsung Kim",
+   "Jongseok Park"
+  ],
+  "abs": "On-device mobile Large Language Model (LLM) inference is gaining significant attention. However, mobile devices operate in highly dynamic multitasking environments where users frequently switch between applications. This creates memory pressure, forcing LLM me",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2506.15155v2": {
+  "id": "2506.15155v2",
+  "title": "eLLM: Elastic Memory Management Framework for Efficient LLM Serving",
+  "year": "2025",
+  "published": "2025-06-18",
+  "authors": [
+   "Jiale Xu",
+   "Rui Zhang",
+   "Yi Xiong"
+  ],
+  "abs": "Large Language Models are increasingly being deployed in datacenters. Serving these models requires careful memory management, as their memory usage includes static weights, dynamic activations, and key-value caches. While static weights are constant and predi",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2505.16067v2": {
+  "id": "2505.16067v2",
+  "title": "How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior",
+  "year": "2025",
+  "published": "2025-05-21",
+  "authors": [
+   "Zidi Xiong",
+   "Yuping Lin",
+   "Wenya Xie"
+  ],
+  "abs": "Memory is a critical component in large language model (LLM)-based agents, enabling them to store and retrieve past executions to improve task performance over time. In this paper, we conduct an empirical study on how memory management choices impact the LLM a",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2405.04437v3": {
+  "id": "2405.04437v3",
+  "title": "vAttention: Dynamic Memory Management for Serving LLMs without PagedAttention",
+  "year": "2024",
+  "published": "2024-05-07",
+  "authors": [
+   "Ramya Prabhu",
+   "Ajay Nayak",
+   "Jayashree Mohan"
+  ],
+  "abs": "PagedAttention is a popular approach for dynamic memory allocation in LLM serving systems. It enables on-demand allocation of GPU memory to mitigate KV cache fragmentation -- a phenomenon that crippled the batch size (and consequently throughput) in prior syst",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2602.07398v1": {
+  "id": "2602.07398v1",
+  "title": "AgentSys: Secure and Dynamic LLM Agents Through Explicit Hierarchical Memory Management",
+  "year": "2026",
+  "published": "2026-02-07",
+  "authors": [
+   "Ruoyao Wen",
+   "Hao Li",
+   "Chaowei Xiao"
+  ],
+  "abs": "Indirect prompt injection threatens LLM agents by embedding malicious instructions in external content, enabling unauthorized actions and data theft. LLM agents maintain working memory through their context window, which stores interaction history for decision",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2503.18292v1": {
+  "id": "2503.18292v1",
+  "title": "Jenga: Effective Memory Management for Serving LLM with Heterogeneity",
+  "year": "2025",
+  "published": "2025-03-24",
+  "authors": [
+   "Chen Zhang",
+   "Kuntai Du",
+   "Shu Liu"
+  ],
+  "abs": "Large language models (LLMs) are widely used but expensive to run, especially as inference workloads grow. To lower costs, maximizing the request batch size by managing GPU memory efficiently is crucial. While PagedAttention has recently been proposed to impro",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2508.13171v1": {
+  "id": "2508.13171v1",
+  "title": "Cognitive Workspace: Active Memory Management for LLMs -- An Empirical Study of Functional Infinite Context",
+  "year": "2025",
+  "published": "2025-08-08",
+  "authors": [
+   "Tao An"
+  ],
+  "abs": "Large Language Models (LLMs) face fundamental limitations in context management despite recent advances extending context windows to millions of tokens. We propose Cognitive Workspace, a novel paradigm that transcends traditional Retrieval-Augmented Generation",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2601.11969v2": {
+  "id": "2601.11969v2",
+  "title": "MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models",
+  "year": "2026",
+  "published": "2026-01-17",
+  "authors": [
+   "Zecheng Tang",
+   "Baibei Ji",
+   "Ruoxi Sun"
+  ],
+  "abs": "Existing works increasingly adopt memory-centric mechanisms to process long contexts in a segment manner, and effective memory management is one of the key capabilities that enables large language models to effectively propagate information across the entire s",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2512.21567v1": {
+  "id": "2512.21567v1",
+  "title": "Beyond Heuristics: A Decision-Theoretic Framework for Agent Memory Management",
+  "year": "2025",
+  "published": "2025-12-25",
+  "authors": [
+   "Changzhi Sun",
+   "Xiangyu Chen",
+   "Jixiang Luo"
+  ],
+  "abs": "External memory is a key component of modern large language model (LLM) systems, enabling long-term interaction and personalization. Despite its importance, memory management is still largely driven by hand-designed heuristics, offering little insight into the",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2606.10694v1": {
+  "id": "2606.10694v1",
+  "title": "REAL: A Reasoning-Enhanced Graph Framework for Long-Term Memory Management of LLMs",
+  "year": "2026",
+  "published": "2026-06-09",
+  "authors": [
+   "Keer Lu",
+   "Liwei Chen",
+   "Guoqing Jiang"
+  ],
+  "abs": "Large Language Models (LLMs) are increasingly expected to interact with users over long time horizons. However, due to their finite context window, LLMs cannot retain all past interactions, making long-term memory management essential for storing, updating, an",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2510.27418v1": {
+  "id": "2510.27418v1",
+  "title": "Dynamic Affective Memory Management for Personalized LLM Agents",
+  "year": "2025",
+  "published": "2025-10-31",
+  "authors": [
+   "Junfeng Lu",
+   "Yueyan Li"
+  ],
+  "abs": "Advances in large language models are making personalized AI agents a new research focus. While current agent systems primarily rely on personalized external memory databases to deliver customized experiences, they face challenges such as memory redundancy, me",
+  "q": [
+   "\"memory management\" AND \"LLM\""
+  ]
+ },
+ "2205.00379v2": {
+  "id": "2205.00379v2",
+  "title": "The Cross-lingual Conversation Summarization Challenge",
+  "year": "2022",
+  "published": "2022-05-01",
+  "authors": [
+   "Yulong Chen",
+   "Ming Zhong",
+   "Xuefeng Bai"
+  ],
+  "abs": "We propose the shared task of cross-lingual conversation summarization, \\emph{ConvSumX Challenge}, opening new avenues for researchers to investigate solutions that integrate conversation summarization and machine translation. This task can be particularly use",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2104.08400v1": {
+  "id": "2104.08400v1",
+  "title": "Structure-Aware Abstractive Conversation Summarization via Discourse and Action Graphs",
+  "year": "2021",
+  "published": "2021-04-16",
+  "authors": [
+   "Jiaao Chen",
+   "Diyi Yang"
+  ],
+  "abs": "Abstractive conversation summarization has received much attention recently. However, these generated summaries often suffer from insufficient, redundant, or incorrect content, largely due to the unstructured and complex characteristics of human-human interact",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2111.07564v2": {
+  "id": "2111.07564v2",
+  "title": "Adding more data does not always help: A study in medical conversation summarization with PEGASUS",
+  "year": "2021",
+  "published": "2021-11-15",
+  "authors": [
+   "Varun Nair",
+   "Namit Katariya",
+   "Xavier Amatriain"
+  ],
+  "abs": "Medical conversation summarization is integral in capturing information gathered during interactions between patients and physicians. Summarized conversations are used to facilitate patient hand-offs between physicians, and as part of providing care in the fut",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2410.16775v1": {
+  "id": "2410.16775v1",
+  "title": "Context-Aware LLM Translation System Using Conversation Summarization and Dialogue History",
+  "year": "2024",
+  "published": "2024-10-22",
+  "authors": [
+   "Mingi Sung",
+   "Seungmin Lee",
+   "Jiwon Kim"
+  ],
+  "abs": "Translating conversational text, particularly in customer support contexts, presents unique challenges due to its informal and unstructured nature. We propose a context-aware LLM translation system that leverages conversation summarization and dialogue history",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2106.00829v1": {
+  "id": "2106.00829v1",
+  "title": "ConvoSumm: Conversation Summarization Benchmark and Improved Abstractive Summarization with Argument Mining",
+  "year": "2021",
+  "published": "2021-06-01",
+  "authors": [
+   "Alexander R. Fabbri",
+   "Faiaz Rahman",
+   "Imad Rizvi"
+  ],
+  "abs": "While online conversations can cover a vast amount of information in many different formats, abstractive text summarization has primarily focused on modeling solely news articles. This research gap is due, in part, to the lack of standardized datasets for summ",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2606.15974v2": {
+  "id": "2606.15974v2",
+  "title": "A Large-Scale Multi-Dimensional Empirical Study of LLMs for Conversation Summarization",
+  "year": "2026",
+  "published": "2026-06-14",
+  "authors": [
+   "Weixiao Zhou",
+   "Gengyao Li",
+   "Junnan Zhu"
+  ],
+  "abs": "Despite the significant advancement of LLMs in conversation summarization, their evaluation remains limited by insufficient scenarios, input lengths, and sample sizes. Furthermore, existing benchmarks often omit frontier reasoning systems and efficient small m",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2309.15739v1": {
+  "id": "2309.15739v1",
+  "title": "Experience and Evidence are the eyes of an excellent summarizer! Towards Knowledge Infused Multi-modal Clinical Conversation Summarization",
+  "year": "2023",
+  "published": "2023-09-27",
+  "authors": [
+   "Abhisek Tiwari",
+   "Anisha Saha",
+   "Sriparna Saha"
+  ],
+  "abs": "With the advancement of telemedicine, both researchers and medical practitioners are working hand-in-hand to develop various techniques to automate various medical operations, such as diagnosis report generation. In this paper, we first present a multi-modal c",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2510.05858v3": {
+  "id": "2510.05858v3",
+  "title": "DACP: Domain-Adaptive Continual Pre-Training of Large Language Models for Phone Conversation Summarization",
+  "year": "2025",
+  "published": "2025-10-07",
+  "authors": [
+   "Xue-Yong Fu",
+   "Elena Khasanova",
+   "Md Tahmid Rahman Laskar"
+  ],
+  "abs": "Large language models (LLMs) have achieved impressive performance in text summarization, yet their performance often falls short when applied to specialized domains that differ from their original pre-training distribution. While fine-tuning can improve summar",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2311.18041v1": {
+  "id": "2311.18041v1",
+  "title": "Zero-shot Conversational Summarization Evaluations with small Large Language Models",
+  "year": "2023",
+  "published": "2023-11-29",
+  "authors": [
+   "Ramesh Manuvinakurike",
+   "Saurav Sahay",
+   "Sangeeta Manepalli"
+  ],
+  "abs": "Large Language Models (LLMs) exhibit powerful summarization abilities. However, their capabilities on conversational summarization remains under explored. In this work we evaluate LLMs (approx. 10 billion parameters) on conversational summarization and showcas",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2204.04504v1": {
+  "id": "2204.04504v1",
+  "title": "TANet: Thread-Aware Pretraining for Abstractive Conversational Summarization",
+  "year": "2022",
+  "published": "2022-04-09",
+  "authors": [
+   "Ze Yang",
+   "Liran Wang",
+   "Zhoujin Tian"
+  ],
+  "abs": "Although pre-trained language models (PLMs) have achieved great success and become a milestone in NLP, abstractive conversational summarization remains a challenging but less studied task. The difficulty lies in two aspects. One is the lack of large-scale conv",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2106.03337v1": {
+  "id": "2106.03337v1",
+  "title": "Summary Grounded Conversation Generation",
+  "year": "2021",
+  "published": "2021-06-07",
+  "authors": [
+   "Chulaka Gunasekara",
+   "Guy Feigenblat",
+   "Benjamin Sznajder"
+  ],
+  "abs": "Many conversation datasets have been constructed in the recent years using crowdsourcing. However, the data collection process can be time consuming and presents many challenges to ensure data quality. Since language generation has improved immensely in recent",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2406.15888v2": {
+  "id": "2406.15888v2",
+  "title": "Real-time Speech Summarization for Medical Conversations",
+  "year": "2024",
+  "published": "2024-06-22",
+  "authors": [
+   "Khai Le-Duc",
+   "Khai-Nguyen Nguyen",
+   "Long Vo-Dang"
+  ],
+  "abs": "In doctor-patient conversations, identifying medically relevant information is crucial, posing the need for conversation summarization. In this work, we propose the first deployable real-time speech summarization system for real-world applications in industry,",
+  "q": [
+   "\"conversation summarization\""
+  ]
+ },
+ "2403.17411v1": {
+  "id": "2403.17411v1",
+  "title": "PCToolkit: A Unified Plug-and-Play Prompt Compression Toolkit of Large Language Models",
+  "year": "2024",
+  "published": "2024-03-26",
+  "authors": [
+   "Jinyi Li",
+   "Yihuai Lan",
+   "Lei Wang"
+  ],
+  "abs": "Prompt compression is an innovative method for efficiently condensing input prompts while preserving essential information. To facilitate quick-start services, user-friendly interfaces, and compatibility with common datasets and metrics, we present the Prompt ",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2410.12388v2": {
+  "id": "2410.12388v2",
+  "title": "Prompt Compression for Large Language Models: A Survey",
+  "year": "2024",
+  "published": "2024-10-16",
+  "authors": [
+   "Zongqian Li",
+   "Yinhong Liu",
+   "Yixuan Su"
+  ],
+  "abs": "Leveraging large language models (LLMs) for complex natural language tasks typically requires long-form prompts to convey detailed requirements and information, which results in increased memory usage and inference costs. To mitigate these challenges, multiple",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2501.01625v1": {
+  "id": "2501.01625v1",
+  "title": "ICPC: In-context Prompt Compression with Faster Inference",
+  "year": "2025",
+  "published": "2025-01-03",
+  "authors": [
+   "Ziyang Yu",
+   "Yuyu Liu"
+  ],
+  "abs": "Despite the recent success of Large Language Models (LLMs), it remains challenging to feed LLMs with long prompts due to the fixed size of LLM inputs. As a remedy, prompt compression becomes a promising solution by removing redundant tokens in the prompt. Howe",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2501.06730v1": {
+  "id": "2501.06730v1",
+  "title": "Better Prompt Compression Without Multi-Layer Perceptrons",
+  "year": "2025",
+  "published": "2025-01-12",
+  "authors": [
+   "Edouardo Honig",
+   "Andrew Lizarraga",
+   "Zijun Frank Zhang"
+  ],
+  "abs": "Prompt compression is a promising approach to speeding up language model inference without altering the generative model. Prior works compress prompts into smaller sequences of learned tokens using an encoder that is trained as a LowRank Adaptation (LoRA) of t",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2403.12968v2": {
+  "id": "2403.12968v2",
+  "title": "LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression",
+  "year": "2024",
+  "published": "2024-03-19",
+  "authors": [
+   "Zhuoshi Pan",
+   "Qianhui Wu",
+   "Huiqiang Jiang"
+  ],
+  "abs": "This paper focuses on task-agnostic prompt compression for better generalizability and efficiency. Considering the redundancy in natural language, existing approaches compress prompts by removing tokens or lexical units according to their information entropy o",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2508.15813v2": {
+  "id": "2508.15813v2",
+  "title": "SCOPE: A Generative Approach for LLM Prompt Compression",
+  "year": "2025",
+  "published": "2025-08-16",
+  "authors": [
+   "Tinghui Zhang",
+   "Yifan Wang",
+   "Daisy Zhe Wang"
+  ],
+  "abs": "A big issue in modern LLM applications is they tend to feed long context to LLM, which results in high inference cost and latency, and may exceed the context limit. Prompt compression addresses this issue by reducing the length of input context with minimum lo",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2505.00019v1": {
+  "id": "2505.00019v1",
+  "title": "An Empirical Study on Prompt Compression for Large Language Models",
+  "year": "2025",
+  "published": "2025-04-24",
+  "authors": [
+   "Zheng Zhang",
+   "Jinyi Li",
+   "Yihuai Lan"
+  ],
+  "abs": "Prompt engineering enables Large Language Models (LLMs) to perform a variety of tasks. However, lengthy prompts significantly increase computational complexity and economic costs. To address this issue, we study six prompt compression methods for LLMs, aiming ",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2308.08758v3": {
+  "id": "2308.08758v3",
+  "title": "Discrete Prompt Compression with Reinforcement Learning",
+  "year": "2023",
+  "published": "2023-08-17",
+  "authors": [
+   "Hoyoun Jung",
+   "Kyung-Joong Kim"
+  ],
+  "abs": "Compressed prompts aid instruction-tuned language models (LMs) in overcoming context window limitations and reducing computational costs. Existing methods, which primarily based on training embeddings, face various challenges associated with interpretability, ",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2507.11942v1": {
+  "id": "2507.11942v1",
+  "title": "DAC: A Dynamic Attention-aware Approach for Task-Agnostic Prompt Compression",
+  "year": "2025",
+  "published": "2025-07-16",
+  "authors": [
+   "Yi Zhao",
+   "Zuchao Li",
+   "Hai Zhao"
+  ],
+  "abs": "Task-agnostic prompt compression leverages the redundancy in natural language to reduce computational overhead and enhance information density within prompts, especially in long-context scenarios. Existing methods predominantly rely on information entropy as t",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2501.12959v2": {
+  "id": "2501.12959v2",
+  "title": "Efficient Prompt Compression with Evaluator Heads for Long-Context Transformer Inference",
+  "year": "2025",
+  "published": "2025-01-22",
+  "authors": [
+   "Weizhi Fei",
+   "Xueyan Niu",
+   "Guoqing Xie"
+  ],
+  "abs": "Although applications involving long-context inputs are crucial for the effective utilization of large language models (LLMs), they also result in increased computational costs and reduced performance. To address this challenge, we propose an efficient, traini",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2407.15504v2": {
+  "id": "2407.15504v2",
+  "title": "Fundamental Limits of Prompt Compression: A Rate-Distortion Framework for Black-Box Language Models",
+  "year": "2024",
+  "published": "2024-07-22",
+  "authors": [
+   "Alliot Nagle",
+   "Adway Girish",
+   "Marco Bondaschi"
+  ],
+  "abs": "We formalize the problem of prompt compression for large language models (LLMs) and present a framework to unify token-level prompt compression methods which create hard prompts for black-box models. We derive the distortion-rate function for this setup as a l",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2409.13035v3": {
+  "id": "2409.13035v3",
+  "title": "TACO-RL: Task Aware Prompt Compression Optimization with Reinforcement Learning",
+  "year": "2024",
+  "published": "2024-09-19",
+  "authors": [
+   "Shivam Shandilya",
+   "Menglin Xia",
+   "Supriyo Ghosh"
+  ],
+  "abs": "The increasing prevalence of large language models (LLMs) such as GPT-4 in various applications has led to a surge in the size of prompts required for optimal performance, leading to challenges in computational efficiency. Prompt compression aims to reduce the",
+  "q": [
+   "\"prompt compression\""
+  ]
+ },
+ "2604.24971v1": {
+  "id": "2604.24971v1",
+  "title": "PolyKV: A Shared Asymmetrically-Compressed KV Cache Pool for Multi-Agent LLM Inference",
+  "year": "2026",
+  "published": "2026-04-27",
+  "authors": [
+   "Ishan Patel",
+   "Ishan Joshi"
+  ],
+  "abs": "We present PolyKV, a system in which multiple concurrent inference agents share a single, asymmetrically compressed KV cache pool. Rather than allocating a separate KV cache per agent -- the standard paradigm -- PolyKV writes a compressed cache once and inject",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2607.01520v1": {
+  "id": "2607.01520v1",
+  "title": "The risk of KV cache compression",
+  "year": "2026",
+  "published": "2026-07-01",
+  "authors": [
+   "Lukas Haverbeck",
+   "Carmen Amo Alonso",
+   "Andres Felipe Posada-Moreno"
+  ],
+  "abs": "Transformer inference on long sequences is expensive because softmax attention repeatedly reads from a large KV cache. The prevalent approach to this bottleneck is KV cache compression, which replaces the full cache with a compact summary. Despite its practica",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2410.15252v1": {
+  "id": "2410.15252v1",
+  "title": "Lossless KV Cache Compression to 2%",
+  "year": "2024",
+  "published": "2024-10-20",
+  "authors": [
+   "Zhen Yang",
+   "J. N. Han",
+   "Kan Wu"
+  ],
+  "abs": "Large language models have revolutionized data processing in numerous domains, with their ability to handle extended context reasoning receiving notable recognition. To speed up inference, maintaining a key-value (KV) cache memory is essential. Nonetheless, th",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2508.11661v1": {
+  "id": "2508.11661v1",
+  "title": "Sparse Attention across Multiple-context KV Cache",
+  "year": "2025",
+  "published": "2025-08-06",
+  "authors": [
+   "Ziyi Cao",
+   "Qingyi Si",
+   "Jingbin Zhang"
+  ],
+  "abs": "Large language models face significant cost challenges in long-sequence inference. To address this, reusing historical Key-Value (KV) Cache for improved inference efficiency has become a mainstream approach. Recent advances further enhance throughput by sparse",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2505.24133v4": {
+  "id": "2505.24133v4",
+  "title": "R-KV: Redundancy-aware KV Cache Compression for Reasoning Models",
+  "year": "2025",
+  "published": "2025-05-30",
+  "authors": [
+   "Zefan Cai",
+   "Wen Xiao",
+   "Hanshi Sun"
+  ],
+  "abs": "Reasoning models have demonstrated impressive performance in self-reflection and chain-of-thought reasoning. However, they often produce excessively long outputs, leading to prohibitively large key-value (KV) caches during inference. While chain-of-thought inf",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2605.17613v1": {
+  "id": "2605.17613v1",
+  "title": "VeriCache: Turning Lossy KV Cache into Lossless LLM Inference",
+  "year": "2026",
+  "published": "2026-05-17",
+  "authors": [
+   "Jiayi Yao",
+   "Samuel Shen",
+   "Kuntai Du"
+  ],
+  "abs": "The large size of the KV cache has become a major bottleneck for serving LLMs with increasing context lengths. In response, many KV cache compression methods, such as token dropping and quantization, have been proposed. However, almost all of these methods are",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2403.04643v2": {
+  "id": "2403.04643v2",
+  "title": "QAQ: Quality Adaptive Quantization for LLM KV Cache",
+  "year": "2024",
+  "published": "2024-03-07",
+  "authors": [
+   "Shichen Dong",
+   "Wen Cheng",
+   "Jiayu Qin"
+  ],
+  "abs": "The emergence of LLMs has ignited a fresh surge of breakthroughs in NLP applications, particularly in domains such as question-answering systems and text generation. As the need for longer context grows, a significant bottleneck in model deployment emerges due",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2509.08315v1": {
+  "id": "2509.08315v1",
+  "title": "EvolKV: Evolutionary KV Cache Compression for LLM Inference",
+  "year": "2025",
+  "published": "2025-09-10",
+  "authors": [
+   "Bohan Yu",
+   "Yekun Chai"
+  ],
+  "abs": "Existing key-value (KV) cache compression methods typically rely on heuristics, such as uniform cache allocation across layers or static eviction policies, however, they ignore the critical interplays among layer-specific feature patterns and task performance,",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2402.02750v2": {
+  "id": "2402.02750v2",
+  "title": "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache",
+  "year": "2024",
+  "published": "2024-02-05",
+  "authors": [
+   "Zirui Liu",
+   "Jiayi Yuan",
+   "Hongye Jin"
+  ],
+  "abs": "Efficiently serving large language models (LLMs) requires batching of many requests to reduce the cost per request. Yet, with larger batch sizes and longer context lengths, the key-value (KV) cache, which stores attention keys and values to avoid re-computatio",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2412.10319v2": {
+  "id": "2412.10319v2",
+  "title": "SCBench: A KV Cache-Centric Analysis of Long-Context Methods",
+  "year": "2024",
+  "published": "2024-12-13",
+  "authors": [
+   "Yucheng Li",
+   "Huiqiang Jiang",
+   "Qianhui Wu"
+  ],
+  "abs": "Long-context LLMs have enabled numerous downstream applications but also introduced significant challenges related to computational and memory efficiency. To address these challenges, optimizations for long-context inference have been developed, centered aroun",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2609.31415v1": {
+  "id": "2609.31415v1",
+  "title": "Evaluating the accuracy of KV cache reuse techniques",
+  "year": "2026",
+  "published": "2026-09-25",
+  "authors": [
+   "Samuel Cestola",
+   "Tianxiang Xia",
+   "Pengfei Zheng"
+  ],
+  "abs": "Position-independent KV cache reuse aims to reduce latency in retrieval-augmented generation by reusing chunk-level KV caches across prompts. We show that current evaluations of KV cache reuse techniques rely on measurements that fail to faithfully capture the",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2406.02069v4": {
+  "id": "2406.02069v4",
+  "title": "PyramidKV: Dynamic KV Cache Compression based on Pyramidal Information Funneling",
+  "year": "2024",
+  "published": "2024-06-04",
+  "authors": [
+   "Zefan Cai",
+   "Yichi Zhang",
+   "Bofei Gao"
+  ],
+  "abs": "In this study, we investigate whether attention-based information flow inside large language models (LLMs) is aggregated through noticeable patterns for long context processing. Our observations reveal that LLMs aggregate information through Pyramidal Informat",
+  "q": [
+   "\"KV cache\""
+  ]
+ },
+ "2412.18547v5": {
+  "id": "2412.18547v5",
+  "title": "Token-Budget-Aware LLM Reasoning",
+  "year": "2024",
+  "published": "2024-12-24",
+  "authors": [
+   "Tingxu Han",
+   "Zhenting Wang",
+   "Chunrong Fang"
+  ],
+  "abs": "Reasoning is critical for large language models (LLMs) to excel in a wide range of tasks. While methods like Chain-of-Thought (CoT) reasoning and enhance LLM performance by decomposing problems into intermediate steps, they also incur significant overhead in t",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2604.09613v2": {
+  "id": "2604.09613v2",
+  "title": "Token-Budget-Aware Pool Routing for Cost-Efficient LLM Inference",
+  "year": "2026",
+  "published": "2026-03-13",
+  "authors": [
+   "Huamin Chen",
+   "Xunzhuo Liu",
+   "Junchen Jiang"
+  ],
+  "abs": "Production vLLM fleets provision every instance for worst-case context length, wasting 4-8x concurrency on the 80-95% of requests that are short and simultaneously triggering KV-cache failures -- OOM crashes, preemption storms, and request rejections. Both pro",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2605.08441v1": {
+  "id": "2605.08441v1",
+  "title": "DUET: Optimize Token-Budget Allocation for Reinforcement Learning with Verifiable Rewards",
+  "year": "2026",
+  "published": "2026-05-08",
+  "authors": [
+   "Haoyu Hu",
+   "Xuandong Zhao",
+   "Xuhai \"Orson'' Xu"
+  ],
+  "abs": "Reinforcement learning with verifiable rewards (RLVR) generates hundreds of thousands of tokens per training step, with rollout generation dominating the computational cost. The overall token budget can be controlled along two main dimensions: (i) deciding whi",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2602.09574v2": {
+  "id": "2602.09574v2",
+  "title": "Aligning Tree-Search Policies with Fixed Token Budgets in Test-Time Scaling of LLMs",
+  "year": "2026",
+  "published": "2026-02-10",
+  "authors": [
+   "Sora Miyamoto",
+   "Daisuke Oba",
+   "Naoaki Okazaki"
+  ],
+  "abs": "Tree-search decoding is an effective form of test-time scaling for large language models (LLMs), but real-world deployment often imposes a fixed per-query token budget that varies across settings. Existing tree-search policies are largely budget-agnostic, trea",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2512.25052v1": {
+  "id": "2512.25052v1",
+  "title": "AdaGReS:Adaptive Greedy Context Selection via Redundancy-Aware Scoring for Token-Budgeted RAG",
+  "year": "2025",
+  "published": "2025-12-31",
+  "authors": [
+   "Chao Peng",
+   "Bin Wang",
+   "Zhilei Long"
+  ],
+  "abs": "Retrieval-augmented generation (RAG) is highly sensitive to the quality of selected context, yet standard top-k retrieval often returns redundant or near-duplicate chunks that waste token budget and degrade downstream generation. We present AdaGReS, a redundan",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2608.28138v1": {
+  "id": "2608.28138v1",
+  "title": "Token-Budget Distillation: Transferring Full-Token Semantics to Compressed Video Vision-Language Models",
+  "year": "2026",
+  "published": "2026-08-28",
+  "authors": [
+   "Xiaoyang Guo",
+   "Guoping Luo",
+   "Jusheng Zhang"
+  ],
+  "abs": "Adapting video vision-language models (VLMs) is computationally expensive because video inputs produce a large number of visual tokens, making both fine-tuning and inference costly. Although visual token compression can reduce this overhead, direct adaptation ",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2604.08075v1": {
+  "id": "2604.08075v1",
+  "title": "Dual-Pool Token-Budget Routing for Cost-Efficient and Reliable LLM Serving",
+  "year": "2026",
+  "published": "2026-04-09",
+  "authors": [
+   "Xunzhuo Liu",
+   "Bowei He",
+   "Xue Liu"
+  ],
+  "abs": "Production vLLM fleets typically provision each instance for the worst-case context length, leading to substantial KV-cache over-allocation and under-utilized concurrency. In practice, 80-95% of requests are short, yet are served under configurations optimized",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2607.21433v1": {
+  "id": "2607.21433v1",
+  "title": "Token Budget Saturation and Mechanistic Early Detection of Reasoning Non-Convergence in Chain-of-Thought Models",
+  "year": "2026",
+  "published": "2026-07-23",
+  "authors": [
+   "Renuka Oladri",
+   "Niveda Jawahar",
+   "Abdirisak Mohamed"
+  ],
+  "abs": "Chain-of-thought reasoning models such as DeepSeek-R1-Distill-Qwen-7B exhibit a bimodal convergence pattern: generations either terminate within a token budget (converged) or exhaust it without reaching a conclusion (non-converged). We characterize this phenom",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2610.07760v1": {
+  "id": "2610.07760v1",
+  "title": "Token-Budgeted Escalation for Financial Document QA: Cost Is Predictable, Benefit Is the Bottleneck",
+  "year": "2026",
+  "published": "2026-10-06",
+  "authors": [
+   "Junru Zhu",
+   "Yixin Yang",
+   "Xiaoqing Ding"
+  ],
+  "abs": "Retrieval-augmented generation systems can route difficult queries to deeper context, but batch deployments must allocate a shared token budget across calls whose costs vary by query. We formulate selective escalation as finite-batch allocation for financial d",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2606.13370v1": {
+  "id": "2606.13370v1",
+  "title": "A Quantitative Experimental Repeated Measures Study of Training Dynamics in a Small Llama Style Language Model Under a Compute-Aware Token Budget",
+  "year": "2026",
+  "published": "2026-06-11",
+  "authors": [
+   "Joe Dwyer"
+  ],
+  "abs": "This study examines training dynamics in a small Llama-style language model trained under a fixed, compute-constrained token budget. Rather than evaluating efficiency solely through endpoint performance, the study uses a quantitative experimental repeated meas",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2604.12035v4": {
+  "id": "2604.12035v4",
+  "title": "Confidence under Visual Token Pruning: Removed Evidence and Risk-Controlled Token Budgets for MLLMs",
+  "year": "2026",
+  "published": "2026-04-13",
+  "authors": [
+   "Kaizhen Tan",
+   "Yang Feng",
+   "Heqing Du"
+  ],
+  "abs": "Visual token pruning speeds up multimodal large language models (MLLMs) by keeping a small subset of the visual tokens, and pruning methods are compared by the accuracy they retain. We study what pruning does to the confidence of these models, across common se",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2610.01984v2": {
+  "id": "2610.01984v2",
+  "title": "Universal Byte-Level Encoding: UTF-8/UTF-16 Routing to Reduce Cross-Script Token-Budget Disparities",
+  "year": "2026",
+  "published": "2026-10-01",
+  "authors": [
+   "Hyunsik Kim",
+   "Youngmoon Jung"
+  ],
+  "abs": "Byte-level byte-pair encoding (BBPE) tokenizers are attractive for multilingual large language models (LLMs) because they cover all Unicode text. In UTF-8-based BBPE, however, many scripts start from a higher fallback cost than English: when no learned merges ",
+  "q": [
+   "\"token budget\""
+  ]
+ },
+ "2606.24322v1": {
+  "id": "2606.24322v1",
+  "title": "Securing LLM-Agent Long-Term Memory Against Poisoning: Non-Malleable, Origin-Bound Authority with Machine-Checked Guarantees",
+  "year": "2026",
+  "published": "2026-06-23",
+  "authors": [
+   "Yedidel Louck"
+  ],
+  "abs": "LLM agents increasingly rely on persistent long-term memory, which creates a critical vulnerability that we study here: memory poisoning. An adversary can store untrusted content in one session that later steers a consequential action, such as a payment, a set",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2604.20006v1": {
+  "id": "2604.20006v1",
+  "title": "From Recall to Forgetting: Benchmarking Long-Term Memory for Personalized Agents",
+  "year": "2026",
+  "published": "2026-04-21",
+  "authors": [
+   "Md Nayem Uddin",
+   "Kumar Shubham",
+   "Eduardo Blanco"
+  ],
+  "abs": "Personalized agents that interact with users over long periods must maintain persistent memory across sessions and update it as circumstances change. However, existing benchmarks predominantly frame long-term memory evaluation as fact retrieval from past conve",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2508.09736v4": {
+  "id": "2508.09736v4",
+  "title": "Seeing, Listening, Remembering, and Reasoning: A Multimodal Agent with Long-Term Memory",
+  "year": "2025",
+  "published": "2025-08-13",
+  "authors": [
+   "Lin Long",
+   "Yichen He",
+   "Wentao Ye"
+  ],
+  "abs": "We introduce M3-Agent, a novel multimodal agent framework equipped with long-term memory. Like humans, M3-Agent can process real-time visual and auditory inputs to build and update episodic and semantic memories, gradually accumulating world knowledge. Its mem",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2510.23010v2": {
+  "id": "2510.23010v2",
+  "title": "TALM: Dynamic Tree-Structured Multi-Agent Framework with Long-Term Memory for Scalable Code Generation",
+  "year": "2025",
+  "published": "2025-10-27",
+  "authors": [
+   "Ming-Tung Shen",
+   "Yuh-Jzer Joung"
+  ],
+  "abs": "Agentic code generation requires large language models (LLMs) capable of complex context management and multi-step reasoning. Prior multi-agent frameworks attempt to address these challenges through collaboration, yet they often suffer from rigid workflows and",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2607.26072v1": {
+  "id": "2607.26072v1",
+  "title": "IFCMemoryBench: Evaluating Long-Term Memory of LLM-Based Agents in BIM Information Retrieval",
+  "year": "2026",
+  "published": "2026-07-13",
+  "authors": [
+   "Changyu Du",
+   "Alexander Vosseler",
+   "Filippo Mazza"
+  ],
+  "abs": "Long-term memory is becoming a core capability of LLM-based agents, but existing evaluations largely test conversational recall in open-domain or persona-grounded settings. We argue that a stronger test is whether an agent can reuse information from prior sess",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2210.13383v1": {
+  "id": "2210.13383v1",
+  "title": "Evaluating Long-Term Memory in 3D Mazes",
+  "year": "2022",
+  "published": "2022-10-24",
+  "authors": [
+   "Jurgis Pasukonis",
+   "Timothy Lillicrap",
+   "Danijar Hafner"
+  ],
+  "abs": "Intelligent agents need to remember salient information to reason in partially-observed environments. For example, agents with a first-person view should remember the positions of relevant objects even if they go out of view. Similarly, to effectively navigate",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2506.05813v2": {
+  "id": "2506.05813v2",
+  "title": "MAPLE: Multi-Agent Adaptive Planning with Long-Term Memory for Table Reasoning",
+  "year": "2025",
+  "published": "2025-06-06",
+  "authors": [
+   "Ye Bai",
+   "Minghan Wang",
+   "Thuy-Trang Vu"
+  ],
+  "abs": "Table-based question answering requires complex reasoning capabilities that current LLMs struggle to achieve with single-pass inference. Existing approaches, such as Chain-of-Thought reasoning and question decomposition, lack error detection mechanisms and dis",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2608.03463v1": {
+  "id": "2608.03463v1",
+  "title": "LeanMem: Simple and Efficient Long-Term Memory for LLM Agents",
+  "year": "2026",
+  "published": "2026-08-04",
+  "authors": [
+   "Yuxin Liao",
+   "Le Wu",
+   "Min Hou"
+  ],
+  "abs": "Long-term memory is essential for LLM-based agents to sustain interactions and reliably leverage distant history. However, existing memory systems typically process heterogeneous dialogue content through a uniform summarization and retrieval pipeline, leading ",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2602.15654v2": {
+  "id": "2602.15654v2",
+  "title": "Zombie Agents: Persistent Control of Self-Evolving LLM Agents via Self-Reinforcing Injections",
+  "year": "2026",
+  "published": "2026-02-17",
+  "authors": [
+   "Xianglin Yang",
+   "Yufei He",
+   "Shuo Ji"
+  ],
+  "abs": "Self-evolving LLM agents update their internal state across sessions, often by writing and reusing long-term memory. This design improves performance on long-horizon tasks but creates a security risk: untrusted external content observed during a benign session",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2601.06377v1": {
+  "id": "2601.06377v1",
+  "title": "HiMem: Hierarchical Long-Term Memory for LLM Long-Horizon Agents",
+  "year": "2026",
+  "published": "2026-01-10",
+  "authors": [
+   "Ningning Zhang",
+   "Xingxing Yang",
+   "Zhizhong Tan"
+  ],
+  "abs": "Although long-term memory systems have made substantial progress in recent years, they still exhibit clear limitations in adaptability, scalability, and self-evolution under continuous interaction settings. Inspired by cognitive theories, we propose HiMem, a h",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2608.29606v1": {
+  "id": "2608.29606v1",
+  "title": "Agent Zero Memory: Provenance-Aware Long-Term Memory for LLM Agents",
+  "year": "2026",
+  "published": "2026-08-30",
+  "authors": [
+   "Ming Wu",
+   "Pengyuan Zhu"
+  ],
+  "abs": "Large language model (LLM) agents need durable, faithful memory of everything a user or organization has said and stored, yet most memory systems commit to a single organizing structure (a fact store, a vector index, or a knowledge graph) and inherit its blind",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2601.19935v1": {
+  "id": "2601.19935v1",
+  "title": "Mem2ActBench: A Benchmark for Evaluating Long-Term Memory Utilization in Task-Oriented Autonomous Agents",
+  "year": "2026",
+  "published": "2026-01-13",
+  "authors": [
+   "Yiting Shen",
+   "Kun Li",
+   "Wei Zhou"
+  ],
+  "abs": "Large Language Model (LLM)-based agents are increasingly deployed for complex, tool-based tasks where long-term memory is critical to driving actions. Existing benchmarks, however, primarily test a angent's ability to passively retrieve isolated facts in respo",
+  "q": [
+   "\"long-term memory\" AND agent"
+  ]
+ },
+ "2507.22931v3": {
+  "id": "2507.22931v3",
+  "title": "Enhancing RAG Efficiency with Adaptive Context Compression",
+  "year": "2025",
+  "published": "2025-07-24",
+  "authors": [
+   "Shuyu Guo",
+   "Shuo Zhang",
+   "Zhaochun Ren"
+  ],
+  "abs": "Retrieval-augmented generation (RAG) enhances large language models (LLMs) with external knowledge but incurs significant inference costs due to lengthy retrieved contexts. While context compression mitigates this issue, existing methods apply fixed compressio",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2510.20797v2": {
+  "id": "2510.20797v2",
+  "title": "No Mean Feat: Simple, Strong Baselines for Context Compression",
+  "year": "2025",
+  "published": "2025-10-23",
+  "authors": [
+   "Yair Feldman",
+   "Yoav Artzi"
+  ],
+  "abs": "Context compression reduces Transformer inference costs by replacing lengthy inputs with shorter pre-computed representations. It carries significant benefits for retrieval-augmented generation (RAG) and has attracted growing research attention. However, progr",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2604.13725v1": {
+  "id": "2604.13725v1",
+  "title": "On the Effectiveness of Context Compression for Repository-Level Tasks: An Empirical Investigation",
+  "year": "2026",
+  "published": "2026-04-15",
+  "authors": [
+   "Jia Feng",
+   "Zhanyue Qin",
+   "Cuiyun Gao"
+  ],
+  "abs": "Repository-level code intelligence tasks require large language models (LLMs) to process long, multi-file contexts. Such inputs introduce three challenges: crucial context can be obscured by noise, truncated due to limited windows, and increased inference late",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2603.25926v1": {
+  "id": "2603.25926v1",
+  "title": "Density-aware Soft Context Compression with Semi-Dynamic Compression Ratio",
+  "year": "2026",
+  "published": "2026-03-26",
+  "authors": [
+   "Yijiong Yu",
+   "Shuai Yuan",
+   "Jie Zheng"
+  ],
+  "abs": "Soft context compression reduces the computational workload of processing long contexts in LLMs by encoding long context into a smaller number of latent tokens. However, existing frameworks apply uniform compression ratios, failing to account for the extreme v",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2602.03784v4": {
+  "id": "2602.03784v4",
+  "title": "Fix the Structural Bottleneck: Context Compression via Explicit Information Transmission",
+  "year": "2026",
+  "published": "2026-02-03",
+  "authors": [
+   "Jiangnan Ye",
+   "Hanqi Yan",
+   "Zhenyi Shen"
+  ],
+  "abs": "Long-context LLM agents often struggle with growing token, memory, and latency costs, making efficient context compression essential for practical deployment. Existing LLM-as-a-compressor methods remain noticeably inferior to using the full context. We find th",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2603.19733v1": {
+  "id": "2603.19733v1",
+  "title": "PoC: Performance-oriented Context Compression for Large Language Models via Performance Prediction",
+  "year": "2026",
+  "published": "2026-03-20",
+  "authors": [
+   "Runsong Zhao",
+   "Shilei Liu",
+   "Jiwei Tang"
+  ],
+  "abs": "While context compression can mitigate the growing inference costs of Large Language Models (LLMs) by shortening contexts, existing methods that specify a target compression ratio or length suffer from unpredictable performance degradation, hindering their rel",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2609.37590v1": {
+  "id": "2609.37590v1",
+  "title": "FOCUS: Training-Free Decision-Preserving Context Compression for LLM Agents",
+  "year": "2026",
+  "published": "2026-09-29",
+  "authors": [
+   "Shantanu Dixit",
+   "Anson Bastos",
+   "Xuchao Zhang"
+  ],
+  "abs": "LLM agents accumulate interaction histories that grow linearly with task length, causing quadratic inference cost scaling and performance degradation from attention dilution. Existing context-compression methods learn what to discard offline: by contrastively ",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2406.05317v2": {
+  "id": "2406.05317v2",
+  "title": "LoCoCo: Dropping In Convolutions for Long Context Compression",
+  "year": "2024",
+  "published": "2024-06-08",
+  "authors": [
+   "Ruisi Cai",
+   "Yuandong Tian",
+   "Zhangyang Wang"
+  ],
+  "abs": "This paper tackles the memory hurdle of processing long context sequences in Large Language Models (LLMs), by presenting a novel approach, Dropping In Convolutions for Long Context Compression (LoCoCo). LoCoCo employs only a fixed-size Key-Value (KV) cache, an",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2511.18832v1": {
+  "id": "2511.18832v1",
+  "title": "Concept than Document: Context Compression via AMR-based Conceptual Entropy",
+  "year": "2025",
+  "published": "2025-11-24",
+  "authors": [
+   "Kaize Shi",
+   "Xueyao Sun",
+   "Xiaohui Tao"
+  ],
+  "abs": "Large Language Models (LLMs) face information overload when handling long contexts, particularly in Retrieval-Augmented Generation (RAG) where extensive supporting documents often introduce redundant content. This issue not only weakens reasoning accuracy but ",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2504.08934v1": {
+  "id": "2504.08934v1",
+  "title": "Long Context In-Context Compression by Getting to the Gist of Gisting",
+  "year": "2025",
+  "published": "2025-04-11",
+  "authors": [
+   "Aleksandar Petrov",
+   "Mark Sandler",
+   "Andrey Zhmoginov"
+  ],
+  "abs": "Long context processing is critical for the adoption of LLMs, but existing methods often introduce architectural complexity that hinders their practical adoption. Gisting, an in-context compression method with no architectural modification to the decoder trans",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2603.29193v1": {
+  "id": "2603.29193v1",
+  "title": "Developing Adaptive Context Compression Techniques for Large Language Models (LLMs) in Long-Running Interactions",
+  "year": "2026",
+  "published": "2026-03-31",
+  "authors": [
+   "Payal Fofadiya",
+   "Sunil Tiwari"
+  ],
+  "abs": "Large Language Models (LLMs) often experience performance degradation during long-running interactions due to increasing context length, memory saturation, and computational overhead. This paper presents an adaptive context compression framework that integrate",
+  "q": [
+   "\"context compression\""
+  ]
+ },
+ "2608.06503v1": {
+  "id": "2608.06503v1",
+  "title": "Toward Reliable Context Compression for Long-Horizon Agents: An Empirical Study of Execution Instability",
+  "year": "2026",
+  "published": "2026-08-06",
+  "authors": [
+   "Guanghui Min",
+   "Liang Wu",
+   "Mayank Darbari"
+  ],
+  "abs": "Recurrent context compression controls context growth in long-horizon agents, but its behavioral effects remain poorly understood. In this preliminary empirical study, we show that compression can weaken the influence of recent interactions, increasing blocked",
+  "q": [
+   "\"context compression\""
+  ]
+ }
+}

@@ -1,0 +1,642 @@
+{
+ "2507.13334": {
+  "id": "2507.13334",
+  "title": "A Survey of Context Engineering for Large Language Models",
+  "upvotes": 264,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2508.08322": {
+  "id": "2508.08322",
+  "title": "Context Engineering for Multi-Agent LLM Code Assistants Using Elicit,\n  NotebookLM, ChatGPT, and Claude Code",
+  "upvotes": 0,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2509.04500": {
+  "id": "2509.04500",
+  "title": "Context Engineering for Trustworthiness: Rescorla Wagner Steering Under\n  Mixed and Inappropriate Contexts",
+  "upvotes": 5,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2510.26493": {
+  "id": "2510.26493",
+  "title": "Context Engineering 2.0: The Context of Context Engineering",
+  "upvotes": 9,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2602.23047": {
+  "id": "2602.23047",
+  "title": "CL4SE: A Context Learning Benchmark For Software Engineering Tasks",
+  "upvotes": 2,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2602.05447": {
+  "id": "2602.05447",
+  "title": "Structured Context Engineering for File-Native Agentic Systems: Evaluating Schema Accuracy, Format Effectiveness, and Multi-File Navigation at Scale",
+  "upvotes": 0,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2603.09619": {
+  "id": "2603.09619",
+  "title": "Context Engineering: From Prompts to Corporate Multi-Agent Architecture",
+  "upvotes": 1,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2510.04618": {
+  "id": "2510.04618",
+  "title": "Agentic Context Engineering: Evolving Contexts for Self-Improving\n  Language Models",
+  "upvotes": 135,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2510.07414": {
+  "id": "2510.07414",
+  "title": "Haystack Engineering: Context Engineering for Heterogeneous and Agentic\n  Long-Context Evaluation",
+  "upvotes": 3,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2512.22431": {
+  "id": "2512.22431",
+  "title": "Monadic Context Engineering",
+  "upvotes": 10,
+  "q": [
+   "context engineering"
+  ]
+ },
+ "2512.12818": {
+  "id": "2512.12818",
+  "title": "Hindsight is 20/20: Building Agent Memory that Retains, Recalls, and Reflects",
+  "upvotes": 1,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2602.02007": {
+  "id": "2602.02007",
+  "title": "Beyond RAG for Agent Memory: Retrieval by Decoupling and Aggregation",
+  "upvotes": 20,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2603.04428": {
+  "id": "2603.04428",
+  "title": "Agent Memory Below the Prompt: Persistent Q4 KV Cache for Multi-Agent LLM Inference on Edge Devices",
+  "upvotes": 0,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2603.28088": {
+  "id": "2603.28088",
+  "title": "GEMS: Agent-Native Multimodal Generation with Memory and Skills",
+  "upvotes": 83,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2605.13880": {
+  "id": "2605.13880",
+  "title": "PREPING: Building Agent Memory without Tasks",
+  "upvotes": 28,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2607.13157": {
+  "id": "2607.13157",
+  "title": "Oracle Agent Memory as an Enterprise Memory Substrate for Long-Horizon AI Agents",
+  "upvotes": 0,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2606.06448": {
+  "id": "2606.06448",
+  "title": "Agent Memory: Characterization and System Implications of Stateful Long-Horizon Workloads",
+  "upvotes": 0,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2608.07169": {
+  "id": "2608.07169",
+  "title": "Agent Memory Distillation: Empowering Small LLM Agents with Hierarchical Teacher Memory",
+  "upvotes": 49,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2609.01836": {
+  "id": "2609.01836",
+  "title": "Agent Memory Is a Surface for Endogenous Authorization Laundering",
+  "upvotes": 5,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2607.05029": {
+  "id": "2607.05029",
+  "title": "Your Agent's Memories Are Not Its Own: Forged Reasoning Attacks on LLM Agent Memory and Defenses",
+  "upvotes": 1,
+  "q": [
+   "agent memory"
+  ]
+ },
+ "2310.08152": {
+  "id": "2310.08152",
+  "title": "Context Compression for Auto-regressive Transformers with Sentinel\n  Tokens",
+  "upvotes": 1,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2602.03784": {
+  "id": "2602.03784",
+  "title": "Context Compression via Explicit Information Transmission",
+  "upvotes": 16,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2602.01719": {
+  "id": "2602.01719",
+  "title": "COMI: Coarse-to-fine Context Compression via Marginal Information Gain",
+  "upvotes": 0,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2606.01336": {
+  "id": "2606.01336",
+  "title": "LongAttnComp: Cross-Family Context Compression for Long-Context Reasoning",
+  "upvotes": 3,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2509.17486": {
+  "id": "2509.17486",
+  "title": "AttnComp: Attention-Guided Adaptive Context Compression for Retrieval-Augmented Generation",
+  "upvotes": 0,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2608.19535": {
+  "id": "2608.19535",
+  "title": "From Retrieved Context to Runtime Control: Adaptive Compression for Edge-based RAG",
+  "upvotes": 0,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2511.15244": {
+  "id": "2511.15244",
+  "title": "Context Cascade Compression: Exploring the Upper Limits of Text Compression",
+  "upvotes": 5,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2512.14244": {
+  "id": "2512.14244",
+  "title": "From Context to EDUs: Faithful and Structured Context Compression via Elementary Discourse Unit Decomposition",
+  "upvotes": 2,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2406.06110": {
+  "id": "2406.06110",
+  "title": "Recurrent Context Compression: Efficiently Expanding the Context Window\n  of LLM",
+  "upvotes": 1,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2507.22931": {
+  "id": "2507.22931",
+  "title": "Dynamic Context Compression for Efficient RAG",
+  "upvotes": 0,
+  "q": [
+   "context compression"
+  ]
+ },
+ "2501.06730": {
+  "id": "2501.06730",
+  "title": "Better Prompt Compression Without Multi-Layer Perceptrons",
+  "upvotes": 1,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2505.00019": {
+  "id": "2505.00019",
+  "title": "An Empirical Study on Prompt Compression for Large Language Models",
+  "upvotes": 1,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2508.15813": {
+  "id": "2508.15813",
+  "title": "SCOPE: A Generative Approach for LLM Prompt Compression",
+  "upvotes": 0,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2604.02985": {
+  "id": "2604.02985",
+  "title": "Prompt Compression in the Wild: Measuring Latency, Rate Adherence, and Quality for Faster LLM Inference",
+  "upvotes": 0,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2410.12388": {
+  "id": "2410.12388",
+  "title": "Prompt Compression for Large Language Models: A Survey",
+  "upvotes": 0,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2407.08892": {
+  "id": "2407.08892",
+  "title": "Characterizing Prompt Compression Methods for Long Context Inference",
+  "upvotes": 10,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2501.12959": {
+  "id": "2501.12959",
+  "title": "Efficient Prompt Compression with Evaluator Heads for Long-Context\n  Transformer Inference",
+  "upvotes": 1,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2502.14925": {
+  "id": "2502.14925",
+  "title": "CODEPROMPTZIP: Code-specific Prompt Compression for Retrieval-Augmented\n  Generation in Coding Tasks with LMs",
+  "upvotes": 0,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2308.08758": {
+  "id": "2308.08758",
+  "title": "Discrete Prompt Compression with Reinforcement Learning",
+  "upvotes": 0,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2608.04569": {
+  "id": "2608.04569",
+  "title": "Relevant but Incomplete: Referential Dangling as a Paradigm-Level Failure Mode in Hard Prompt Compression",
+  "upvotes": 12,
+  "q": [
+   "prompt compression"
+  ]
+ },
+ "2405.03917": {
+  "id": "2405.03917",
+  "title": "KV Cache is 1 Bit Per Channel: Efficient Large Language Model Inference\n  with Coupled Quantization",
+  "upvotes": 0,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2407.18003": {
+  "id": "2407.18003",
+  "title": "Keep the Cost Down: A Review on Methods to Optimize LLM' s KV-Cache\n  Consumption",
+  "upvotes": 0,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2407.21118": {
+  "id": "2407.21118",
+  "title": "Palu: Compressing KV-Cache with Low-Rank Projection",
+  "upvotes": 1,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2407.01527": {
+  "id": "2407.01527",
+  "title": "KV Cache Compression, But What Must We Give in Return? A Comprehensive\n  Benchmark of Long Context Capable Approaches",
+  "upvotes": 0,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2412.08521": {
+  "id": "2412.08521",
+  "title": "EMS: Adaptive Evict-then-Merge Strategy for Head-wise KV Cache\n  Compression Based on Global-Local Importance",
+  "upvotes": 0,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2405.14256": {
+  "id": "2405.14256",
+  "title": "ZipCache: Accurate and Efficient KV Cache Quantization with Salient\n  Token Identification",
+  "upvotes": 1,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2503.16257": {
+  "id": "2503.16257",
+  "title": "Plug-and-Play 1.x-Bit KV Cache Quantization for Video Large Language\n  Models",
+  "upvotes": 28,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2501.15113": {
+  "id": "2501.15113",
+  "title": "Task-KV: Task-aware KV Cache Optimization via Semantic Differentiation\n  of Attention Heads",
+  "upvotes": 1,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2503.11816": {
+  "id": "2503.11816",
+  "title": "Key, Value, Compress: A Systematic Exploration of KV Cache Compression\n  Techniques",
+  "upvotes": 0,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2507.08799": {
+  "id": "2507.08799",
+  "title": "KV Cache Steering for Inducing Reasoning in Small Language Models",
+  "upvotes": 40,
+  "q": [
+   "KV cache"
+  ]
+ },
+ "2607.13591": {
+  "id": "2607.13591",
+  "title": "Memory as a Controlled Process: Learned Adaptive Memory Management for LLM Agents",
+  "upvotes": 0,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2601.07190": {
+  "id": "2601.07190",
+  "title": "Active Context Compression: Autonomous Memory Management in LLM Agents",
+  "upvotes": 0,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2405.04437": {
+  "id": "2405.04437",
+  "title": "vAttention: Dynamic Memory Management for Serving LLMs without\n  PagedAttention",
+  "upvotes": 3,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2601.20309": {
+  "id": "2601.20309",
+  "title": "SuperInfer: SLO-Aware Rotary Scheduling and Memory Management for LLM Inference on Superchips",
+  "upvotes": 0,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2603.04549": {
+  "id": "2603.04549",
+  "title": "Adaptive Memory Admission Control for LLM Agents",
+  "upvotes": 1,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2602.02474": {
+  "id": "2602.02474",
+  "title": "MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents",
+  "upvotes": 64,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2601.11969": {
+  "id": "2601.11969",
+  "title": "MemoryRewardBench: Benchmarking Reward Models for Long-Term Memory Management in Large Language Models",
+  "upvotes": 27,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2507.21428": {
+  "id": "2507.21428",
+  "title": "MemTool: Optimizing Short-Term Memory Management for Dynamic Tool\n  Calling in LLM Agent Multi-Turn Conversations",
+  "upvotes": 1,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2601.15311": {
+  "id": "2601.15311",
+  "title": "Aeon: High-Performance Neuro-Symbolic Memory Management for Long-Horizon LLM Agents",
+  "upvotes": 0,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2602.07398": {
+  "id": "2602.07398",
+  "title": "AgentSys: Secure and Dynamic LLM Agents Through Explicit Hierarchical Memory Management",
+  "upvotes": 2,
+  "q": [
+   "memory management LLM"
+  ]
+ },
+ "2606.29718": {
+  "id": "2606.29718",
+  "title": "Diagnosing and Mitigating Context Rot in Long-horizon Search",
+  "upvotes": 0,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2603.20105": {
+  "id": "2603.20105",
+  "title": "The Y-Combinator for LLMs: Solving Long-Context Rot with \u03bb-Calculus",
+  "upvotes": 37,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2601.12030": {
+  "id": "2601.12030",
+  "title": "ARC: Active and Reflection-driven Context Management for Long-Horizon Information Seeking Agents",
+  "upvotes": 0,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2602.00015": {
+  "id": "2602.00015",
+  "title": "G-MemLLM: Gated Latent Memory Augmentation for Long-Context Reasoning in Large Language Models",
+  "upvotes": 0,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2607.21503": {
+  "id": "2607.21503",
+  "title": "Agentic Context Management: Solving Agent Memory and Cost by Treating Them as Lifecycle and Architecture Problems",
+  "upvotes": 28,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2609.33485": {
+  "id": "2609.33485",
+  "title": "DISCO: Distributed Long Context Scaling with Grounding-Reasoning Disaggregation",
+  "upvotes": 3,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2602.07962": {
+  "id": "2602.07962",
+  "title": "LOCA-bench: Benchmarking Language Agents Under Controllable and Extreme Context Growth",
+  "upvotes": 26,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2607.17937": {
+  "id": "2607.17937",
+  "title": "How Agent Skills Fail under Long Contexts: A White-Box Study in Code Auditing",
+  "upvotes": 0,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2606.16586": {
+  "id": "2606.16586",
+  "title": "LOCUS: Local Visual Cue Search for Enhancing Fine-Grained Perception in Multimodal Large Language Models",
+  "upvotes": 0,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2608.01507": {
+  "id": "2608.01507",
+  "title": "Deep Agentic Search for Repository-Level Code Question Answering: An Empirical Study",
+  "upvotes": 1,
+  "q": [
+   "context rot"
+  ]
+ },
+ "2205.00379": {
+  "id": "2205.00379",
+  "title": "The Cross-lingual Conversation Summarization Challenge",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2309.15739": {
+  "id": "2309.15739",
+  "title": "Experience and Evidence are the eyes of an excellent summarizer! Towards Knowledge Infused Multi-modal Clinical Conversation Summarization",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2307.04018": {
+  "id": "2307.04018",
+  "title": "Revisiting Cross-Lingual Summarization: A Corpus-based Study and A New\n  Benchmark with Improved Annotation",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2402.13043": {
+  "id": "2402.13043",
+  "title": "Effective and Efficient Conversation Retrieval for Dialogue State\n  Tracking with Implicit Text Summaries",
+  "upvotes": 2,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2406.15888": {
+  "id": "2406.15888",
+  "title": "Real-time Speech Summarization for Medical Conversations",
+  "upvotes": 1,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2306.10543": {
+  "id": "2306.10543",
+  "title": "UniMC: A Unified Framework for Long-Term Memory Conversation via\n  Relevance Representation Learning",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2601.00821": {
+  "id": "2601.00821",
+  "title": "CogCanvas: Verbatim-Grounded Artifact Extraction for Long LLM Conversations",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2303.17071": {
+  "id": "2303.17071",
+  "title": "DERA: Enhancing Large Language Model Completions with Dialog-Enabled\n  Resolving Agents",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2503.17460": {
+  "id": "2503.17460",
+  "title": "ConvoGen: Enhancing Conversational AI with Synthetic Data: A Multi-Agent\n  Approach",
+  "upvotes": 2,
+  "q": [
+   "conversation summarization"
+  ]
+ },
+ "2610.01234": {
+  "id": "2610.01234",
+  "title": "ASCRIBE: Atomic and Significance-Based Reasoning for Thai Clinical SOAP Note Generation",
+  "upvotes": 0,
+  "q": [
+   "conversation summarization"
+  ]
+ }
+}
