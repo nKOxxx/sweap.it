@@ -3,6 +3,43 @@
 Product thesis + lab notebook for paper #2. Every entry dated, every number
 measured, nothing invented. Em-dashes banned per house law.
 
+## 2026-10-13: R1 grind results (DeepSeek R1 + internet harvest)
+
+**Harvest (real fetched metadata, all raw in research/raw/harvest/):**
+271 records: arXiv 120 (10 queries), HF papers 80 (8 queries), OpenAlex 39
+(4 queries), GitHub 32 (5 queries). Raw JSON preserved verbatim; digest and
+R1b brief committed. S2 rate-limited (429) on first pass; OpenAlex used as
+substitute. Ledger is append-only; nothing paraphrased into loss.
+
+**Competitor scan verdict (GitHub section, 32 repos):** the itch is universal
+(context cleaners, session cleaners, memory cleanups, one literally named
+pi-hermes-memory-cleanup) but the field is shallow: monitors that only
+measure (blitzclean 234 stars: macOS menu-bar stats; splitrail 223 stars:
+token cost tracking), single-CLI hacks at 1-7 stars, memory systems without
+hygiene. NOBODY combines host+context planes, gated reversible cleanup, and
+distill-before-sweep. The monster seat is empty.
+
+**DeepSeek R1 landscape verdict (34.5KB raw, needle-verified, worker ran its
+own arXiv verification):**
+- Closest cousin: MemGPT/Letta (arXiv 2310.08560): context as priced paged
+  memory. Does NOT do: fixed-overhead composition audit, tool-exhaust share,
+  dry-run+quarantine reclaim, host plane.
+- Whitespace confirmed under-served: (1) per-call fixed overhead broken into
+  system-prompt + per-tool schema bytes, priced; (2) tool-exhaust share of
+  transcript bytes as a reclaimable-waste metric (our 85.4% headline);
+  (3) gated, itemized, reversible reclaim of production conversation state.
+- Transferable theory: mark-sweep roots law (McCarthy 1960) -> hard-deny set
+  = reachable state; generational hypothesis (Ungar 1984) -> most context
+  dies young, tenure transcripts by age; CCleaner trust loop (analyze, show,
+  clean) -> our dry-run-first law.
+- Novelty framing per R1: synthesis-and-application. Concede every component,
+  own the composition + the gated-reclaim application. Pre-answer attacks
+  6 and 10 (flagged by R1 as needing competitor re-verification).
+
+**Research log law adopted:** worker outputs are raw evidence (kept whole in
+research/raw/); only measured extractions enter this log, each tagged with
+the raw file it came from.
+
 ## 2026-10-13: Founder reframe #3: the CCleaner analogy + Cognexia preservation layer
 
 **Founder's restatement:** the basic idea is "something like CCleaner or disk
