@@ -1,0 +1,283 @@
+Query: # TASK: Scenario model for a hypothetical team (show ALL arithmetic, 
+label everything)
+
+You are a quantitative modeler. A founder (NOT technical) needs to understand 
+what
+a context-reclaim layer could do to cost and efficiency FOR A HYPOTHETICAL team.
+Every output number must be stamped [HYPOTHETICAL]. Do not present any figure as
+measured. Distinguish three input classes everywhere: [ANCHOR] = really measured
+on a live agent stack; [THEORY] = assumption grounded in published mechanism or
+common practice; [ASSUMPTION] = pure assumption, chosen for the scenario.
+
+## THE HYPOTHETICAL START: "Team Kite" (invented 4-person startup, coding+ops 
+agents)
+
+A1 [ASSUMPTION] 3,000 model calls per month across their agents.
+A2 [ANCHOR + ASSUMPTION split] Average re-sent context per call = 60,000 tokens,
+   composed of:
+   - 33,000 tokens fixed paperwork (system prompt + skills index + tool 
+schemas).
+     [ANCHOR: really measured at 97.7 KB/call on a live stack; converted at the
+     measured 3.04 chars/token to ~32,910 tokens, rounded to 33,000]
+   - 27,000 tokens of accumulated session history (grows over a session).
+     [ASSUMPTION: the split]
+A3 [ASSUMPTION] Model mix: 70% of calls on a mid-price model at $0.50 per 1M
+   input tokens; 30% on a premium model at $3.00 per 1M input tokens.
+A4 [THEORY] Prompt caching: 60% of re-sent tokens hit the vendor cache at
+   baseline (static paperwork + append-only history are cacheable; published
+   cache discounts are ~90% off list, so cached tokens bill at 10% of list).
+   So effective cost multiplier m = h x 0.10 + (1 - h) x 1.00 with h = 0.60.
+A5 [ANCHOR with haircut] 85% of the HISTORY portion (not the paperwork) is tool
+   exhaust (tool outputs + tool-call records). [Really measured at rest: 89.1%
+   of stored bytes; 85% used as a conservative in-flight figure.]
+A6 [ASSUMPTION - the big one] 40% of that exhaust is STALE: duplicated reads,
+   superseded command results, dead outputs nobody will ever look at again.
+   [Theory: agents re-read files and re-run similar commands; sessions
+   supersede earlier results. Chosen number: pure assumption.]
+
+## THE HYPOTHETICAL INTERVENTION (what a reclaim layer could do; all effects 
+assumed)
+
+I1 [HYPOTHETICAL product effect] Prune 80% of the STALE exhaust out of the
+   re-sent history (A6 x 0.8 of A5 x 27,000 tokens per call).
+   Assume the removed tokens had the SAME cache profile as the average (60/40).
+   Note in a footnote: pruning shifts the prefix, so the very next call after a
+   prune rebuilds cache once; at 3,000 calls/mo this one-time cost is 
+negligible.
+I2 [HYPOTHETICAL product effect] Cache-friendly layout raises the hit rate from
+   h = 0.60 to h = 0.85. [THEORY: static prefix ordering, append-only history,
+   no timestamps churned into the prefix.]
+I3 [HYPOTHETICAL product effect] Deduplication of repeated calls eliminates 5%
+   of all calls outright.
+
+## COMPUTE (show every formula and step; apply levers in order I1, then I2, then
+I3)
+
+S1 BASELINE: monthly input cost.
+    blended list price = 0.7 x 0.50 + 0.3 x 3.00 ($/1M tokens)
+    m(baseline) from A4; monthly tokens = A1 x A2; baseline $ = tokens x list x 
+m.
+    Also state: effective $/1M tokens actually paid.
+S2 LEVERS ONE AT A TIME (recompute cost after each, in order):
+    after I1: new tokens/call, new monthly cost, $ and % saved.
+    after I2: new m; new monthly cost; $ and % saved vs previous step.
+    after I3: new call count; final monthly cost; $ and % saved.
+S3 COMBINED RESULT: baseline $ -> final $; total % cost decrease. Then the
+    efficiency view: prefill tokens per call before vs after (60,000 -> ?),
+    % fewer; calls before vs after. Express as a "work per dollar" multiple
+    (how much more agent-work the same money buys). Stamp all [HYPOTHETICAL].
+S4 LATENCY (directional only, no invented milliseconds): prefill compute scales
+    roughly with tokens prefilled; state the direction and rough proportion of
+    the token cut; note TTFT also depends on queueing and decode, so this is a
+    tendency, not a promise.
+S5 SENSITIVITY: one-at-a-time +/-50% on A4 (h), A5 (exhaust share), A6 (stale
+    share), and A2's history split (27,000 -> 13,500 and 40,500). Rank which
+    two assumptions move the final answer most, with the numbers.
+S6 PLAIN ENGLISH: 3-4 sentences a non-technical founder could quote, followed by
+    "what would make this real": the TWO cheapest real-world measurements that
+    would replace the two most sensitive assumptions. End with one line starting
+    "FALSIFIED IF:" naming the observation that would kill the scenario.
+
+## FORMAT
+Plain text, sections S1..S6, every dollar stamped [HYPOTHETICAL], every input
+tagged [ANCHOR]/[THEORY]/[ASSUMPTION] on first use.
+End with exactly this line: SCENARIO-MODEL-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    SCENARIO MODEL: TEAM KITE (hypothetical 4-person startup)
+    
+    All dollar figures [HYPOTHETICAL]. Inputs tagged
+    [ANCHOR]/[THEORY]/[ASSUMPTION] on first use.
+    
+    
+    INPUTS (restated with tags)
+    
+    A1 [ASSUMPTION] Calls/month  = 3,000
+    A2 Context per call = 60,000 tokens
+         Paperwork  33,000 tokens   [ANCHOR: 97.7 KB/call measured on a live
+    stack, /3.04 chars-per-token = ~32,910, rounded]
+         History    27,000 tokens   [ASSUMPTION: the split]
+    A3 [ASSUMPTION] Mix: 70% mid @ $0.50/M in; 30% premium @ $3.00/M in
+    A4 [THEORY] Cache hit h = 0.60 baseline; cached tokens bill at 10% of
+    list
+    A5 [ANCHOR w/ haircut] 85% of history is tool exhaust (89.1% measured at
+    rest, 85% conservative in-flight)
+    A6 [ASSUMPTION] 40% of exhaust is stale
+    I1 [HYPOTHETICAL] prune 80% of stale exhaust
+    I2 [HYPOTHETICAL/THEORY] cache layout raises h: 0.60 -> 0.85
+    I3 [HYPOTHETICAL] dedup removes 5% of calls
+    
+    Footnotes
+    - Removed tokens carry the same 60/40 cache profile, so m unchanged by I1.
+    - Pruning shifts the prefix: the first call after a prune rebuilds cache
+    once; at 3,000 calls/mo this one-off is negligible.
+    - When I vary A2's history split I hold the anchored 33,000 paperwork
+    fixed, so total context moves with history.
+    
+    
+    S1 BASELINE: monthly input cost
+    
+    blended list price = 0.7 x 0.50 + 0.3 x 3.00 = 0.35 + 0.90 = $1.25 per 1M
+    input tokens  [HYPOTHETICAL]
+    
+    m(baseline) = h x 0.10 + (1 - h) x 1.00 = 0.60 x 0.10 + 0.40 x 1.00
+                = 0.06 + 0.40 = 0.46
+    
+    monthly input tokens = A1 x A2 = 3,000 x 60,000 = 180,000,000 = 180M
+    
+    baseline $ = tokens x list x m = 180M x $1.25/M x 0.46
+               = 180 x 1.25 x 0.46 = 225 x 0.46 = $103.50  [HYPOTHETICAL]
+    
+    effective $/1M actually paid = $1.25 x 0.46 = $0.575 per 1M input tokens 
+    [HYPOTHETICAL]
+    
+    
+    S2 LEVERS ONE AT A TIME (in order I1, I2, I3)
+    
+    After I1 (prune stale exhaust)
+      stale exhaust per call = A5 x A6 x history = 0.85 x 0.40 x 27,000 =
+    0.34 x 27,000 = 9,180 tokens
+      pruned = 80% of that = 0.8 x 9,180 = 7,344 tokens/call removed
+      new tokens/call = 60,000 - 7,344 = 52,656
+      monthly tokens = 3,000 x 52,656 = 157,968,000 = 157.968M
+      m unchanged = 0.46
+      new cost = 157.968 x 1.25 x 0.46 = 197.46 x 0.46 = $90.83 
+    [HYPOTHETICAL]
+      saved vs baseline = 103.50 - 90.83 = $12.67  (= 12.24%)
+    
+    After I2 (h 0.60 -> 0.85)
+      new m = 0.85 x 0.10 + 0.15 x 1.00 = 0.085 + 0.15 = 0.235
+      tokens unchanged (52,656/call, 157.968M/mo)
+      new cost = 157.968 x 1.25 x 0.235 = 197.46 x 0.235 = $46.40 
+    [HYPOTHETICAL]
+      saved vs previous step = 90.83 - 46.40 = $44.43  (= 48.9%)
+    
+    After I3 (dedup removes 5% of calls)
+      new call count = 3,000 x 0.95 = 2,850
+      final monthly cost = 46.40 x 0.95 = $44.08  [HYPOTHETICAL]
+      saved vs previous step = 46.40 - 44.08 = $2.32  (= 5.0%)
+    
+    
+    S3 COMBINED RESULT
+    
+    baseline $103.50 -> final $44.08  [HYPOTHETICAL]
+    total decrease = (103.50 - 44.08) / 103.50 = 59.42 / 103.50 = 57.4%
+    
+    Efficiency view
+      prefill tokens/call: 60,000 -> 52,656  = 7,344 fewer = 12.24% fewer
+      calls/month:         3,000 -> 2,850    = 150 fewer  = 5.0% fewer
+    
+    Work per dollar multiple (~how much more agent-work the same money buys) 
+    [HYPOTHETICAL]
+      prefill-token-work per month before = 180M tokens  for $103.50  = 1.739
+    M tokens/$
+      prefill-token-work per month after  = 2,850 x 52,656 = 150,069,600 =
+    150.07M tokens  for $44.08 = 3.404 M tokens/$
+      multiple = 3.404 / 1.739 = 1.96x  (~2x the prefill-token work per
+    dollar)
+    
+    
+    S4 LATENCY (directional only, no invented milliseconds)
+    
+    The reclaimed layer cuts prefill tokens per call by 12.24% (60,000 ->
+    52,656).
+    Prefill compute scales roughly with the tokens prefilled, so the prefill
+    phase of
+    time-to-first-token (TTFT) should tend ~12% shorter, all else equal. But
+    TTFT also
+    depends on queueing and decode length, which this layer does not touch,
+    so this is a
+    tendency, not a promise. Direction: down, roughly proportional to the
+    token cut.
+    
+    
+    S5 SENSITIVITY (one-at-a-time +-50%, levers I1+I2+I3 applied, final
+    monthly cost)
+    
+    Formula used for each run (all three levers live):
+      final = 2,850 x (total_context - 0.8 x e x s x H) / 1e6 x 1.25 x (1 -
+    0.9 x h)
+      where total_context = 33,000 + H (paperwork held at anchored 33,000)
+    
+    A4 cache hit h  [THEORY]
+      h = 0.30 (m 0.73): 0.0035625 x 52,656... -> final $136.94
+         (187.587 x 0.73 = 136.94)
+      h = 0.90 (m 0.19): -> final $35.64
+         (187.587 x 0.19 = 35.64)
+      max swing vs baseline 44.08 = +92.86 (+211%)
+    
+    A5 exhaust share e  [ANCHOR haircut]
+      e = 0.425: prune 3,672, tokens/call 56,328 -> final $92.31
+      e = 1.275: prune 11,016, tokens/call 48,984 -> final $80.27
+      max swing = +48.23 (+109%)
+    
+    A6 stale share s  [ASSUMPTION]
+      s = 0.20: prune 3,672 -> final $92.31
+      s = 0.60: prune 11,016 -> final $80.27
+      identical to A5 because e x s enters as a product; max swing = +48.23
+    
+    A2 history split H  [ASSUMPTION]
+      H = 13,500 (total 46,500): prune 3,672, tokens/call 42,828
+          monthly = 2,850 x 42,828 = 122.06M; cost = 122.06 x 1.25 x 0.46 =
+    $70.18
+      H = 40,500 (total 73,500): prune 11,016, tokens/call 62,484
+          monthly = 2,850 x 62,484 = 178.08M; cost = 178.08 x 1.25 x 0.46 =
+    $102.40
+      max swing = +58.32 (+132%)
+    
+    RANKING by largest absolute swing on final cost:
+      1st: A4 cache hit rate h (max +$92.86, +211%)
+      2nd: A2 history split H (max +$58.32, +132%)
+      3rd (tie): A5 exhaust share and A6 stale share (+$48.23)
+    So the two most sensitive assumptions are A4 (cache hit rate) and A2
+    (history split).
+    
+    
+    S6 PLAIN ENGLISH
+    
+    On the numbers we chose, a context-reclaim layer cuts the team's model
+    input bill by
+    about 57%, from roughly $104 to $44 a month [HYPOTHETICAL], and roughly
+    doubles how
+    much agent work the same budget buys. It does that mostly by making
+    caching cheaper,
+    not by new hardware: pruning dead re-sent tool output shrinks each call
+    by about 12%,
+    a cache-friendly layout drops the effective price per million tokens from
+    about $0.58
+    to about $0.29 [HYPOTHETICAL], and stripping duplicate calls saves
+    another 5%. None of
+    this is measured on your stack yet, so treat the dollars as an
+    illustration, not a
+    forecast.
+    
+    What would make this real: the two cheapest real measurements that would
+    replace the
+    two most sensitive assumptions. First, read your vendor's usage/billing
+    API to get the
+    actual cached-input-hit rate and cached bytes (replaces A4, and
+    re-anchors the whole
+    price model for free, no instrumentation). Second, sample a session dump
+    off one real
+    agent to measure actual re-sent tokens per call and how much of history
+    is tool output
+    (replaces A2's split, and gives you A5's exhaust share as a byproduct).
+    
+    FALSIFIED IF: a live measurement shows the average re-sent context per
+    call is already
+    an order of magnitude below 60,000 tokens (say under ~10k), meaning there
+    is no history
+    left to reclaim and the ~57% number collapses.
+    
+    SCENARIO-MODEL-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261014_134457_b346da
+
+Session:        20261014_134457_b346da
+Duration:       2m 18s
+Messages:       2 (1 user, 0 tool calls)

@@ -1,0 +1,76 @@
+# TASK: Scenario model for a hypothetical team (show ALL arithmetic, label everything)
+
+You are a quantitative modeler. A founder (NOT technical) needs to understand what
+a context-reclaim layer could do to cost and efficiency FOR A HYPOTHETICAL team.
+Every output number must be stamped [HYPOTHETICAL]. Do not present any figure as
+measured. Distinguish three input classes everywhere: [ANCHOR] = really measured
+on a live agent stack; [THEORY] = assumption grounded in published mechanism or
+common practice; [ASSUMPTION] = pure assumption, chosen for the scenario.
+
+## THE HYPOTHETICAL START: "Team Kite" (invented 4-person startup, coding+ops agents)
+
+A1 [ASSUMPTION] 3,000 model calls per month across their agents.
+A2 [ANCHOR + ASSUMPTION split] Average re-sent context per call = 60,000 tokens,
+   composed of:
+   - 33,000 tokens fixed paperwork (system prompt + skills index + tool schemas).
+     [ANCHOR: really measured at 97.7 KB/call on a live stack; converted at the
+     measured 3.04 chars/token to ~32,910 tokens, rounded to 33,000]
+   - 27,000 tokens of accumulated session history (grows over a session).
+     [ASSUMPTION: the split]
+A3 [ASSUMPTION] Model mix: 70% of calls on a mid-price model at $0.50 per 1M
+   input tokens; 30% on a premium model at $3.00 per 1M input tokens.
+A4 [THEORY] Prompt caching: 60% of re-sent tokens hit the vendor cache at
+   baseline (static paperwork + append-only history are cacheable; published
+   cache discounts are ~90% off list, so cached tokens bill at 10% of list).
+   So effective cost multiplier m = h x 0.10 + (1 - h) x 1.00 with h = 0.60.
+A5 [ANCHOR with haircut] 85% of the HISTORY portion (not the paperwork) is tool
+   exhaust (tool outputs + tool-call records). [Really measured at rest: 89.1%
+   of stored bytes; 85% used as a conservative in-flight figure.]
+A6 [ASSUMPTION - the big one] 40% of that exhaust is STALE: duplicated reads,
+   superseded command results, dead outputs nobody will ever look at again.
+   [Theory: agents re-read files and re-run similar commands; sessions
+   supersede earlier results. Chosen number: pure assumption.]
+
+## THE HYPOTHETICAL INTERVENTION (what a reclaim layer could do; all effects assumed)
+
+I1 [HYPOTHETICAL product effect] Prune 80% of the STALE exhaust out of the
+   re-sent history (A6 x 0.8 of A5 x 27,000 tokens per call).
+   Assume the removed tokens had the SAME cache profile as the average (60/40).
+   Note in a footnote: pruning shifts the prefix, so the very next call after a
+   prune rebuilds cache once; at 3,000 calls/mo this one-time cost is negligible.
+I2 [HYPOTHETICAL product effect] Cache-friendly layout raises the hit rate from
+   h = 0.60 to h = 0.85. [THEORY: static prefix ordering, append-only history,
+   no timestamps churned into the prefix.]
+I3 [HYPOTHETICAL product effect] Deduplication of repeated calls eliminates 5%
+   of all calls outright.
+
+## COMPUTE (show every formula and step; apply levers in order I1, then I2, then I3)
+
+S1 BASELINE: monthly input cost.
+    blended list price = 0.7 x 0.50 + 0.3 x 3.00 ($/1M tokens)
+    m(baseline) from A4; monthly tokens = A1 x A2; baseline $ = tokens x list x m.
+    Also state: effective $/1M tokens actually paid.
+S2 LEVERS ONE AT A TIME (recompute cost after each, in order):
+    after I1: new tokens/call, new monthly cost, $ and % saved.
+    after I2: new m; new monthly cost; $ and % saved vs previous step.
+    after I3: new call count; final monthly cost; $ and % saved.
+S3 COMBINED RESULT: baseline $ -> final $; total % cost decrease. Then the
+    efficiency view: prefill tokens per call before vs after (60,000 -> ?),
+    % fewer; calls before vs after. Express as a "work per dollar" multiple
+    (how much more agent-work the same money buys). Stamp all [HYPOTHETICAL].
+S4 LATENCY (directional only, no invented milliseconds): prefill compute scales
+    roughly with tokens prefilled; state the direction and rough proportion of
+    the token cut; note TTFT also depends on queueing and decode, so this is a
+    tendency, not a promise.
+S5 SENSITIVITY: one-at-a-time +/-50% on A4 (h), A5 (exhaust share), A6 (stale
+    share), and A2's history split (27,000 -> 13,500 and 40,500). Rank which
+    two assumptions move the final answer most, with the numbers.
+S6 PLAIN ENGLISH: 3-4 sentences a non-technical founder could quote, followed by
+    "what would make this real": the TWO cheapest real-world measurements that
+    would replace the two most sensitive assumptions. End with one line starting
+    "FALSIFIED IF:" naming the observation that would kill the scenario.
+
+## FORMAT
+Plain text, sections S1..S6, every dollar stamped [HYPOTHETICAL], every input
+tagged [ANCHOR]/[THEORY]/[ASSUMPTION] on first use.
+End with exactly this line: SCENARIO-MODEL-OK

@@ -585,3 +585,35 @@ the trap our own swarm rejected (fake numbers).
 
 Repo: research/briefs/R7_hypothesis.txt, research/raw/R7_hypothesis_deepseek_raw.txt,
 research/R7_hypothesis_report.txt (clean extract).
+
+## 2026-10-14 - R8: scenario model (DeepSeek) - hypothetical team, efficiency + cost numbers
+
+Founder ask: "hypothetical start and assumptions... what this could look like in terms of
+numbers of efficiency increase and cost decrease." Construct: Team Kite, invented 4-person
+startup; inputs tagged [ANCHOR]/[THEORY]/[ASSUMPTION]; all outputs stamped [HYPOTHETICAL].
+
+VERIFIED NUMBERS (hub-side recount agrees with DeepSeek on every headline cell):
+- Baseline: 3,000 calls/mo x 60,000 tok (33k anchored paperwork + 27k assumed history),
+  blended list $1.25/M, cache multiplier 0.46 -> $103.50/mo, effective $0.575/M.
+- I1 prune stale (12.2%): $90.83 (-$12.67). I2 cache layout h .60->.85 (48.9%): $46.40.
+  I3 dedup calls -5%: FINAL $44.08/mo = -57.4% cost decrease.
+- Efficiency: prefill/call 60,000 -> 52,656 (-12.2%); work-per-dollar 1.74 -> 3.40 M tok/$
+  = 1.96x; effective price $0.575 -> $0.294/M.
+- Ranking of savings: cache layout (I2) > pruning (I1) > dedup (I3). Product insight: the
+  reclaim layer is primarily a CACHE OPTIMIZER, secondarily a deleter.
+- Sensitivity (all levers live, corrected hub-side): A4 cache-hit rate dominates
+  ($35.64-$136.94 across +-50%), then A2 history split ($35.86-$52.31). A5/A6 minor.
+  Two cheap real measurements replace them: vendor billing API (cached-hit rate) + one
+  real session dump (tokens/call + exhaust share).
+- FALSIFIED IF: real re-sent context < ~10k tok/call.
+
+DISCREPANCY LEDGER (verification worked both directions):
+1. Hub recount v1 skipped stale factor -> wrong; DeepSeek's I1 (7,344 tok pruned) correct.
+2. Hub work-per-dollar slip (2.23x) -> corrected 1.96x; DeepSeek's "roughly doubles" right.
+3. DeepSeek S5 rows A5/A6/A2 used baseline m=0.46 despite "all three levers live" and its
+   own formula (x0.235); also used unphysical e=1.275 (+50% exhaust = 127.5%). Corrected
+   hub-side; top-2 ranking (A4, A2) unchanged under both readings.
+Net: every published R8 number above is the hub-verified version.
+
+Files: research/briefs/R8_scenario.txt, research/raw/R8_scenario_deepseek_raw.txt,
+research/R8_scenario_report.txt. Proc: proc_360b8b77f354 (2m18s, deepseek, 850s budget).
