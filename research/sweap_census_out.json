@@ -1,0 +1,50 @@
+{
+ "generated": "2026-10-14 14:23",
+ "store": "/Users/ares/.hermes/state.db",
+ "sessions": 357,
+ "messages": 7423,
+ "stored_bytes": 40200051,
+ "exhaust_share_pct": 90.69,
+ "lanes": {
+  "MiniMaxAI": {
+   "calls": 51,
+   "unc": 1861363,
+   "cr": 0,
+   "cw": 0,
+   "out": 49292,
+   "sess": 1,
+   "resend_per_call_median": 36497.313725490196,
+   "cache_hit_pct": 0.0
+  },
+  "deepseek-ai": {
+   "calls": 1697,
+   "unc": 127857208,
+   "cr": 0,
+   "cw": 0,
+   "out": 1640998,
+   "sess": 1,
+   "resend_per_call_median": 75343.08073070124,
+   "cache_hit_pct": 0.0
+  },
+  "glm-4.6": {
+   "calls": 10093,
+   "unc": 28296142,
+   "cr": 739190912,
+   "cw": 0,
+   "out": 6914539,
+   "sess": 1,
+   "resend_per_call_median": 76041.51927078173,
+   "cache_hit_pct": 96.31314406509846
+  },
+  "glm-4.7": {
+   "calls": 1,
+   "unc": 12427,
+   "cr": 2944,
+   "cw": 0,
+   "out": 15,
+   "sess": 1,
+   "resend_per_call_median": 15371.0,
+   "cache_hit_pct": 19.152950361069546
+  }
+ }
+}
