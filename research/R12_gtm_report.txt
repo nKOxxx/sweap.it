@@ -1,0 +1,264 @@
+Phase 0 "The artifact" | 04-04 to 04-05 | strategy: NONE, a joke, a
+    one-line idea ("why use many token when few token do trick"). Your fact
+    says the description is verbatim the pitch. This is the rare case where
+    strategy and luck are the same thing: the artifact was built to be
+    self-evident and self-describing, so it did not need marketing.
+    
+    Phase 1 "Viral monolith" | 04-05 to ~06 mid | strategy: whatever the
+    founder did or did not do, the working strategy was "product IS the
+    marketing." The artifact was complete, free, forkable, and carried its
+    own sales line. The joke did the distribution. Pure luck delivered the
+    front page, but the design (a self-contained meme with a real efficiency
+    claim) is what made that luck spendable.
+    
+    Phase 2 "The quiet tac" | ~06 to 07-05 | strategy: none visible in the
+    facts [INFERRED: a cooldown where the founder either built quietly or
+    waited]. The joke had peaked; stars were still compounding off the
+    initial spike but no new event. This looks like emptiness, but it is the
+    exact gap that third-party validation later filled. Not strategy so much
+    as the placebo between stimulants.
+    
+    Phase 3 "Independent validation" | 07-06 to 07-28 | strategy: emergent,
+    not directed. Third parties bench it ("Does Speaking to Agents Like
+    Cavemen Save 65% of Tokens? We Test", 46 pts best). The founder did not
+    run these benchmarks; the audience did. Strategy here = the artifact had
+    been built to be benchmarkable, so validation happened by itself.
+    Balfour's PMF caveat applies: this phase proves demand for the IDEA
+    (token efficiency), not yet for a product you can charge for.
+    
+    Phase 4 "Resistance" | 08-18 to 08-21 | strategy: the first real
+    counterclaim ("saves tokens until you run it in real sessions", 3 pts).
+    Low points but high signal. This is the most strategically important
+    phase because it named the gap that the product would later be built to
+    close.
+    
+    Phase 5 "Industrialization" | 10-04 to 10-13 | strategy: deliberate and
+    dense. v2.0.2 -> v2.1.0 -> middleware-ts v1.0.1 -> v3.2.0 (npm package),
+    then 10-13 v4.0.0 + v4.0.1 + bin-v4.0.x (CLI binaries). README now sells
+    warm cache, caveman stats, browse "121 tokens instead of 15,704",
+    caveman-compress, Cloud $300/mo, enterprise/VPC. This is the shift from
+    joke to infrastructure, from free artifact to recoverable revenue.
+    
+    Phase 6 "Surface-area compounding" | post-10-13 onward | family grows:
+    cavegemma, cavekit, caveman-browse, plus npm and CLI distribution
+    channels. Default-alive doctrine: they stopped being one repo and became
+    a small ecosystem.
+    
+    Verdict on strategy-vs-luck: Phase 0 and 1 were mostly luck delivered by
+    good design. Phases 2/3/4 were the product's inertia earning trust.
+    Phases 5/6 are where actual deliberate strategy appears, and it is the
+    only phase that could have been planned from day one.
+    
+    ════════════════════════════════
+    2. WHY DAY-2 WENT FRONT-PAGE
+    ════════════════════════════════
+    
+    Three mechanics, each necessary:
+    
+    (a) The title WAS the pitch. The HN submission (by stranger 'tosh') used
+    the repo description verbatim: "why use many token when few token do
+    trick." One bottle of a funny, culturally-loaded phrase that also states
+    a real value proposition (fewer tokens = less money). HN front pages
+    reward exactly this: a single line that is both a joke and a claim.
+    
+    (b) The artifact was cheap to evaluate. A prompt/proxy is not a 40-page
+    product. Anyone can read the diff, run it, and have an opinion in five
+    minutes. That is why 366 comments and substantive debate (tokens as units
+    of thinking, quality risk, real-session skepticism) could happen on a
+    joke. High-quality discussion is what HN ranks up, not the joke itself.
+    
+    (c) The founder did the crucial NOT-doing. The submitter was a stranger,
+    not the founder. The founder was not among top commenters. So the thread
+    read as community discovery, not self-promotion, which is the
+    authenticity signal HN is trained to reward [INFERRED: this restraint was
+    either deliberate or lucky; either way it was the correct play]. Had the
+    founder astroturfed, cross-posted, or dominated the comment stack, the
+    thread would have smelled like marketing and been flagged or downvoted.
+    The community carried it because nothing told them it was a shill.
+    
+    Counter-intuitive takeaway: the founder's best move on the most important
+    day of the product's life was to not move at all.
+    
+    ════════════════════════════════
+    3. WHY THIRD PARTIES BENCHMARKED IN JULY
+    ════════════════════════════════
+    
+    By month 3-4 the product had done three things that made benchmarking
+    socially safe and cheap:
+    - It was famous (star velocity from the 904-pt Day-2). Testing a popular
+    thing carries no career risk; testing an unknown thing does. [INFERRED]
+    - It made a crisp, falsifiable, single-number claim ("85-token caveman
+    prompt outperforms the 552-token original", already circulating by 04-08;
+    "saves 65%" by July). A measurable claim is an invitation to measure it.
+    - It was trivially testable (a prompt you run), so a skeptic could
+    disprove it in minutes.
+    
+    On seed-validation vs wait-for-it: you cannot seed third-party validation
+    directly, and you should not try. What you CAN seed is testability: a
+    famous artifact, a falsifiable numeric claim, and a zero-friction way to
+    check it. Do that and the validation comes on its own, months later, and
+    it is worth more than anything you could have bought, because it is
+    independent. The 46-pt benchmark ran in July even though nothing
+    "happened" in the spring because the spring seeding was the trailer that
+    made July's test inevitable. [INFERRED on mechanism]
+    
+    ════════════════════════════════
+    4. WHY WAIT UNTIL OCTOBER TO SHIP THE MONEY
+    ════════════════════════════════
+    
+    The sequencing was correct, and it contradicts the "charge from day 1"
+    dogma for a specific reason: you cannot charge for a joke, but you can
+    charge for infrastructure.
+    
+    What the free months proved, in order:
+    - Month 1: demand for the IDEA (stars, front page, copycats). Not yet
+    willingness-to-pay.
+    - Months 3-4: independent validation (benchmarks) that converted novelty
+    into trust.
+    - Month 4: the real-session gap (skeptical tests) that told the founder
+    exactly which monetizable pain the product actually addressed.
+    
+    The October product (warm cache so "the provider forgets your session and
+    the next ask pays full price", compress, browse at 121 vs 15,704 tokens,
+    caveman-compress memory files, Cloud $300/mo, VPC) is precisely the
+    answer to the August criticism. The skepticism did not kill the product;
+    it wrote the product spec. Warm-cache proxy = real-session token
+    persistence, which is the thing the skeptics said was missing.
+    
+    Why charging day 1 would have been wrong: a paywall is friction. It caps
+    the meme spread (fewer forks, shares, stars), and it forces you to
+    monetize before you know where willingness-to-pay lives or before you've
+    closed the real-session gap. The joke was the funnel; monetizing it day 1
+    would have strangled the funnel. The cost of waiting was combinatorial:
+    copycats only ever reached the joke level (the 04-06 "Show HN" clones at
+    5 pts), because none of them did the three months of trust-building. [INFERRED]
+    
+    Doctrine check: this is PMF-before-scale applied literally. They banked
+    trust for free for 6 months, then charged only where a recurring-cost
+    pain (provider caching, memory persistence) existed.
+    
+    ════════════════════════════════
+    5. THE COMPOUNDING LOOP (flywheels)
+    ════════════════════════════════
+    
+    Five distinct flywheels, all visible in the facts:
+    
+    F1 Meme -> stars. A self-replicating, funny, copy-pasteable artifact
+    earns 904 pts in one day. The joke is the growth engine of phases 0-1.
+    
+    F2 Stars -> press. 111,865 stars plus the cited 904-pt HN thread become
+    ammunition for press (Fortune tokenmaxxing, 404 Media, Hackaday, Decrypt,
+    BNR interview). The product cites its own 904-pt HN on its own site.
+    Press -> more stars -> more press.
+    
+    F3 Benchmarks -> trust. Independent third-party tests (July) convert
+    novelty into credibility, raising the social safety of engaging further,
+    which raises more testing.
+    
+    F4 Skepticism -> features -> stronger claims. The August "works only
+    until real sessions" test becomes the warm-cache/proxy/compress roadmap
+    in October, which produces fresh falsifiable numbers (121 vs 15,704
+    tokens, "byte-exact recovery", 18/18 evals) that loop back into F3. Every
+    published metric (33.2% fewer input tokens, 0.46x cost) is itself content
+    that invites more benchmarking.
+    
+    F5 Family repo -> surface area. cavegemma, cavekit, caveman-browse plus
+    npm middleware and CLI binaries spread the brand across multiple
+    discovery surfaces (npm registry, GitHub releases, web) and erase
+    single-repo single-channel risk. Default-alive: not one artifact anymore,
+    an ecosystem.
+    
+    F6 [bonus] Token -> metrics -> content. The product's subject is tokens,
+    so every benchmark result is simultaneously a product metric and a
+    marketing asset, collapsing the distance between engineering and GTM.
+    This is structural to the product category and is the deepest moat.
+    
+    NFX defensibility note: the moat is not the prompt (copyable). It is the
+    compounding network of trust (F3/F4), press (F2), and owned distribution
+    surfaces (F5), plus the "we are the hub of agent-token infrastructure"
+    position.
+    
+    ════════════════════════════════
+    6. TRANSFERABLE PLAYBOOK (7 ranked moves)
+    ════════════════════════════════
+    For a zero-budget OSS agent tool, copyable next month. CHEAP = hours,
+    HARD = weeks/systematic.
+    
+    1. Make the artifact self-describing and self-contained, so the pitch is
+    contained in the artifact itself. Repo description should BE the value
+    proposition, in one funny or striking line. CHEAP. This is the single
+    highest-leverage cheap move; it is what turned a stranger into your
+    marketer.
+    
+    2. Ship v1 in 1-2 days. Do not gold-plate. Memes and framing decay; speed
+    is the moat. The entire Day-2 explosion depended on the joke being intact
+    and raw on day 2, not six weeks of polish later. CHEAP.
+    
+    3. Build a falsifiable single-number claim and put it in the artifact.
+    "85 tokens beats 552", "saves 65%", "121 vs 15,704". You cannot seed
+    validation, but you can seed testability: a famous artifact + a crisp
+    numeric claim + a zero-friction way to run it. CHEAP.
+    
+    4. Do not promote it. Do not self-submit, do not astroturf comments, do
+    not top the thread. Let a stranger discover it. Restraint is a
+    distribution strategy for OSS, and it is the cheapest high-discipline
+    move on this list. CHEAP, but takes discipline.
+    
+    5. Do not monetize until you have three things: proof of demand, a
+    falsifiable metric, and a named real-world gap. In this case all three
+    arrived by month 4-6; only then did a paid tier (proxy, Cloud, VPC)
+    become a defensible business instead of a paywalled joke. HARD, because
+    it means deliberately refusing revenue for months.
+    
+    6. Turn skepticism into your roadmap. Watch for the critique that names a
+    real gap ("works until real sessions") and convert it into features, then
+    re-benchmark. Do not argue, do not get defensive. The resistance you
+    receive is a cheaper product spec than any survey. HARD, because it
+    requires listening and a rearchitecture when the easy move is to ignore
+    critics.
+    
+    7. Expand surface area once validated: family repos, CLI binaries, npm
+    package, paid Cloud/VPC. Spread the brand across distribution ecosystems
+    so you are not one repo on one channel. HARD, because it is broad
+    engineering plus multi-ecosystem distribution. This is what converts a
+    flash in the pan into default-alive infrastructure.
+    
+    ════════════════════════════════
+    7. KILL RISKS (where it could have died)
+    ════════════════════════════════
+    
+    Phase 0-1: Over-engineering before shipping. If the founder had spent
+    weeks building instead of 1-2 days, the joke would have gone stale and
+    the Day-2 spike never happens. Nearest miss: shipping late.
+    
+    Phase 1: Over-promotion. If the founder had self-submitted AND dominated
+    comments, the community-detection instinct (flag/downvote) would have
+    killed the authenticity that made the front page. The restraint was
+    load-bearing.
+    
+    Phase 2-3: Validation never landing. If no one had benchmarked it in
+    July, it dies as a burmt-out meme at maybe a few thousand stars, never
+    converting to trust. This was the highest-probability failure and the one
+    with the least founder control [INFERRED: mitigated only by the earlier
+    choice to make it testable].
+    
+    Phase 4: Defensiveness at the skeptics. Had the founder dismissed the
+    August real-session critique instead of internalizing it, credibility
+    collapses and there is no productization week. Argue-your-way-out is the
+    classic kill at this point.
+    
+    Phase 5: Monetizing too early or for the wrong thing. Charging day 1 (or
+    charging for a Cloud tier before the real-session gap was closed) would
+    have sold a product that failed the last evaluation the market ran. This
+    was the other high-probability miss.
+    
+    Phase 6: Distribution concentration. Had the whole brand lived in one
+    repo and one channel, a GitHub change or a channel drying up kills
+    everything. The family-repo expansion is the explicit hedge. [INFERRED as
+    the motivation]
+    
+    Single line: the story almost died at every phase, and at each one the
+    surviving move was the same pattern, give the community something true to
+    verify, then don't get in its way.
+    
+    R12-GTM-OK

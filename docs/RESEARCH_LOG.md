@@ -705,3 +705,16 @@ TOCTOU (BEGIN IMMEDIATE covers recheck+delete), gate bypass (none).
 8 shards hashed, row parity PASS). Store UNTOUCHED. Apply (and its 23 MB
 disk reclaim) waits for a quiet moment: the store must not be mid-write;
 instrument-frozen law applies to surgery, not just measurement.
+
+## R12 (2026-10-15): Caveman growth & GTM post-mortem (user-requested, DeepSeek-analyzed)
+- Question: how did caveman.so go from zero to 111,865 stars in 6.5 months, and what transfers?
+- Primary harvest (hub, verified): research/raw/R12_gtm_timeline_verified.md (GitHub API,
+  HN Algolia, README raw; all dates UTC-checked).
+- Analysis: DeepSeek-V4-Flash free lane, proc_67372abca73b, 84s, needle R12-GTM-OK,
+  8/8 hub spot-checks PASS. Report: research/R12_gtm_report.txt; raw: research/raw/.
+- Findings: Day-2 HN 904pts by stranger submitter; founder restraint load-bearing;
+  third-party benchmark wave months 3-4 (testability was seeded, not validation);
+  August skeptics wrote the October product spec (warm cache); monetization only at
+  month 6 (joke is the funnel, infrastructure is the business); 6 flywheels; 7 ranked
+  transferable moves. Sweap relevance: receipt-as-demo mirrors phase 0-1 mechanics;
+  our falsifiable number = 90.69% exhaust; monetize only after measured proof.
