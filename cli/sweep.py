@@ -216,20 +216,18 @@ def cmd_apply(a, mid):
         json.dump(man, open(man_p, "w"), indent=1)
         sys.exit(f"APPLY ABORTED, store rolled back: {e}")
     con.close()
-    # VACUUM INTO swap: actually reclaims disk; atomic via temp file + rename
+    # VACUUM in place: through SQLite's own locking protocol, so a live
+    # writer (WAL) stays consistent. A manual VACUUM INTO + rename swap
+    # would strand an already-open writer on the orphaned old inode.
     f_after = f_before
     try:
-        tmp = tempfile.mktemp(suffix=".vacuum", dir=os.path.dirname(db))
         vcon = sqlite3.connect(db, timeout=BUSY_TIMEOUT_MS / 1000)
         vcon.execute("PRAGMA busy_timeout=%d" % BUSY_TIMEOUT_MS)
-        vcon.execute("VACUUM INTO ?", (tmp,))
+        vcon.execute("VACUUM")
         vcon.close()
-        if os.path.exists(db + "-wal"): os.remove(db + "-wal")
-        if os.path.exists(db + "-shm"): os.remove(db + "-shm")
-        os.replace(tmp, db)
         f_after = os.path.getsize(db)
     except Exception as e:
-        print(f"  (vacuum swap skipped: {e}; file size unchanged: pages freed, not reclaimed)")
+        print(f"  (vacuum skipped: {e}; file size unchanged: pages freed, not reclaimed)")
     man["state"] = "applied"
     man["applied_at"] = datetime.datetime.now().isoformat()
     man["rows_deleted"] = len(ids)
