@@ -1,0 +1,251 @@
+Query: # TASK: Independent quantitative check of a cost hypothesis (show ALL
+arithmetic)
+You are an independent quantitative analyst. Another team measured the constants
+below on a live LLM-agent stack. They have a HYPOTHESIS they want you to test
+WITHOUT knowing their conclusions. Derive everything yourself; show every
+arithmetic step; flag anything that does not follow. Do not invent data: if a
+needed input is missing, say so and proceed with what is given, labeled.
+## MEASURED INPUTS (all from a real single-user agent store, macOS, 2026-10)
+A. Fixed per-call prompt overhead (paid on EVERY model API call):
+   - system prompt:            28.7 KB
+   - skills index:             14.7 KB
+   - tool schemas (28 tools):  54.3 KB
+   - TOTAL fixed:              97.7 KB per call
+B. Tokenizer density of machine/tool text (measured, exact count over 18.2M
+   tokens, o200k_base): tool-style JSON text averages 3.04 characters per token.
+   (For comparison: human prose averages 4.10 chars/token on the same store.)
+C. Store census (exact full-store pass, no sampling):
+   - 37,813 stored messages, 353 sessions
+   - 18,210,064 stored tokens total
+   - 90.69% of stored tokens are tool exhaust (tool outputs + tool-call records)
+   - historical byte comparison 3 weeks earlier: 38 MB store, 85.4% exhaust
+     byte-share; now 60 MB and 89.1% (agent-heavy usage period)
+D. Willingness-to-pay medians from a simulated 100-persona buyer panel
+   (treat as soft demand signals, NOT demand forecasts):
+   enterprise $60/mo, eval-focused MLE $25/mo, paid-heavy prosumer $25/mo,
+   startup platform $24.50/mo, indie hacker $5/mo, overall median $15/mo.
+E. Model input-token price scenarios to use (list-price 2026 ballpark, treat
+   as scenario variables): P = $0.15, $0.50, $3.00 per 1M input tokens.
+   Label every dollar figure with its P and scenario.
+## HYPOTHESIS TO TEST
+"The fixed machine paperwork (system prompt + skills + tool schemas) re-sent
+on every call, not thinking, dominates what a typical agent user pays per
+month; therefore a tool that measures and verifiably reclaims store/context
+waste can stand on a real per-user dollar number."
+## COMPUTE AND ANSWER (show formulas + every step)
+H1. Convert the 97.7 KB fixed overhead to tokens using the measured 3.04
+    chars/token density. What fraction is it of a 128K-token context window?
+    Of a 200K window?
+H2. Monthly dollar cost of the fixed overhead alone as a table for
+    calls/month N in {100, 500, 1000, 5000} x P in {0.15, 0.50, 3.00}.
+    (cost = N x overhead_tokens / 1M x P)
+H3. Store cross-check: implied tokens per stored message from the census.
+    Consistent with the overhead figure? Anything odd?
+H4. BREAKEVEN: for each P, at what calls/month does the fixed-overhead cost
+    alone equal $15, $25, and $60 (the D medians)? Conclusion: which buyer
+    segments does the hypothesis "pencil" for at realistic usage?
+H5. Extrapolation (label PROJECTION): byte-share went 85.4% -> 89.1% as the
+    store grew 38 -> 60 MB. Assuming the same linear trend, project the
+    exhaust share at 100 MB and state one reason the linear assumption
+    might be wrong in either direction.
+H6. ADVERSARIAL: list the 3 weakest assumptions in this whole setup and the
+    ONE measurement that would each fix them. Be specific and hostile.
+H7. VERDICT: in 3-5 sentences, is the hypothesis supported by these numbers,
+    partially supported, or not supported? State the single most important
+    caveat.
+## FORMAT
+Plain text, sections H1..H7, all arithmetic visible inline.
+End with exactly this line: HYPOTHESIS-CHECK-OK
+Initializing agent...
+ ⚕ Hermes
+    I'll work through this quantitatively. Let me verify all arithmetic with
+    a quick computation, then write up every step.
+  ┊ 🐍 preparing execute_code…
+  ┊ 🐍 exec      KB = 1024  # binary KB  0.1s
+ ⚕ Hermes
+    Verified. Here is the full independent check, all arithmetic shown inline.
+    FIXED INPUTS (restated, labeled)
+    Fixed overhead per call: 28.7 + 14.7 + 54.3 = 97.7 KB
+    Density: tool-style JSON = 3.04 chars/token (measured); human prose =
+    4.10 chars/token
+    Census: 37,813 msgs / 353 sess / 18,210,064 tokens; 90.69% tool-exhaust
+    (tokens); byte-share 85.4% (38MB) -> 89.1% (60MB)
+    WTP medians: enterprise $60, eval-MLE $25, prosumer $25, startup $24.50,
+    indie $5, overall $15
+    Price scenarios: P = $0.15 / $0.50 / $3.00 per 1M input tokens
+    I take 1 KB = 1024 bytes (memory/jargon standard). I flag the decimal
+    alternative at H1 so you can see how sensitive this is to that choice.
+    H1 - Fixed overhead -> tokens, and window fractions
+    chars = 97.7 KB x 1024 = 100,044.8 chars
+    tokens = 100,044.8 / 3.04 = 32,909.5  (round to ~32,910 tokens)
+    Window fraction (using 128K/200K = 128/200 x 1024):
+    128K = 131,072 tokens -> 32,909.5 / 131,072 = 25.11%
+    200K = 204,800 tokens -> 32,909.5 / 204,800 = 16.07%
+    So the fixed paperwork alone eats a QUARTER of a 128K window and ~16% of
+    a 200K window, before a single real token of user thinking or tool output.
+    Flag: if "KB" is decimal (1000), chars = 97,700 and tokens = 32,138 (2.3%
+    lower). I use binary throughout; the qualitative result is unchanged.
+    One thing that does NOT follow cleanly: the 3.04 chars/token density was
+    measured on tool-style JSON. The system prompt (28.7KB) and skills index
+    (14.7KB) are at least partly human prose, which measured 4.10 chars/token
+    on the same store. If even part of the 43.4KB of prose is at 4.10 rather
+    than 3.04, the true token count is LOWER than 32,910. I note this as a
+    downward bias on the headline number; the direction matters for the
+    verdict.
+    H2 - Monthly dollar cost of fixed overhead alone
+    cost = N x (32,909.5 / 1,000,000) x P
+    per-call million-tokens = 0.03291
+    P = $0.15/M (scenario 1):
+      N=100    -> 100  x 0.03291 x 0.15 = $0.49
+      N=500    -> 500  x 0.03291 x 0.15 = $2.47
+      N=1000   -> 1000 x 0.03291 x 0.15 = $4.94
+      N=5000   -> 5000 x 0.03291 x 0.15 = $24.68
+    P = $0.50/M (scenario 2):
+      N=100    -> 100  x 0.03291 x 0.50 = $1.65
+      N=500    -> 500  x 0.03291 x 0.50 = $8.23
+      N=1000   -> 1000 x 0.03291 x 0.50 = $16.45
+      N=5000   -> 5000 x 0.03291 x 0.50 = $82.27
+    P = $3.00/M (scenario 3):
+      N=100    -> 100  x 0.03291 x 3.00 = $9.87
+      N=500    -> 500  x 0.03291 x 3.00 = $49.36
+      N=1000   -> 1000 x 0.03291 x 3.00 = $98.73
+      N=5000   -> 5000 x 0.03291 x 3.00 = $493.64
+    Every dollar above is labeled by (scenario P, N). Note cost scales
+    linearly in both N and P, so P is the dominant lever: the SAME 1,000
+    calls/mo costs $4.94 at P=15 cents vs $98.73 at P=$3, a 20x spread from
+    price alone.
+    H3 - Store cross-check
+    Implied tokens per stored message = 18,210,064 / 37,813 = 481.6
+    tokens/message
+    Implied tokens per session     = 18,210,064 / 353    = 51,586.6
+    tokens/session
+    The odd/notable finding: the average STORED message is ~482 tokens, while
+    the re-sent fixed overhead is ~32,910 tokens per call. That is a 68x gap.
+    This is actually CONSISTENT with the hypothesis in spirit: the 97.7KB of
+    system prompt + skills + schemas is ephemeral re-send and does NOT get
+    persisted into the store (if it did, per-message bytes would reflect it).
+    The store also corroborates the tool-exhaust dominance: 90.69% x
+    18,210,064 = 16,514,707 stored tokens are tool exhaust, leaving only 44.8
+    non-exhaust tokens per message on average.
+    But it is only "consistent," not proof, for two reasons:
+    1. The store records 18.2M tokens TOTAL across a period, yet the fixed
+    overhead alone would generate ~32,910 tokens per single call. If the same
+    agent made even ~550 calls while the store accumulated, the overhead
+    re-sends would total ~18M tokens of BILLED flow that never appears in the
+    store. So the store materially UNDERSTATES real token flow; that
+    understatement is exactly the hypothesis's point, but it also means the
+    census cannot by itself size the dollar claim.
+    2. 482 tokens/message is low, suggesting this is a compact single-user
+    dev store, not a representative production load. I'd be reluctant to
+    scale the ratio up to multi-user prod.
+    H4 - Breakeven calls/month for fixed-overhead cost = each WTP median
+    breakeven N = D / (per-call dollar cost), where per-call = 0.03291 x P
+    P = $0.15/M (per call = $0.00494):
+      indie $5    -> 5   / 0.00494 =  1,013  calls/mo
+      overall $15 -> 15  / 0.00494 =  3,039  calls/mo
+      MLE/prosumer $25 -> 25 / 0.00494 = 5,064 calls/mo
+      enterprise $60 -> 60 / 0.00494 = 12,155 calls/mo
+    P = $0.50/M (per call = $0.01645):
+      indie $5    -> 5   / 0.01645 =    304  calls/mo
+      overall $15 -> 15  / 0.01645 =    912  calls/mo
+      MLE/prosumer $25 -> 25 / 0.01645 = 1,519 calls/mo
+      enterprise $60 -> 60 / 0.01645 = 3,646  calls/mo
+    P = $3.00/M (per call = $0.09873):
+      indie $5    -> 5  / 0.09873 =    51   calls/mo
+      overall $15 -> 15 / 0.09873 =   152   calls/mo
+      MLE/prosumer $25 -> 25 / 0.09873 = 253 calls/mo
+      enterprise $60 -> 60 / 0.09873 =   608  calls/mo
+    Conclusion on which segments pencil: it depends entirely on P (price) AND
+    on what "realistic usage" you assume.
+    - At P = $3.00: it pencils for everyone at shockingly light usage (an
+    enterprise needs only ~600 calls/mo, ~20/day). Very heavy agent users hit
+    $60/mo of pure paperwork.
+    - At P = $0.50: it pencils for MLE/prosumer/enterprise at
+    plausible-but-heavy use (1,500-3,600 calls/mo, i.e. 50-120 calls/day
+    every day). Indie and light overall-average users only reach their WTP at
+    ~300-900 calls/mo.
+    - At P = $0.15 (cheap frontier models): the hypothesis is WEAK for
+    everyone except the most extreme users. Enterprise needs ~12,000 calls/mo
+    (~400/day) just to equal $60; the overall median $15 buyer needs ~3,000
+    calls/mo. At low input prices, thinking/output and the paperwork are all
+    cheap, so "paperwork dominates the bill" is not compelling.
+    So the hypothesis does NOT pencil uniformly. It is strongest for high-P
+    (premium-model) heavy users, moderate for mid-P MLE/prosumer, and
+    collapses at $0.15/M.
+    H5 - Extrapolation (PROJECTION, labeled)
+    Two points: (38 MB, 85.4%) and (60 MB, 89.1%)
+    slope = (89.1 - 85.4) / (60 - 38) = 3.7 / 22 = 0.1682 %-share per MB
+    PROJECTION: share at 100 MB = 85.4 + 0.1682 x (100 - 38) = 85.4 + 10.43 =
+    95.8%
+    (Checking from the other point: 89.1 + 0.1682 x 40 = 95.8% — consistent,
+    linear through both.)
+    Note the linear line crosses 100% at ~124.8 MB, so the trend is
+    mathematically guaranteed to break before ~125 MB.
+    Why linear could be wrong DOWNWARD (overstate): exhaust share is bounded
+    at 100%; real stores decelerate as the count asymptotes, and the
+    remaining non-exhaust (system prompt, brief, reasoning) is a floor that
+    never shrinks to zero. So growth should flatten well before 125MB, making
+    95.8% an over-estimate.
+    Why it could be wrong UPWARD (understate): a single retention/spooling
+    bug or a huge multi-turn context dump into the store could add a large
+    block of exhaust at once, jumping share faster than linear, and pushing
+    it above 95.8% sooner.
+    Separate caveat worth naming: H5 runs on BYTE-share (85.4/89.1) while the
+    census headline is a different metric, 90.69% TOKEN-share. Byte and token
+    share can diverge (JSON tool text is denser per token), so the 90.69% and
+    the 95.8% extrapolation should NOT be averaged or treated as the same
+    number.
+    H6 - Adversarial: three weakest assumptions + the one fix each
+    A1. Density misapplication. The headline 32,910 tokens is built by
+    pushing the ENTIRE 97.7KB (system prompt + skills + schemas) through a
+    3.04 chars/token JSON density, but the system prompt and skills index are
+    partly human prose (measured 4.10 chars/token on the same store). If even
+    ~43KB of prose is at ~4.10, the true fixed overhead is meaningfully LOWER
+    than 32,910 tokens, shrinking every dollar figure and every breakeven.
+        FIX: tokenize the ACTUAL system-prompt + skills + schema strings with
+    the real o200k_base tokenizer and count exactly, instead of applying a
+    store-wide proxy density to mixed content.
+    A2. List price vs billed reality / prompt caching. Every cost uses list
+    input-token price P with no allowance for prompt caching (vendor KV-cache
+    discounts slash the cost of re-sent, stable prefix text like system
+    prompt + skills + schemas 10-90%) and no allowance that the "97.7KB
+    re-sent every call" may be substantially cached in practice. If caching
+    applies, the fixed overhead is the single CHEAPEST thing being sent (it
+    is byte-identical every call), and "paperwork dominates the bill" inverts
+    toward "the fresh thinking and tool motion dominate." This is the most
+    dangerous threat to the claim because it can flip the sign.
+        FIX: pull the actual BILLED input tokens (and cache-hit tokens) from
+    the vendor usage/billing ledger for a month, don't compute from list
+    price.
+    A3. Stored-token census is not billed-token flow. The 18.2M stored tokens
+    / 90.69% exhaust describes what is PERSISTED in a single-user dev store,
+    not what is CHARGED per call (the 32,910-token overhead never appears in
+    the store, per H3; and stored bytes are not billed input tokens). The
+    whole edifice therefore rests on inferring charging behavior from a
+    retention metric, on one machine, in an agent-heavy 3-week burst.
+        FIX: instrument the live stack's real per-call billed input tokens
+    (and cached vs uncached) and tally a full month, instead of dividing
+    store tokens by call counts.
+    Honorable mention (not in the top 3): the WTP panel is a self-reported
+    simulated panel, not revealed purchasing — a soft demand signal,
+    correctly labeled, but it should never be read as a demand forecast, and
+    a $15 "overall median" drawn mostly from one $5 indie + heavy segments
+    will be skewed by the persona mix.
+    H7 - Verdict
+    The hypothesis is only PARTIALLY supported, and only under a specific and
+    narrow condition: at premium input prices (P=$3/M) the fixed paperwork
+    alone reaches even the $60 enterprise WTP at just ~600 calls/mo, and
+    reaches the $15 median at ~150 calls/mo, so for high-priced-model heavy
+    users the claim that "paperwork, not thinking, dominates the bill" is
+    credible. But at cheap frontier pricing (P=$0.15/M) the same paperwork
+    tops the $15 median only at ~3,000 calls/mo and the $60 enterprise only
+    at ~12,000 calls/mo, which drains the force of the claim for exactly the
+    cost-conscious buyers the number is aimed at. The single most important
+    caveat is A2: prompt caching makes the re-sent fixed text the cheapest
+    bytes on the wire, so unless the team shows real cached-vs-uncached
+    billed tokens rather than list price, the "paperwork dominates" claim can
+    flip sign entirely. Net: the measurement tool's dollar story rightfully
+    scales with P and usage, but the headline "paperwork dominates thinking"
+    is not robust across the price scenarios given; it should be re-sold
+    around the P=$0.50-$3.00, cache-excluded, heavy-agent-user cases where
+    the arithmetic actually holds.

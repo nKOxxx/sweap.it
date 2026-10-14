@@ -1,0 +1,65 @@
+# TASK: Independent quantitative check of a cost hypothesis (show ALL arithmetic)
+
+You are an independent quantitative analyst. Another team measured the constants
+below on a live LLM-agent stack. They have a HYPOTHESIS they want you to test
+WITHOUT knowing their conclusions. Derive everything yourself; show every
+arithmetic step; flag anything that does not follow. Do not invent data: if a
+needed input is missing, say so and proceed with what is given, labeled.
+
+## MEASURED INPUTS (all from a real single-user agent store, macOS, 2026-10)
+
+A. Fixed per-call prompt overhead (paid on EVERY model API call):
+   - system prompt:            28.7 KB
+   - skills index:             14.7 KB
+   - tool schemas (28 tools):  54.3 KB
+   - TOTAL fixed:              97.7 KB per call
+B. Tokenizer density of machine/tool text (measured, exact count over 18.2M
+   tokens, o200k_base): tool-style JSON text averages 3.04 characters per token.
+   (For comparison: human prose averages 4.10 chars/token on the same store.)
+C. Store census (exact full-store pass, no sampling):
+   - 37,813 stored messages, 353 sessions
+   - 18,210,064 stored tokens total
+   - 90.69% of stored tokens are tool exhaust (tool outputs + tool-call records)
+   - historical byte comparison 3 weeks earlier: 38 MB store, 85.4% exhaust
+     byte-share; now 60 MB and 89.1% (agent-heavy usage period)
+D. Willingness-to-pay medians from a simulated 100-persona buyer panel
+   (treat as soft demand signals, NOT demand forecasts):
+   enterprise $60/mo, eval-focused MLE $25/mo, paid-heavy prosumer $25/mo,
+   startup platform $24.50/mo, indie hacker $5/mo, overall median $15/mo.
+E. Model input-token price scenarios to use (list-price 2026 ballpark, treat
+   as scenario variables): P = $0.15, $0.50, $3.00 per 1M input tokens.
+   Label every dollar figure with its P and scenario.
+
+## HYPOTHESIS TO TEST
+
+"The fixed machine paperwork (system prompt + skills + tool schemas) re-sent
+on every call, not thinking, dominates what a typical agent user pays per
+month; therefore a tool that measures and verifiably reclaims store/context
+waste can stand on a real per-user dollar number."
+
+## COMPUTE AND ANSWER (show formulas + every step)
+
+H1. Convert the 97.7 KB fixed overhead to tokens using the measured 3.04
+    chars/token density. What fraction is it of a 128K-token context window?
+    Of a 200K window?
+H2. Monthly dollar cost of the fixed overhead alone as a table for
+    calls/month N in {100, 500, 1000, 5000} x P in {0.15, 0.50, 3.00}.
+    (cost = N x overhead_tokens / 1M x P)
+H3. Store cross-check: implied tokens per stored message from the census.
+    Consistent with the overhead figure? Anything odd?
+H4. BREAKEVEN: for each P, at what calls/month does the fixed-overhead cost
+    alone equal $15, $25, and $60 (the D medians)? Conclusion: which buyer
+    segments does the hypothesis "pencil" for at realistic usage?
+H5. Extrapolation (label PROJECTION): byte-share went 85.4% -> 89.1% as the
+    store grew 38 -> 60 MB. Assuming the same linear trend, project the
+    exhaust share at 100 MB and state one reason the linear assumption
+    might be wrong in either direction.
+H6. ADVERSARIAL: list the 3 weakest assumptions in this whole setup and the
+    ONE measurement that would each fix them. Be specific and hostile.
+H7. VERDICT: in 3-5 sentences, is the hypothesis supported by these numbers,
+    partially supported, or not supported? State the single most important
+    caveat.
+
+## FORMAT
+Plain text, sections H1..H7, all arithmetic visible inline.
+End with exactly this line: HYPOTHESIS-CHECK-OK

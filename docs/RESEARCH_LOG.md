@@ -549,3 +549,39 @@ is the cautionary dataset).
 **Unchanged**: 97.7KB fixed overhead/call (28.7 sysprompt + 14.7 skills index + 54.3 tool schemas), re-paid every call.
 
 **Artifacts**: research/tokenizer_remeasure.py, tokenizer_exact.py, tokenizer_remeasure_20261013.json (sample + exact), tokenizer_exact_out.txt. Commits: this one.
+
+## 2026-10-14 - R7: independent hypothesis check (DeepSeek, blind)
+
+Question from founder (plain): "can we use deepseek to run some numbers on our hypothesis?"
+Dispatch: R7_hypothesis.txt -> deepseek, needle HYPOTHESIS-CHECK-OK, 850s budget, landed 78s.
+Blind protocol: brief carried ONLY measured constants (A-E), no conclusions of ours.
+
+Hub-side arithmetic audit: ALL CELLS REPRODUCED EXACTLY (H1 32,909.5 tok; 12/12 cost cells;
+12/12 breakevens; H5 slope 0.1682%/MB -> 95.8% @100MB; H3 481.6 tok/msg). No corrections needed
+(unlike analyst wave). Receipt: research/R7_hypothesis_report.txt.
+
+Findings (all DeepSeek's, arithmetic verified hub-side):
+1. Fixed overhead = ~32.9K tokens/call = 25% of a 128K window, 16% of 200K.
+2. Dollar envelope: at P=$3/M, $60/mo enterprise WTP crossed at ~600 calls/mo; at P=$0.50,
+   $25 crossed at ~1,500 calls/mo; at P=$0.15 the hypothesis weakens sharply ($15 needs ~3,000).
+3. Store census understates billed flow: the 97.7KB overhead is ephemeral (never persisted),
+   so wire-plane billing >> store-plane census. Two different quantities; do not conflate.
+4. H5 projection: exhaust share -> 95.8% at 100MB (linear), but line hits 100% at ~125MB so
+   trend must break; byte-share and token-share metrics must not be averaged.
+5. ADVERSARIAL (material, accepted):
+   A1 density misapplication: JSON density applied to prose-heavy sysprompt/skills; mixed-density
+      recount ~29.1K tok (-12%); direction weakens, does not flip.
+   A2 PROMPT CACHING (the sign-flip threat): cached prefixes bill at ~10x discount; if paperwork
+      is cached it is the CHEAPEST content on the wire. Dollar card MUST read billed tokens
+      (cached vs uncached) from provider ledgers, never list-price x bytes.
+   A3 stored != billed; single-user dev store; WTP panel is soft signal (already labeled).
+
+VERDICT: hypothesis PARTIALLY supported, conditional: holds for premium-model heavy users
+(P=$0.50-3), weak for cheap-model light users. A2 upgrades the W5-8 harness requirement:
+billed-token instrumentation with cache visibility is now mandatory for any dollar claim.
+Product consequence: proof-run census stays valid (store-plane quantities are real), but the
+dollar card's cost line must be built on billed tokens, or Caveman-style calculators become
+the trap our own swarm rejected (fake numbers).
+
+Repo: research/briefs/R7_hypothesis.txt, research/raw/R7_hypothesis_deepseek_raw.txt,
+research/R7_hypothesis_report.txt (clean extract).
