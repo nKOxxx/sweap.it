@@ -660,3 +660,48 @@ B. HUB-SIDE BILLED-USAGE CENSUS (the B3 test, run same day, provider-reported co
 
 Files: research/briefs/R9_notes.txt, research/raw/R9_notes_deepseek_raw.txt,
 research/R9_notes_report.txt, research/billed_usage_census.txt. Proc proc_6159a9abc903.
+
+## 2026-10-14: R11: sweep v1.1 shipped, hostile safety review applied, live store staged
+
+GO received from user ("Formal GO: build sweep v1"). Built, reviewed, fixed,
+demoed, staged. Commit chain this entry: see git log.
+
+**Landscape (measured, live store):** 38,397+ messages, 40.8 MB content,
+258.6 MB file. Dead rows (compacted=1 OR finalized session; active=0 is a
+perfect mirror of compacted=1, 0 exceptions): 30,943 rows / 24.69 MB.
+v1 targets TOOL rows only: 14,955 rows / 19.56 MB (48% of message content).
+Protected classes: user+assistant prose (the mandate record, never touched),
+live rows. token_count is NULL on every row (store never fills it).
+
+**Wire honesty law enforced in code:** dead rows re-send nothing, so v1 wire
+savings are stamped $0.00. v1 reclaims disk. v2 (live cache arrangement) is
+where wire savings live; never conflate the two planes.
+
+**sweep v1.1 mechanics:** dry-run census; quarantine (full-column copies,
+8 SHA-256-hashed JSONL shards, manifest, store untouched); gated apply (id
+typed twice; BEGIN IMMEDIATE; per-row dead-recheck including role inside the
+transaction; schema-drift abort; crash sentinel state=applying before
+commit); VACUUM INTO swap with measured before/after file size; FTS ghost
+assertion (external-content fts5 delete-triggers verified, 0 ghosts);
+restore (hash-verified, full-column, never duplicates).
+
+**R10C hostile safety review (DeepSeek, 5m06s, 24 tool calls, ran its own
+quarantine-apply-restore experiment on a copy):** 7 attack lanes + 3 extras.
+Must-fixes all applied: (A1) staging was 9 columns, now schema-driven 23
+(its own probe found 3 dead rows carrying effect_disposition; v1.1 restores
+all 3, verified); (E1) copy verification was count-only with dead
+byte-parity code, now per-shard SHA-256 verified before apply and restore;
+(A6/A7) the file did not shrink without VACUUM (verified 0 bytes) and the
+48% content-share read as a disk claim, now VACUUM INTO swap + measured
+file deltas + explicit content-vs-file separation. Refuted by evidence:
+FTS ghost fear (delete triggers fire; verified 0 ghosts post-apply), race
+TOCTOU (BEGIN IMMEDIATE covers recheck+delete), gate bypass (none).
+
+**Demo, end to end, on a copy:** quarantine 14,955 rows / 23 columns, apply
+(-23.58 MB file, measured), integrity ok, restore, FULL-COLUMN round-trip
+14,955/14,955 identical including the 3 effect_disposition rows.
+
+**Live store status:** quarantined as q_20261014_191532 (28.89 MB staged,
+8 shards hashed, row parity PASS). Store UNTOUCHED. Apply (and its 23 MB
+disk reclaim) waits for a quiet moment: the store must not be mid-write;
+instrument-frozen law applies to surgery, not just measurement.
