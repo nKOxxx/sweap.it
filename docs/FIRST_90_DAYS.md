@@ -136,8 +136,20 @@ Nikola: the 4 clicks that matter (push public, post Reddit, post HN, the Day-90
 decision) + every final word that leaves the account with his name on it.
 Nobody else: nothing is outsourced; no paid promotion exists at any point.
 
+## BUDGET (unlocked 2026-10-15, owner statement: "I have no issues to actually
+put some money on this")
+Money buys ASSETS, never ACCELERATION. Gates, receipt-first order, and the
+Day-90 evidence decision do not move. Approved now:
+- sweap.it domain (available per RDAP check 2026-10-15): ~10-15 EUR/yr.
+  Registrar: any ( Porkbun/Cloudflare ); WHOIS privacy on; Nikola's card,
+  hub prepares exact clicks.
+- sweapit.com defensive redirect (~10 USD/yr), same day.
+Still free-tier: hosting (GitHub Pages), CI, everything else.
+Gated behind the R4 measurements (Day 60+): any paid infra, paid promotion
+(stands forever per R3), design work, .com/.ai upgrades beyond the defensive.
+
 ## STANDING LAWS THIS DOCUMENT OBEYS
 No fabricated numbers (everything stamped). No em-dash anywhere. English only.
-No purchases (domain/hosting stays free-tier: GitHub Pages + repo; sweap.it
-domain only if/when R4-gate passes). DeepSeek free lane for any research waves.
+Domain purchase approved (see BUDGET); hosting stays free-tier GitHub Pages.
+DeepSeek free lane for any research waves.
 Findings land as files; user artifacts are never rewritten.
