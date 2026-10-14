@@ -177,7 +177,7 @@ Initializing agent...
     slope = (89.1 - 85.4) / (60 - 38) = 3.7 / 22 = 0.1682 %-share per MB
     PROJECTION: share at 100 MB = 85.4 + 0.1682 x (100 - 38) = 85.4 + 10.43 =
     95.8%
-    (Checking from the other point: 89.1 + 0.1682 x 40 = 95.8% — consistent,
+    (Checking from the other point: 89.1 + 0.1682 x 40 = 95.8% ;  consistent,
     linear through both.)
     Note the linear line crosses 100% at ~124.8 MB, so the trend is
     mathematically guaranteed to break before ~125 MB.
@@ -227,7 +227,7 @@ Initializing agent...
     (and cached vs uncached) and tally a full month, instead of dividing
     store tokens by call counts.
     Honorable mention (not in the top 3): the WTP panel is a self-reported
-    simulated panel, not revealed purchasing — a soft demand signal,
+    simulated panel, not revealed purchasing ;  a soft demand signal,
     correctly labeled, but it should never be read as a demand forecast, and
     a $15 "overall median" drawn mostly from one $5 indie + heavy segments
     will be skewed by the persona mix.
