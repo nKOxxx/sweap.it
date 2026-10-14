@@ -65,7 +65,8 @@ A live rehearsal (14,955 rows) restored byte-identical.
 - **90.69%** of stored transcript tokens are dead tool output
   (n=37,813 rows, exact tokenizer count)
 - **48%** of the session-store file is provably-dead tool rows
-  (14,955 rows, 19.56 MB); sweeping them reclaimed 23.6 MB on a live store
+  (14,955 rows, 19.56 MB); sweeping them reclaimed 22.1 MB on a live
+  store, measured (23.6 MB in the rehearsal copy)
 - **96.3%** cache hit on the best-tuned lane vs **0.0%** on untuned lanes;
   the gap is the "cache lottery", $24.93 over one host's lifetime [reconstructed]
 - **$53.80** lifetime cache-break tax on one host [reconstructed from
