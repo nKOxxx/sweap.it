@@ -1,0 +1,7 @@
+# Billed-usage census (provider-reported, state.db sessions, 2026-10-14)
+# method: session usage columns; resend/call = (input+cache_read+cache_write)/api_call_count
+
+glm-4.6: sessions=62 calls=10,085 uncached=28,289,153 cache_read=738,618,432 cache_write=0 hit=96.3% resend/call avg=76,044 median=41,052 p25=24,122 p75=52,845 max=111,871
+deepseek-ai: sessions=269 calls=1,697 uncached=127,857,208 cache_read=0 cache_write=0 hit=0.0% resend/call avg=75,343 median=24,512 p25=24,510 p75=24,517 max=137,014
+MiniMaxAI: sessions=17 calls=51 uncached=1,861,363 cache_read=0 cache_write=0 hit=0.0% resend/call avg=36,497 median=23,106 p25=22,288 p75=23,458 max=60,689
+glm-4.7: sessions=1 calls=1 uncached=12,427 cache_read=2,944 cache_write=0 hit=19.2% resend/call avg=15,371 median=15,371 p25=15,371 p75=15,371 max=15,371

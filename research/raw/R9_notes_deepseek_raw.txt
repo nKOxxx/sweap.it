@@ -1,0 +1,256 @@
+Query: # TASK: Two research notes for a context-cost product (recall + 
+reasoning; label everything)
+
+You are a research analyst. Two notes needed. You have NO browsing: work from 
+training
+knowledge. EVERY factual claim about the outside world gets a confidence tag
+[HIGH]/[MED]/[LOW] and a source type ///. If you do
+not know, write UNKNOWN; never invent numbers or citations. Your own reasoning 
+and
+arithmetic need no tags.
+
+CONTEXT (measured on our side, take as given): an agent's fixed "paperwork" 
+(system
+prompt + skills index + 28 tool schemas) measures 97.7 KB = ~33k tokens, re-sent
+on
+EVERY API call. A hypothetical cost scenario assumed 60k tokens/call total 
+re-sent and
+was made falsifiable if real agent stacks re-send under 10k tokens/call.
+
+## PART A: THE 10K QUESTION (how big is a real agent call?)
+
+A1. Plain chatbots: typical re-sent input context per call. Ranges + point 
+estimate, tagged.
+A2. Coding agents (Claude Code / Cursor / Codex class): typical re-sent input 
+per call,
+    including their system prompts and tool-schema weight. Ranges + point 
+estimate, tagged.
+A3. Long-running autonomous agents: how re-sent context grows per call over a 
+run;
+    typical mid-run size. Ranges + point estimate, tagged.
+A4. VERDICT: given that fixed tool+prompt overhead alone is ~20-35k tokens on 
+serious
+    agent stacks, is >10k re-sent per call the NORM for agent stacks? Is 60k 
+plausible
+    as a heavy-use median? One-line kill check for the scenario.
+A5. What vendor-documented behavior implies: prompt-caching rules (OpenAI, 
+Anthropic,
+    Google: what gets cached automatically, minimum prefix sizes, discount 
+sizes,
+    TTLs), plus any context-editing/compaction features. Tag each claim.
+
+## PART B: HOW TO DELIVER REAL SAVINGS (the "do the same" question)
+
+A competing product (compressor lane, complementary to us) delivers savings via 
+an
+OpenAI-compatible proxy: user swaps one base-URL line; it compresses traffic in 
+flight;
+it tests fixes by replaying old requests; it has an autopilot. OSS core + paid 
+cloud.
+
+B1. Enumerate delivery paths for OUR lane (auditor/complementary, NO proxy):
+    (1) read-only store-census CLI printing a personal dollar card;
+    (2) client-side prompt-assembly hook/linter that prunes stale history and 
+orders
+        content cache-friendly BEFORE send (works with native provider caching);
+    (3) post-hoc store sweep with quarantine (reversible, opt-in);
+    (4) framework integration (LangChain callback, OpenAI SDK wrapper, Claude 
+Code hooks);
+    (5) any other path you think is stronger.
+    For each: install friction, invasiveness, are savings verifiable per-user, 
+does it
+    complement rather than fight compressors.
+B2. What should our OSS artifact be (equivalent of their one-line install)? 
+Recommend
+    ONE primary path and the first artifact to ship. Five sentences max.
+B3. Name the single biggest technical risk of your recommended path and the 
+cheapest
+    test that would kill or clear it.
+
+## FORMAT
+Plain text, sections A1..A5, B1..B3, tags everywhere.
+End with exactly this line: R9-NOTES-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    R9 NOTES: CONTEXT-COST RECALL + REASONING LANE
+    (analyst, no browsing; all outside-world claims tagged [conf]/[type].
+    Where I don't know, UNKNOWN.)
+    
+    PART A: THE 10K QUESTION (how big is a real agent call?)
+    
+    A1. Plain chatbots
+    Re-sent input per call = prior conversation + small system prompt.
+    Consumer turns are short.
+    - Range: ~0.5k to ~15k tokens/call [HIGH] [vendor doc + anecdote]
+    - Point estimate: ~3-5k median, maybe less for single-turn assistants
+    [MED] [anecdote]
+    - Note: even these cross 10k once a chat runs long, but the typical
+    casual call does not.
+    Verdict for comparison: plain chatbots are clearly BELOW the 10k floor;
+    they are not the market.
+    
+    A2. Coding agents (Claude Code / Cursor / Codex class)
+    These layer a large fixed system prompt + an explicit tool/schema corpus
+    on top of growing file+transcript context, and they re-send everything on
+    every tool loop.
+    - Range: ~15k to ~80k tokens/call, higher on edit/debug segments [MED]
+    [vendor doc + anecdote]
+    - Point estimate: ~30-40k typical mid-task [MED] [anecdote]
+    - Known signal: Claude team's engineer (Alex Albert) publicly cited
+    Claude Code burning on the order of ~2M tokens in a ~20-minute session,
+    i.e. tens of thousands re-sent per call on a tight loop [MED] [anecdote,
+    primary source is a public statement from the Claude org]. That number is
+    a single anecdote, not a measurement, but it is consistent with the
+    arithmetic below.
+    Our own measured "paperwork" alone: 97.7KB = ~33k tokens re-sent on EVERY
+    call [given, take as fact]. So the fixed overhead of a real code agent
+    already exceeds the 10k kill line before any history, file context, or
+    tool output is added.
+    
+    A3. Long-running autonomous agents
+    Context only grows: each hop appends tool inputs/outputs and the running
+    transcript; nothing meaningful is dropped unless compaction/editing runs.
+    So per-call re-sent size is monotone-ish over a run.
+    - Range: early calls maybe 20-40k, mid-run typically 40-120k, late-run
+    higher [LOW-MED] [anecdote]
+    - Point estimate: ~50-80k at mid-run for a multi-hour multitool run
+    without manual compaction [LOW-MED] [anecdote]
+    - Caveat: agents that auto-compact (Claude Code /compact, OpenAI
+    summaries) hold it flatter; agents that don't, grow unbounded [MED]
+    [vendor doc].
+    
+    A4. VERDICT
+    Yes: for real agent stacks (A2/A3), >10k re-sent per call is the NORM,
+    not the exception. The fixed paper+tool overhead alone is ~20-35k on
+    serious stacks [HIGH and, for our own stack, measured], which already
+    clears the 10k floor before any history. 60k as a heavy-use median is
+    plausible: take ~33k fixed + moderate history + a big
+    file/search/screenshot tool result and you are there quickly [MED]
+    [arithmetic + anecdote].
+    One-line kill check: the scenario is falsified (dead) only if real stacks
+    re-send under 10k/call, but measured paper alone is 33k, so no
+    tool-calling agent stack can live under that line; the risk is
+    effectively cleared, hedge only by sampling two deployed stacks to
+    confirm.
+    
+    A5. Vendor-documented prompt-caching + context-editing behavior
+    OpenAI:
+    - Automatic caching for API inputs [HIGH] [vendor doc]
+    - Minimum cacheable prefix: 1024 tokens (in the modern auto-cache) [MED]
+    [vendor doc]
+    - Discount: ~50% off cached input tokens [MED-HIGH] [vendor doc]
+    - TTL / invalidation: cache slot expires after ~5-10 min of inactivity;
+    exact figure has shifted across docs [MED] [vendor doc]
+    - Context compaction/summaries: auto-compaction and memory-style
+    summarization exist for long chats [MED] [vendor doc]
+    
+    Anthropic:
+    - Explicit caching via cache_control breakpoints (not fully automatic;
+    you must mark breakpoints) [MED-HIGH] [vendor doc]
+    - Minimum cacheable block: 1024 tokens [MED-HIGH] [vendor doc]
+    - Discount: cached input reads billed at a 90% discount (write has a ~25%
+    premium) [MED-HIGH] [vendor doc]
+    - TTL: default 5 min, extendable [MED] [vendor doc]
+    - Context editing: officially shipped an experimental "context editing"
+    API (backward/forward compaction) [MED] [vendor doc]
+    - Claude Code /compact and /memory exist as first-party compaction
+    features [MED-HIGH] [vendor doc]
+    
+    Google (Gemini):
+    - Context caching: explicit, via a caching API (not purely automatic)
+    [MED] [vendor doc]
+    - Minimum request size to enable caching: historically 32k tokens, since
+    lowered; exact current floor may differ [LOW-MED] [vendor doc]
+    - Discount: cached input billed at a substantial discount (~75% off, i.e.
+    ~25% of the original input price, with newer tiers better) [MED] [vendor
+    doc]
+    - TTL: 1 hour default up to ~24h max [MED] [vendor doc]
+    
+    Salt for A5: cache semantics change frequently and vary by model/tier;
+    treat the specific numbers as MED until re-verified against live docs.
+    The qualitative pattern is stable and HIGH: all three major providers
+    discount auto- or explicitly-cached prefixes and offer some
+    compaction/editing path, which is exactly why cache layout (not raw
+    compression) reads as the dominant cost lever.
+    
+    PART B: HOW TO DELIVER REAL SAVINGS (do the same, no proxy)
+    
+    B1. Delivery paths for our auditor/complementary lane (NO proxy, by
+    constraint)
+    (1) Read-only store-census CLI printing a personal dollar card.
+      - Install friction: low (drop a script/binary, read-only).
+      - Invasiveness: none (reads stored history + billing; never transforms
+    traffic).
+      - Per-user verifiable: YES, and this is the requirement-safe property,
+    it must read BILLED tokens with cache visibility (per R7) [HIGH on
+    requirement, from our own R-series].
+      - Complement vs compressor: complements cleanly, it does not touch the
+    wire.
+    (2) Client-side prompt-assembly hook/linter: prunes stale history +
+    orders content cache-friendly BEFORE send, so it rides native provider
+    caching instead of fighting it.
+      - Install friction: medium (must hook the assembly layer, not just read).
+      - Invasiveness: medium-high (it edits what is sent).
+      - Per-user verifiable: YES (token before/after + cache-hit delta).
+      - Complement: yes, and this is the R8 "cache-optimizer first" lever
+    [from our own R-series, treat as given].
+    (3) Post-hoc store sweep with quarantine (reversible, opt-in).
+      - Install friction: low-medium.
+      - Invasiveness: medium (touches stored history) but reversible +
+    opt-in, matches our existing file-delete quarantine pattern.
+      - Verifiable: YES (token deltas from the sweep).
+      - Complement: yes (compressors work on live traffic; we clean stored
+    residue).
+    (4) Framework integration (LangChain callback, OpenAI SDK wrapper, Claude
+    Code hooks).
+      - Install friction: high (one adapter per framework, version churn).
+      - Invasiveness: highest per framework at the call layer.
+      - Verifiable: YES.
+      - Complement: weaker, edges toward the proxy lane and competes for
+    integration surface.
+    (5) Stronger alternatives: the cache-optimizer middle layer
+    (reassemble/order context to maximize prefix cache hits) done client-side
+    rather than as a proxy; plus a "dry-run burn predictor" that estimates
+    the cost of the next call and flags compaction candidates before send.
+    Both preserve no-proxy constraint, keep measurement + optimization on the
+    same side as the user, and stay orthogonal to compressors.
+    
+    B2. Recommended primary path and first artifact
+    Ship path (1), the read-only store-census CLI dollar card, as the first
+    artifact. It is the cheapest to adopt (low install friction, zero
+    invasiveness), and it is the only path that satisfies per-user
+    verifiability from day one because it must read billed tokens with cache
+    visibility, which is the R7 requirement. It does not fight or duplicate
+    compressors, it occupies the auditor lane, and it establishes the
+    measurement basis (real billed token numbers per user) that every later
+    lever, especially the cache-optimizer, needs to prove itself. First
+    artifact: a single-file CLI that takes a provider credential and prints a
+    per-user or per-project dollar card with a billed-token line item, a
+    cache-relevant split, and the fixed paper overhead called out.
+    
+    B3. Single biggest technical risk + cheapest test
+    Risk: billing-data fidelity, specifically that we can read billed tokens
+    itemized to the cache-hit level across OpenAI, Anthropic, and Google,
+    because if the provider's usage/billing surface does not expose cache-hit
+    splits the way the dollar card expects, the card silently under-reports
+    real spend and the whole "auditor" claim breaks. Cheapest test: take N
+    real user sessions on ONE provider only, compute our counted token total
+    independently, and cross-check it against that provider's own billed
+    usage endpoint; if our number reconciles within a small tolerance AND the
+    cache-hit component is itemizable, the path is clear, if not, the card is
+    dead and we pivot immediately to the client-side cache-optimizer (path
+    2), which only needs relative before/after deltas and is robust to
+    billing-opacity.
+    
+    R9-NOTES-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261014_140634_f23430
+
+Session:        20261014_140634_f23430
+Duration:       59s
+Messages:       2 (1 user, 0 tool calls)

@@ -617,3 +617,46 @@ Net: every published R8 number above is the hub-verified version.
 
 Files: research/briefs/R8_scenario.txt, research/raw/R8_scenario_deepseek_raw.txt,
 research/R8_scenario_report.txt. Proc: proc_360b8b77f354 (2m18s, deepseek, 850s budget).
+
+## 2026-10-14 - R9: 10k question + delivery-path notes (DeepSeek) + billed-usage census (hub)
+
+Founder ask: settle the 10k kill-condition (average/standard resend per call), note it,
+and research how to deliver savings the way the compressor lane does (complementary).
+
+A. DEEPSEEK RECALL NOTE (R9_notes.txt -> research/R9_notes_report.txt, all claims tagged):
+- Plain chatbots: ~0.5-15k tok/call, median 3-5k [MED] -> below 10k floor, not the market.
+- Coding agents: 15-80k, point est 30-40k mid-task [MED]; Alex Albert anecdote ~2M tok/
+  20min session [MED/anecdote]. Fixed paperwork alone ~20-35k on serious stacks.
+- Autonomous long-run: mid-run 40-120k [LOW-MED]; auto-compaction flattens the curve [MED].
+- A4 verdict: >10k/call is the NORM for agent stacks; 60k heavy median plausible; kill
+  check CLEARED; hedge = sample two deployed stacks.
+- B1/B2: recommends path 1 first (read-only census CLI dollar card, billed tokens with
+  cache visibility), path 2 (client-side cache-optimizer hook) as the savings lever;
+  framework adapters weakest (churn, proxy-adjacent).
+- B3 biggest risk: billing-surface fidelity (cache itemization across providers); cheapest
+  test: reconcile independently-counted tokens against provider billed usage on ONE provider.
+
+B. HUB-SIDE BILLED-USAGE CENSUS (the B3 test, run same day, provider-reported columns
+   in state.db sessions: input_tokens, cache_read_tokens, api_call_count; 348 sessions
+   with usage, 349 with api_call_count):
+  glm-4.6 lane   62 sess, 10,080 calls: 28.3M uncached + 738.3M cache-read -> 96.3% hit,
+                 resend/call avg 76,049, per-session median 41,052 (max 111,871)
+  deepseek lane 269 sess,  1,697 calls: 127.9M uncached, cache-read 0 (lane reports none),
+                 resend/call avg 75,343, median 24,512
+  minimax lane    17 sess,     51 calls: 1.86M uncached, cache 0, resend/call 36,497
+- FINDING 1: kill condition dead by measurement, not just recall. All three families
+  re-send >>10k per call (medians 23k-41k; averages 36k-76k). Team Kite's 60k heavy
+  median is inside the measured envelope (glm median 41k, avg 76k).
+- FINDING 2 (new, material): cache hit rate is a PROVIDER LOTTERY: 96.3% (glm, automatic
+  caching) vs 0% reported (Hyperfusion deepseek lane, minimax lane). Same workload, two
+  lanes: one pays ~10% list on the re-send, the other pays full price every call.
+  The wire-plane story is two-sided: store exhaust (90.69%) is real, but only cache-poor
+  lanes pay full freight re-sending it. Product framing: measure your h, then improve it
+  (R8's I2 lever has near-zero headroom on cached lanes, massive headroom on cache-poor).
+- CAVEATS: single-user dev store; deepseek/minimax 0% may mean 'not reported' not 'not
+  cached'; resend/call from session totals / api_call_count (approximation if retries
+  counted). Still: provider-reported billed usage, not assumption.
+- R8 addendum: FALSIFIED-IF line is measured-cleared (3 families, all >>10k).
+
+Files: research/briefs/R9_notes.txt, research/raw/R9_notes_deepseek_raw.txt,
+research/R9_notes_report.txt, research/billed_usage_census.txt. Proc proc_6159a9abc903.

@@ -1,0 +1,50 @@
+# TASK: Two research notes for a context-cost product (recall + reasoning; label everything)
+
+You are a research analyst. Two notes needed. You have NO browsing: work from training
+knowledge. EVERY factual claim about the outside world gets a confidence tag
+[HIGH]/[MED]/[LOW] and a source type [paper]/[vendor doc]/[blog]/[anecdote]. If you do
+not know, write UNKNOWN; never invent numbers or citations. Your own reasoning and
+arithmetic need no tags.
+
+CONTEXT (measured on our side, take as given): an agent's fixed "paperwork" (system
+prompt + skills index + 28 tool schemas) measures 97.7 KB = ~33k tokens, re-sent on
+EVERY API call. A hypothetical cost scenario assumed 60k tokens/call total re-sent and
+was made falsifiable if real agent stacks re-send under 10k tokens/call.
+
+## PART A: THE 10K QUESTION (how big is a real agent call?)
+
+A1. Plain chatbots: typical re-sent input context per call. Ranges + point estimate, tagged.
+A2. Coding agents (Claude Code / Cursor / Codex class): typical re-sent input per call,
+    including their system prompts and tool-schema weight. Ranges + point estimate, tagged.
+A3. Long-running autonomous agents: how re-sent context grows per call over a run;
+    typical mid-run size. Ranges + point estimate, tagged.
+A4. VERDICT: given that fixed tool+prompt overhead alone is ~20-35k tokens on serious
+    agent stacks, is >10k re-sent per call the NORM for agent stacks? Is 60k plausible
+    as a heavy-use median? One-line kill check for the scenario.
+A5. What vendor-documented behavior implies: prompt-caching rules (OpenAI, Anthropic,
+    Google: what gets cached automatically, minimum prefix sizes, discount sizes,
+    TTLs), plus any context-editing/compaction features. Tag each claim.
+
+## PART B: HOW TO DELIVER REAL SAVINGS (the "do the same" question)
+
+A competing product (compressor lane, complementary to us) delivers savings via an
+OpenAI-compatible proxy: user swaps one base-URL line; it compresses traffic in flight;
+it tests fixes by replaying old requests; it has an autopilot. OSS core + paid cloud.
+
+B1. Enumerate delivery paths for OUR lane (auditor/complementary, NO proxy):
+    (1) read-only store-census CLI printing a personal dollar card;
+    (2) client-side prompt-assembly hook/linter that prunes stale history and orders
+        content cache-friendly BEFORE send (works with native provider caching);
+    (3) post-hoc store sweep with quarantine (reversible, opt-in);
+    (4) framework integration (LangChain callback, OpenAI SDK wrapper, Claude Code hooks);
+    (5) any other path you think is stronger.
+    For each: install friction, invasiveness, are savings verifiable per-user, does it
+    complement rather than fight compressors.
+B2. What should our OSS artifact be (equivalent of their one-line install)? Recommend
+    ONE primary path and the first artifact to ship. Five sentences max.
+B3. Name the single biggest technical risk of your recommended path and the cheapest
+    test that would kill or clear it.
+
+## FORMAT
+Plain text, sections A1..A5, B1..B3, tags everywhere.
+End with exactly this line: R9-NOTES-OK
