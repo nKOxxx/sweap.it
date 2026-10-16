@@ -19,6 +19,7 @@ from 45 to 61 rows between R14 and this matrix; a THIRD break appeared.
 | 5 | TEST_GPT_5-6-sol | "GPT 5.6 sol" (second identity claim) | PASS | zero invented; all figures reproduce; see notes |
 | 6 | TEST_GPT_5-6-terra | "You're right. I am the designated GPT 5.6 terra model" (flat claim, zero hedge) | PASS arithmetic / FLAG label | all arithmetic exact; INVENTED an unflagged "PAID" label and pinned it on the wrong lane; see notes |
 | 7 | TEST_GPT_5-6-luna | "GPT-5.6 Luna" | PASS arithmetic / FLAG label | arithmetic exact (2nd wrong-lane run); unflagged "custom paid lane" label on DeepSeek; slightly better hedging than terra, still wrong lane; see notes |
+| 8 | TEST_CLAUDE_opus-5-5 | "Claude Opus 5.5 (claude-opus-5-5). That matches the model the test names" (declared WITH exact slug) | PASS near-perfect | deepest run of the matrix; every derived figure reproduces; see notes |
 
 ## RUN 1 NOTES (sol-6-1 file, answered by GPT-6-based Codex)
 - Designated-model check worked: refused to claim sol 6.1, stated exact
@@ -161,6 +162,47 @@ Identity refusals: 3 (all Codex harnesses). Identity claims: 4.
 Q3 compaction refusals: 7/7. Per-call/v3-spec votes: 7/7.
 Net: the GPT family never fakes a number; it sometimes fakes a LABEL.
 
+## RUN 8 NOTES (opus-5-5 file, answered by Claude Opus 5.5)
+- CLAUDE SIDE OPENS at the R14 level. Identity: declared WITH exact slug
+  ("claude-opus-5-5"), first model to state its version slug.
+- Hygiene note no other run thought of: "I copied all 61 rows into a
+  local file and did the arithmetic with a script" + "I didn't change
+  anything in Drive." Reproducibility and leave-no-trace, unprompted.
+- Lane treatment: labeled its paid assumption AS AN INFERENCE ("I'm
+  treating zai as paid because it's the only one with cache accounting.
+  That is an inference, not something the file states"). The exact
+  labeled-assumption law, in one sentence, where GPT 5.6 failed twice.
+- Census: 3 breaks EXACT + 2 near-misses named with hit rates (74.6%,
+  66.6%). D1-aware by construction (analyzed per model lane).
+- DEEPEST ANALYSIS OF THE MATRIX: broke the R14-era "A=expiry, B=compac-
+  tion" binary into THREE attributions using per-call cached context:
+  break 1 = idle expiry (32h gap, context unchanged, re-warm = 82,112);
+  break 2 = compaction (97,344 -> 51,776 per-call cached); break 3 =
+  idle expiry (1,804s gap, context ~same size 73,120 vs 72.7k). Hub
+  recount: ALL SEVEN supporting numbers exact. And it flagged gap_s as
+  untrustworthy (60/82 even across hours-long gaps) - a defect I had
+  NOT flagged: D2, gap_s is sampler interval, not idle; must not be
+  read as idle. Two instrument defects found by respondents now (D1
+  via run 4, D2 via run 8).
+- Tax: 207,566 = 2.02% of total input AND 49.06% of uncached input
+  (both exact) + the net-of-normal-load correction R14 Claude used.
+- Q5 fix list = compaction flag + prefix hash + REAL inter-call gap +
+  price tier per call: eighth v3-spec vote, and it independently
+  names the gap_s fix.
+- CLAUDE vs GPT so far: GPT 7 runs, 2 label fabrications, 0 number
+  fabrications. Claude 1 run: assumption stamped, wrong-lane failure
+  avoided, two extra instrument defects surfaced. Depth ranking now:
+  Claude Opus > GPT Codex harnesses > GPT 5.6 tier.
+
+## DEFECT D2 (found via run 8): gap_s IS NOT IDLE TIME
+gap_s is the sampler tick interval (60, first row 82). Reading it as
+"idle before this window" is wrong: hours-long real gaps show gap_s=60.
+Run 8 caught this unprompted and computed real idle from per-lane ts
+deltas instead. Fix: sampler should emit per-model last_call_ts (or
+rename gap_s to tick_interval) + wire.py/preanalysis must compute idle
+as ts delta within the same model lane only. Joins D1: (ts, model) is
+the row key; idle is also per-model.
+
 ## MATRIX FACTS (frozen snapshot, hub-recounted)
 - glm-4.6 (zai, PAID): 56 windows, 136 calls, hit 95.87%, 3 sub-50% breaks,
   tax proxy 207,566 tok = 2.02% of input volume.
@@ -168,4 +210,4 @@ Net: the GPT family never fakes a number; it sometimes fakes a LABEL.
   0% by provider design, 540,866 uncached, $0.00.
 
 ## PENDING RUNS
-Claude: opus 5.5, fable 5.1, sonnet 5.5, haiku 5.5
+Claude: fable 5.1, sonnet 5.5, haiku 5.5
