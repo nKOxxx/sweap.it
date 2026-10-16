@@ -1,0 +1,112 @@
+# R17 BRIEF: three-way comparison sweap vs caveman vs jev, updated to 2026-10-16
+
+ROLE: You are a competitive-landscape analyst. Produce an updated comparison of
+three context-economy tools from the perspective of an investor/adopter deciding
+where each tool wins, where it fails, and how they interact. READ-ONLY task:
+your output is text only; you write nothing anywhere.
+
+BLIND PROTOCOL: Inputs below are tagged. [ANCHOR] = measured on our reference
+host, do not re-derive, but DO attack their interpretation. [THEORY] = published
+vendor claim or public repo fact. [ASSUMPTION] = chosen modeling choice. Any
+number or claim you add from your own knowledge must carry a confidence tag
+[HIGH]/[MED]/[LOW] plus source type; write UNKNOWN rather than invent.
+
+## THE THREE TOOLS (facts carried from the R13 harvest, 2026-10-15)
+
+CAVEMAN [THEORY] (github JuliusBrussee/caveman, Apache-2.0, ~111.9k stars):
+an in-flight PROXY compressing request bytes before the provider. Vendor claims:
+33.2% fewer input tokens, 0.46x cost, byte-exact recovery, 18/18 evals, warm
+prompt-cache preservation across pauses. Business model: free OSS core + paid
+Cloud $300/mo + VPC. Failure modes [INFERRED]: in-path rewrite can shift
+behavior; per-turn re-encoding can break provider prefix caches and re-bill the
+prefix; only touches bytes SENT, store rot untouched.
+
+JEV [THEORY] (TypeSafe AI "System One", launched 2026-09-15, ex-OpenAI founder;
+plugin fast-jev-compaction ~7.7k stars): WINDOW-plane. Typed decision model
+(choice/score/boolean, no free-text generation, RLCD-trained, claimed ~100x
+cheaper/faster on decision tasks). The plugin scores tool outputs vs the whole
+conversation, elides stale results to notes, keeps the rest verbatim, pins first
+message + newest N. Router research prototype self-reports a conservative
+candidate FAILED a real-agent usefulness gate. License: UNKNOWN (verify).
+Failure modes [INFERRED]: mis-scored drops strand load-bearing context; any
+window mutation can break provider prefix caches.
+
+SWEAP [ANCHOR] (ours, Apache-2.0, repo private): STORE + WIRE-OBSERVATION plane.
+Read-only census (exact exhaust share), provably-dead-only sweep to quarantine
+(SHA-256 all columns, byte-identical restore verified), and a wire sampler:
+1-minute snapshot-diff of the harness's in-place usage counters, a per-window
+cache ledger with NO proxy and NO traffic interception.
+
+## WHAT IS NEW SINCE THE LAST COMPARISON (2026-10-15 -> 10-16), all [ANCHOR]
+
+N1. LIFETIME CACHE LANES (measured from the harness store, 10,370+ calls):
+glm-4.6 paid lane 96.3% cache hit; two free lanes 0% (no cache contract);
+two other paid-config lanes 1.0% and 19.2%. Lanes differ wildly; blended
+hit-rate marketing numbers are meaningless.
+
+N2. CAUSAL CACHE PROBE: identical ~3.5k-token real prefix sent warm x3, then
+ONE token mutated, then original re-sent: paid lane 98.9% warm -> 0% after
+one-token mutation -> instant 98.9% recovery. Free lanes: 0/0/0 (no cache at
+all). Provider-bound: caching is a per-provider contract, not a given.
+
+N3. ELEVEN-MODEL BLIND AUDIT MATRIX: 11 external frontier models (7 GPT-family,
+4 Claude-family), each given the SAME self-contained 61-row ledger file with no
+ground truth, same 5 questions. Results: arithmetic exact 11/11; invented
+NUMBERS 0 by GPT, 1 arithmetic slip by the smallest Claude; invented BILLING
+LABELS 2/7 on the GPT 5.6 tier (pinned "PAID" on a free lane, then reported a
+100% break tax on the wrong lane, arithmetic-perfect). The 4 Claude runs each
+also contributed new analysis (3-way break attribution, hidden-break ceiling,
+baseline-corrected net tax, session-ID stability, a logical proof the
+cache-write column is dead). Same artifact, eleven honesty profiles.
+
+N4. THE CACHE-BREAK RECEIPT (the number the category does not publish):
+in the live paid lane, 3 real cache breaks in one day: 207,566 tokens billed
+at full price = 2.02% of paid-lane input volume (upper bound), ceiling 333,120
+if merged windows hide full-miss calls, baseline-corrected net ~202,003 tokens
+(1.97%). Break attribution now CONFIRMED FROM STORE EVENT RECORDS, not
+inference: break B was caused by a context compaction 95 seconds earlier;
+breaks A and C were idle-expiry (no compaction within 5 minutes). Idle gaps:
+32.1h and 30min. Detection is AUTOMATIC: the harness store records every
+compaction as a summary row; the sampler backfills the event log from the
+store each tick. A fresh install reconstructs the customer's full break history
+with zero integration.
+
+N5. INSTRUMENT DEFECTS THE BLIND AUDIT CAUGHT IN OUR OWN LEDGER (fixed same
+day): timestamp not a unique key (rows are per-model per-minute); the tick
+interval was readable as idle time; cache-write column all-zero while cache
+reads happen (providers report writes only sometimes). Fixes: uid row keys,
+real per-lane idle field, merged-window honesty markers, write-field trust
+stamp, automatic compaction-event join log.
+
+## YOUR TASK (deliver all five sections)
+
+S1. UPDATED COMPARISON TABLE: one row per tool. Columns: PLANE | MECHANISM |
+VERIFIED EVIDENCE GRADE (what is measured vs vendor-claimed) | CACHE INTERACTION
+(new: how the tool affects or observes provider prompt caches, with the N1-N4
+facts applied) | LICENSE | BUSINESS MODEL | FAILURE MODE. Mark every cell
+[ANCHOR]/[THEORY]/[INFERRED].
+
+S2. THE CACHE QUESTION, TOOL BY TOOL: given N1-N4, which of the three tools can
+state a NET dollar effect (savings MINUS cache-break costs) for a customer, and
+what would each need to measure to prove it? Be specific about caveman and jev
+exposure: window/wire mutation vs prefix-cache re-billing, and who bears the
+risk. Use the measured 96.3% hit lane and the one-token-mutation result.
+
+S3. WHERE THEY COMPETE AND WHERE THEY COMPLEMENT: adopter's view. If a team
+already runs caveman, what does sweap add (and vice versa)? Same for jev.
+Name the overlap fights honestly (e.g. caveman's warm-cache claim vs the
+observation plane). No marketing language; adoption-logic only.
+
+S4. RED-TEAM: the three strongest attacks on sweap's position given this new
+evidence, each with FALSIFIED IF: naming the observation that kills the attack
+or the claim. Include at least one attack that assumes caveman/jev ship the
+same observability (i.e. our wedge is temporary).
+
+S5. VERDICT: 5-10 sentences, plain language, no hype: what each tool is, what
+it can prove, what it cannot, and the single most important open measurement
+for the category. Every claim you make about the future must be stamped
+[HYPOTHETICAL].
+
+RULES: English only. No em-dashes anywhere (use commas or colons). Do not
+invent numbers; tag everything. End your entire output with exactly this line:
+R17-COMPARISON-OK

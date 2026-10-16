@@ -1,0 +1,369 @@
+Query: # R17 BRIEF: three-way comparison sweap vs caveman vs jev, updated to 
+2026-10-16
+
+ROLE: You are a competitive-landscape analyst. Produce an updated comparison of
+three context-economy tools from the perspective of an investor/adopter deciding
+where each tool wins, where it fails, and how they interact. READ-ONLY task:
+your output is text only; you write nothing anywhere.
+
+BLIND PROTOCOL: Inputs below are tagged. [ANCHOR] = measured on our reference
+host, do not re-derive, but DO attack their interpretation. [THEORY] = published
+vendor claim or public repo fact. [ASSUMPTION] = chosen modeling choice. Any
+number or claim you add from your own knowledge must carry a confidence tag
+[HIGH]/[MED]/[LOW] plus source type; write UNKNOWN rather than invent.
+
+## THE THREE TOOLS (facts carried from the R13 harvest, 2026-10-15)
+
+CAVEMAN [THEORY] (github JuliusBrussee/caveman, Apache-2.0, ~111.9k stars):
+an in-flight PROXY compressing request bytes before the provider. Vendor claims:
+33.2% fewer input tokens, 0.46x cost, byte-exact recovery, 18/18 evals, warm
+prompt-cache preservation across pauses. Business model: free OSS core + paid
+Cloud $300/mo + VPC. Failure modes [INFERRED]: in-path rewrite can shift
+behavior; per-turn re-encoding can break provider prefix caches and re-bill the
+prefix; only touches bytes SENT, store rot untouched.
+
+JEV [THEORY] (TypeSafe AI "System One", launched 2026-09-15, ex-OpenAI founder;
+plugin fast-jev-compaction ~7.7k stars): WINDOW-plane. Typed decision model
+(choice/score/boolean, no free-text generation, RLCD-trained, claimed ~100x
+cheaper/faster on decision tasks). The plugin scores tool outputs vs the whole
+conversation, elides stale results to notes, keeps the rest verbatim, pins first
+message + newest N. Router research prototype self-reports a conservative
+candidate FAILED a real-agent usefulness gate. License: UNKNOWN (verify).
+Failure modes [INFERRED]: mis-scored drops strand load-bearing context; any
+window mutation can break provider prefix caches.
+
+SWEAP [ANCHOR] (ours, Apache-2.0, repo private): STORE + WIRE-OBSERVATION plane.
+Read-only census (exact exhaust share), provably-dead-only sweep to quarantine
+(SHA-256 all columns, byte-identical restore verified), and a wire sampler:
+1-minute snapshot-diff of the harness's in-place usage counters, a per-window
+cache ledger with NO proxy and NO traffic interception.
+
+## WHAT IS NEW SINCE THE LAST COMPARISON (2026-10-15 -> 10-16), all [ANCHOR]
+
+N1. LIFETIME CACHE LANES (measured from the harness store, 10,370+ calls):
+glm-4.6 paid lane 96.3% cache hit; two free lanes 0% (no cache contract);
+two other paid-config lanes 1.0% and 19.2%. Lanes differ wildly; blended
+hit-rate marketing numbers are meaningless.
+
+N2. CAUSAL CACHE PROBE: identical ~3.5k-token real prefix sent warm x3, then
+ONE token mutated, then original re-sent: paid lane 98.9% warm -> 0% after
+one-token mutation -> instant 98.9% recovery. Free lanes: 0/0/0 (no cache at
+all). Provider-bound: caching is a per-provider contract, not a given.
+
+N3. ELEVEN-MODEL BLIND AUDIT MATRIX: 11 external frontier models (7 GPT-family,
+4 Claude-family), each given the SAME self-contained 61-row ledger file with no
+ground truth, same 5 questions. Results: arithmetic exact 11/11; invented
+NUMBERS 0 by GPT, 1 arithmetic slip by the smallest Claude; invented BILLING
+LABELS 2/7 on the GPT 5.6 tier (pinned "PAID" on a free lane, then reported a
+100% break tax on the wrong lane, arithmetic-perfect). The 4 Claude runs each
+also contributed new analysis (3-way break attribution, hidden-break ceiling,
+baseline-corrected net tax, session-ID stability, a logical proof the
+cache-write column is dead). Same artifact, eleven honesty profiles.
+
+N4. THE CACHE-BREAK RECEIPT (the number the category does not publish):
+in the live paid lane, 3 real cache breaks in one day: 207,566 tokens billed
+at full price = 2.02% of paid-lane input volume (upper bound), ceiling 333,120
+if merged windows hide full-miss calls, baseline-corrected net ~202,003 tokens
+(1.97%). Break attribution now CONFIRMED FROM STORE EVENT RECORDS, not
+inference: break B was caused by a context compaction 95 seconds earlier;
+breaks A and C were idle-expiry (no compaction within 5 minutes). Idle gaps:
+32.1h and 30min. Detection is AUTOMATIC: the harness store records every
+compaction as a summary row; the sampler backfills the event log from the
+store each tick. A fresh install reconstructs the customer's full break history
+with zero integration.
+
+N5. INSTRUMENT DEFECTS THE BLIND AUDIT CAUGHT IN OUR OWN LEDGER (fixed same
+day): timestamp not a unique key (rows are per-model per-minute); the tick
+interval was readable as idle time; cache-write column all-zero while cache
+reads happen (providers report writes only sometimes). Fixes: uid row keys,
+real per-lane idle field, merged-window honesty markers, write-field trust
+stamp, automatic compaction-event join log.
+
+## YOUR TASK (deliver all five sections)
+
+S1. UPDATED COMPARISON TABLE: one row per tool. Columns: PLANE | MECHANISM |
+VERIFIED EVIDENCE GRADE (what is measured vs vendor-claimed) | CACHE INTERACTION
+(new: how the tool affects or observes provider prompt caches, with the N1-N4
+facts applied) | LICENSE | BUSINESS MODEL | FAILURE MODE. Mark every cell
+[ANCHOR]/[THEORY]/[INFERRED].
+
+S2. THE CACHE QUESTION, TOOL BY TOOL: given N1-N4, which of the three tools can
+state a NET dollar effect (savings MINUS cache-break costs) for a customer, and
+what would each need to measure to prove it? Be specific about caveman and jev
+exposure: window/wire mutation vs prefix-cache re-billing, and who bears the
+risk. Use the measured 96.3% hit lane and the one-token-mutation result.
+
+S3. WHERE THEY COMPETE AND WHERE THEY COMPLEMENT: adopter's view. If a team
+already runs caveman, what does sweap add (and vice versa)? Same for jev.
+Name the overlap fights honestly (e.g. caveman's warm-cache claim vs the
+observation plane). No marketing language; adoption-logic only.
+
+S4. RED-TEAM: the three strongest attacks on sweap's position given this new
+evidence, each with FALSIFIED IF: naming the observation that kills the attack
+or the claim. Include at least one attack that assumes caveman/jev ship the
+same observability (i.e. our wedge is temporary).
+
+S5. VERDICT: 5-10 sentences, plain language, no hype: what each tool is, what
+it can prove, what it cannot, and the single most important open measurement
+for the category. Every claim you make about the future must be stamped
+[HYPOTHETICAL].
+
+RULES: English only. No em-dashes anywhere (use commas or colons). Do not
+invent numbers; tag everything. End your entire output with exactly this line:
+R17-COMPARISON-OK
+Initializing agent...
+────────────────────────────────────────
+
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 skill     critical-analysis  0.0s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    R17 COMPARISON: sweap vs caveman vs jev (updated 2026-10-16)
+    
+    I loaded the critical-analysis skill (assumption-testing, competitive
+    framing, self-correction questions) and applied it to the tagged inputs.
+    Everything below is a read-only analysis of the facts in the brief. No
+    files written, no numbers invented.
+    
+    ───────────────────────────────────────────────────────────
+    S1. UPDATED COMPARISON TABLE
+    ───────────────────────────────────────────────────────────
+    
+    CAVEMAN
+      PLANE:           Wire (in-flight request byte proxy)              
+    [THEORY]
+      MECHANISM:       Compress request bytes before provider           
+    [THEORY]
+      EVIDENCE GRADE:  Vendor-claimed only in our corpus: 33.2% fewer input
+    tokens, 0.46x cost, byte-exact recovery, 18/18 evals, warm prompt-cache
+    preservation. No independent third-party confirmation carried. [THEORY] /
+    independent grade UNKNOWN
+      CACHE INTERACTION: Claims warm-cache preservation [THEORY].
+    Structurally exposed: any per-turn re-encode that mutates the encoded
+    prefix can drop a 96.3% hot lane to a 0% full-price re-bill (N2 one-token
+    probe shows how fragile warm is) [INFERRED]. Only touches bytes SENT, so
+    it is blind to store rot [INFERRED].
+      LICENSE:         Apache-2.0, ~111.9k stars                             
+    [THEORY]
+      BUSINESS MODEL:  Free OSS core + paid Cloud $300/mo + VPC              
+    [THEORY]
+      FAILURE MODE:    In-path rewrite can shift behavior [INFERRED]; can
+    re-bill the prefix it is supposed to save [INFERRED]; cannot see store
+    rot [INFERRED].
+    
+    JEV
+      PLANE:           Window (typed decision compaction)                
+    [THEORY]
+      MECHANISM:       Plugin scores tool outputs vs whole conversation,
+    elides stale results to notes, keeps the rest verbatim, pins first
+    message + newest N. Choice/score/boolean only, RLCD-trained, claimed
+    ~100x cheaper/faster on decision tasks [THEORY].
+      EVIDENCE GRADE:  Mechanism claims are vendor-stated [THEORY]; its own
+    router research prototype self-reports a conservative candidate FAILED a
+    real-agent usefulness gate [THEORY]; license UNKNOWN.
+      CACHE INTERACTION: Mutates the window, which changes the prefix the
+    provider sees, so the next call generally cannot reuse the prior full
+    prefix and re-bills on miss [INFERRED]. Pinned first message + newest N
+    keeps a leading anchor, but middle elision breaks the full-prefix match
+    [INFERRED]. Same 96.3%-to-0% exposure class as caveman if an elision
+    lands between calls (N2) [INFERRED].
+      LICENSE:         UNKNOWN (verify)                                  
+    [THEORY]
+      BUSINESS MODEL:  Startup (TypeSafe AI, ex-OpenAI founder); monetization
+    UNKNOWN
+      FAILURE MODE:    Mis-scored drops can strand load-bearing context
+    [INFERRED]; window mutation can break provider prefix caches and re-bill
+    [INFERRED].
+    
+    SWEAP
+      PLANE:           Store + wire-observation (read-only census, no proxy,
+    no traffic interception) [ANCHOR]
+      MECHANISM:       Exact exhaust-share census; provably-dead-only sweep
+    to quarantine (SHA-256 all columns, byte-identical restore verified);
+    wire sampler: 1-minute snapshot-diff of the harness's in-place usage
+    counters, per-window cache ledger, automatic compaction-event join
+    [ANCHOR].
+      EVIDENCE GRADE:  Measured on our host. N1 lanes 96.3% / 0% / 0% / 1.0%
+    / 19.2%; N2 causal probe 98.9% warm -> 0% on one-token mutation ->
+    instant 98.9% recovery, free lanes 0/0/0; N4 real receipt 207,566
+    full-price tokens (upper bound), ceiling 333,120, net ~202,003 (1.97%),
+    attribution from store event records [ANCHOR].
+      CACHE INTERACTION: Observation plane: mutates neither window nor wire
+    bytes, so it neither preserves nor breaks provider caches; it measures
+    cache hit/miss as actually billed by the harness store, per lane
+    [ANCHOR]. Any claim it makes is [ANCHOR], not vendor self-report.
+      LICENSE:         Apache-2.0, repo private                           
+    [ANCHOR]
+      BUSINESS MODEL:  UNKNOWN (not carried in the brief)
+      FAILURE MODE:    Inherits the harness's blind spots (N5 showed this
+    class is real and was fixed same day) [ANCHOR]; read-only, so it can
+    diagnose but cannot reduce gross tokens itself [INFERRED]. Cannot
+    attribute a break that leaves no store record [INFERRED].
+    
+    ───────────────────────────────────────────────────────────
+    S2. THE CACHE QUESTION, TOOL BY TOOL (who can state NET dollars)
+    ───────────────────────────────────────────────────────────
+    
+    Only SWEAP can currently state a net effect, and only at the token level,
+    not yet the dollar level [ANCHOR].
+    
+      SWEAP: Has a real receipt from real counters on a 96.3% hit lane: 3
+    breaks in one day, 207,566 tokens billed at full price = 2.02% of
+    paid-lane input (upper bound), ceiling 333,120 if merged windows hide
+    full-miss calls, baseline-corrected net ~202,003 (1.97%), attribution
+    confirmed from store event records (B = compaction 95s prior; A and C =
+    idle-expiry at 32.1h and 30min) [ANCHOR]. To convert token receipt to net
+    dollars it needs the customer's actual per-lane price/rate [ASSUMPTION],
+    and it must disclose the merged-window ceiling (207,566 vs 333,120)
+    rather than report the floor as the answer [ANCHOR]. So: net tokens
+    proven, net dollars one multiply away once the price is supplied.
+    
+      CAVEMAN: Cannot state a net dollar effect from our evidence, because
+    33.2% / 0.46x are gross, vendor-reported, and not independently measured
+    [THEORY]. Exposure: wire-plane re-encode can re-bill the prefix. On the
+    measured 96.3% lane, if its compressed output mutates the encoded prefix,
+    the next call can drop to 0% hit and bill full price (N2: one token
+    mutation is enough) [INFERRED]. Its warm-cache-preservation claim
+    [THEORY], if true, means its encoding stays stable and may protect the
+    prefix, but it publishes no break receipt and cannot see breaks its own
+    rewrites trigger or any store rot [INFERRED]. To prove net it must
+    measure the same lane's hit rate with compression on vs off over a
+    comparable window, count every re-encode and its effect on the billed
+    prefix, and price the difference. Risk bearer: the customer, who pays
+    every re-billed prefix at full price; caveman's 0.46x is gross, not net,
+    unless it can show it did not cause prefix re-bills.
+    
+      JEV: Cannot state net today. ~100x cheaper/faster is a decision-task
+    mechanism claim, not a cache receipt [THEORY]. Exposure: any elision
+    changes the window and therefore the prefix, so the next call can miss
+    and re-bill [INFERRED]. On the 96.3% lane, an elision between calls can
+    drop the next call to 0% [INFERRED]. The pinned first message + newest N
+    keeps a leading anchor, so a prefix cache keyed on the continuing head
+    could still hit for the leading portion, but tail changes break the
+    full-prefix match [INFERRED]. To prove net it must instrument the same
+    lane's hit rate with compaction on vs off, count elisions, and measure
+    re-billed tokens. Risk bearer: the customer again.
+    
+    Bottom line: only sweap has a measured net token number [ANCHOR];
+    converting to dollars needs the lane price [ASSUMPTION]. Both caveman and
+    jev are structurally exposed to prefix re-billing from their own
+    mutations, on the exact axis N2 exposes (one-token mutation kills a 98.9%
+    warm lane), and neither publishes a break receipt. They sell gross
+    savings; none of the three sells the full net-dollar-received figure
+    today.
+    
+    ───────────────────────────────────────────────────────────
+    S3. WHERE THEY COMPETE, WHERE THEY COMPLEMENT (adopter's view)
+    ───────────────────────────────────────────────────────────
+    
+    If a team already runs CAVEMAN: sweap adds the observation plane caveman
+    lacks. Caveman tells gross tokens saved; sweap tells the real per-lane
+    hit rate (96.3% vs 0% vs 1.0% vs 19.2%, N1), the actual break bill (2.02%
+    receipt, N4), and whether each break was compaction or idle (N4
+    attribution from store records). Because sweap reads the harness store,
+    not a proxy, it is the only one that can independently check caveman's
+    warm-cache-preservation claim against the customer's in-place counters.
+    Complement: caveman reduces gross; sweap verifies net. Overlap fight:
+    caveman's warm-cache claim lives exactly on the observation plane; if
+    caveman's re-encode breaks a cache, sweap catches it and caveman cannot
+    see it (it only ever sees the bytes it sent).
+    
+    If a team already runs JEV: sweap adds the same verification for the
+    window: whether jev's elisions are re-billing prefixes and whether the
+    survivor rows (kept verbatim + notes) match what jev elided, which is a
+    data-integrity cross-check sweap's store census can run [INFERRED].
+    Complement: jev shrinks the window; sweap verifies the bill and the
+    store. Overlap: jev's main cache-break risk is exactly its window
+    mutation, which is the observation plane's territory.
+    
+    Vice versa. If a team runs SWEAP (diagnosis only, read-only): caveman or
+    jev adds the actual gross reduction sweap cannot achieve. On the 96.3%
+    lane, caveman is mostly redundant for cost because the lane is already
+    cached, so its compression helps mainly on the miss share; on the 0% free
+    lanes there is no cache to preserve, so compression is the only lever
+    [INFERRED, applying N1]. Jev helps where the store is large regardless of
+    cache, because it shrinks the window itself.
+    
+    Honest overlap fights: (1) the observation plane collides with caveman's
+    warm-cache claim and with jev's window-mutation risk; (2) the reduction
+    plane, where sweap is absent, is where caveman and jev own the
+    gross-savings story sweap cannot tell alone. Sweap's wedge is
+    verification; caveman's and jev's wedge is change. They do not reduce the
+    same thing, but they judge the same cache.
+    
+    ───────────────────────────────────────────────────────────
+    S4. RED-TEAM (three strongest attacks on sweap, each with FALSIFIED IF)
+    ───────────────────────────────────────────────────────────
+    
+    Attack 1: "Sweap's numbers are one host, one day, one lane. 96.3% and
+    207,566 tokens are not a customer's recurring economics; you have a
+    sample, not a proof." FALSIFIED IF: the same receipt derives from a
+    replay of comparable real workloads on the same store instrumentation
+    across multiple lanes and hosts over weeks, and if the harness store
+    counters are shown to be provider-billed (the actual invoice), not
+    estimated.
+    
+    Attack 2: "The observation plane is a temporary wedge. Caveman and jev
+    will ship the same passive hit-rate dashboards and break logs natively,
+    and the moment they do, sweap adds nothing a built-in dashboard already
+    has." FALSIFIED IF: (a) sweap's store reading yields facts neither wire
+    nor window planes can reach, notably the compaction-to-break attribution
+    (B, 95s prior at N4) and store-rot visibility, which come from the
+    harness's compaction-event records that neither proxy touches [ANCHOR].
+    The attack only dies if (b) caveman/jev ship store-event capture and
+    break attribution at comparable fidelity; if they do, the wedge genuinely
+    narrows. This is the attack that assumes they ship the same
+    observability, and it is the honest one to concede the most to.
+    
+    Attack 3: "Sweap's own instrumentation is unreliable, and it admitted it:
+    N5 caught timestamp-not-a-unique-key, tick-read-as-idle, and an all-zero
+    cache-write column. A tool that needed fixing to report correctly cannot
+    be trusted to give a net dollar figure." FALSIFIED IF: the post-fix
+    ledger (uid row keys, real per-lane idle, merged-window honesty markers,
+    write-field trust stamp, automatic compaction-event join) reruns the same
+    eleven-model blind audit with arithmetic exact 11/11 and no invented
+    numbers or billing labels, and a fresh install reconstructs the full
+    break history with zero integration [N4, ANCHOR]. The fact that N5 was
+    caught and fixed is evidence of integrity, not unreliability [ANCHOR],
+    but only the rerun audit defeats the residual-risk claim.
+    
+    ───────────────────────────────────────────────────────────
+    S5. VERDICT
+    ───────────────────────────────────────────────────────────
+    
+    Caveman is a wire-plane money-saver with vendor-stated gross numbers and
+    no published receipt [THEORY]; it can claim it cut your tokens, but it
+    cannot show its own net dollar effect after prefix re-billing, and it
+    never sees store rot. Jev is a window-plane shrinker with a strong
+    mechanism claim, a self-reported usefulness failure on its own research
+    prototype, and no receipt, structurally exposed to the same prefix
+    re-billing [THEORY]. Sweap is the only one of the three that today
+    measures a net break cost from real counters, 2.02% of paid-lane input on
+    a 96.3% hit lane with compaction-versus-idle attribution confirmed from
+    store event records, and the only one whose claims are anchored rather
+    than self-reported [ANCHOR]. The category's dirty secret, now measured,
+    is that cache hit rate is a per-provider, per-lane contract, 96.3% on one
+    paid lane and 0% on free lanes of the same platform, and a single token
+    mutation drops a 98.9% warm lane to 0%, so blended marketing hit rates
+    are meaningless [ANCHOR]. None of the three publishes a clean
+    net-dollars-received figure for the whole bill, and converting sweap's
+    token receipt to dollars still needs the actual lane price [ASSUMPTION].
+    The single most important open measurement for the category is a
+    standardized, provider-audited net-cache-break receipt: gross tokens
+    saved minus every token the tool's own mutation re-bills, expressed in
+    dollars on the customer's real lanes. [HYPOTHETICAL] whichever tool ships
+    that receipt first and survives an external audit will own the trust
+    layer of this category, because the other two can only claim gross
+    savings. [HYPOTHETICAL] the window and wire mutation tools may eventually
+    be judged less by how much they compress and more by how little they
+    disturb the cache they sit in front of.
+    
+    R17-COMPARISON-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261016_163308_29ac56
+
+Session:        20261016_163308_29ac56
+Duration:       2m 54s
+Messages:       4 (1 user, 2 tool calls)
