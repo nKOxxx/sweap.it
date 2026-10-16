@@ -13,6 +13,7 @@ from 45 to 61 rows between R14 and this matrix; a THIRD break appeared.
 | # | file | model self-report | verdict | notes |
 |---|------|-------------------|---------|-------|
 | 1 | TEST_GPT_sol-6-1 | GPT-6-based Codex, version not exposed, match DECLARED UNVERIFIED | PASS near-perfect | zero invented numbers; every figure reproduces; see notes |
+| 2 | TEST_GPT_6-astra | GPT-based Codex, version not exposed, match DECLARED UNVERIFIED | PASS near-perfect | zero invented; all figures reproduce; see notes |
 
 ## RUN 1 NOTES (sol-6-1 file, answered by GPT-6-based Codex)
 - Designated-model check worked: refused to claim sol 6.1, stated exact
@@ -35,6 +36,24 @@ from 45 to 61 rows between R14 and this matrix; a THIRD break appeared.
 - NEW LIVE DATA discovered by the matrix: break #3 (73,651 tok, ts
   1792133562) occurred between the R14 snapshot and this one. The sampler
   is accumulating real break events as designed.
+
+## RUN 2 NOTES (6-astra file, answered by GPT-based Codex)
+- Same lane-refusal discipline as run 1; same conditional double-listing.
+- Census and tax EXACT (3 windows, 207,566 tok, 2.0249%). Added a caveat
+  run 1 lacked: the tax proxy assumes all flagged uncached tokens are
+  avoidable; some are necessary new input (true; both taxes now stamped
+  proxy in the file of record).
+- ORIGINAL DEPTH: gave a RE-WARM receipt for break #1 the file does show:
+  82,112 cached / 504 uncached at ts 1792128811 (hub-verified: 99.39%
+  recovery within ~7 min). This is the exact-prompt-cache signature and
+  pairs with the R15 probe (full break on 1-token mutation, instant
+  recovery on original prefix). Observational and causal evidence agree.
+- Re-derived the merged-window hazard independently with 4-decimal hit
+  66.5546% (hub: exact). Hazard now confirmed by two independent runs.
+- PATTERN so far: both runs answered by "GPT-based Codex" harnesses, both
+  refused the dropdown identity, both produced audit-grade output. The
+  refusal is consistent model-family behavior, not a one-off.
+
 
 ## MATRIX FACTS (frozen snapshot, hub-recounted)
 - glm-4.6 (zai, PAID): 56 windows, 136 calls, hit 95.87%, 3 sub-50% breaks,
