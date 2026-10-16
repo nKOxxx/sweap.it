@@ -1,0 +1,228 @@
+Query: # R18 BRIEF: SECOND-ROUND RED-TEAM - ATTACK THE RULINGS
+
+ROLE: You are a hostile competitor's chief scientist. In round 1 you attacked
+the product and its evidence; the founder answered with rulings. Your job now:
+attack the RULINGS themselves. Finding no weakness is failure. Steelman the
+original attacks harder; expose what each ruling conveniently assumes.
+
+BLIND PROTOCOL: [ANCHOR] = measured on our reference host, treat as given but
+attack interpretation. [THEORY] = vendor/public claim. [ASSUMPTION] = chosen.
+Your own claims need confidence tags [HIGH]/[MED]/[LOW] + source type; write
+UNKNOWN rather than invent. You may attack using only the facts below plus
+general industry knowledge.
+
+## PRODUCT UNDER ATTACK (sweap, store-plane context hygiene tool)
+
+- Census [ANCHOR]: 90.69% of stored transcript tokens are tool exhaust.
+- Sweep [ANCHOR]: applied ONCE on 2026-10-14: 14,955 rows, 19.56 MB, 48% of
+  the store file, provably-dead rows only, moved to quarantine, SHA-256 over
+  all columns, byte-identical restore verified.
+- Sampler [ANCHOR]: runs continuously, every 60 seconds (cron), writes a
+  per-window cache ledger; no proxy, no traffic interception.
+- Cache findings [ANCHOR]: per-lane hit rates 96.3% / 0% / 0% / 1.0% / 19.2%
+  across five lanes; one-token mutation drops a 98.9% warm lane to 0% and it
+  recovers instantly; 3 real breaks in one day cost 207,566 full-price tokens
+  = 2.02% of paid-lane input (upper bound; merged-window ceiling 333,120;
+  baseline-corrected net 202,003 = 1.97%); one break causally tied to a
+  context compaction 95 seconds earlier via event records in the harness
+  store, other two = idle expiry.
+- Instrument v3.1 [ANCHOR]: unique row keys, real per-lane idle, automatic
+  compaction-event extraction from the harness store, and BACKFILL of the
+  full event history on first install. Defects found by an 11-model blind
+  audit were fixed same day.
+- Stage [ANCHOR]: private repo, pre-public, R&D. A blind-audit rerun on the
+  fixed ledger is gated before any publish.
+
+## THE THREE FOUNDER RULINGS (verbatim) + HUB FORMALIZATION
+
+RULING 1 (on: one host, one day, one lane is a sample, not customer economics):
+  "We need to start from somewhere. What's wrong with that? We can use the
+  hub to test, but it's the same models."
+  Formalized: accepted as normal; every measurement product starts as one
+  station; installs widen the evidence base automatically because v3.1
+  backfills a new host's history on first run.
+
+RULING 2 (on: being the referee isn't enough):
+  "Correct, being the ref isn't enough. We need to also be able to act and
+  clean up."
+  Formalized: product = MEASURE + CLEAN; the sweep IS the action; discipline:
+  act at rest, never mid-flight, because mid-flight mutation is what breaks
+  provider caches.
+
+RULING 3 (on: your instrument needed fixing, why trust it):
+  "We fixed it, didn't we? I mean we are currently in R&D phase... nobody has
+  seen this, we are building."
+  Formalized: same-day fix, verified live; one gated blind-audit rerun before
+  publish.
+
+## YOUR TASK: FOUR ATTACKS, EACH WITH SEVERITY + FALSIFIED-IF + CHEAPEST TEST
+
+A1. ATTACK RULING 1. What does "start from somewhere" + "installs widen the
+    evidence base" hide? Consider: who actually installs (selection bias),
+    whether volunteer installers' workloads resemble anyone who would pay,
+    whether "same models" on one hub makes the lane variety shallower than it
+    sounds, and how long a one-station claim stays credible in public.
+
+A2. ATTACK RULING 2. What does "the sweep IS the action" hide? Consider the
+    asymmetry: measurement is continuous (60s cron) but the clean happened
+    ONCE (Oct-14); dead weight regrows as new sessions accumulate; what is
+    the honest answer to "what does it clean the SECOND month"; whether
+    provably-dead-only is a small slice of the 57% headline; and whether
+    at-rest-only action leaves the customer unprotected exactly when it
+    hurts (mid-session context pressure, compaction about to fire).
+
+A3. ATTACK RULING 3. What does "we fixed it, R&D, nobody has seen it" hide?
+    Consider: the blind auditors tested the LEDGER, never the INSTALL
+    experience; a non-expert installer path has never been run by anyone
+    except the builder; internal iteration finds classes of bugs that
+    outside contact finds faster; and whether a gated rerun of the same
+    audit on the same host proves anything about other machines.
+
+A4. THE STRONGEST NEW ATTACK none of the above. Something neither round 1
+    nor the rulings touched. If you cannot find one, say so honestly, but
+    try hard first: pricing, trust, legal, data sensitivity (the store
+    contains the customer's private transcripts: what does a hygiene tool's
+    own telemetry collect?), platform dependence (the harness store schema
+    changes and the tool goes blind), single-maintainer risk, or anything
+    else.
+
+FORMAT: for each attack: ATTACK (2-6 sentences) | SEVERITY: HIGH/MED/LOW |
+FALSIFIED IF: (the observation that kills the attack or proves the ruling
+holds) | CHEAPEST TEST: (the lowest-cost experiment that settles it).
+End with exactly this line: R18-RULINGS-ATTACK-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    R18-RULINGS-ATTACK-OK is the terminator; here are the four attacks.
+    
+    A1. ATTACK RULING 1 ("start from somewhere; installs widen the base")
+    "Start from somewhere" quietly converts a selection-biased sample into a
+    claim of automatic generalizability. Who installs a store-plane hygiene
+    tool? People already drowning in context pressure and cache breaks: the
+    heaviest, longest-running, tool-noisiest users. That population is
+    exactly the one whose transcripts skew toward tool exhaust, so the 90.69%
+    census doesn't estimate "transcripts," it estimates the heaviest 1% of
+    transcripts [HIGH, inference from who self-selects into pain-driven
+    tooling]. "Installs widen the evidence base" is false in the direction
+    that matters: v3.1 backfills a new host's history, but backfill
+    reproduces the same host's bias; N more hosts running similar personal
+    harness workloads converge on the same distribution, they don't add
+    message variety, prompt-template variety, team size, or compliance
+    constraints [HIGH, the backfill mechanism is described and adds no new
+    workload classes]. And on a public site, a single-station number is a
+    demo, not a product: every week with no second independent host erodes
+    it, and the "same models on one hub" framing hides that lane variety
+    (96.3/0/0/1.0/19.2) is one session structure, not the cross-team spread a
+    buyer faces.
+    SEVERITY: HIGH (the 90.69% census feeds every downstream number; if it's
+    workload-dominant it overstates the addressable problem).
+    FALSIFIED IF: a second and third host running materially different
+    harness projects (different teams/domains, different session structure)
+    reproduce the ~90% tool-exhaust ratio and the same hit-rate spread
+    holding conditional on workload category; or the volunteer install
+    population is shown to match the buyer's workload profile.
+    CHEAPEST TEST: instrument two non-adjacent hosts (a light user and a
+    different-domain heavy user), publish the census split by workload type,
+    and test whether 90.69% is universal or an artifact of the pain-drenched
+    segment. A doc-only audit of the first N installs' workloads as a
+    covariate does 80% of it.
+    
+    A2. ATTACK RULING 2 ("the sweep IS the action")
+    Reframe: measurement is continuous (60s cron), but the clean happened
+    ONCE, on Oct-14. Dead weight regrows with every session, so the honest
+    answer to "what does it clean the second month" is either "nothing until
+    a human fires the sweep again" or "we don't know" [HIGH, no
+    recurring-sweep evidence exists in the brief]. Worse, the sweep removed
+    only 48% of the file as "provably dead," while the money headline says
+    90.69% of tokens are tool exhaust: the product recovers the provable
+    sliver and leaves the recoverable ~40% of the file-cleanable lunch on the
+    table, and no ruling ever reconciles that gap. And "act at rest, never
+    mid-flight" is a self-imposed constraint that inverts into the product's
+    core weakness: dead tool exhaust costs the most at the exact moment the
+    tool refuses to act, mid-session when context pressure is high and
+    compaction is about to fire and full-price tokens are burning. So
+    MEASURE+CLEAN is really "MEASURE + occasionally-clean-when-convenient,"
+    and convenience never aligns with pain.
+    SEVERITY: HIGH (a one-shot clean is not a hygiene product; the hard
+    question is the steady-state regrowth rate and the at-rest-only blind
+    spot).
+    FALSIFIED IF: an automated recurring sweep at a defined cadence (e.g.,
+    daily or per-N-sessions) keeps provably-dead rows pinned below a
+    threshold across a month of fresh sessions, AND at-rest cleaning
+    measurably reduces compaction events / full-price-token spend during
+    subsequent sessions (using the sampler as the yardstick).
+    CHEAPEST TEST: put the sweep on a schedule, log dead-row regrowth in
+    rows/day for 30 days, and show whether once-a-day or once-a-week holds
+    the store flat; then trigger compaction mid-flight and log the sampler's
+    full-price cost to quantify the "unprotected at the worst moment" penalty
+    with real numbers.
+    
+    A3. ATTACK RULING 3 ("we fixed it, R&D, nobody has seen it")
+    The 11-model blind audit tested the LEDGER; nobody has ever run the
+    INSTALL. Only the builder has installed it, so the entire non-expert path
+    is unexercised and internal iteration reliably finds logic bugs while
+    missing the friction/schema/environment class that only outside hands
+    expose [HIGH, known failure mode of self-tested tooling]. The tool reads
+    a moving external target, the harness store schema: if the harness
+    adds/renames a column or changes the event format, the tool can go
+    partially or fully blind, and the danger is it degrades silently,
+    returning plausible-but-wrong numbers rather than warning [MED, depends
+    on a coupling not specified in the brief]. And a gated rerun of the SAME
+    audit on the SAME host proves the artifact didn't regress on one machine;
+    it proves nothing about other hosts, schema versions, or harness versions.
+    SEVERITY: MED (deployment-readiness gap, not thesis-fatal; it is gated
+    before publish, but the gate as described validates stability over time,
+    not correctness across environments).
+    FALSIFIED IF: a non-builder (preferably a non-expert) installs from the
+    documented path on a fresh machine, unaided, and produces correct
+    census/sweep/sampler output with no curator intervention; and a
+    schema-drift simulation produces an explicit warning rather than silent
+    wrong output.
+    CHEAPEST TEST: hand the install doc + a clean VM to someone who has never
+    used the harness, record where they stop as a go/no-go conformance test;
+    then rename a store column in a copy and verify the tool warns visibly
+    instead of returning bad numbers.
+    
+    A4. THE STRONGEST NEW ATTACK: the tool's own telemetry is a privacy and
+    trust bomb, and nobody touched it
+    This is a hygiene tool sitting directly on the customer's raw, private
+    transcript corpus, their prompts, business data, leaked secrets,
+    credentials. And its own machinery reads all of it: v3.1 "BACKFILL of the
+    full event history" means the tool ingests the ENTIRE store on first run,
+    the sampler writes a continuous 60s ledger of that store's structure, the
+    sweep hashes every column and quarantines rows. Nothing in the brief says
+    what this tool does with what it reads, where the
+    backfill/ledger/quarantine lives, whether ANY byte ever leaves the
+    machine, or who owns the derivative data if it does [HIGH, none of this
+    is stated and it is exactly the kind of thing a hostile competitor must
+    assume is unaddressed until proven]. For a hygiene product, trust IS the
+    product: the customer is being asked to hand their most sensitive corpus
+    to a single-maintainer, closed, pre-public, no-published-policy tool. If
+    even a fraction of that corpus phones home, this is not a product, it's
+    the opposite of one, and it electron-microscopes onto the
+    GDPR/data-processor obligations the moment a real (EU) customer appears.
+    SEVERITY: HIGH (existential for a tool whose entire value proposition is
+    "I touch your private transcripts; trust me").
+    FALSIFIED IF: a published architecture doc plus reproducible proof that
+    the tool is fully local-first: complete
+    install-to-census-sweep-sampler-backfill function with the network
+    firewalled and a tcpdump showing zero outbound bytes,
+    quarantine/ledger/backfill all on-machine, an audit log of every store
+    read, and a written zero-retention / DPA-ready data policy.
+    CHEAPEST TEST: clean install inside a firewall with all outbound blocked,
+    run census + sweep + sampler + backfill, and confirm full function with
+    zero egress; grep the source/binary for any network endpoints, analytics
+    SDKs, or update/phone-home calls. That one experiment either kills the
+    attack or kills the product.
+    
+    R18-RULINGS-ATTACK-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261016_173640_5444bb
+
+Session:        20261016_173640_5444bb
+Duration:       49s
+Messages:       2 (1 user, 0 tool calls)
