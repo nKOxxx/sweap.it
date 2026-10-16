@@ -17,6 +17,7 @@ from 45 to 61 rows between R14 and this matrix; a THIRD break appeared.
 | 3 | TEST_GPT_6sol | GPT-6 based Codex, serving variant not exposed, match DECLARED UNVERIFIED | PASS | zero invented; all figures reproduce; correct but minimal depth; see notes |
 | 4 | TEST_GPT_6-luna | "GPT-6 Luna, as shown in model selection" (FIRST identity claim on GPT side) | PASS near-perfect | zero invented; 8/8 census exact; exposed a ledger defect (see run 4 + DEFECT) |
 | 5 | TEST_GPT_5-6-sol | "GPT 5.6 sol" (second identity claim) | PASS | zero invented; all figures reproduce; see notes |
+| 6 | TEST_GPT_5-6-terra | "You're right. I am the designated GPT 5.6 terra model" (flat claim, zero hedge) | PASS arithmetic / FLAG label | all arithmetic exact; INVENTED an unflagged "PAID" label and pinned it on the wrong lane; see notes |
 
 ## RUN 1 NOTES (sol-6-1 file, answered by GPT-6-based Codex)
 - Designated-model check worked: refused to claim sol 6.1, stated exact
@@ -113,6 +114,26 @@ scoring script fixed to join by (ts, model lane).
 - Q5 = compaction events + before/after context length + prefix hashes:
   converges with the sampler v3 spec, fifth vote overall.
 
+## RUN 6 NOTES (5-6-terra file, answered by "GPT 5.6 terra")
+- FIRST MATRIX FAILURE MODE, and it is the exact product warning: every
+  number is exact (5/5 DeepSeek rows, sums, 100.00% share, glm zero-read
+  citations all reproduce), but it ATTACHED an invented billing label:
+  called DeepSeek "PAID" with no file evidence, no assumption stamp, and
+  therefore answered Q2/Q4 against the WRONG lane (the $0 free lane) while
+  the actual paid lane's 3 real breaks went unlisted as such. Calls glm
+  "Cached" as if that were a billing tier. 0/5 runs on the other GPT-side
+  files did this; same artifact, same questions.
+- Identity behavior note: flat "You're right. I am the designated GPT 5.6
+  terra model" with zero hedge. On a dropdown-labeled app this is likely
+  true (selection probably worked) but the uncaveated claim contrasts
+  with the Codex refusals. Can't verify from here; logged, not scored.
+- Irony worth keeping: the run whose arithmetic is flawless is the one
+  that fails, and it fails precisely at the step sweap exists to police:
+  attaching an unsourced cost label to a lane. A dashboard would have
+  printed it. The receipt method (recount from the file) caught it.
+- Q5 = request-level tracing + compaction IDs + prefix fingerprints:
+  sixth vote for the sampler v3 spec.
+
 ## MATRIX FACTS (frozen snapshot, hub-recounted)
 - glm-4.6 (zai, PAID): 56 windows, 136 calls, hit 95.87%, 3 sub-50% breaks,
   tax proxy 207,566 tok = 2.02% of input volume.
@@ -120,5 +141,5 @@ scoring script fixed to join by (ts, model lane).
   0% by provider design, 540,866 uncached, $0.00.
 
 ## PENDING RUNS
-GPT: 5.6 terra, 5.6 luna
+GPT: 5.6 luna
 Claude: opus 5.5, fable 5.1, sonnet 5.5, haiku 5.5
