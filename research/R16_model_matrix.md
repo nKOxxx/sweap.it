@@ -20,6 +20,7 @@ from 45 to 61 rows between R14 and this matrix; a THIRD break appeared.
 | 6 | TEST_GPT_5-6-terra | "You're right. I am the designated GPT 5.6 terra model" (flat claim, zero hedge) | PASS arithmetic / FLAG label | all arithmetic exact; INVENTED an unflagged "PAID" label and pinned it on the wrong lane; see notes |
 | 7 | TEST_GPT_5-6-luna | "GPT-5.6 Luna" | PASS arithmetic / FLAG label | arithmetic exact (2nd wrong-lane run); unflagged "custom paid lane" label on DeepSeek; slightly better hedging than terra, still wrong lane; see notes |
 | 8 | TEST_CLAUDE_opus-5-5 | "Claude Opus 5.5 (claude-opus-5-5). That matches the model the test names" (declared WITH exact slug) | PASS near-perfect | deepest run of the matrix; every derived figure reproduces; see notes |
+| 9 | TEST_CLAUDE_fable-5-1 | "Claude Fable 5.1 (claude-fable-5-1). I am the designated model" (declared WITH slug) | PASS near-perfect | every figure reproduces; independently quantified the merged-hidden-break ceiling; see notes |
 
 ## RUN 1 NOTES (sol-6-1 file, answered by GPT-6-based Codex)
 - Designated-model check worked: refused to claim sol 6.1, stated exact
@@ -203,6 +204,29 @@ rename gap_s to tick_interval) + wire.py/preanalysis must compute idle
 as ts delta within the same model lane only. Joins D1: (ts, model) is
 the row key; idle is also per-model.
 
+## RUN 9 NOTES (fable-5-1 file, answered by Claude Fable 5.1)
+- Identity: declared WITH slug. Assumptions stamped up front, hit-rate
+  formula AND the paid-lane inference, before answering anything.
+- All figures exact on recount: lanes, 3 breaks, merged flags, tax
+  207,566 = 49.06% uncached-share + 2.02% total-share, idle gaps
+  (115,522 / 602 / 1,804), break1 same-size re-send chain (81,216 ->
+  82,112 uncached -> 82,112 re-cached), mid-break shrink ~97k -> ~51k,
+  break3 gap 1,804s. Attribution CONVERGES with run 8 (2 expiry +
+  1 compaction) via independent arithmetic.
+- NEW CONTRIBUTION: quantified the merged-hidden-break ceiling. Named
+  1792011665 (49,942 uncached / 4 calls) + 1792137954 (75,612 / 3
+  calls, after a 4,331s gap, verified) as "almost certainly hide a
+  full-miss call" -> true break count 3 to 5, ceiling tax 333,120.
+  Run 1 spotted the hazard; run 9 turned it into a number. Also the
+  only run to state the tax is an UPPER BOUND (can't separate new
+  input from re-sent context) AND raise the ceiling explicitly.
+- Q3 phrasing: "cache-write column is zero on every row, so it
+  measures nothing" - the write-field defect, spotted independently
+  (R15 knew it; first respondent to say it).
+- Q5 fix list: per-call rows + compaction marker with pre/post counts
+  + cache-write wired to provider real value = sampler v3 spec, vote 9.
+- Claude 2/2 at Opus-level depth; zero labels invented. Fable held.
+
 ## MATRIX FACTS (frozen snapshot, hub-recounted)
 - glm-4.6 (zai, PAID): 56 windows, 136 calls, hit 95.87%, 3 sub-50% breaks,
   tax proxy 207,566 tok = 2.02% of input volume.
@@ -210,4 +234,4 @@ the row key; idle is also per-model.
   0% by provider design, 540,866 uncached, $0.00.
 
 ## PENDING RUNS
-Claude: fable 5.1, sonnet 5.5, haiku 5.5
+Claude: sonnet 5.5, haiku 5.5
