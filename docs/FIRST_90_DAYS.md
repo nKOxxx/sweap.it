@@ -140,13 +140,24 @@ Nobody else: nothing is outsourced; no paid promotion exists at any point.
 put some money on this")
 Money buys ASSETS, never ACCELERATION. Gates, receipt-first order, and the
 Day-90 evidence decision do not move. Approved now:
-- sweap.it domain (available per RDAP check 2026-10-15): ~10-15 EUR/yr.
-  Registrar: any ( Porkbun/Cloudflare ); WHOIS privacy on; Nikola's card,
-  hub prepares exact clicks.
-- sweapit.com defensive redirect (~10 USD/yr), same day.
+- sweap.it domain (USER-BOUGHT 2026-10-16 on GoDaddy; Airo first-draft pending,
+  QA law: every number on the generated page gets hub-verified before publish).
+- sweapit.com defensive redirect (~10 USD/yr), same day, optional now that the
+  .it is secured.
 Still free-tier: hosting (GitHub Pages), CI, everything else.
 Gated behind the R4 measurements (Day 60+): any paid infra, paid promotion
 (stands forever per R3), design work, .com/.ai upgrades beyond the defensive.
+
+## INSTRUMENTATION (updated 2026-10-16)
+- Wire sampler cron `7bc28619817f` runs every minute; ledger
+  `~/.sweap/wire_ledger.jsonl`; healthy (37+ frames, max gap 1 min, live hit
+  89.2% over 99 calls, glm-4.6 arm at 96.4%).
+- Daily watchdog cron `bdd31ec9d58a` (10:00): silent unless sampler stalls
+  >26h; alert lands in this chat.
+- Day-14 gate ~2026-10-29: run `python3 cli/wire_preanalysis.py`, then the
+  four-arm composition experiment with measured cache-break numbers (R13
+  design in research/R13_threepane_report.txt). No projections before then.
+
 
 ## STANDING LAWS THIS DOCUMENT OBEYS
 No fabricated numbers (everything stamped). No em-dash anywhere. English only.
