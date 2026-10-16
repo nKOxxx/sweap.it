@@ -24,8 +24,26 @@ def load():
                 pass
     return frames
 
+def row_key(f):
+    """D1 (R16 run 4): ts alone is NOT unique - one row per (session, model)
+    per tick. Any per-ts join must use (ts, session, model); v2 rows without
+    uid fall back to that triple. Also drops merged_marker helper rows."""
+    return (f.get("ts"), f.get("session"), f.get("model"))
+
+def analysis_rows(frames):
+    """Only real measurement rows (v3 merged_marker rows are annotations)."""
+    return [f for f in frames if f.get("row_kind") != "merged_marker"]
+
+def idle_s(f):
+    """D2 (R16 run 8): tick_s/gap_s is the sampler interval, NEVER idle.
+    Real per-lane idle: v3 idle_s field; v2 rows: compute from prior row of
+    the SAME (session, model) lane, else None."""
+    if "idle_s" in f and f.get("idle_s") is not None:
+        return f["idle_s"]
+    return None  # v2 rows cannot prove idle; absence is honest
+
 def main():
-    frames = load()
+    frames = analysis_rows(load())
     if not frames:
         print("ledger empty")
         return
@@ -83,6 +101,30 @@ def main():
         m[0] += f["d_calls"]; m[1] += f["d_cache_read"]; m[2] += f["d_input"] + f["d_cache_write"]
     for m, (c, r, u) in sorted(per_model.items()):
         print(f"  {m}: {c} calls, hit {r/(r+u)*100 if r+u else 0:.1f}%")
+    # v3: compaction-event join (events logged via sweap_event.py)
+    ev_path = os.path.expanduser("~/.sweap/compaction_events.jsonl")
+    if os.path.exists(ev_path):
+        events = []
+        with open(ev_path) as f:
+            for line in f:
+                try:
+                    e = json.loads(line)
+                except Exception:
+                    continue
+                if e.get("session") == "seed":
+                    continue
+                events.append(e)
+        if events:
+            print(f"compaction/prefix events on record: {len(events)}; checking breaks for an event in the prior 60s:")
+            for f in brk:
+                near = [e for e in events
+                        if e.get("session") == f.get("session")
+                        and e.get("model") == f.get("model")
+                        and 0 <= f["ts"] - e.get("ts", 0) <= 60]
+                tag = f"EVENT {near[0]['kind']} (ts {near[0]['ts']})" if near else "no event on record"
+                print(f"  break ts {f['ts']} ({f.get('model')}): {tag}")
+        else:
+            print("compaction event log present but empty (seed only)")
     print("(baseline only; four-arm interpretation = separate, human-gated step)")
 
 if __name__ == "__main__":

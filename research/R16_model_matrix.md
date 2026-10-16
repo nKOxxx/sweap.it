@@ -319,5 +319,22 @@ the row key; idle is also per-model.
   0% by provider design, 540,866 uncached, $0.00.
 
 ## PENDING RUNS
-(none - MATRIX COMPLETE 11/11; sampler v3 schema fixes D1+D2+per-call
-rows+real idle+compaction flag+write-field wiring queued next)
+(none - MATRIX COMPLETE 11/11)
+
+## SAMPLER V3 DEPLOYED (2026-10-16, post-matrix)
+All four respondent-demanded fixes are live in
+`~/.hermes/scripts/sweap_wire_sampler.py` (canonical copies in
+`scripts/` of this repo):
+- D1: rows carry `uid = ts|session|model`; ts no longer ambiguous.
+- D2: `gap_s` renamed `tick_s` (tick interval); real per-lane `idle_s`
+  added (seconds since the same (session, model) lane last emitted).
+- Per-call attribution: merged windows now also emit a `merged_marker`
+  row stating exactly what is unknown (per-call split unavailable at
+  sampler grain) - no invented splits.
+- Write-field honesty: rows carry `write_field_trust` ("dead" for the
+  glm lane, confirming run 11's logical proof), plus a
+  `compaction_events.jsonl` join log written via `scripts/sweap_event.py`
+  (kinds: compaction | prefix_change | restart | manual); preanalysis
+  now tests each break for an event in the prior 60s.
+- v2 rows in the ledger stay untouched (frozen measurement era); v3
+  rows carry `schema: 3`. Health watchdog unchanged.

@@ -14,6 +14,12 @@ What it does (read-only):
 - prints the v2 wire receipt: basket, breaks, tax, headroom. Every dollar
   line keeps its v0 honesty stamps ([reconstructed]/[projected]/[ASSUMPTION]).
 
+v3 schema notes (R16 blind-matrix defects D1/D2):
+- ledger rows are keyed by (ts, session, model) - uid in v3 rows; ts alone
+  is NOT unique (one row per lane per tick);
+- gap_s/tick_s is the sampler tick interval, NEVER idle time; use the v3
+  idle_s field or per-lane ts deltas within the same (session, model).
+
 Design laws: read-only by default; billed tokens never byte guesses;
 measurement first (instrument frozen while measuring); nothing in here
 mutates traffic. The v2 INTERVENTION (layout optimizer) is a separate,
