@@ -57,7 +57,28 @@ in both cases: the customer.
    reruns the 11-model blind audit clean + fresh install reconstructs full
    history with zero integration (already true on this host).
 
-## VERDICT (worker's, plain language, recount PASS)
+## FOUNDER RULING ON THE RED-TEAM (2026-10-16, Nikola)
+- Attack 1 (one host/one day/one lane): "we need to start from somewhere.
+  What's wrong with that?" RULING: accepted as normal. Every measurement
+  product starts as one station. Note the variety we already have: census
+  and sweep results are store facts, model-independent; cache findings span
+  four lanes (96.3 / 0 / 0 / 1.0 / 19.2). The one thing this machine cannot
+  give is other people's workloads, and installs fix that: v3.1 backfills a
+  new host's full break history automatically on first run, so every
+  install widens the evidence base by itself.
+- Attack 2 (ref not enough): "correct, being the ref isn't enough. We need
+  to also be able to act and clean up." RULING: product confirmed as
+  MEASURE + CLEAN, which it already is: the sweep IS the action (14,955
+  rows, 19.56 MB, 48% of the file, provably-dead-only, quarantine +
+  SHA-256 + byte-identical restore verified). Discipline kept: we act AT
+  REST, never mid-flight in window or wire, because mid-flight mutation is
+  exactly what our own measurements show breaks caches.
+- Attack 3 (instrument had defects): "we fixed it, didn't we? We are in
+  R&D phase, nobody has seen this, we are building." RULING: fixed same
+  day, v3.1 live and verified. Before any publish (paper #2 / public
+  flip): rerun the blind audit once against the v3.1 ledger so the answer
+  is a receipt, not trust.
+
 
 The category's dirty secret, now measured: cache hit is a per-provider,
 per-lane contract and blended marketing hit rates are meaningless. The
