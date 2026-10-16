@@ -1,0 +1,599 @@
+Query: # BRIEF R13: three-plane context economy (sweap / caveman / jev) - 
+landscape + experiment design
+
+## Your job
+Two deliverables: (1) a precise comparison of three approaches to agent context
+waste, (2) design the composition experiment that measures whether they 
+multiply,
+interfere, or are redundant. Mark all inference [INFERRED]. No invented numbers.
+
+## VERIFIED FACTS (hub-harvested 2026-10-15 from primary sources)
+
+CAVEMAN (github.com/JuliusBrussee/caveman, Apache-2.0, 111,865 stars):
+- In-flight proxy for coding agents. Compresses REQUEST bytes before they reach
+  the provider. Claims: 33.2% fewer input tokens, 18/18 evals, 0.46x cost,
+  "byte-exact recovery". Cloud $300/mo + VPC. README (Oct) also sells "warm
+  cache" (keeps provider prompt-cache warm across pauses), caveman browse
+  (121 tokens instead of 15,704 for a page), /caveman-compress for memory files.
+- Plane: THE WIRE (what is sent per call).
+
+JEV (TypeSafe AI, typesafe.ai blog Sep 15 2026, founder Diogo Almeida 
+ex-OpenAI):
+- "System One model": input = unstructured state + typed question; output =
+  typed decision (choice/score/boolean) with calibrated confidence. Gives up
+  free-text generation; claimed ~100x faster/cheaper than chat LLMs on decision
+  tasks; trained with RLCD (Reinforcement Learning for Calibrated Decisions);
+  claimed unable to hallucinate in the generation sense. Early access.
+- Ecosystem evidence (GitHub): fast-jev-compaction (7,652 stars): Claude Code
+  plugin, replaces lossy compaction summaries. Every tool_use/tool_result scored
+  by Jev against the whole conversation (results elided to notes), stale ones
+  DROPPED, kept ones stay VERBATIM; first message + newest N messages pinned;
+  user/assistant prose never touched. jev-context-router (research prototype):
+  two-stage Jev filtering of tool outputs BEFORE they enter context, local
+  originals + exact-recall markers; self-reported: conservative candidate failed
+  a real-agent usefulness gate, nothing auto-enables.
+- Plane: THE WINDOW (what stays in the live context).
+
+SWEEP (ours, github.com/nKOxxx/sweap when public, Apache-2.0):
+- Read-only census of the agent STORE: exact exhaust share (90.69% of stored
+  transcript tokens are dead tool output on the reference host), dollar card
+  , provably-dead-only sweep (14,955 rows / 19.56 MB / 48% of file),
+  quarantine + SHA-256 over all columns, byte-identical restore proven, live
+  store reclaimed 22.1 MB measured. Wire sampler: 1-min snapshot-diff of the
+  store's in-place counters = per-call-window cache ledger without a proxy.
+- Plane: THE STORE (what persists at rest and gets re-sent forever after).
+
+INTERACTION HYPOTHESES TO INTERROGATE:
+H1 Store-rot is invariant to window hygiene: compaction/compression change what
+is SENT, but transcripts still write everything to the store, so sweap's reclaim
+universe is the same under all arms. (Check against Claude Code transcript
+behavior if you know it; else mark open.)
+H2 Wire savings and window savings multiply (different token populations), but
+store savings are the only ones that persist across sessions/backups.
+H3 Verbatim-keepers converge: caveman claims byte-exact recovery, jev-compaction
+keeps kept-items verbatim, sweap proves byte-identical restore. The category is
+converging on "compress or drop, never rewrite".
+H4 Cache interaction: mid-session context mutations (compaction drops, proxy
+rewrites) BREAK provider prompt caches and re-bill the prefix at full price.
+A tool that shrinks context may INCREASE cost if it fires too often. Nobody
+publishes this number. The sweap wire sampler can measure it.
+
+## QUESTIONS
+1. Comparison table: plane, mechanism, what it claims, what it proves, license,
+   business model, failure mode. One row per tool, facts only.
+2. H1-H4: argue each, mark [INFERRED] or open, name what evidence would settle 
+it.
+3. DESIGN THE COMPOSITION EXPERIMENT (the core ask): one task suite, four arms:
+   A baseline (no optimization), B caveman only, C jev-style compaction only,
+   D both. Metrics: tokens sent, billed cost, task success, cache-hit rate,
+   store bytes at end, restore fidelity. Specify: how to run each arm cheaply
+   on ONE host in days (not weeks), what to do when Jev early-access is not yet
+   available (policy-replay alternative: reimplement the DOCUMENTED policy of
+   fast-jev-compaction with a cheap LLM judge and label it as our replica, not
+   their product), and how to keep the comparison honest (same tasks, same 
+seeds,
+   receipts for every number).
+4. Failure modes nobody publishes: what breaks when these three run together?
+5. Positioning for sweap: 5 sentences max. Where does the auditor sit when the
+   wire and the window both have optimizers?
+
+Rules: no fabricated numbers, no invented events. [INFERRED] tags mandatory on
+speculation. End with exactly the line: R13-JEV-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I'll start by grounding myself in the existing sweap context and relevant
+    skills before writing the deliverable.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 📚 preparing skill_view…
+  ┊ 🔎 preparing search_files…
+  ┊ 🔎 preparing search_files…
+  ┊ 📚 skill     critical-analysis  0.1s
+  ┊ 🔎 find      sweap  60.5s
+  ┊ 🔎 find      R13|three-plane|caveman|JEV|jev  60.6s
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         ls -la ~/ | grep -iE 'sweap|caveman|jev|brief|r13' + 3 commands  0.2s
+  ┊ 💻 preparing terminal…
+  ┊ 📖 preparing read_file…
+  ┊ 💻 $         ls -la + 2 commands  0.1s
+  ┊ 📖 read      FIRST_90_DAYS_sweap.md  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Let me read the key sweap documents to ground the facts accurately.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 📖 preparing read_file…
+  ┊ 📖 preparing read_file…
+  ┊ 📖 preparing read_file…
+  ┊ 📖 read      README.md  0.2s
+  ┊ 📖 read      DECISIONS.md  0.1s
+  ┊ 📖 read      R12_gtm_report.txt  0.2s
+  ┊ 📖 preparing read_file…
+  ┊ 📖 preparing read_file…
+  ┊ 📖 read      RESEARCH_LOG.md  0.2s
+  ┊ 📖 read      billed_usage_census.txt  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Let me verify the sweap wire-sampler mechanism and store census details
+    to describe the mechanism accurately.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 📖 preparing read_file…
+  ┊ 📖 preparing read_file…
+  ┊ 📖 read      sweap_wire_sampler.py  0.2s
+  ┊ 📖 read      sweap_census_out.json  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I have strong grounding on sweap (store census, wire sampler, the R1-R12
+    lineage) and the verified caveman/JEV facts from the brief. Writing the
+    R13 deliverable to the research log, then presenting it.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/sweap.it/research/R13_three_plane_composition.txt  0.4s
+  ┊ review diff
+a/research/R13_three_plane_composition.txt → b/research/R13_three_plane_composition.txt
+@@ -0,0 +1,254 @@
++R13: THREE-PLANE CONTEXT ECONOMY (caveman / jev / sweap) - landscape + experiment design
++Date: 2026-10-16. Hub-synthesized. All speculation tagged [INFERRED]. No invented numbers.
++Sources: brief VERIFIED FACTS (hub-harvested 2026-10-15 from primary sources) + own measured
++sweap artifacts (sweap_census_out.json 2026-10-14, billed_usage_census.txt 2026-10-14,
++cli/sweap_wire_sampler.py, README.md, RESEARCH_LOG.md). Upper line per cell = fact; [INFERRED] = reasoning.
++
++================================================================================
++1. COMPARISON TABLE (facts + explicit inference; one row per tool)
++================================================================================
++Columns: PLANE | MECHANISM | CLAIMS | PROVES | LICENSE | BUSINESS MODEL | FAILURE MODE
++
++CAVEMAN (JuliusBrussee/caveman, 111,865 stars)
++- PLANE: THE WIRE. What is SENT per call, compressed in flight before the provider.
++- MECHANISM: in-flight proxy that compresses request bytes before they reach the
++  provider. README (Oct) also sells "warm cache" (keeps provider prompt-cache warm
++  across pauses), caveman browse (121 tokens vs 15,704 for a page), /caveman-compress
++  for memory files.
++- CLAIMS: 33.2% fewer input tokens; 0.46x cost; 18/18 evals; "byte-exact recovery".
++  All self-reported in README/site. R12 notes a July third-party test challenged
++  "saves 65%" in real sessions, which became the warm-cache roadmap.
++- PROVES: self-reported metrics; some independent July benchmarking (per R12). The
++  "byte-exact recovery" is claimed, not independently re-verified in this series.
++- LICENSE: Apache-2.0 (verified via GitHub API per DECISIONS.md).
++- BUSINESS MODEL: free OSS core + Cloud $300/mo + VPC + npm middleware + CLI binaries;
++  family repos (cavegemma, cavekit, caveman-browse).
++- FAILURE MODE: in-path rewrite can shift task behavior; content-dependent re-encoding
++  per turn can break provider prefix caches (H4) and re-bill the prefix at full price
++  [INFERRED mechanism]; only helps bytes SENT, leaves store rot untouched.
++
++JEV (TypeSafe AI; typesafe.ai blog 2026-09-15; Diogo Almeida ex-OpenAI)
++- PLANE: THE WINDOW. What stays in the LIVE context.
++- MECHANISM: "System One" model = input unstructured state + typed question, output =
++  typed decision (choice/score/boolean) with calibrated confidence; gives up free-text
++  generation; trained with RLCD (RL for Calibrated Decisions). Ecosystem, two artifacts:
++  fast-jev-compaction (Claude Code plugin, 7,652 stars): scores every tool_use/
++  tool_result against the whole conversation, elides results to notes, DROPS stale ones,
++  keeps the rest VERBATIM, pins first message + newest N, never touches user/assistant
++  prose. jev-context-router (research prototype): two-stage Jev filtering of tool
++  outputs BEFORE they enter context, local originals + exact-recall markers.
++- CLAIMS: ~100x faster/cheaper than chat LLMs on decision tasks; "unable to hallucinate
++  in the generation sense"; compaction policy as documented.
++- PROVES: compaction plugin ships (stars). Router is research: "self-reported:
++  conservative candidate failed a real-agent usefulness gate, nothing auto-enables."
++  The ~100x claim is vendor-reported, early access. Not independently measured here.
++- LICENSE: not stated in the harvest [OPEN - verify before reuse; do not assume Apache].
++- BUSINESS MODEL: early access for the System One model; startup (TypeSafe AI); router
++  currently research-only, nothing auto-enables.
++- FAILURE MODE: lossy at the decision boundary (drop/elide); a mis-scored "stale" drop
++  strands load-bearing context; gives up free-text generation (cannot do open-ended
++  work itself); any window mutation can break the provider prefix cache (H4) [INFERRED];
++  the real-agent usefulness gate already failed once (their own report).
++
++SWEAP (ours, github.com/nKOxxx/sweap when public, Apache-2.0)
++- PLANE: THE STORE. What persists AT REST and gets re-sent forever after.
++- MECHANISM: read-only census of the agent store (exact exhaust share, dollar card);
++  provably-dead-only sweep to quarantine with SHA-256 over all columns; byte-identical
++  restore proven; wire sampler = 1-min snapshot-diff of the store's in-place usage
++  counters, producing a per-call-window cache ledger WITHOUT a proxy (cli/
++  sweap_wire_sampler.py).
++- PROVES (all measured on our host): 90.69% of stored transcript tokens are tool
++  exhaust (exact tokenizer count, sweap_census_out.json); 14,955 rows / 19.56 MB / 48%
++  of file provably-dead; live store reclaimed 22.1 MB (measured); restore byte-identical
++  (SHA-256 verified before and after); wire ledger reconstructs per-call cache hits.
++- LICENSE: Apache-2.0.
++- BUSINESS MODEL: none yet, by design (FIRST_90_DAYS R4: no monetization until
++  measured demand + falsifiable metric strangers verified + a named real-world gap;
++  earliest Day 60+). OSS, owned domains sweap.it + sweapit.com only.
++- FAILURE MODE: single-host store focus; quarantine hold consumes storage; a wrong
++  "provably dead" verdict can strand references (mitigated by quarantine-first +
++  byte-restore); does nothing in-flight or mid-session (needs the others or stays
++  rest-plane-only).
++
++================================================================================
++2. INTERACTION HYPOTHESES H1-H4
++================================================================================
++H1: STORE-ROT IS INVARIANT TO WINDOW HYGIENE. [INFERRED]
++Arg: caveman changes what is SENT; jev changes what stays in the live window; neither
++writes Hermes transcripts into .hermes/state.db. sweap's reclaim universe (dead tool
+… omitted 176 diff line(s) across 1 additional file(s)/section(s)
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 -c " data=open('R13_three_plane_composition.txt').read() for ch in ['\u2014','\u2013']: n=data.count(ch) print(repr(ch), n) print('ends with:', data.rstrip()[-12:]) "  1.6s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    One em-dash slipped in. Finding and fixing it per house law.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 -c " data=open('R13_three_plane_composition.txt').read() i=data.find('\u2014') print(repr(data[max(0,i-60):i+60])) "  1.4s
+  ┊ 🔧 preparing patch…
+  ┊ 🔧 patch     /Users/ares/sweap.it/research/R13_three_plane_composition.txt  0.3s
+  ┊ review diff
+a//Users/ares/sweap.it/research/R13_three_plane_composition.txt → b//Users/ares/sweap.it/research/R13_three_plane_composition.txt
+@@ -102,7 +102,7 @@
+ A - (A-B) - (A-C) with a small overlap penalty, multiply-thin holds; if D ~= B, the two
+ are redundant on the history population (window savings are a subset of wire savings).
+ 
+-H3: VERBATIM-KEEPERS CONVERGE. [FAIR—category observation; the individual claims are facts]
++H3: VERBATIM-KEEPERS CONVERGE. [FAIR; category observation, the individual claims are facts]
+ Arg: caveman claims byte-exact recovery, fast-jev-compaction keeps kept items verbatim
+ plus exact-recall markers, sweap proves byte-identical restore. The category is
+ converging on "compress or drop, never rewrite" because rewrite introduces drift risk
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 -c "d=open('R13_three_plane_composition.txt').read(); print('emdash count:', d.count(chr(0x2014)), '| ends:', d.rstrip()[-9:])"  1.0s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    R13 deliverable written to
+    /Users/ares/sweap.it/research/R13_three_plane_composition.txt (em-dash
+    clean, ends R13-JEV-OK). Full content below.
+    
+    ==========================================================================
+    ======
+    R13: THREE-PLANE CONTEXT ECONOMY (caveman / jev / sweap)
+    ==========================================================================
+    ======
+    Deliverable 1 = comparison table. Deliverable 2 = the composition
+    experiment.
+    All speculation tagged [INFERRED]. Nothing fabricated. Facts from the
+    brief's
+    hub-harvest plus our own measured artifacts (sweap_census_out.json 10-14,
+    billed_usage_census.txt 10-14, sweap_wire_sampler.py, RESEARCH_LOG.md).
+    
+    
+    
+    1. COMPARISON TABLE (one row per tool, facts + explicit inference)
+    
+    
+    Columns: PLANE | MECHANISM | CLAIMS | PROVES | LICENSE | BUSINESS MODEL |
+    FAILURE MODE
+    
+    CAVEMAN (JuliusBrussee/caveman, 111,865 stars)
+    - PLANE: THE WIRE. Request bytes, compressed in flight before the
+    provider.
+    - MECHANISM: in-flight proxy. README (Oct) also sells warm cache (keeps
+    prompt-cache
+      warm across pauses), caveman browse (121 vs 15,704 tokens/page),
+    /caveman-compress.
+    - CLAIMS: 33.2% fewer input tokens; 0.46x cost; 18/18 evals; "byte-exact
+    recovery".
+      Self-reported. R12 notes a July third-party test challenged "saves 65%"
+    in real
+      sessions, which became the warm-cache roadmap.
+    - PROVES: self-reported metrics + some independent July benchmarking.
+    "Byte-exact
+      recovery" is claimed, not independently re-verified in this series.
+    - LICENSE: Apache-2.0 (verified).
+    - BUSINESS MODEL: free OSS core + Cloud $300/mo + VPC + npm/CLI + family
+    repos.
+    - FAILURE MODE: in-path rewrite can shift behavior; content-dependent
+    per-turn
+      re-encoding can break provider prefix caches and re-bill the prefix
+    [INFERRED];
+      only helps bytes SENT, leaves store rot untouched.
+    
+    JEV (TypeSafe AI; typesafe.ai blog 09-15; Diogo Almeida ex-OpenAI)
+    - PLANE: THE WINDOW. What stays in live context.
+    - MECHANISM: "System One" model, input = unstructured state + typed
+    question, output =
+      typed decision (choice/score/boolean) + calibrated confidence; no
+    free-text
+      generation; trained with RLCD. fast-jev-compaction (Claude Code plugin,
+    7,652 stars):
+      scores every tool_use/tool_result vs whole conversation, elides results
+    to notes,
+      drops stale, keeps rest VERBATIM, pins first message + newest N, never
+    touches
+      user/assistant prose. jev-context-router (research): two-stage
+    filtering before
+      context, local originals + exact-recall markers.
+    - CLAIMS: ~100x faster/cheaper than chat LLMs on decision tasks; "unable
+    to hallucinate
+      in the generation sense". Vendor-reported, early access.
+    - PROVES: compaction plugin ships. Router: "self-reported: conservative
+    candidate
+      failed a real-agent usefulness gate, nothing auto-enables." ~100x not
+    independently
+      measured here.
+    - LICENSE: not stated in the harvest [OPEN; verify before reuse, do not
+    assume Apache].
+    - BUSINESS MODEL: early access for the System One model; startup; router
+    research-only.
+    - FAILURE MODE: lossy at the decision boundary; a mis-scored "stale" drop
+    strands
+      load-bearing context; gives up free-text generation; any window
+    mutation can break
+      provider prefix cache [INFERRED]; already failed one real-agent
+    usefulness gate.
+    
+    SWEAP (ours, Apache-2.0)
+    - PLANE: THE STORE. What persists at rest and gets re-sent forever after.
+    - MECHANISM: read-only census (exact exhaust share, dollar card);
+    provably-dead-only
+      sweep to quarantine with SHA-256 over all columns; byte-identical
+    restore proven;
+      wire sampler = 1-min snapshot-diff of in-place usage counters, a
+    per-call-window
+      cache ledger with NO proxy.
+    - PROVES (measured on our host): 90.69% of stored transcript tokens are
+    tool exhaust
+      (exact count, sweap_census_out.json); 14,955 rows / 19.56 MB / 48% of
+    file
+      provably-dead; live store reclaimed 22.1 MB (measured); restore
+    byte-identical
+      (SHA-256 verified before and after); wire ledger reconstructs per-call
+    cache hits.
+    - LICENSE: Apache-2.0.
+    - BUSINESS MODEL: none yet by design (R4 gate, earliest Day 60+); OSS +
+    owned domains
+      sweap.it and sweapit.com only.
+    - FAILURE MODE: single-host store focus; quarantine hold consumes
+    storage; a wrong
+      "provably dead" verdict can strand refs (mitigated by quarantine +
+    byte-restore);
+      does nothing in-flight or mid-session.
+    
+    
+    
+    2. INTERACTION HYPOTHESES
+    
+    
+    H1 STORE-ROT IS INVARIANT TO WINDOW HYGIENE. [INFERRED]
+    caveman changes what is SENT, jev changes what stays in the live window;
+    neither
+    writes Hermes transcripts into state.db, so sweap's reclaim universe
+    (dead tool
+    output rows) is a property of the store and stays ~unchanged under B and
+    C. Falsifier:
+    if an optimizer's client writes elided/compacted content into the
+    persisted transcript,
+    the exhaust share drops. For Claude Code, whether fast-jev-compaction
+    rewrites the
+    on-disk .jsonl transcript or only the live provider window is NOT
+    established in the
+    harvest [OPEN; verify from the plugin repo]. Evidence: run B and C,
+    re-run census at
+    end; if share stays ~90.69%, H1 holds.
+    
+    H2 WIRE AND WINDOW SAVINGS MULTIPLY, STORE SAVINGS ARE THE ONLY
+    PERSISTENT ONES.
+    [INFERRED, with a subadditivity caveat]
+    They touch overlapping bytes on a given call (caveman re-encodes history
+    jev already
+    elided), so they are not strictly disjoint populations; first-order D ~=
+    B*C minus
+    overlap, because caveman has less redundancy to exploit on
+    already-compacted content
+    [INFERRED]. Store savings persist because only sweap touches state.db
+    while the others
+    are in-flight/window only [consistent with H1]. Evidence: arm D vs A/B/C
+    raw tokens; if
+    D ~= B, window savings are a subset of wire savings (redundant),
+    falsifying multiply.
+    
+    H3 VERBATIM-KEEPERS CONVERGE. [FAIR; category observation, the individual
+    claims are
+    facts]
+    caveman claims byte-exact recovery, jev keeps kept items verbatim +
+    exact-recall
+    markers, sweap proves byte-identical restore. The category converges on
+    "compress or
+    drop, never rewrite" because rewrite invites drift/dangling refs (per R1b
+    lit). The law
+    is falsifiable: any candidate must expose a byte-identical or
+    exact-recall path. But
+    caution: "byte-exact" means a different original for each tool (caveman
+    compressed form,
+    jev pre-filter original, sweap raw store row). That conflation is a real
+    category bug.
+    
+    H4 CONTEXT MUTATION BREAKS PROVIDER CACHE AND RE-BILLS THE PREFIX.
+    [highest value]
+    Prefix caching keys on byte-identical prefixes. Our baseline lane sits at
+    96.3%
+    cache-hit (glm-4.6, billed_usage_census.txt) with a reconstructed $53.80
+    lifetime
+    cache-break tax when the prefix wobbles. If jev drops/elides mid-session,
+    the next
+    request encodes differently, the cached prefix misses, and the provider
+    re-bills the
+    whole prefix as uncached. Same risk for caveman if its compression is
+    content-dependent
+    per turn [INFERRED on the reverse mechanism; the 96.3% and $53.80 are
+    measured on the
+    untooled baseline]. Corollary: a tool that LOWERS tokens-sent can RAISE
+    billed cost if
+    it fires too often. Nobody public publishes this number. The sweap wire
+    sampler is
+    built to catch it: a compaction event aligned to a cache_read collapse in
+    the following
+    window.
+    
+    
+    
+    3. COMPOSITION EXPERIMENT (the core ask)
+    
+    
+    QUESTION: do the three planes multiply, interfere, or prove redundant?
+    
+    FOUR ARMS on one host:
+      A baseline (no optimizer)
+      B caveman only (OSS proxy on the same host, no Cloud tier needed)
+      C jev-style compaction only (our policy-replay replica)
+      D both (proxy + compaction replica)
+    
+    TASK SUITE: ~20 seeded deterministic agentic tasks that require tool
+    calls (so real
+    tool output is generated) with an objective, held-out oracle per task
+    (test passes,
+    exact answer) [protocol law from R2: external verifier runs the
+    before/after task set,
+    not the agent under test]. Same 20 tasks, same seeds, identical session
+    inputs per arm.
+    
+    SIX METRICS, each with a local receipt:
+      1. tokens sent: wire-sampler ledger per arm (wire_ledger_<arm>.jsonl).
+      2. billed cost: dollars from the same usage table the sampler diffs,
+    stamped
+         [measured]/[reconstructed]/[projected], never blended.
+      3. task success: fraction passing the oracle, per-task log.
+      4. cache-hit rate: cache_read/(uncached+cache_read) per arm vs the
+    96.3% baseline.
+      5. store bytes at end: sweap census on the arm's store (census json per
+    arm).
+      6. restore fidelity: sweap SHA-256 byte-identical restore; replica
+    exact-recall
+         (every dropped/elided item resolves byte-identically to a local
+    original).
+    
+    HOW TO RUN CHEAPLY ON ONE HOST IN DAYS:
+    - SERIALIZE arms on SEPARATE fresh stores (a mutated store would
+    contaminate the next
+      arm's baseline and end-state). Fresh identical state.db clone per arm.
+    This is the
+      #1 honesty control.
+    - SAME provider and SAME model across all four arms (cache behavior is
+    model-specific;
+      mixing lanes confounds cache-hit). Use the cheap/free lane (DeepSeek
+    free lane per
+      house law) so billed cost is comparative and near-zero.
+    - Bounded runs: ~20 seeded tasks per arm, enough measurable exhaust, no
+    24/7 job.
+    - DAYS: Day 1 build harness + replica + pre-registration; Day 2 arms A+B;
+    Day 3 arms
+      C+D; Day 4 measure all six metrics + write receipts. ~4 days total.
+    
+    JEV EARLY-ACCESS UNAVAILABLE -> POLICY-REPLAY (honest fallback):
+    Reimplement the DOCUMENTED policy of fast-jev-compaction (public): score
+    every
+    tool_use/tool_result against the whole conversation, elide to notes, drop
+    stale, keep
+    newest N verbatim, pin first message, never touch user/assistant prose;
+    use a cheap LLM
+    judge for staleness. LABEL IT "our replica of the documented policy",
+    never the Jev
+    product. We measure the POLICY, not the proprietary System One model;
+    caveat that the
+    real model may score differently. That keeps the comparison honest (same
+    tasks, same
+    seeds, our own replica, receipts).
+    
+    KEEPING IT HONEST:
+    - Pre-register tasks, seeds, metrics, thresholds, accept/reject rules
+    BEFORE any arm.
+    - Same tasks/seeds, fresh identical store per arm, same provider+model.
+    - Every number stamped; falsifiable (a stranger reruns any arm and checks).
+    - Save raw artifacts per arm (ledgers, census, task logs, rebuild
+    manifests) plus a
+      timestamped compaction-event log to test H4 by aligning events to
+    ledger windows.
+    - Self-sweep paradox law: measurer runs the oracle, not the agent under
+    test.
+    
+    INTERPRETATION PLAN:
+    - D near A - (A-B) - (A-C) with small overlap penalty: savings roughly
+    ADD.
+    - D clearly below the additive prediction: genuine multiply [surprising].
+    - D ~= B: window savings redundant with wire savings on history. [H2
+    multiply falsified]
+    - cache-hit in any arm far below A's 96.3%: the H4 tax is live; recompute
+    NET cost in
+      dollars, not raw tokens. This is the number nobody publishes.
+    - store bytes ~equal across arms: H1 confirmed. Lower in C/D: that
+    optimizer writes
+      back to the store; H1 falsified.
+    - restore fidelity failing in any arm: that tool's "verbatim" claim is
+    hollow.
+    
+    
+    
+    4. FAILURE MODES NOBODY PUBLISHES (three running together)
+    
+    
+    1. CACHE THRASH (H4, the big one): mutations from compaction or per-turn
+    re-encoding
+       break the prefix cache; combined tools can LOWER tokens-sent while
+    RAISING billed
+       cost. "Savings" framed as raw tokens mislead; dollars are the true
+    unit, and nobody
+       ships that attribution ledger.
+    2. THREE-WAY CONSISTENCY: the provider sees caveman's encoded bytes, the
+    window sees
+       jev's filtered view, the store holds the agent's raw rows. Different
+    encodings of
+       "the same" conversation; a byte-exact store restore does not
+    reconstruct what the
+       provider saw. Recall breaks across reference frames.
+    3. REFERENCE-FRAME CONFLATION: three different "originals" all called
+    verbatim (see H3).
+    4. SCORING-DRIFT LOOP: if the compaction judge is an LLM and caveman
+    changes the exact
+       text the judge reads, judge quality shifts; the optimizers do not
+    compose because
+       one changes the other's input distribution.
+    5. SHARED-ROW DIVERGENCE: a tool_result jev drops as stale (window) is
+    still a stored
+       row sweap may classify differently (store); opposing verdicts on the
+    same artifact.
+    6. BLAME AMBIGUITY + LATENCY: three layers, cost regressions
+    unattributable without a
+       unified ledger; N layers of tooling add per-call latency.
+    7. COLD-CACHE CASCADE: if warm-cache and compaction both fire, cache
+    state is unstable;
+       worst case every call pays full uncached price, negating all claimed
+    savings.
+    
+    
+    
+    5. POSITIONING FOR SWEAP (5 sentences max)
+    
+    
+    sweap is the auditor, not another optimizer: it measures the store plane,
+    which is the
+    only plane whose savings survive sessions, restarts, and restores. When
+    the wire
+    (caveman) and the window (jev) both mutate context, neither can tell you
+    what still
+    sits at rest and gets re-sent forever after; sweap can, with an exact
+    exhaust share and
+    a dollar card billed from the provider's own counters. Its per-call wire
+    sampler is the
+    neutral attribution ledger that says which optimizer actually saved you
+    money NET of any
+    cache break, so it is the honest referee the whole category is missing.
+    Because it stays
+    read-only until a human gates it, and restores byte-identically
+    (SHA-256), the auditor
+    guarantees no optimizer stack can strand you with unrecoverable context.
+    Put sweap
+    between the optimizer stack and the money: it is the receipt for what all
+    of them cost
+    you.
+    
+    R13-JEV-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261016_093536_8f2085
+
+Session:        20261016_093536_8f2085
+Duration:       6m 10s
+Messages:       31 (1 user, 29 tool calls)
