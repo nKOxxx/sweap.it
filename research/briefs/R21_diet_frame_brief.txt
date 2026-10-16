@@ -1,0 +1,66 @@
+# R21 BRIEF: FINAL GUT-CHECK - THE DIET FRAME (fat AI + carrying charge + trainer)
+
+ROLE: You are a launch strategist and hostile copy-reviewer. The founder has
+settled on a marketing frame after three research rounds. Gut-check it: attack
+it, then make it sharper. The bar: would a non-technical person, seeing this
+once, think "shit, I need to try this"? If not, what is missing?
+
+## THE FRAME UNDER TEST (founder-approved, three layers)
+
+LAYER 1 - THE JOKE (weight): "Your AI is fat. 57% of its memory is junk:
+abandoned tool output, dead files, exhaust it hoards and never uses."
+- The joke is on the AI, never the user (kills the sick-niche attack: not
+  confessional, universal, funny).
+- Entry action: `sweap weigh`, 2 seconds, read-only. Their own number.
+
+LAYER 2 - THE STING (carrying charge): "And that junk is not sitting still.
+Your AI drags it into every conversation. When it loses the thread (which
+happens), it pays FULL PRICE to re-read all the junk too."
+- Measured basis [ANCHOR]: one observed day had 207,566 tokens billed at
+  full price from 3 memory-loss events; cache hit on the good lane is 96.3%,
+  so sting days are real but not every day.
+- This answers "so what?" for the weigh-in: the fat has a carrying charge.
+
+LAYER 3 - THE RETENTION (trainer that stays): "Diets fail because they end.
+Sweap stays on the scale." After the one-command diet (undoable), sweap keeps
+watching: weighs the workspace continuously, alerts when junk creeps back,
+and catches the binges (a memory-loss receipt = the trainer catching the AI
+snacking at full price).
+- Measured basis [ANCHOR]: the watcher already exists (runs every 60 seconds,
+  local-only, zero network calls); the recurring auto-diet is on the roadmap.
+- The shareable artifacts: before/after weigh-in card ("22 MB gone in one
+  command"), binge receipt ("your AI binged 207k tokens last night").
+
+CONTRAST LINE: "Caveman makes your AI talk less. Jev makes your AI think
+faster. Sweap makes your AI weigh less."
+
+CONSTRAINTS (fixed): no ads, no cold outreach, product-led only; every public
+number measured or stamped hypothetical; local-only privacy is a quiet README
+section, not a slogan; complementary to caveman/jev, never attacks them.
+
+## YOUR TASK
+
+G1. THE BUS-TEST: a non-technical person sees ONLY this frame (no docs).
+    Do the three layers compose into one feeling, or three? Name the exact
+    sentence where attention dies, if any.
+
+G2. ATTACK THE WEAKEST LAYER. Which of joke/sting/trainer is most likely to
+    fall flat in the wild, and what replaces it if it does?
+
+G3. THE DAY-2 STORY: user installed, weighed, dieted, card posted. What is
+    the literal reason they open sweap on day 2, day 8, day 30? If the
+    answer is "alerts," what does an alert look like in one line that a
+    non-expert would act on? Give 3 example alert lines.
+
+G4. THE OVERCLAIM SCAN: find every word in the frame that promises more than
+    measured fact (prevention, continuous savings, "every conversation").
+    Rewrite those lines honestly WITHOUT losing punch. List: original ->
+    honest version.
+
+G5. VERDICT: does the frame pass the "shit, I need to try this" bar? PASS /
+    PASS-WITH-FIXES / FAIL. If PASS-WITH-FIXES, the minimal fix list (max 3).
+    Then the final one-liner for the README hero, in the founder's three-beat
+    contrast shape, tightened if you can.
+
+FORMAT: G1-G5, blunt, no hype words. End with exactly this line:
+R21-DIET-FRAME-OK

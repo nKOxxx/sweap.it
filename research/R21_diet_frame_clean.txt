@@ -1,0 +1,179 @@
+G1. THE BUS-TEST: a non-technical person sees ONLY this frame (no docs).
+    Do the three layers compose into one feeling, or three? Name the exact
+    sentence where attention dies, if any.
+
+G2. ATTACK THE WEAKEST LAYER. Which of joke/sting/trainer is most likely to
+    fall flat in the wild, and what replaces it if it does?
+
+G3. THE DAY-2 STORY: user installed, weighed, dieted, card posted. What is
+    the literal reason they open sweap on day 2, day 8, day 30? If the
+    answer is "alerts," what does an alert look like in one line that a
+    non-expert would act on? Give 3 example alert lines.
+
+G4. THE OVERCLAIM SCAN: find every word in the frame that promises more than
+    measured fact (prevention, continuous savings, "every conversation").
+    Rewrite those lines honestly WITHOUT losing punch. List: original ->
+    honest version.
+
+G5. VERDICT: does the frame pass the "shit, I need to try this" bar? PASS /
+    PASS-WITH-FIXES / FAIL. If PASS-WITH-FIXES, the minimal fix list (max 3).
+    Then the final one-liner for the README hero, in the founder's three-beat
+    contrast shape, tightened if you can.
+
+FORMAT: G1-G5, blunt, no hype words. End with exactly this line:
+R21-DIET-FRAME-OK
+Initializing agent...
+
+
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 skill     sweap-stack  0.1s
+
+⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Gut-check done. This one has real bones because the weigh-in is a
+    read-only 2-second action with the user's own number, and the trainer is
+    a genuine retention mechanic that your own data supports. But there's one
+    dead sentence, one weak joint, and two words that overpromise. Here's the
+    whole thing.
+
+    G1 - THE BUS TEST: It composes into ONE story, but only if you never see
+    Layer 2's numerology. The throughline is literally a sentence: "Your AI
+    is fat. It costs you to carry that. Weigh it now, keep it off." That's
+    one feeling, and it's the right one (health metaphor, trainer everywhere).
+
+    The sentence where attention dies, named: "one observed day had 207,566
+    tokens billed at full price from 3 memory-loss events; cache hit on the
+    good lane is 96.3%". That is where a non-technical person checks out.
+    "Tokens" is not money to them, 207,566 is not magnitude to them, and the
+    96.3% hedge tells them "ok this is for engineers." You've told a health
+    story and then dropped them into an engineering footnote. The sting
+    should be in dollars or in plain "re-reads all the junk," never in raw
+    token counts.
+
+    The other subtle seam: Layers 1 and 2 mix metaphors (weight + money). It
+    survives because "carrying charge" is a weight-flavored finance word and
+    the trainer knits them back together, but only if Layer 2 stays a cost
+    story and doesn't become a statistics lecture. Keep the health metaphor
+    in charge of the writing, let money be the number underneath.
+
+    G2 - WEAKEST LAYER: The sting, and not for the reason you think. It's not
+    that it's unfunny or unemotional, it's that it's the one layer that has
+    to confess a limit: "cache hit on the good lane is 96.3%, so sting days
+    are real but not every day." That admission lives in the same layer as
+    the headline claim "drags it into every conversation," so the frame is
+    simultaneously promising frequency and apologizing for frequency. That's
+    the weak joint.
+
+    Replace the emotion, not the layer. Your real sting isn't frequency, it's
+    INVISIBILITY, which is stronger, more honest, and costless to claim.
+    Reworked:
+
+      "You can't see it. You can't predict it. On the days it happens, your
+    AI re-reads all its junk at full price, and you only find out when the
+    receipt shows up."
+
+    That does everything the frequency claim wanted but can't be attacked,
+    because it says nothing about how often. The frequency hedge disappears;
+    the surprise + blindness does the work. This also feeds your trainer beat
+    perfectly, because the trainer's job becomes "so you're never surprised
+    again" instead of "so it never happens," which is a claim you can
+    actually back.
+
+    G3 - THE DAY-2 STORY (and the hardest truth: your honest answer is yes,
+    it's the alerts, but not the way you think):
+
+    - Day 2: not alerts. FEAR check. The user opens it to confirm the diet
+    didn't break their tool. The undo guarantee is your whole day-2 story, so
+    clean that path: "everything reversible, byte-identical restore" must be
+    the second screen they see. If day 2 is smooth, they trust you forever.
+    - Day 8: the watcher catches a real event and tells them, with a number
+    they recognize as their own (their workspace's MB, not tokens). This is
+    the trainer proving it's awake.
+    - Day 30: this is where it sticks or dies. The muscle memory is the
+    MONTHLY RECEIPT of what they'd have wasted, in money or plain terms, not
+    the shame of a binge. A gain artifact ("you kept X off this month")
+    out-shares and out-returns a shame artifact ("your AI binged last night")
+    every time, and your own research already flipped that. Day 30 reason to
+    open: "what did it save me this month?" not "what did it catch?"
+
+    Three alert lines a non-expert would act on (one line each: accusation +
+    one command):
+
+    1. "Your AI hoarded 22 MB of dead junk this week. One command cleans it:
+    sweap diet."
+    2. "Binge caught: your AI re-read 200K tokens of junk at full price
+    overnight. Clean it: sweap diet." (keep the big round number here, it's
+    the scare, but the APP speaks MB)
+    3. "Junk is creeping back (up 8 MB since Monday). 20 seconds keeps the
+    weight off: sweap diet."
+
+    Rule: every alert is "what happened in your number + the exact one
+    command." Never just a warning with no action in the same breath.
+
+    G4 - THE OVERCLAIM SCAN. Every place the frame promises more than
+    measured:
+
+    - "drags it into EVERY conversation" -> honest version: "drags it into
+    conversations on days you can't predict, and pays full price when it
+    does." Frequency un-claimed, sting preserved.
+    - "catches the binges" (Layer 3) -> your skill's own honest-verb law:
+    "catches" is fine only if you mean DETECTS. You detect compaction events
+    automatically, that's real. But if "catches" is read as "prevents," it's
+    a lie. Honest: "flags a memory-loss event the moment it happens." Use
+    "flags," not "catches."
+    - "alerts when junk creeps back" -> the watcher (60s, local) is real, but
+    confirm "alerts to the user" is actually shipped before you say "alerts."
+    If alerting is not yet user-facing, honest version: "watches the
+    workspace and flags junk as it comes back" and keep auto-alerting stamped
+    as the roadmap item it is.
+    - "Sweap stays on the scale... keeps watching" -> true for the watcher.
+    "recurring auto-diet is on the roadmap," so anything implying the DIET
+    repeats itself (your phrase "after the one-command diet... stays on the
+    scale" in context of auto-diet) must not promise continuous clearing.
+    Honest: "Sweap keeps weighing after you diet; the scheduled re-diet is
+    coming." Stamp the auto part hypothetical.
+    - THE BIG ONE: "57% of its memory is junk." Is this measured? This is the
+    single most load-bearing factual claim in the frame and it's sitting in
+    the most-seen sentence. If it's your measured number across your hosts,
+    say it came from your reference host(s) and keep it. If it's a vibe or a
+    rounded impression, it's your largest overclaim and it'll get shredded
+    first. Either source it or cut it and let the weigh-in's own number
+    (theirs) replace it; "weigh in and see yours" is stronger than any
+    headline percent anyway.
+    - "carrying charge" implied to be paid "at full price" always -> your own
+    data says sting days are not every day; already handled above. Keep "at
+    full price WHEN it happens," drop the always.
+
+    G5 - VERDICT: PASS-WITH-FIXES.
+
+    The bar is "do they want to try it once." Yes, decisively, because a
+    2-second read-only weigh-in showing their own number is the best
+    product-led entry you could ask for, and the joke/trainer layers are
+    universal and can't be sick-niche attacked. It earns the try. It does not
+    yet earn the return, and the sting's frequency-cum-apology and the 57%
+    sourcing are the two places it can collapse in the wild.
+
+    Minimal fix list (the only three that matter):
+    1. Kill the numerology in Layer 2; replace frequency with the
+    invisibility sting ("can't see it, can't predict it, pay full price when
+    it happens"). The 96.3% and 207,566 go to the README footnote or the
+    docs, never the pitch.
+    2. Source or cut "57%." If it's not a measured reference-host figure,
+    it's your one factual soft spot and it's in the headline. If you cut it,
+    "weigh in and see yours" is the replacement and it's better.
+    3. Make day-30 a GAIN artifact (monthly "what it saved you"), not the
+    shame binge receipt. Your research already ruled on this: gain gets
+    shared, shame stays private. The binge receipt is the trainer talking to
+    the user in private; the shared card is the savings.
+
+    Final README hero, three-beat, tightened:
+
+      "Weigh it. Diet it. Keep it off."
+
+    That's the whole frame in six words, health metaphor intact, and it hands
+    the reader the action (the 2-second weigh-in) in the first beat. If you
+    want a touch more sting in the hero, the alternative: "Your AI is fat.
+    Feeding it is expensive. Sweap is the trainer." But "Weigh it. Diet it.
+    Keep it off." survives the bus test cleanest because a stranger can do
+    beat one immediately.
+
+    R21-DIET-FRAME-OK
