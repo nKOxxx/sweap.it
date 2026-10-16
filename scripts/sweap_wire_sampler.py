@@ -40,6 +40,45 @@ STATE = os.path.join(HOME, ".sweap", "wire_state.json")
 LEDGER = os.path.join(HOME, ".sweap", "wire_ledger.jsonl")
 EVENTS = os.path.join(HOME, ".sweap", "compaction_events.jsonl")
 
+def auto_compaction_events(con):
+    """v3.1: compaction events come from the STORE, automatically.
+
+    The harness records every context compaction in `messages` as a
+    role='user' row whose content starts with the compaction-summary
+    marker, and flips that session's `compacted` flag at the same id.
+    No agent cooperation needed: a sweap.it customer gets the full
+    event history on first install, and every future event lands here
+    on the next sampler tick (60s worst case).
+
+    Returns (new_events, seen_ids): events after watermark, kind split
+    between first-seen (backfill) and steady-state. ctx sizes use the
+    summary row length (chars, stamped 'chars' not tokens - honesty)."""
+    rows = con.execute(
+        "SELECT id, session_id, timestamp, length(content) FROM messages "
+        "WHERE content LIKE '[CONTEXT COMPACTION%' ORDER BY id").fetchall()
+    seen = _load_seen()
+    out = []
+    for mid, sid, ts, ln in rows:
+        if mid in seen:
+            continue
+        out.append(dict(ts=round(ts), session=sid, model="*", kind="compaction",
+                        ctx_before=None, ctx_after=ln, source="auto",
+                        note=f"auto: store summary row id={mid}, {ln} chars"))
+    return out, {r[0] for r in rows}
+
+SEEN_PATH = os.path.join(HOME, ".sweap", "compaction_seen.json")
+
+def _load_seen():
+    if os.path.exists(SEEN_PATH):
+        try:
+            return set(json.load(open(SEEN_PATH)))
+        except Exception:
+            return set()
+    return set()
+
+def _save_seen(seen):
+    json.dump(sorted(seen)[-5000:], open(SEEN_PATH, "w"))
+
 def snapshot():
     con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     rows = con.execute("""SELECT session_id, model, COALESCE(billing_provider,''),
@@ -79,7 +118,18 @@ def main():
     if not os.path.exists(DB):
         return  # store absent: silent
     now = time.time()
+    con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
     snap = snapshot()
+    # v3.1: auto-derive compaction events (steady-state: only new rows appended)
+    try:
+        new_evs, seen_ids = auto_compaction_events(con)
+        if new_evs:
+            with open(EVENTS, "a") as f:
+                for e in new_evs:
+                    f.write(json.dumps(e) + "\n")
+            _save_seen(seen_ids)
+    except Exception:
+        pass  # event log is best-effort; ledger never depends on it
     prev, t_prev, lane_last = {}, None, {}
     if os.path.exists(STATE):
         try:

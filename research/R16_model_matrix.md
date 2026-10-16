@@ -321,7 +321,29 @@ the row key; idle is also per-model.
 ## PENDING RUNS
 (none - MATRIX COMPLETE 11/11)
 
-## SAMPLER V3 DEPLOYED (2026-10-16, post-matrix)
+## COMPACTION DETECTION: SOLVED, AUTOMATIC (2026-10-16, same day)
+User challenge ("a customer won't have your knowledge; the product must
+work installed") forced the real fix. Result: compaction was NEVER
+invisible - the hub just hadn't looked in the right table.
+- Detection: the harness writes the compaction summary into `messages`
+  as a role='user' row starting "[CONTEXT COMPACTION" and flips the
+  session's `compacted` flag 1->0 at that id. 129 events on record,
+  fully automatic, zero agent involvement.
+- Ground truth vs R14/R16 attributions, join = compaction row ts vs
+  break ts (per session+model):
+  * break A (05:26:30): no compaction within 300s -> IDLE EXPIRY
+    (matches Opus/Fable/Sonnet attribution)
+  * break B (05:53:34): compaction at 05:51:59, 95s BEFORE the break
+    -> CAUSALLY CONFIRMED (matches the 97k->52k shrink reading)
+  * break C (06:52:42): no compaction within 300s -> IDLE/TTL
+  The blind auditors got all three right from token shapes alone;
+  the store now confirms it from event records.
+- v3.1: sampler auto-derives compaction events from the store each
+  tick into compaction_events.jsonl (source:"auto"), sweap_event.py
+  stays for kinds the store cannot see (manual/prefix_change).
+- PRODUCT LESSON (user's point, kept): never ship "the agent will log
+  it by hand." If a signal exists anywhere on the machine, the product
+  reads it automatically or it does not exist.
 All four respondent-demanded fixes are live in
 `~/.hermes/scripts/sweap_wire_sampler.py` (canonical copies in
 `scripts/` of this repo):
