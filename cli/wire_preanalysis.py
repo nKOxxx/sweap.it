@@ -40,8 +40,26 @@ def main():
     print(f"=== wire ledger: {t0} .. {t1} UTC-epoch = {days:.1f} days ===")
     print(f"windows: {len(frames):,} | calls: {calls:,} | merged windows: {sum(1 for f in frames if f['merged'])} ({sum(1 for f in frames if f['merged'])/len(frames)*100:.0f}%)")
     print(f"tokens: cache_read {cr:,} | cache_write {cw:,} | uncached_in {di:,} | output {do:,}")
-    if cr + di + cw:
-        print(f"aggregate hit rate: {cr/(cr+di+cw)*100:.1f}%")
+    # LANE LAW (owner decree 2026-10-16): free lanes are reported separately and
+    # NEVER blended into the paid hit-rate headline. Free = no cache contract;
+    # a 0% hit there is not a defect and does not dilute the paid number.
+    FREE_MARKERS = ("deepseek", "hyperfusion", "minimax", "free")
+    def is_free(model, provider):
+        s = f"{model} {provider}".lower()
+        return any(k in s for k in FREE_MARKERS)
+    per_lane = {"paid": [0,0,0,0], "free": [0,0,0,0]}
+    for f in frames:
+        lane = "free" if is_free(f["model"], f.get("provider","")) else "paid"
+        m = per_lane[lane]
+        m[0] += f["d_calls"]; m[1] += f["d_cache_read"]
+        m[2] += f["d_input"] + f["d_cache_write"]; m[3] += f["d_output"]
+    for lane in ("paid", "free"):
+        c, r, u, o = per_lane[lane]
+        if c:
+            print(f"[{lane.upper()} lane] {c:,} calls | hit {r/(r+u)*100 if r+u else 0:.1f}% | uncached-in {u:,} | out {o:,}")
+    if per_lane["paid"][0] and per_lane["free"][0]:
+        print("headline hit rate = PAID lane only (free lane has no cache contract; blend shown for completeness only):")
+        c, r, u, o = per_lane["paid"]; print(f"  paid-lane hit: {r/(r+u)*100:.1f}%")
     # per-window hit-rate histogram (the break sensor)
     buckets = defaultdict(int)
     for f in frames:
