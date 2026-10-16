@@ -1,0 +1,81 @@
+# R20 BRIEF: SECOND-ROUND RED-TEAM - ATTACK THE POSITIONING VERDICT
+
+ROLE: You are a hostile GTM strategist hired by a competitor. In R19 a
+strategist proposed a positioning for sweap; the founder has NOT yet decided.
+Your job: attack that verdict hard enough to change or sharpen the decision.
+Finding no weakness is failure. Then, constructively: name what survives.
+
+BLIND PROTOCOL: [ANCHOR] = measured on our reference host, given but
+attackable in interpretation. [THEORY] = vendor/public claim. [ASSUMPTION] =
+chosen. Outside claims need [HIGH]/[MED]/[LOW] + source type; write UNKNOWN
+rather than invent. No hype words. English only.
+
+## CONTEXT (one paragraph)
+
+sweap is a local-only context-hygiene tool for AI coding agents: read-only
+census (90.69% of stored transcript tokens are tool exhaust [ANCHOR]), a
+provably-dead-only sweep with undo (one sweep: 14,955 rows, 19.56 MB, 48% of
+the store file [ANCHOR]), and a wire ledger that measures prompt-cache truth
+per lane (96.3% hit paid lane; one-token mutation drops it to 0% [ANCHOR];
+3 real breaks in one day = 207,566 tokens billed at full price, causes
+attributed from store records: one compaction 95s prior, two idle [ANCHOR]).
+Zero network calls in the product code [ANCHOR]. No ads, no cold outreach
+allowed; product-led distribution only. Competitors: caveman (wire
+compression, ~111.9k stars [THEORY]), jev (window filtering, fast
+decisions [THEORY]). A prior round established: only sweap can state a NET
+effect (savings minus cache-break costs) with named causes.
+
+## THE R19 VERDICT UNDER ATTACK
+
+- PRIMARY: THE RECEIPT. Pitch: "Your AI billed you for work you never asked
+  for. Sweap shows you what, and why, every time." Rationale: reaches every
+  PAYING AI user (not just the drowning), flattering to catch rather than
+  confessional, built on the net-effect-with-causes asset competitors
+  cannot claim.
+- SECONDARY: THE TRUST ANCHOR. Pitch: "Physically cannot phone home; every
+  byte stays on your machine." Rationale: the healthy buy privacy; it makes
+  the receipt credible.
+- CONTRAST LINE: "Caveman makes the request smaller. Jev makes the context
+  faster. Sweap stops paying for AI work you never asked for."
+- SHAREABLE MECHANIC: the verdict card (one-glance, from the user's own
+  data: "Yesterday your AI billed you for work you never asked for. Cause:
+  idle, then compaction. Caught locally.").
+- ADMITTED BETS: modest measured waste (2.02% of paid-lane input [ANCHOR])
+  must convert to a dollar figure that feels real without inflating; receipt
+  only lands with paying users; quiet cards stay quiet.
+
+## YOUR TASK
+
+T1. ATTACK THE RECEIPT PRIMARY (3 strongest attacks). Consider, at minimum:
+    the 2.02% problem (is a receipt for small money worth a product?), who
+    actually reads receipts (do people open bills?), whether "your AI
+    overcharged you" creates ANGER AT THE WRONG TARGET (the AI vendor or
+    the harness, not sweap; does sweap look like it is suing the user's
+    chosen tools?), attribution confidence (can a competitor claim our
+    causes are guesses?), and the empty-inbox day (what does the product
+    say on a day with zero breaks? does the receipt positioning make the
+    product feel absent exactly when things go WELL?).
+
+T2. ATTACK THE TRUST SECONDARY (2 attacks). Consider: "trust me, I cannot
+    phone home" is unverifiable to a non-expert; open-source claims need
+    the repo public (it is private today [ANCHOR]); and whether privacy as
+    a feature is a 2024-era message in a market that has already
+    surrendered its data.
+
+T3. ATTACK THE CONTRAST LINE. Is "stops paying for AI work you never asked
+    for" honest given the sweep is provably-dead-only and the breaks are
+    attributed but NOT prevented? Is there a false promise hiding in
+    "stops"? Propose a sharper honest alternative if you find one.
+
+T4. ATTACK THE VERDICT CARD. Who screenshots a receipt of their own waste?
+    Compare with what actually gets shared in dev communities ([MED/LOW
+    claims fine]). Is the card a status object or a shame object? What
+    single design change flips it if it is a shame object?
+
+T5. THE SURVIVOR: after your own attacks, state what position survives,
+    even if damaged: keep receipt-primary with which amendments, or
+    replace with what? One paragraph, decisive, no hedging.
+
+FORMAT: T1-T5. Attacks: 2-6 sentences + SEVERITY (HIGH/MED/LOW) +
+FALSIFIED IF + CHEAPEST TEST where applicable. End with exactly this line:
+R20-VERDICT-ATTACK-OK

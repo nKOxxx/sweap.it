@@ -1,0 +1,274 @@
+Query: # R20 BRIEF: SECOND-ROUND RED-TEAM - ATTACK THE POSITIONING VERDICT
+
+ROLE: You are a hostile GTM strategist hired by a competitor. In R19 a
+strategist proposed a positioning for sweap; the founder has NOT yet decided.
+Your job: attack that verdict hard enough to change or sharpen the decision.
+Finding no weakness is failure. Then, constructively: name what survives.
+
+BLIND PROTOCOL: [ANCHOR] = measured on our reference host, given but
+attackable in interpretation. [THEORY] = vendor/public claim. [ASSUMPTION] =
+chosen. Outside claims need [HIGH]/[MED]/[LOW] + source type; write UNKNOWN
+rather than invent. No hype words. English only.
+
+## CONTEXT (one paragraph)
+
+sweap is a local-only context-hygiene tool for AI coding agents: read-only
+census (90.69% of stored transcript tokens are tool exhaust [ANCHOR]), a
+provably-dead-only sweep with undo (one sweep: 14,955 rows, 19.56 MB, 48% of
+the store file [ANCHOR]), and a wire ledger that measures prompt-cache truth
+per lane (96.3% hit paid lane; one-token mutation drops it to 0% [ANCHOR];
+3 real breaks in one day = 207,566 tokens billed at full price, causes
+attributed from store records: one compaction 95s prior, two idle [ANCHOR]).
+Zero network calls in the product code [ANCHOR]. No ads, no cold outreach
+allowed; product-led distribution only. Competitors: caveman (wire
+compression, ~111.9k stars [THEORY]), jev (window filtering, fast
+decisions [THEORY]). A prior round established: only sweap can state a NET
+effect (savings minus cache-break costs) with named causes.
+
+## THE R19 VERDICT UNDER ATTACK
+
+- PRIMARY: THE RECEIPT. Pitch: "Your AI billed you for work you never asked
+  for. Sweap shows you what, and why, every time." Rationale: reaches every
+  PAYING AI user (not just the drowning), flattering to catch rather than
+  confessional, built on the net-effect-with-causes asset competitors
+  cannot claim.
+- SECONDARY: THE TRUST ANCHOR. Pitch: "Physically cannot phone home; every
+  byte stays on your machine." Rationale: the healthy buy privacy; it makes
+  the receipt credible.
+- CONTRAST LINE: "Caveman makes the request smaller. Jev makes the context
+  faster. Sweap stops paying for AI work you never asked for."
+- SHAREABLE MECHANIC: the verdict card (one-glance, from the user's own
+  data: "Yesterday your AI billed you for work you never asked for. Cause:
+  idle, then compaction. Caught locally.").
+- ADMITTED BETS: modest measured waste (2.02% of paid-lane input [ANCHOR])
+  must convert to a dollar figure that feels real without inflating; receipt
+  only lands with paying users; quiet cards stay quiet.
+
+## YOUR TASK
+
+T1. ATTACK THE RECEIPT PRIMARY (3 strongest attacks). Consider, at minimum:
+    the 2.02% problem (is a receipt for small money worth a product?), who
+    actually reads receipts (do people open bills?), whether "your AI
+    overcharged you" creates ANGER AT THE WRONG TARGET (the AI vendor or
+    the harness, not sweap; does sweap look like it is suing the user's
+    chosen tools?), attribution confidence (can a competitor claim our
+    causes are guesses?), and the empty-inbox day (what does the product
+    say on a day with zero breaks? does the receipt positioning make the
+    product feel absent exactly when things go WELL?).
+
+T2. ATTACK THE TRUST SECONDARY (2 attacks). Consider: "trust me, I cannot
+    phone home" is unverifiable to a non-expert; open-source claims need
+    the repo public (it is private today [ANCHOR]); and whether privacy as
+    a feature is a 2024-era message in a market that has already
+    surrendered its data.
+
+T3. ATTACK THE CONTRAST LINE. Is "stops paying for AI work you never asked
+    for" honest given the sweep is provably-dead-only and the breaks are
+    attributed but NOT prevented? Is there a false promise hiding in
+    "stops"? Propose a sharper honest alternative if you find one.
+
+T4. ATTACK THE VERDICT CARD. Who screenshots a receipt of their own waste?
+    Compare with what actually gets shared in dev communities ([MED/LOW
+    claims fine]). Is the card a status object or a shame object? What
+    single design change flips it if it is a shame object?
+
+T5. THE SURVIVOR: after your own attacks, state what position survives,
+    even if damaged: keep receipt-primary with which amendments, or
+    replace with what? One paragraph, decisive, no hedging.
+
+FORMAT: T1-T5. Attacks: 2-6 sentences + SEVERITY (HIGH/MED/LOW) +
+FALSIFIED IF + CHEAPEST TEST where applicable. End with exactly this line:
+R20-VERDICT-ATTACK-OK
+Initializing agent...
+────────────────────────────────────────
+
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 preparing skill_view…
+  ┊ 📚 skill     sweap-stack  0.1s
+  ┊ 📚 skill     oss-gtm-playbooks  0.1s
+  ┊ 📚 skill     founder-doctrine  0.1s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    R20 SECOND-ROUND RED-TEAM: ATTACKING THE POSITIONING VERDICT
+    
+    Role: hostile GTM strategist for a competing vendor, working against the
+    R19 verdict. I found real weaknesses in all four planes. Below, attacks
+    then the survivor.
+    
+    T1. ATTACK THE RECEIPT PRIMARY (3 strongest)
+    
+    Attack 1: A receipt for small money is not a product.
+    The headline number behind the receipt is 2.02% of paid-lane input
+    [ANCHOR]. That is the admitted bet in the verdict itself. The attacker's
+    move is simple: price it. 2.02% of a typical paid lane is
+    cents-to-low-dollars per day. The one impressive figure, 207,566 tokens
+    billed at full price in one day [ANCHOR], is a single-day extreme reached
+    after 3 breaks; it is not the everyday number a receipt will show. A
+    receipt whose honest median value is small change trains the user to see
+    sweap as a rounding error. People do not open bills for small amounts;
+    they auto-file or ignore them [LOW, behavioral consensus]. The receipt
+    only "lands" on the drowning user, which is exactly the narrow
+    confessional segment the verdict claimed to escape.
+    SEVERITY: HIGH. FALSIFIED IF: a 30-day ledger on the reference host shows
+    median daily recovery in dollars (once prices.json lands) that a user
+    would notice and act on, say over one dollar a day, on a majority of
+    days. CHEAPEST TEST: run the existing v3.1 ledger for 30 days, multiply
+    the recorded saved-token figures by real prices.json rates, and count
+    days where the dollar recovery clears one dollar. Until that run, the
+    receipt primary is selling a monetary promise no measurement yet supports.
+    
+    Attack 2: The empty-inbox day is a silent retention killer.
+    On a day with zero cache breaks and near-zero dead rows, which the 96.3%
+    paid-lane hit rate [ANCHOR] says is the normal day, the receipt says "you
+    owed nothing, nothing was cleaned." The product's entire message is a
+    bill, and the bill is empty. The positioning makes sweap feel absent
+    precisely when things go well, which is when happy users form habits. A
+    tool that only speaks up to show you a charge you mostly already paid
+    for, and goes silent the rest of the time, has no daily ritual and no
+    reason to be reopened. Compare: caveman's message is "your requests got
+    faster" and jev's is "your decisions got faster" [THEORY], both
+    present-tense benefits the user feels on every good day. sweap's receipt
+    is a past-tense exception report.
+    SEVERITY: HIGH. FALSIFIED IF: install telemetry (local-only, per the
+    no-egress law) or structured user sessions show a meaningful fraction of
+    good days drive re-engagement, not drop-off. CHEAPEST TEST: instrument
+    whether a "clean day, nothing to report" state even produces a
+    user-facing artifact today; if it produces silence, that is a designed
+    gap. Add a positive-state artifact and A/B the two against reopen rate.
+    
+    **Attack 3: The receipt points anger at the wrong target and is
+    attributable away.**
+    "Your AI billed you for work you never asked for" invites the user to be
+    angry at the AI vendor or the harness, neither of which sweap can fix or
+    influence. The user's natural question becomes "then why am I paying you
+    instead of them?" sweap looks less like a helper and more like a
+    whistleblower that sues the user's own chosen tools, which is fine for a
+    browser extension and fatal for a paid dev tool the user must recommend
+    inside a team. Worse, the receipt's causes are attributed from store
+    records [ANCHOR], but the repo is private today, so a competitor can
+    credibly tell the same user "their causes are guesses, their numbers come
+    from one host" and there is no public artifact to refute it. Attribution
+    strength is the one asset competitors cannot claim, and the private repo
+    is the hole that lets them claim it anyway.
+    SEVERITY: HIGH. FALSIFIED IF: the repo is public with the full
+    methodology, and a fresh-machine non-builder install reproduces the same
+    attributed causes on the same host. CHEAPEST TEST: flip the repo public
+    and run the pre-flip gate (fresh-machine unaided install, schema-drift
+    drill, zero-egress tcpdump receipt) so the attribution claim is
+    externally checkable before any receipt launch.
+    
+    T2. ATTACK THE TRUST SECONDARY (2 attacks)
+    
+    **Attack 1: "I cannot phone home" is a promise, not proof, and the repo
+    is private.**
+    To a non-expert, "trust me, there is no network call" is exactly the
+    sentence a malicious local tool also uses. The user has no way to verify
+    it, and the verdict's own anchor, "zero network calls in the product
+    code" [ANCHOR], is checkable only by someone who can read the code, which
+    nobody can because the repo is private [ANCHOR]. In the absence of the
+    public artifact, the trust anchor is an assertion standing on the same
+    credibility gap the user already doubts. It also concedes the frame: by
+    volunteering "I cannot spy on you," sweap raises the spy question the
+    user had not asked and hands the trivia to a competitor who can say "we
+    never needed to say that."
+    SEVERITY: MED. FALSIFIED IF: the moment the repo is public with the
+    network-grep and tcpdump receipts, non-experts can independently confirm
+    zero egress with the published instructions. CHEAPEST TEST: publish, then
+    watch whether "does it phone home" questions stop appearing in the first
+    public thread; if they persist against a public repo, the trust object is
+    structurally weak regardless of the source.
+    
+    **Attack 2: Privacy as a feature is a 2024 message in a market that
+    already surrendered.**
+    The dev audience this product needs has already accepted cloud agents,
+    telemetry, and remote inference as the cost of the toolchain. Leading
+    with "every byte stays on your machine" speaks to a segment that largely
+    stopped buying that argument and, worse, it positions sweap as the
+    anxious alternative, the tool for users who distrust their own setup,
+    which is the confessional register the receipt primary was trying to
+    escape. Privacy as the secondary reason to buy is also unverifiable in
+    the moment of purchase and unflattering to brag about to a team lead.
+    SEVERITY: MED. FALSIFIED IF: a public-thread or install cohort shows
+    privacy is a top stated purchase reason rather than a defensive backstop.
+    CHEAPEST TEST: do not lead any launch material with privacy; mention it
+    once in the README security section and measure whether trust questions
+    rise or fall. If trust holds without the privacy lead, the secondary is
+    cargo, not a pillar.
+    
+    T3. ATTACK THE CONTRAST LINE
+    
+    "Stops paying for AI work you never asked for" is not honest as written,
+    and it is the most dangerous line because it is the one that gets shared.
+    The sweep is provably-dead-only and the breaks are attributed but not
+    prevented [ANCHOR]; sweap does not stop the AI from doing wasted work, it
+    cleans and reports paid waste after the fact. "Stops" promises prevention
+    the product does not deliver, and a competitor needs only one
+    counterexample, a break sweap saw but did not prevent, to call the line
+    false. The honest version trades the verb for a verifiable one. Sharper
+    alternative that survives scrutiny: "Every byte your AI billed you for,
+    and never used. Sweap finds it and cleans it, with the receipt to prove
+    it." This keeps the net-effect asset (found, cleaned, receipted) without
+    the unearned "stops" and without directing anger at the vendor.
+    SEVERITY: HIGH on the current wording. FALSIFIED IF: sweap ever prevents
+    a cache break rather than reports one, at which point "stops" becomes
+    earnable. CHEAPEST TEST: a plain-language read of the sweep and break
+    mechanics to a non-expert; if they conclude sweap prevents future waste,
+    the line is doing dishonest work and must change before launch.
+    
+    T4. ATTACK THE VERDICT CARD
+    
+    Who screenshots a receipt of their own waste? Almost nobody. What
+    actually circulates in dev communities is artifacts that signal
+    competence or a good find: benchmarks, novel solutions, funny failures
+    that turned into wins, hot takes, before-and-after speedups [MED,
+    community behavior]. A receipt of one's own overcharge is a shame object;
+    it admits "my AI outsmarted me," and sharing it is revealing personal
+    waste, which is why people forward a tool that reveals someone else's
+    waste but not their own. The fix is to flip the valence from "you were
+    charged" (loss) to "you recovered" (gain). Single design change: make the
+    card show what was cleaned and reclaimed, a positive delta, not a charge.
+    "Your AI billed you for work you never asked for" becomes "Here is what
+    you got back today." Same mechanic, opposite emotion; gain is shareable,
+    loss is not.
+    SEVERITY: MED. FALSIFIED IF: the recovery-framed card demonstrably draws
+    more screenshots, forwards, or public posts than the charge-framed card
+    in a controlled comparison. CHEAPEST TEST: render both cards from the
+    same real ledger day, post the gain-framed one to the softest technical
+    channel first per the launch-sequencing law, and count reshares. If the
+    shame card ever wins, revise this attack.
+    
+    T5. THE SURVIVOR
+    
+    After the attacks, the receipt-primary as framed does not survive, but
+    the asset underneath it does, so I do not scrap the receipt, I invert it
+    and demote it. Keep the net-effect-with-causes engine as the
+    differentiating core, it is the one thing no competitor can state
+    [ANCHOR-derived, R17 finding], but reposition it from accusation to
+    recovery: the primary message becomes "Every byte your AI billed you for
+    and never used, found and cleaned, with the receipt to prove it," which
+    keeps the verifiable causal receipt as the mechanic while fixing the
+    three failures (it is not a small-money bill, it has a positive artifact
+    on good days, it does not point anger at the vendor). Drop "stops" from
+    all copy; the honest verb is "finds and cleans." Demote the trust anchor
+    from a lead slogan to a quiet README security section backed by the
+    public repo and the tcpdump receipt, because privacy as a headline
+    undersells the stronger claim, that sweap is the only tool that can
+    verify on the competitors' own observation plane. The verdict card flips
+    to a gain artifact, "here is what you got back," because gain is
+    shareable and loss is not. And the whole thing is gated on one
+    measurement that does not exist yet: a 30-day recovered-dollar figure on
+    the reference host. If that figure cannot clear a user-noticeable
+    threshold on a majority of days, the monetizable story collapses and
+    sweap should stay a clean-and-verify utility competing on verification,
+    not on money.
+    
+    R20-VERDICT-ATTACK-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261016_181711_fd7714
+
+Session:        20261016_181711_fd7714
+Duration:       2m 47s
+Messages:       6 (1 user, 4 tool calls)
