@@ -21,6 +21,7 @@ from 45 to 61 rows between R14 and this matrix; a THIRD break appeared.
 | 7 | TEST_GPT_5-6-luna | "GPT-5.6 Luna" | PASS arithmetic / FLAG label | arithmetic exact (2nd wrong-lane run); unflagged "custom paid lane" label on DeepSeek; slightly better hedging than terra, still wrong lane; see notes |
 | 8 | TEST_CLAUDE_opus-5-5 | "Claude Opus 5.5 (claude-opus-5-5). That matches the model the test names" (declared WITH exact slug) | PASS near-perfect | deepest run of the matrix; every derived figure reproduces; see notes |
 | 9 | TEST_CLAUDE_fable-5-1 | "Claude Fable 5.1 (claude-fable-5-1). I am the designated model" (declared WITH slug) | PASS near-perfect | every figure reproduces; independently quantified the merged-hidden-break ceiling; see notes |
+| 10 | TEST_CLAUDE_sonnet-5-5 | "Claude Sonnet 5.5 (claude-sonnet-5-5), which is the designated model" (declared WITH slug) | PASS near-perfect | every figure reproduces; NEW: baseline-corrected net tax (202,003 / 1.97%) with exactly reproducible method; see notes |
 
 ## RUN 1 NOTES (sol-6-1 file, answered by GPT-6-based Codex)
 - Designated-model check worked: refused to claim sol 6.1, stated exact
@@ -227,6 +228,32 @@ the row key; idle is also per-model.
   + cache-write wired to provider real value = sampler v3 spec, vote 9.
 - Claude 2/2 at Opus-level depth; zero labels invented. Fable held.
 
+## RUN 10 NOTES (sonnet-5-5 file, answered by Claude Sonnet 5.5)
+- Identity: declared WITH slug. Method stated up front (script, ledger
+  only, d_cache_write excluded from maths because all 0). Lane
+  inference stamped ("file never states which lane is paid").
+- Census exact: 3 breaks + 2 near-misses (74.6%, 66.5% - rounding of
+  66.5546%, fine). DeepSeek framed as STRUCTURAL ZERO with the
+  unsupported-or-unreported caveat and "can't be compared with the glm
+  hit rate" - per-lane law, independently derived.
+- DEEPEST CONTRIBUTION: baseline-corrected net tax. Computed the
+  non-break hit rate (97.84%, reproduces EXACTLY), then asked what the
+  break rows would have billed at that baseline: ~202,003 excess
+  tokens = 1.97%, with the 5,563 difference = "uncached input those
+  rows would have had anyway". Hub reproduced BOTH numbers to the
+  token: excess 202,003.0, difference 5,563.0, variant
+  (total-volume baseline). This upgrades R14's rough net estimate
+  (132,034, median method) into a tighter, fully reproducible
+  estimator. Runs 8+9 gave upper bound + ceiling; run 10 gives the
+  corrected midpoint. Three Claude runs, three complementary
+  estimators on the same artifact.
+- D2 CONFIRMED unprompted: "gap_s field is a constant ~60 s sampling
+  interval, not the real idle time." Second respondent to catch it.
+- Q5 fix list: real idle + compaction/prefix events + before/after
+  context size per call = v3 spec, vote 10.
+- Claude 3/3 at Opus-level depth, zero fabrications of any kind.
+  Discipline HOLDS down-stack so far.
+
 ## MATRIX FACTS (frozen snapshot, hub-recounted)
 - glm-4.6 (zai, PAID): 56 windows, 136 calls, hit 95.87%, 3 sub-50% breaks,
   tax proxy 207,566 tok = 2.02% of input volume.
@@ -234,4 +261,4 @@ the row key; idle is also per-model.
   0% by provider design, 540,866 uncached, $0.00.
 
 ## PENDING RUNS
-Claude: sonnet 5.5, haiku 5.5
+Claude: haiku 5.5
