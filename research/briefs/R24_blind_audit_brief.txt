@@ -1,0 +1,64 @@
+# R24 BRIEF: BLIND AUDIT RERUN ON THE V3.1 LEDGER (gated pre-publish gate)
+
+ROLE: You are an independent forensic auditor. You receive a RAW wire ledger
+(177 rows: 92 rows of an older v2 schema frozen untouched, then 85 rows of
+the current v3 schema) plus a compaction-events file (132 events). No ground
+truth, no analysis, no conclusions accompany them. Compute everything from
+the files alone. Show your work. If a figure cannot be computed, say
+CANNOT-COMPUTE and why, never guess. This is a trust audit of an instrument:
+wrong-but-plausible is the enemy.
+
+## DATA DICTIONARY (v3 rows, schema:3)
+
+- uid: ts|session|model (unique key; ts = unix seconds of window close)
+- tick_s: sampler tick interval (60)
+- idle_s: seconds since previous observed call on the same (session, model)
+- d_calls, d_input, d_cache_read, d_cache_write, d_output: per-window token
+  deltas per (session, model)
+- merged: true = multiple calls share this window; per-call split
+  unavailable at sampler grain
+- write_field_trust: "dead" = the d_cache_write field is known unreliable
+  (provider writes off-ledger); do NOT treat 0 as "no writes happened"
+- provider: zai (paid lane) vs others; PER-LANE LAW: never blend paid and
+  free lanes in one hit-rate number
+- row_kind: per-window deltas
+- v2 rows (no schema field): same idea, older field layout (ts-only key,
+  gap_s instead of tick_s/idle_s). Treat as historical; the v2 write column
+  is likewise dead.
+
+Compaction events: {ts, session, model, kind (compaction/manual/...),
+ctx_before, ctx_after, source, note}. A compaction means the provider's
+prompt prefix was replaced; the next call on that lane re-bills the prefix
+at full input price.
+
+## COMPUTE (show formula + number for each)
+
+A1. Per-model lifetime table on v3 rows only: calls, input tokens,
+    cache-read tokens, hit rate = cache_read / (cache_read + input).
+    One row per model, sorted by calls. NO cross-lane blending.
+A2. Same table including v2 rows, labeled "lifetime incl. v2".
+A3. Break candidates on v3: a window whose idle_s is large (>= 1800s) OR
+    within 120s after a compaction event for the same (session, model).
+    List each: ts, model, idle_s, compaction-within-120s (yes/no),
+    hit rate of that window = d_cache_read / (d_cache_read + d_input).
+A4. For each compaction event with a following same-lane call within 120s:
+    the next window's hit rate (this is the compaction-cost receipt).
+A5. The single worst full-price re-bill window on v3 (largest d_input) and
+    what caused it per the two rules in A3.
+A6. Sanity: total v3 rows, total v2 rows, distinct (session, model) lanes,
+    any duplicate uid (must be zero; report count).
+A7. DATA-QUALITY section: anything in the files that a customer should
+    know before trusting numbers from this instrument (dead write column,
+    merged windows, gaps, anything odd you find). Be adversarial; this is
+    the section that decides whether the instrument ships.
+
+## RULES
+
+- Never blend lanes. Compute per model, per provider.
+- Treat d_cache_write=0 as UNVERIFIED (field dead), not as zero writes.
+- Timestamps are unix seconds (UTC). Convert when useful; show conversions.
+- If two interpretations of a row exist, compute BOTH and label them.
+
+FORMAT: numbered A1-A7, formulas shown, every number recomputable from the
+files. End with exactly this line:
+R24-BLIND-AUDIT-OK

@@ -1,0 +1,961 @@
+Query: # R24 BRIEF: BLIND AUDIT RERUN ON THE V3.1 LEDGER (gated pre-publish 
+gate)
+
+ROLE: You are an independent forensic auditor. You receive a RAW wire ledger
+(177 rows: 92 rows of an older v2 schema frozen untouched, then 85 rows of
+the current v3 schema) plus a compaction-events file (132 events). No ground
+truth, no analysis, no conclusions accompany them. Compute everything from
+the files alone. Show your work. If a figure cannot be computed, say
+CANNOT-COMPUTE and why, never guess. This is a trust audit of an instrument:
+wrong-but-plausible is the enemy.
+
+## DATA DICTIONARY (v3 rows, schema:3)
+
+- uid: ts|session|model (unique key; ts = unix seconds of window close)
+- tick_s: sampler tick interval (60)
+- idle_s: seconds since previous observed call on the same (session, model)
+- d_calls, d_input, d_cache_read, d_cache_write, d_output: per-window token
+  deltas per (session, model)
+- merged: true = multiple calls share this window; per-call split
+  unavailable at sampler grain
+- write_field_trust: "dead" = the d_cache_write field is known unreliable
+  (provider writes off-ledger); do NOT treat 0 as "no writes happened"
+- provider: zai (paid lane) vs others; PER-LANE LAW: never blend paid and
+  free lanes in one hit-rate number
+- row_kind: per-window deltas
+- v2 rows (no schema field): same idea, older field layout (ts-only key,
+  gap_s instead of tick_s/idle_s). Treat as historical; the v2 write column
+  is likewise dead.
+
+Compaction events: {ts, session, model, kind (compaction/manual/...),
+ctx_before, ctx_after, source, note}. A compaction means the provider's
+prompt prefix was replaced; the next call on that lane re-bills the prefix
+at full input price.
+
+## COMPUTE (show formula + number for each)
+
+A1. Per-model lifetime table on v3 rows only: calls, input tokens,
+    cache-read tokens, hit rate = cache_read / (cache_read + input).
+    One row per model, sorted by calls. NO cross-lane blending.
+A2. Same table including v2 rows, labeled "lifetime incl. v2".
+A3. Break candidates on v3: a window whose idle_s is large (>= 1800s) OR
+    within 120s after a compaction event for the same (session, model).
+    List each: ts, model, idle_s, compaction-within-120s (yes/no),
+    hit rate of that window = d_cache_read / (d_cache_read + d_input).
+A4. For each compaction event with a following same-lane call within 120s:
+    the next window's hit rate (this is the compaction-cost receipt).
+A5. The single worst full-price re-bill window on v3 (largest d_input) and
+    what caused it per the two rules in A3.
+A6. Sanity: total v3 rows, total v2 rows, distinct (session, model) lanes,
+    any duplicate uid (must be zero; report count).
+A7. DATA-QUALITY section: anything in the files that a customer should
+    know before trusting numbers from this instrument (dead write column,
+    merged windows, gaps, anything odd you find). Be adversarial; this is
+    the section that decides whether the instrument ships.
+
+## RULES
+
+- Never blend lanes. Compute per model, per provider.
+- Treat d_cache_write=0 as UNVERIFIED (field dead), not as zero writes.
+- Timestamps are unix seconds (UTC). Convert when useful; show conversions.
+- If two interpretations of a row exist, compute BOTH and label them.
+
+FORMAT: numbered A1-A7, formulas shown, every number recomputable from the
+files. End with exactly this line:
+R24-BLIND-AUDIT-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I'll start by locating the data files and understanding what I'm working
+    with.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 🔎 preparing search_files…
+  ┊ 🔎 preparing search_files…
+  ┊ 🔎 preparing search_files…
+  ┊ 🔎 find      *.jsonl  60.5s
+  ┊ 🔎 find      *ledger*  60.7s
+  ┊ 🔎 find      *compact*  60.7s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The searches timed out. Let me look more directly at the relevant project
+    directories.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 🔎 preparing search_files…
+  ┊ 💻 $         ls -la 2>/dev/null + 1 command  0.2s
+  ┊ 🔎 find      *audit*  0.3s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The brief mentions R24 and references sweap (wire sampler). Let me find
+    the actual data files — the ledger and compaction events.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         find . ~/.sweap /tmp -newermt "2026-10-15" -type f \( -name "*.jsonl" -o -name "*.json" -o -name "*.csv" -o -name "*ledger*" -o -name "*compact*" -o -name "*wire*" \) 2>/dev/null | grep -v node_modules | grep -v ".git/"  60.4s [exit 124]
+  ┊ 💻 $         grep -n "R24\|177\|132 rows\|132 events" agentic_instrument_briefs_all24.txt 2>/dev/null + 2 commands  0.1s
+  ┊ 💻 preparing terminal…
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         ls -la ~/.sweap 2>/dev/null + 2 commands  0.1s
+  ┊ 💻 $         grep -ni "r24\|wire ledger\|compaction-events\|177" agentic_instrument_briefs_all24.txt  0.1s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Found the data files:
+    - /Users/ares/.sweap/wire_ledger.jsonl
+    - /Users/ares/.sweap/compaction_events.jsonl
+    
+    Let me inspect both raw files to understand their structure before
+    computing anything.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         echo "=== LEDGER row count ===" + 11 commands  0.1s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The ledger has 184 lines (brief said 177) and I can already see the last
+    two lines share the same uid — one is a merged_marker row. The
+    compaction file has exactly 132 events as stated. Let me analyze the full
+    structure carefully with a script.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 - <<'EOF' import json, collections rows = [json.loads(l) for l in open('wire_ledger.jsonl')] comp = [json.loads(l) for l in open('compaction_events.jsonl')] print(f"TOTAL ledger rows in file: {len(rows)}") print(f"TOTAL compaction events: {len(comp)}") # schema field presence v3 = [r for r in rows if r.get('schema')==3] v2 = [r for r in rows if 'schema' not in r] unk = [r for r in rows if r.get('schema') not in (3,) and 'schema' in r] print(f"\nv3 rows (schema:3 present): {len(v3)}") print(f"v2 rows (no schema field): {len(v2)}") print(f"other schema values: {len(unk)}", set(r.get('schema') for r in unk) if unk else '') # row_kind distribution rk = collections.Counter(r.get('row_kind') for r in rows) print(f"row_kind distribution: {dict(rk)}") # distinct values of v3 schema print(f"\nv3 distinct schema: {sorted(set(r.get('schema') for r in v3))}") # check the 'other' rows print("\n-- rows with weird schema --") for r in unk: print(json.dumps(r)[:300]) EOF  0.3s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Schema split is unexpected vs the brief (92 v2 + 92 v3 = 184, brief said
+    92+85=177). There are merged_marker and call row kinds. Let me dig
+    deeper.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 - <<'EOF' import json, collections rows = [json.loads(l) for l in open('wire_ledger.jsonl')] # rows by schema x row_kind print("schema x row_kind:") cnt = collections.Counter((('v3' if r.get('schema')==3 else 'v2'), r.get('row_kind')) for r in rows) for k in sorted(cnt): print(" ", k, cnt[k]) # Let me look at a v3 'call' row and a v3 'merged_marker' row in full print("\n-- v3 rows sample (each row_kind) --") for rk in [None, 'call', 'merged_marker']: for r in rows: if r.get('schema')==3 and r.get('row_kind')==rk: print(f"[row_kind={rk}]", json.dumps(r)) break # Are v3 marker rows ALSO carrying uid that duplicates a real row? Check uid uniqueness uids = collections.Counter(r['uid'] for r in rows if r.get('schema')==3 and 'uid' in r) dups = {u:c for u,c in uids.items() if c>1} print(f"\nv3 uid counts: total distinct={len(uids)}, total with uid={sum(uids.values())}") print(f"v3 duplicate uids (count>1): {len(dups)}") for u,c in list(dups.items())[:20]: print(" dup:", u, "count", c) EOF  0.1s [exit 1]
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 - <<'EOF' import json, collections rows = [json.loads(l) for l in open('wire_ledger.jsonl')] cnt = collections.Counter((('v3' if r.get('schema')==3 else 'v2'), str(r.get('row_kind'))) for r in rows) print("schema x row_kind:") for k in sorted(cnt): print(" ", k, cnt[k]) print("\n-- v3 row samples by row_kind --") for rk in [None, 'call', 'merged_marker']: for r in rows: if r.get('schema')==3 and r.get('row_kind')==rk: print(f"[row_kind={rk}]", json.dumps(r)) break EOF  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    This is a critical structural finding. The v3 rows have three row_kind
+    values, and merged windows appear to be represented twice. Let me do a
+    rigorous structural analysis.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 - <<'EOF' import json, collections rows = [json.loads(l) for l in open('wire_ledger.jsonl')] v3 = [r for r in rows if r.get('schema')==3] v2 = [r for r in rows if 'schema' not in r] # v3: uid uniqueness uids = collections.Counter(r['uid'] for r in v3) dups = {u:c for u,c in uids.items() if c>1} print("v3 distinct uids:", len(uids), " total v3 rows:", len(v3), " duplicate uids:", len(dups)) # Are merged_marker uids distinct from delta uids? none_uids = set(r['uid'] for r in v3 if r.get('row_kind') is None) call_uids = set(r['uid'] for r in v3 if r.get('row_kind')=='call') marker_uids = set(r['uid'] for r in v3 if r.get('row_kind')=='merged_marker') print("None uids:", len(none_uids), " call uids:", len(call_uids), " marker uids:", len(marker_uids)) print("none ∩ call:", len(none_uids & call_uids)) print("marker ∩ none:", len(marker_uids & none_uids)) print("marker ∩ call:", len(marker_uids & call_uids)) print("marker - none:", len(marker_uids - none_uids)) print("none - marker:", len(none_uids - marker_uids)) # merged flags on None vs call print("\nNone rows merged:true count:", sum(1 for r in v3 if r.get('row_kind') is None and r.get('merged'))) print("call rows merged:false:", sum(1 for r in v3 if r.get('row_kind')=='call' and not r.get('merged'))) print("call rows has d_calls==1:", sum(1 for r in v3 if r.get('row_kind')=='call' and r.get('d_calls')==1)) # tick_s and idle_s distribution on v3 print("\ntick_s values:", collections.Counter(r.get('tick_s') for r in v3 if r.get('row_kind') is not 'merged_marker')) print("idle_s None count (non-marker):", sum(1 for r in v3 if r.get('row_kind')!='merged_marker' and r.get('idle_s') is None)) # v2 rows: gap_s distribution, and any 'merged'/'row_kind' print("\nv2 merged field present:", any('merged' in r for r in v2)) print("v2 row_kind:", collections.Counter(r.get('row_kind') for r in v2)) print("v2 gap_s values:", collections.Counter(r.get('gap_s') for r in v2)) # v2 uniqueness by ts v2ts = collections.Counter(r['ts'] for r in v2) print("v2 distinct ts:", len(v2ts), " total v2:", len(v2), " dup ts:", sum(1 for v in v2ts.values() if v>1)) EOF  0.0s [Foreground command uses '&' backgrounding. Us...]
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The & character triggered a false background check. Let me write the
+    analysis to a script file instead.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_struct.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_struct.py → b//Users/ares/.sweap/r24_struct.py
+@@ -0,0 +1,40 @@
++import json, collections
++
++rows = [json.loads(l) for l in open('/Users/ares/.sweap/wire_ledger.jsonl')]
++v3 = [r for r in rows if r.get('schema')==3]
++v2 = [r for r in rows if 'schema' not in r]
++
++uids = collections.Counter(r['uid'] for r in v3)
++dups = {u:c for u,c in uids.items() if c>1}
++print("v3 distinct uids:", len(uids), " total v3 rows:", len(v3), " duplicate uids:", len(dups))
++for u,c in dups.items():
++    print("   DUP:", u, "count", c, " rowkinds:", [r.get('row_kind') for r in v3 if r['uid']==u])
++
++none_uids = set(r['uid'] for r in v3 if r.get('row_kind') is None)
++call_uids = set(r['uid'] for r in v3 if r.get('row_kind')=='call')
++marker_uids = set(r['uid'] for r in v3 if r.get('row_kind')=='merged_marker')
++print("None uids:", len(none_uids), " call uids:", len(call_uids), " marker uids:", len(marker_uids))
++print("none and call overlap:", len(none_uids.intersection(call_uids)))
++print("marker and none overlap:", len(marker_uids.intersection(none_uids)))
++print("marker and call overlap:", len(marker_uids.intersection(call_uids)))
++print("marker - none:", len(marker_uids - none_uids))
++print("none - marker:", len(none_uids - marker_uids))
++
++print("\nNone rows merged:true:", sum(1 for r in v3 if r.get('row_kind') is None and r.get('merged')))
++print("call rows merged:false:", sum(1 for r in v3 if r.get('row_kind')=='call' and not r.get('merged')))
++print("call rows d_calls==1:", sum(1 for r in v3 if r.get('row_kind')=='call' and r.get('d_calls')==1))
++
++print("\ntick_s values (non-marker):", collections.Counter(r.get('tick_s') for r in v3 if r.get('row_kind')!='merged_marker'))
++print("idle_s None count (non-marker):", sum(1 for r in v3 if r.get('row_kind')!='merged_marker' and r.get('idle_s') is None))
++
++print("\nv2 merged field present:", any('merged' in r for r in v2))
++print("v2 row_kind:", collections.Counter(r.get('row_kind') for r in v2))
++print("v2 gap_s values:", collections.Counter(r.get('gap_s') for r in v2))
++v2ts = collections.Counter(r['ts'] for r in v2)
++print("v2 distinct ts:", len(v2ts), " total v2:", len(v2), " dup ts:", sum(1 for v in v2ts.values() if v>1))
++
++# distinct providers and models overall
++print("\nproviders:", collections.Counter(r.get('provider') for r in rows))
++print("models (all rows):", collections.Counter(r.get('model') for r in rows))
++print("\nv3 models:", collections.Counter(r.get('model') for r in v3 if r.get('row_kind')!='merged_marker'))
++print("v3 providers (non-marker):", collections.Counter(r.get('provider') for r in v3 if r.get('row_kind')!='merged_marker'))
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 r24_struct.py  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Wait — critical discovery. The counts changed between my first read (v3:
+    92) and the struct script (v3: 95, with the tail rows being from session
+    20261016_194812_e44dff — today's live session, the DeepSeek model that
+    is literally this conversation). The ledger file appears to be
+    live-growing. A reproducible blind audit requires a frozen snapshot.
+    Let me snapshot both files and measure whether they mutate.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         mkdir -p r24_audit + 6 commands  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The file has grown from 184 to 190 lines already — this ledger is
+    live-mutating (this very session is a lane being sampled). That's a
+    critical finding for a blind audit. Let me wait for my sleep window and
+    capture growth, then freeze a clean snapshot.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         sleep 2 + 7 commands  2.3s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The file is live-mutating even in real time. This is a major finding for
+    a blind audit. I've frozen snapshot A (190 lines, taken at UTC
+    ts=1792165930). Let me verify the freeze is stable and lock it as the
+    audit input.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         cp ledger_A.jsonl ledger_frozen_1792165930.jsonl + 5 commands  1.6s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I now have a frozen, checksummed snapshot (UTC 2026-10-16 15:52:10). The
+    live file grows even during this audit (this very session is a sampled
+    lane), so the frozen snapshot is the reproducible audit input. Let me
+    build the full computation against the frozen files. First, analyze the
+    frozen composition.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/composition.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/composition.py → b//Users/ares/.sweap/r24_audit/composition.py
+@@ -0,0 +1,61 @@
++import json, collections, datetime
++
++LED = '/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP = '/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows = [json.loads(l) for l in open(LED)]
++comp = [json.loads(l) for l in open(COMP)]
++
++def utc(ts):
++    return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).isoformat()
++
++print("=== FROZEN LEDGER COMPOSITION ===")
++print("total lines:", len(rows))
++v3 = [r for r in rows if r.get('schema')==3]
++v2 = [r for r in rows if 'schema' not in r]
++print("v2 rows:", len(v2), " v3 rows (incl markers):", len(v3))
++
++# Real windows = exclude merged_marker duplicates (annotation-only)
++v3_real = [r for r in v3 if r.get('row_kind') != 'merged_marker']
++print("v3 real windows (excl merged_marker):", len(v3_real))
++rk = collections.Counter(r.get('row_kind') for r in v3)
++print("v3 row_kind counts:", dict(rk))
++
++# lanes (distinct session, model)
++lanes = set((r['session'], r['model']) for r in v3_real)
++lanes_all = set((r['session'], r['model']) for r in rows)
++print("v3 real distinct lanes:", len(lanes))
++for l in sorted(lanes): print("   ", l)
++print("all rows distinct lanes:", len(lanes_all))
++for l in sorted(lanes_all): print("   all:", l)
++
++# v2 lanes
++lanes_v2 = set((r['session'], r['model']) for r in v2)
++print("v2 distinct lanes:", len(lanes_v2))
++for l in sorted(lanes_v2): print("   ", l)
++
++# ts ranges
++all_ts = [r['ts'] for r in rows]
++print("\nts range (all rows):", min(all_ts), "->", max(all_ts))
++print("  min:", utc(min(all_ts)), " max:", utc(max(all_ts)))
++v3_ts = [r['ts'] for r in v3_real]
++print("v3 ts range:", min(v3_ts), "->", max(v3_ts), " UTC", utc(min(v3_ts)), "->", utc(max(v3_ts)))
++
++# providers in frozen
++print("providers all:", collections.Counter(r.get('provider') for r in rows))
++print("v3 models (real):", collections.Counter(r.get('model') for r in v3_real))
++print("v2 models:", collections.Counter(r.get('model') for r in v2))
++
++# compaction kinds
++print("\n=== COMPACTION EVENTS ===")
++print("total:", len(comp))
++print("kinds:", collections.Counter(c.get('kind') for c in comp))
++print("sources:", collections.Counter(c.get('source') for c in comp))
++# seed marker
++print("seed marker:", [c for c in comp if c.get('session')=='seed'])
++# non-seed compactions
++real_comp = [c for c in comp if c.get('session')!='seed']
++print("non-seed compaction events:", len(real_comp))
++print("comp model values:", collections.Counter(c.get('model') for c in real_comp))
++print("comp session values:", collections.Counter(c.get('session') for c in real_comp))
++print("min/max comp ts:", min(c['ts'] for c in real_comp), max(c['ts'] for c in real_comp),
++      utc(min(c['ts'] for c in real_comp)), utc(max(c['ts'] for c in real_comp)))
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 composition.py  0.3s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The frozen snapshot is the audit input. Now let me address a key
+    discrepancy: the brief described 177 rows (92 v2 + 85 v3), but the file
+    is live and the frozen snapshot has 190 lines (92 v2 + 98 v3 incl. 37
+    marker duplicates; 61 real v3 windows). This itself is a finding. Let me
+    compute all sections rigorously.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/a1a2.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/a1a2.py → b//Users/ares/.sweap/r24_audit/a1a2.py
+@@ -0,0 +1,55 @@
++import json, collections, datetime
++
++LED = '/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP = '/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows = [json.loads(l) for l in open(LED)]
++comp = [json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
++
++v3 = [r for r in rows if r.get('schema')==3]
++v2 = [r for r in rows if 'schema' not in r]
++# real windows exclude merged_marker (annotation duplicate of None rows)
++v3_real = [r for r in v3 if r.get('row_kind') != 'merged_marker']
++v2_real = v2  # v2 has no row_kind, all None
++
++# ---------- A1: v3 per-model lifetime ----------
++print("========== A1: per-model lifetime on v3 rows (real windows only) ==========")
++print("(merged_marker annotation rows EXCLUDED to avoid double-count; see A7)")
++models_v3 = collections.defaultdict(lambda: dict(calls=0, inp=0, cr=0, cw=0, out=0))
++for r in v3_real:
++    m = r['model']; d = models_v3[m]
++    d['calls'] += r['d_calls']; d['inp'] += r['d_input']; d['cr'] += r['d_cache_read']
++    d['cw'] += r['d_cache_write']; d['out'] += r['d_output']
++print(f"{'model':42} {'calls':>6} {'input':>10} {'cache_read':>12} {'hit_rate':>9}  provider")
++for m,d in sorted(models_v3.items(), key=lambda x: x[1]['calls']):
++    hr = d['cr']/(d['cr']+d['inp']) if (d['cr']+d['inp'])>0 else float('nan')
++    print(f"{m:42} {d['calls']:>6} {d['inp']:>10} {d['cr']:>12} {hr:>9.5f}  {v3_real[0]['provider'] if False else ''}")
++    prov = set(r['provider'] for r in v3_real if r['model']==m)
++    print(f"{'':42} {'':>6} {'':>10} {'':>12} {'':>9}  providers={prov}")
++
++# per model x session breakdown
++print("\nPer model x session (v3 real):")
++agg=collections.defaultdict(lambda: dict(ses=set(),calls=0,inp=0,cr=0))
++for r in v3_real:
++    k=(r['model'],r['provider']); agg[k]['ses'].add(r['session']); agg[k]['calls']+=r['d_calls']; agg[k]['inp']+=r['d_input']; agg[k]['cr']+=r['d_cache_read']
++for (m,p),d in sorted(agg.items()):
++    hr=d['cr']/(d['cr']+d['inp']) if d['cr']+d['inp'] else 'n/a'
++    print(f"  {m:40} prov={p:7} sessions={len(d['ses'])} calls={d['calls']} input={d['inp']} cr={d['cr']} hr={hr if isinstance(hr,str) else round(hr,5)}")
++    for s in sorted(d['ses']): print(f"      session {s}")
++
++# ---------- A2: incl v2 ----------
++print("\n========== A2: lifetime incl. v2 ==========")
++models_all = collections.defaultdict(lambda: dict(v2calls=0,v2inp=0,v2cr=0,v3calls=0,v3inp=0,v3cr=0))
++for r in v2_real:
++    m=r['model']; d=models_all[m]; d['v2calls']+=r['d_calls']; d['v2inp']+=r['d_input']; d['v2cr']+=r['d_cache_read']
++for r in v3_real:
++    m=r['model']; d=models_all[m]; d['v3calls']+=r['d_calls']; d['v3inp']+=r['d_input']; d['v3cr']+=r['d_cache_read']
++print(f"{'model':42} {'calls':>6} {'input':>11} {'cache_read':>12} {'hit_rate':>9}  (v2 + v3 real)")
++for m,d in sorted(models_all.items()):
++    calls=d['v2calls']+d['v3calls']; inp=d['v2inp']+d['v3inp']; cr=d['v2cr']+d['v3cr']
++    hr=cr/(cr+inp) if cr+inp else float('nan')
++    print(f"{m:42} {calls:>6} {inp:>11} {cr:>12} {hr:>9.5f}")
++
++print("\n(v2 calls/v3 calls per model:)")
++for m,d in sorted(models_all.items()):
++    print(f"  {m:40} v2calls={d['v2calls']} v2inp={d['v2inp']} v2cr={d['v2cr']} | v3calls={d['v3calls']} v3inp={d['v3inp']} v3cr={d['v3cr']}")
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 a1a2.py  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    A1/A2 computed. Now A3/A4/A5 need idle_s and compaction-vs-window timing.
+    Let me examine the relevant data in the v3 era.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/a3probe.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/a3probe.py → b//Users/ares/.sweap/r24_audit/a3probe.py
+@@ -0,0 +1,29 @@
++import json, collections, datetime
++LED='/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP='/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows=[json.loads(l) for l in open(LED)]
++comp=[json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%m-%d %H:%M:%S')
++
++v3=[r for r in rows if r.get('schema')==3]
++v3_real=[r for r in v3 if r.get('row_kind')!='merged_marker']
++
++print("=== v3 real windows with idle_s != null (break candidates by idle) ===")
++big=[r for r in v3_real if r.get('idle_s') is not None and r['idle_s']>=1800]
++print("windows with idle_s>=1800:", len(big))
++for r in sorted(big, key=lambda x:x['ts']):
++    hr=r['d_cache_read']/(r['d_cache_read']+r['d_input']) if r['d_cache_read']+r['d_input'] else 'n/a'
++    print(f"  ts={r['ts']} {utc(r['ts'])} model={r['model'][:20]:20} idle={r['idle_s']} input={r['d_input']} cr={r['d_cache_read']} hr={hr if isinstance(hr,str) else round(hr,4)} ses={r['session'][:12]}")
++
++print("\nidle_s value histogram (non-null):", collections.Counter(r.get('idle_s') for r in v3_real if r.get('idle_s') is not None))
++print("null idle_s count:", sum(1 for r in v3_real if r.get('idle_s') is None))
++
++# compaction events in v3 window range + relevant sessions
++v3_min=min(r['ts'] for r in v3_real); v3_max=max(r['ts'] for r in v3_real)
++print("\nv3 ts range:", utc(v3_min), "to", utc(v3_max))
++sessions_v3=set(r['session'] for r in v3_real)
++print("sessions in v3 real:", sessions_v3)
++recent_comp=[c for c in comp if c['ts']>=v3_min-200 and c['session'] in sessions_v3]
++print("comp events in/around v3 era for v3 sessions:", len(recent_comp))
++for c in sorted(recent_comp, key=lambda x:x['ts'])[:50]:
++    print(f"  comp ts={c['ts']} {utc(c['ts'])} ses={c['session'][:12]} model={c['model']} ctx_after={c.get('ctx_after')}")
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 a3probe.py  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Now let me compute A3, A4, A5 precisely — checking windows within 120s
+    after compaction events and combining with idle rule.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/a345probe.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/a345probe.py → b//Users/ares/.sweap/r24_audit/a345probe.py
+@@ -0,0 +1,67 @@
++import json, collections, datetime
++LED='/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP='/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows=[json.loads(l) for l in open(LED)]
++comp=[json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%m-%d %H:%M:%S %Z')
++
++v3=[r for r in rows if r.get('schema')==3]
++v3_real=[r for r in v3 if r.get('row_kind')!='merged_marker']
++# non-seed compactions only
++comp_real=[c for c in comp if c.get('session')!='seed']
++
++def hr(r):
++    d=r['d_cache_read']+r['d_input']
++    return r['d_cache_read']/d if d else 'n/a'
++
++print("========== A3: break candidates on v3 ==========")
++# Rule: idle_s>=1800 OR within 120s after a compaction for same session (comp model='*' matches any model in session)
++# map each window's session; comps keyed by session
++comps_by_ses=collections.defaultdict(list)
++for c in comp_real:
++    comps_by_ses[c['session']].append(c['ts'])
++
++breaks=[]
++for r in sorted(v3_real, key=lambda x:x['ts']):
++    idle_break = (r.get('idle_s') is not None and r['idle_s']>=1800)
++    within=[]
++    for ct in comps_by_ses.get(r['session'],[]):
++        diff = r['ts']-ct
++        if 0<=diff<=120:
++            within.append((ct,diff))
++    comp_break = len(within)>0
++    if idle_break or comp_break:
++        breaks.append((r, idle_break, within))
++print("windows matching either rule:", len(breaks))
++for r,idleb,within in breaks:
++    print(f"  ts={r['ts']} {utc(r['ts'])} model={r['model'][:22]:22} idle={r.get('idle_s')} "
++          f"idle_break={idleb} comp_within120={'yes:'+str([(c,d) for c,d in within]) if within else 'no'} "
++          f"input={r['d_input']} cr={r['d_cache_read']} hr={hr(r) if isinstance(hr(r),str) else round(hr(r),4)}")
++
++print("\n========== A4: compaction-cost receipts (compaction + following same-lane call within 120s) ==========")
++# find comp events that have a following v3 window on same session within 120s
++for c in sorted(comp_real, key=lambda x:x['ts']):
++    ses=c['session']
++    # following windows on same session
++    nxt=sorted([r for r in v3_real if r['session']==ses and c['ts']<=r['ts']<=c['ts']+120], key=lambda x:x['ts'])
++    if nxt:
++        follow=nxt[0]
++        print(f"  comp ts={c['ts']} {utc(c['ts'])} ses={ses[:16]} ctx_after={c.get('ctx_after')} -> next window ts={follow['ts']} {utc(follow['ts'])} "
++              f"delta={follow['ts']-c['ts']}s input={follow['d_input']} cr={follow['d_cache_read']} "
++              f"hitrate={hr(follow) if isinstance(hr(follow),str) else round(hr(follow),4)}")
++
++print("\n========== A5: worst full-price re-bill window on v3 (largest d_input) ==========")
++worst=max(v3_real, key=lambda r:r['d_input'])
++print("largest d_input window:")
++print(f"  ts={worst['ts']} {utc(worst['ts'])} model={worst['model']} session={worst['session']} input={worst['d_input']} "
++      f"cr={worst['d_cache_read']} idle={worst.get('idle_s')} merged={worst.get('merged')} tick={worst.get('tick_s')}")
++# what caused it per two rules
++idle_break = worst.get('idle_s') is not None and worst['idle_s']>=1800
++within=[(ct,worst['ts']-ct) for ct in comps_by_ses.get(worst['session'],[]) if 0<=worst['ts']-ct<=120]
++print(f"  idle_rule_break={idle_break} (idle_s={worst.get('idle_s')})  comp_within120={within if within else 'no'}")
++# top 5 largest
++print("top 5 by d_input:")
++for r in sorted(v3_real, key=lambda x:x['d_input'], reverse=True)[:5]:
++    w2=[(ct,r['ts']-ct) for ct in comps_by_ses.get(r['session'],[]) if 0<=r['ts']-ct<=120]
++    print(f"  ts={r['ts']} {utc(r['ts'])} input={r['d_input']} cr={r['d_cache_read']} idle={r.get('idle_s')} "
++          f"idle_break={r.get('idle_s') is not None and r['idle_s']>=1800} comp={w2 if w2 else 'no'}")
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 a345probe.py  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    A3/A4/A5 computed. The worst d_input window is a **live,
+    still-growing** window from this very session. Now let me finalize A6
+    (sanity) and gather all the adversarial A7 data points.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/a6.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/a6.py → b//Users/ares/.sweap/r24_audit/a6.py
+@@ -0,0 +1,64 @@
++import json, collections, datetime
++LED='/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP='/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows=[json.loads(l) for l in open(LED)]
++comp=[json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
++
++v3=[r for r in rows if r.get('schema')==3]
++v2=[r for r in rows if 'schema' not in r]
++v3_real=[r for r in v3 if r.get('row_kind')!='merged_marker']
++
++print("========== A6: SANITY ==========")
++print("total v3 rows in file (incl marker):", len(v3))
++print("total v2 rows in file:", len(v2))
++print("total lines (all):", len(rows), " check v2+v3:", len(v2)+len(v3))
++print("v3 real windows (excl merged_marker):", len(v3_real))
++print("distinct (session,model) lanes overall:", len(set((r['session'],r['model']) for r in rows)))
++print("distinct (session,model) lanes v3 real:", len(set((r['session'],r['model']) for r in v3_real)))
++
++# duplicate uid in v3
++uids=collections.Counter(r['uid'] for r in v3)
++dups={u:c for u,c in uids.items() if c>1}
++print("v3 DUPLICATE uids:", len(dups))
++# all dups are (None real + merged_marker)
++print("  breakdown of duplicate-uid rows by row_kind:")
++rk_dups=collections.Counter()
++for r in v3:
++    if uids[r['uid']]>1: rk_dups[r.get('row_kind')]+=1
++print("   ", dict(rk_dups))
++
++# v2 duplicate ts keys
++v2ts=collections.Counter(r['ts'] for r in v2)
++print("v2 duplicate ts keys:", sum(1 for v in v2ts.values() if v>1), " (v2 key is ts-only; distinct ts:", len(v2ts),")")
++
++# lane/provider/monolane check
++print("\n--- data quality probes ---")
++# write_field_trust distribution on v3
++print("v3 write_field_trust:", collections.Counter(r.get('write_field_trust') for r in v3_real))
++# cache_write totals
++tot_cw_v2=sum(r['d_cache_write'] for r in v2)
++tot_cw_v3=sum(r['d_cache_write'] for r in v3_real)
++print("sum d_cache_write v2:", tot_cw_v2, " v3:", tot_cw_v3, " (field is DEAD -> should not be interpreted)")
++# merged windows count + calls within them
++merged=[r for r in v3_real if r.get('merged')]
++print("merged windows v3:", len(merged), " total calls inside merged:", sum(r['d_calls'] for r in merged))
++# deepseek cache_read always 0?
++ds=[r for r in v3_real if r['model']=='deepseek-ai/DeepSeek-V4-Flash-0731']
++print("deepseek v3 real windows:", len(ds), " all cache_read==0:", all(r['d_cache_read']==0 for r in ds))
++print("deepseek provider set:", set(r['provider'] for r in ds))
++# glm cache_read
++gl=[r for r in v3_real if r['model']=='glm-4.6']
++print("glm v3 windows:", len(gl), " cache_read>0:", sum(1 for r in gl if r['d_cache_read']>0), " cache_read==0:", sum(1 for r in gl if r['d_cache_read']==0))
++# glm full-miss windows (cr==0)
++gl0=[r for r in gl if r['d_cache_read']==0]
++print("glm v3 windows with cr==0:")
++for r in gl0:
++    print(f"   ts={r['ts']} {utc(r['ts'])} idle={r.get('idle_s')} input={r['d_input']} calls={r['d_calls']}")
++
++# do deepseek sessions report cache write? 
++print("\ncompaction sessions not present in any ledger lane:", set(c['session'] for c in comp if c.get('session')!='seed') - set(r['session'] for r in rows))
++# comp count vs ledger v3 presence
++print("total non-seed comp events:", sum(1 for c in comp if c.get('session')!='seed'))
++print("comp events whose session IS in ledger:", sum(1 for c in comp if c.get('session')!='seed' and c['session'] in set(r['session'] for r in rows)))
++print("comp events whose session NOT in ledger:", sum(1 for c in comp if c.get('session')!='seed' and c['session'] not in set(r['session'] for r in rows)))
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 a6.py  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    All the raw numbers are computed. Let me run one more completeness check
+    — A4 across ALL compaction events (both v2 and v3-era windows) to make
+    sure I don't miss any cost receipt — and verify the comp-to-window
+    mapping fully.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/a4full.py  0.2s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/a4full.py → b//Users/ares/.sweap/r24_audit/a4full.py
+@@ -0,0 +1,45 @@
++import json, collections, datetime
++LED='/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP='/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows=[json.loads(l) for l in open(LED)]
++comp=[json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
++
++v3=[r for r in rows if r.get('schema')==3]
++v2=[r for r in rows if 'schema' not in r]
++v3_real=[r for r in v3 if r.get('row_kind')!='merged_marker']
++comp_real=[c for c in comp if c.get('session')!='seed']
++
++def hr(r):
++    d=r['d_cache_read']+r['d_input']
++    return r['d_cache_read']/d if d else float('nan')
++
++# Combine v2 and v3 real windows to evaluate all 'next window' after each comp within 120s same session
++all_windows = v2 + v3_real
++print("=== A4 FULL: all compaction events with following same-session window within 120s ===")
++comp_matches=[]
++for c in sorted(comp_real, key=lambda x:x['ts']):
++    ses=c['session']
++    nxt=sorted([r for r in all_windows if r['session']==ses and c['ts']<=r['ts']<=c['ts']+120], key=lambda x:x['ts'])
++    if nxt:
++        f=nxt[0]
++        comp_matches.append((c,f))
++        print(f"  comp ts={c['ts']} {utc(c['ts'])} ctx_after={c.get('ctx_after')} -> next win ts={f['ts']} {utc(f['ts'])} "
++              f"delta={f['ts']-c['ts']}s schema={'v3' if 'schema' in f else 'v2'} "
++              f"input={f['d_input']} cr={f['d_cache_read']} hitrate={hr(f):.4f}")
++print("total compaction events with a following window within 120s:", len(comp_matches))
++print("total non-seed comp events:", len(comp_real), " -> with no following window within 120s:", len(comp_real)-len(comp_matches))
++
++# Among those comp events, how many precede a v3 window specifically
++v3matches=[m for m in comp_matches if 'schema' in m[1]]
++print("comp events preceding a v3 window within 120s:", len(v3matches))
++v2matches=[m for m in comp_matches if 'schema' not in m[1]]
++print("comp events preceding a v2 window within 120s:", len(v2matches))
++
++print("\n=== Also: any compaction within 120s BEFORE a v3 window (for A3 completeness, incl v2-era comps) ===")
++comps_by_ses=collections.defaultdict(list)
++for c in comp_real: comps_by_ses[c['session']].append(c['ts'])
++for r in sorted(v3_real, key=lambda x:x['ts']):
++    within=[(ct,r['ts']-ct) for ct in comps_by_ses.get(r['session'],[]) if 0<=r['ts']-ct<=120]
++    if within:
++        print(f"  v3 win ts={r['ts']} {utc(r['ts'])} model={r['model'][:20]:20} input={r['d_input']} cr={r['d_cache_read']} hr={hr(r):.4f} comp={within}")
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 a4full.py  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Let me verify a couple of A7 details: the write_field_trust distribution,
+    comp event ordering vs the seed marker, and confirm the deepseek lane
+    always zeros.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/a7probe.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/a7probe.py → b//Users/ares/.sweap/r24_audit/a7probe.py
+@@ -0,0 +1,36 @@
++import json, collections, datetime
++LED='/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP='/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows=[json.loads(l) for l in open(LED)]
++comp=[json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
++
++v3=[r for r in rows if r.get('schema')==3]
++v3_real=[r for r in v3 if r.get('row_kind')!='merged_marker']
++
++print("=== write_field_trust by model (v3 real) ===")
++for r in v3_real:
++    print(f"  {r['model'][:34]:34} trust={r.get('write_field_trust')} cw={r['d_cache_write']} ts={utc(r['ts'])}")
++
++print("\n=== deepseek session names & ts (are live rows 'unknown' trust?) ===")
++for r in sorted(v3_real, key=lambda x:x['ts']):
++    if r['model']=='deepseek-ai/DeepSeek-V4-Flash-0731':
++        print(f"  {utc(r['ts'])} ses={r['session'][:16]} cr={r['d_cache_read']} cw={r['d_cache_write']} trust={r.get('write_field_trust')} input={r['d_input']}")
++
++# comp file: is seed first, are there events with ts BEFORE seed ts listed AFTER it?
++print("\n=== comp ordering vs seed ===")
++seed_idx=[i for i,c in enumerate(comp) if c.get('session')=='seed'][0]
++print("seed at file position", seed_idx, "of", len(comp), "seed ts", comp[seed_idx]['ts'], utc(comp[seed_idx]['ts']))
++bef=[c['ts'] for c in comp if c['ts']<comp[seed_idx]['ts']]
++print("comp events with ts < seed ts:", len(bef), "min", min(bef) if bef else None, utc(min(bef)) if bef else '')
++# events with ts in the future relative to seed that are BEFORE seed in file
++after_in_file=[c for c in comp[:seed_idx]]
++print("events BEFORE seed in FILE (excluding seed):", len(after_in_file))
++for c in comp[:seed_idx][:3]:
++    print("   file-pre", c['ts'], utc(c['ts']), "kind", c['kind'])
++
++# non-seed comp events whose session in ledger
++led_ses=set(r['session'] for r in rows)
++for c in comp:
++    if c.get('session')!='seed' and c['session'] not in led_ses:
++        print("  comp for session not in ledger:", c['session'], "ts", utc(c['ts']))
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 a7probe.py  0.3s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I have all the numbers computed and cross-verified. Let me generate a
+    clean, final, reproducible audit report from the frozen snapshot and save
+    it.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ ✍️ preparing write_file…
+  ┊ ✍️  write     /Users/ares/.sweap/r24_audit/final_report.py  0.2s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/final_report.py → b//Users/ares/.sweap/r24_audit/final_report.py
+@@ -0,0 +1,130 @@
++import json, collections, datetime
++
++LED='/Users/ares/.sweap/r24_audit/ledger_frozen_1792165930.jsonl'
++COMP='/Users/ares/.sweap/r24_audit/comp_frozen_1792165930.jsonl'
++rows=[json.loads(l) for l in open(LED)]
++comp=[json.loads(l) for l in open(COMP)]
++def utc(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S %Z')
++def hr(r):
++    d=r['d_cache_read']+r['d_input']
++    return r['d_cache_read']/d if d else float('nan')
++
++v3=[r for r in rows if r.get('schema')==3]
++v2=[r for r in rows if 'schema' not in r]
++v3_real=[r for r in v3 if r.get('row_kind')!='merged_marker']
++comp_real=[c for c in comp if c.get('session')!='seed']
++
++out=[]
++P=out.append
++P("R24 BLIND AUDIT - FROZEN SNAPSHOT")
++P("input ledger : %s (%d lines)" % (LED, len(rows)))
++P("input comp   : %s (%d events)" % (COMP, len(comp)))
++P("snapshot UTC : 2026-10-16 15:52:10+00:00 (ts 1792165930)")
++P("NOTE: source files are LIVE and mutate (this session is a sampled lane); all figures")
++P("      are computed from the checksummed frozen snapshot above, which is reproducible.")
++P("")
++
++# A1
++P("A1. PER-MODEL LIFETIME ON v3 ROWS (real windows only; merged_marker annotation rows excluded to avoid double-count)")
++P("    row_kind in {None, call} = per-window deltas. hit_rate = cache_read/(cache_read+input). PER-LANE: not blended.")
++P("    formula: calls=sum(d_calls), input=sum(d_input), cr=sum(d_cache_read), hr=cr/(cr+input)")
++models_v3=collections.defaultdict(lambda:dict(calls=0,inp=0,cr=0))
++for r in v3_real:
++    d=models_v3[r['model']]; d['calls']+=r['d_calls']; d['inp']+=r['d_input']; d['cr']+=r['d_cache_read']
++for m,d in sorted(models_v3.items(), key=lambda x:x[1]['calls']):
++    hr=d['cr']/(d['cr']+d['inp']) if d['cr']+d['inp'] else 0.0
++    prov=set(r['provider'] for r in v3_real if r['model']==m)
++    P("    %-36s calls=%4d input=%9d cache_read=%10d  hit_rate=%.5f  provider=%s"%(m,d['calls'],d['inp'],d['cr'],hr,prov))
++P("    (deepseek cache_read=0 on every window -> hit_rate 0.00000; see A7)")
++P("")
++
++# A2
++P("A2. LIFETIME INCLUDING v2 (real windows only)")
++models_a=collections.defaultdict(lambda:dict(c2=0,i2=0,r2=0,c3=0,i3=0,r3=0))
++for r in v2:
++    d=models_a[r['model']]; d['c2']+=r['d_calls']; d['i2']+=r['d_input']; d['r2']+=r['d_cache_read']
++for r in v3_real:
++    d=models_a[r['model']]; d['c3']+=r['d_calls']; d['i3']+=r['d_input']; d['r3']+=r['d_cache_read']
++for m,d in sorted(models_a.items()):
++    c=d['c2']+d['c3']; i=d['i2']+d['i3']; rr=d['r2']+d['r3']
++    hr=rr/(rr+i) if rr+i else 0.0
++    P("    %-36s calls=%4d input=%10d cache_read=%11d  hit_rate=%.5f  (v2 %d/%d/%d + v3 %d/%d/%d)"%(
++        m,c,i,rr,hr,d['c2'],d['i2'],d['r2'],d['c3'],d['i3'],d['r3']))
++P("")
++
++# A3
++P("A3. BREAK CANDIDATES ON v3 (real windows)")
++comps_by_ses=collections.defaultdict(list)
++for c in comp_real: comps_by_ses[c['session']].append(c['ts'])
++P("    rule: idle_s>=1800  OR  within 120s after a compaction for same (session,model)")
++cands=[]
++for r in sorted(v3_real, key=lambda x:x['ts']):
++    idle_break = (r.get('idle_s') is not None and r['idle_s']>=1800)
++    w=[(ct,r['ts']-ct) for ct in comps_by_ses.get(r['session'],[]) if 0<=r['ts']-ct<=120]
++    if idle_break or w:
++        cands.append(r)
++        P("    ts=%-11d %s model=%-22s idle_s=%s idle_break=%s comp_within120=%s  input=%d cr=%d  hit_rate=%.4f"%(
++          r['ts'],utc(r['ts']),r['model'][:22],r.get('idle_s'),idle_break,('yes '+str(w)) if w else 'no',r['d_input'],r['d_cache_read'],hr(r)))
++P("    count of break candidates: %d" % len(cands))
++P("")
++
++# A4
++P("A4. COMPACTION-COST RECEIPTS (compaction with a following same-session window <=120s)")
++allwin=v2+v3_real
++n=0
++for c in sorted(comp_real,key=lambda x:x['ts']):
++    nxt=sorted([r for r in allwin if r['session']==c['session'] and c['ts']<=r['ts']<=c['ts']+120],key=lambda x:x['ts'])
++    if nxt:
++        f=nxt[0]; n+=1
+… omitted 52 diff line(s) across 1 additional file(s)/section(s)
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I have a stray syntax artifact in that script. Let me fix it before
+    running.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 🔧 preparing patch…
+  ┊ 🔧 patch     /Users/ares/.sweap/r24_audit/final_report.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/final_report.py → b//Users/ares/.sweap/r24_audit/final_report.py
+@@ -109,7 +109,7 @@
+ 
+ # A7
+ P("A7. DATA-QUALITY (adversarial)")
+-P("  1. LIVE/MUTATING LEDGER: wire_ledger.jsonl grows during read (obs +6 lines in <1min; this audit's own").py if False else P("  1. LIVE/MUTATING LEDGER: wire_ledger.jsonl grows during read; frozen snapshot required. CHECKSUM mismatch = not reproducible without pin.")
++P("  1. LIVE/MUTATING LEDGER: wire_ledger.jsonl grows during read (obs +6 lines in <1min); frozen snapshot required. CHECKSUM mismatch = not reproducible without pin.")
+ P("  2. DUPLICATE UIDs: 37 merged windows have two rows sharing one uid (delta + merged_marker). A naive sum double-counts merged windows; must filter row_kind!=merged_marker.")
+ P("  3. DEAD WRITE COLUMN: all d_cache_write=0 with write_field_trust in {dead(56), unknown(5)}. 0 is UNVERIFIED, NOT 'no writes'. Cache-write cost cannot be measured at all.")
+ P("  4. MERGED WINDOWS: 37 v3 windows (142 calls) aggregate multiple calls; per-call split unavailable. Hit rate is per-window aggregate across those calls.")
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 final_report.py + 2 commands  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Name collision — hr got reused as a variable in A2. Let me rename the
+    helper function to hit.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         sed -i '' 's/def hr(r):/def hit(r):/; s/,hr(r))/，hit(r))/g' final_report.py + 1 command  0.1s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    I introduced a stray unicode comma. Let me fix that line cleanly.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 🔧 preparing patch…
+  ┊ 🔧 patch     /Users/ares/.sweap/r24_audit/final_report.py  0.2s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/final_report.py → b//Users/ares/.sweap/r24_audit/final_report.py
+@@ -64,7 +64,7 @@
+     if idle_break or w:
+         cands.append(r)
+         P("    ts=%-11d %s model=%-22s idle_s=%s idle_break=%s comp_within120=%s  input=%d cr=%d  hit_rate=%.4f"%(
+-          r['ts'],utc(r['ts']),r['model'][:22],r.get('idle_s'),idle_break,('yes '+str(w)) if w else 'no',r['d_input'],r['d_cache_read']，hit(r)))
++          r['ts'],utc(r['ts']),r['model'][:22],r.get('idle_s'),idle_break,('yes '+str(w)) if w else 'no',r['d_input'],r['d_cache_read'],hit(r)))
+ P("    count of break candidates: %d" % len(cands))
+ P("")
+ 
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    There may be more hr(r) uses in the A4/A5 sections. Let me check and
+    fix all remaining ones.
+    
+╰──────────────────────────────────────────────────────────────────────────────╯
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         grep -n "hr(r)" final_report.py  0.1s [exit 1]
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         grep -n "hr(" final_report.py  0.1s
+  ┊ 🔧 preparing patch…
+  ┊ 🔧 patch     /Users/ares/.sweap/r24_audit/final_report.py  0.3s
+  ┊ review diff
+a//Users/ares/.sweap/r24_audit/final_report.py → b//Users/ares/.sweap/r24_audit/final_report.py
+@@ -77,7 +77,7 @@
+     if nxt:
+         f=nxt[0]; n+=1
+         P("    comp ts=%-11d %s ctx_after=%s -> next win ts=%-11d %s delta=%4ds schema=%s  input=%d cr=%d hit_rate=%.4f"%(
+-          c['ts'],utc(c['ts']),c.get('ctx_after'),f['ts'],utc(f['ts']),f['ts']-c['ts'],'v3' if 'schema' in f else 'v2',f['d_input'],f['d_cache_read'],hr(f)))
++          c['ts'],utc(c['ts']),c.get('ctx_after'),f['ts'],utc(f['ts']),f['ts']-c['ts'],'v3' if 'schema' in f else 'v2',f['d_input'],f['d_cache_read'],hit(f)))
+ P("    total receipts: %d  (v3-era: 2  v2-era: %d)"%(n,n-2))
+ P("    KEY v3 receipts: comp 1792154877->win 1792154916 hit_rate=0.0000 ; comp 1792163078->win 1792163156 hit_rate=0.7427")
+ P("")
+  ┊ 💻 preparing terminal…
+  ┊ 💻 $         python3 final_report.py + 2 commands  0.2s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    The audit is complete, fully recomputed from a frozen, checksummed
+    snapshot of the two data files. Full report saved to
+    /Users/ares/.sweap/r24_audit/R24_REPORT.txt (plus the frozen inputs and
+    all analysis scripts in the same folder).
+    
+    CRITICAL METHODOLOGY NOTE FIRST
+    The ledger is a LIVE file, not a static deliverable. It grew from 184 to
+    190 lines in under a minute while I worked, because this very session
+    (deepseek custom lane) is a sampled lane. So no number is reproducible
+    against the live file. I froze a checkpoint at ts 1792165930 (UTC
+    2026-10-16 15:52:10), checksummed it, and computed everything from that
+    frozen snapshot. This is itself finding #1 in A7.
+    
+    R24 BLIND AUDIT (frozen snapshot, 190 ledger lines + 132 compaction
+    events)
+    
+    A1. PER-MODEL LIFETIME (v3 rows only, real windows; merged_marker
+    annotation rows EXCLUDED)
+    formula: calls=sum(d_calls), input=sum(d_input), cr=sum(d_cache_read),
+    hr=cr/(cr+input), per-lane not blended
+      deepseek-ai/DeepSeek-V4-Flash-0731  calls=13 input=400920 cr=0
+    hit_rate=0.00000  {custom}
+      glm-4.6                             calls=153 input=359216 cr=13748864
+    hit_rate=0.97454  {zai}
+    
+    A2. LIFETIME INCLUDING v2 (real windows)
+      deepseek  calls=25 input=941786 cr=0 hit_rate=0.00000 (v2 12/540866/0 +
+    v3 13/400920/0)
+      glm-4.6   calls=386 input=1052154 cr=30206080 hit_rate=0.96634 (v2
+    233/692938/16457216 + v3 153/359216/13748864)
+    
+    A3. BREAK CANDIDATES ON v3 (idle_s>=1800 OR within 120s after same-lane
+    compaction); hr = cr/(cr+input)
+      ts=1792153953 12:32:33  glm-4.6  idle=2587  idle_break=yes  comp=no  
+    input=117943  hr=0.7461
+      ts=1792154916 12:48:36  glm-4.6  idle=662   idle_break=no  
+    comp=yes(39s)  input=67164  hr=0.0000
+      ts=1792163156 15:05:56  glm-4.6  idle=541   idle_break=no  
+    comp=yes(78s)  input=60706  hr=0.7427
+      ts=1792165442 15:44:02  glm-4.6  idle=2165  idle_break=yes  comp=no  
+    input=838  hr=0.9938
+      total break candidates: 4
+    
+    A4. COMPACTION-COST RECEIPTS (compaction + following same-session window
+    <=120s); 6 total
+      v2-era: 0.7455 (118s), 0.4930 (95s), 0.4924 (70s), 0.9784 (69s)
+      v3-era (KEY): comp 1792154877 -> win 1792154916 (39s) hit_rate=0.0000 
+    |  comp 1792163078 -> win 1792163156 (78s) hit_rate=0.7427
+    
+    A5. WORST FULL-PRICE RE-BILL ON V3 (largest d_input)
+      literal: deepseek ts=1792165923, input=171490, cr=0, idle=60, NOT
+    break-caused (deepseek always reports cr=0)
+      largest break-caused: glm-4.6 ts=1792153953 input=117943 (idle 2587
+    >=1800)
+      largest comp-caused:  glm-4.6 ts=1792154916 input=67164 (39s after
+    compaction)
+    
+    A6. SANITY
+      v3 rows in file=98 (61 real + 37 merged_marker); v2 rows=92; total=190
+      distinct (session,model): overall 7, v3 real 5
+      DUPLICATE uids = 37 (NOT zero) - every merged window emits a delta row
+    AND a merged_marker row with the same uid
+      v2 duplicate ts keys = 5 (v2 key is ts-only)
+      brief-stated 177 (92+85) does not match live file; frozen=190
+    
+    A7. DATA-QUALITY (decides ship/no-ship)
+      1. LIVE LEDGER: mutates during read; no number is reproducible without
+    a pinned snapshot.  (blocking)
+      2. DUPLICATE UIDs: 37 merged windows appear twice (delta+marker). Naive
+    sum double-counts; must filter row_kind!=merged_marker.  (blocking if
+    unfiltered)
+      3. DEAD WRITE COLUMN: all d_cache_write=0,
+    write_field_trust=dead(56)/unknown(5). 0 is UNVERIFIED, not "no writes";
+    cache-write cost unmeasurable.  (blocking for cost math)
+      4. MERGED WINDOWS: 37 windows aggregate 142 calls; per-call split
+    unavailable; hit rate is per-window aggregate.
+      5. deepseek lane reports cr=0 on every window -> 0.00000. Either
+    genuinely no cache or cache not instrumented. CANNOT distinguish. Don't
+    publish deepseek 0% as a real miss rate.
+      6. tick_s not always 60 (observed {60,49,12,30,6,24}); idle_s null on 5
+    rows -> boundary drift.
+      7. Composition mismatch vs brief (177 vs 190) depends on read time.
+      8. 10 compaction events reference sessions with no ledger rows -> their
+    cost receipts are unconstructable.
+      9. First v3 window mid-v3.1-deploy (tick 49, idle null; seed marker
+    11:39:01).
+     10. A break does NOT guarantee full re-bill: both idle-break windows
+    retained cache hits (0.7461, 0.9938).
+    
+    VERDICT: the instrument's hit-rate math is sound and ships, but only if
+    (a) merged_marker rows are deduped, (b) cache_write is dropped entirely,
+    and (c) every published number is pinned to a frozen ledger snapshot.
+    Publish per-lane only (zai vs custom), never blended.
+    
+    R24-BLIND-AUDIT-OK
+    
+    Want me to save this blind-audit procedure as a skill (freeze snapshot
+    first, dedup merged_marker, drop dead write column) so future runs are
+    one command?
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261016_194812_e44dff
+
+Session:        20261016_194812_e44dff
+Duration:       9m 27s
+Messages:       81 (1 user, 79 tool calls)

@@ -1,0 +1,79 @@
+A1. PER-MODEL LIFETIME (v3 rows only, real windows; merged_marker
+    annotation rows EXCLUDED)
+    formula: calls=sum(d_calls), input=sum(d_input), cr=sum(d_cache_read),
+    hr=cr/(cr+input), per-lane not blended
+      deepseek-ai/DeepSeek-V4-Flash-0731  calls=13 input=400920 cr=0
+    hit_rate=0.00000  {custom}
+      glm-4.6                             calls=153 input=359216 cr=13748864
+    hit_rate=0.97454  {zai}
+
+    A2. LIFETIME INCLUDING v2 (real windows)
+      deepseek  calls=25 input=941786 cr=0 hit_rate=0.00000 (v2 12/540866/0 +
+    v3 13/400920/0)
+      glm-4.6   calls=386 input=1052154 cr=30206080 hit_rate=0.96634 (v2
+    233/692938/16457216 + v3 153/359216/13748864)
+
+    A3. BREAK CANDIDATES ON v3 (idle_s>=1800 OR within 120s after same-lane
+    compaction); hr = cr/(cr+input)
+      ts=1792153953 12:32:33  glm-4.6  idle=2587  idle_break=yes  comp=no
+    input=117943  hr=0.7461
+      ts=1792154916 12:48:36  glm-4.6  idle=662   idle_break=no
+    comp=yes(39s)  input=67164  hr=0.0000
+      ts=1792163156 15:05:56  glm-4.6  idle=541   idle_break=no
+    comp=yes(78s)  input=60706  hr=0.7427
+      ts=1792165442 15:44:02  glm-4.6  idle=2165  idle_break=yes  comp=no
+    input=838  hr=0.9938
+      total break candidates: 4
+
+    A4. COMPACTION-COST RECEIPTS (compaction + following same-session window
+    <=120s); 6 total
+      v2-era: 0.7455 (118s), 0.4930 (95s), 0.4924 (70s), 0.9784 (69s)
+      v3-era (KEY): comp 1792154877 -> win 1792154916 (39s) hit_rate=0.0000
+comp 1792163078 -> win 1792163156 (78s) hit_rate=0.7427
+
+    A5. WORST FULL-PRICE RE-BILL ON V3 (largest d_input)
+      literal: deepseek ts=1792165923, input=171490, cr=0, idle=60, NOT
+    break-caused (deepseek always reports cr=0)
+      largest break-caused: glm-4.6 ts=1792153953 input=117943 (idle 2587
+    >=1800)
+      largest comp-caused:  glm-4.6 ts=1792154916 input=67164 (39s after
+    compaction)
+
+    A6. SANITY
+      v3 rows in file=98 (61 real + 37 merged_marker); v2 rows=92; total=190
+      distinct (session,model): overall 7, v3 real 5
+      DUPLICATE uids = 37 (NOT zero) - every merged window emits a delta row
+    AND a merged_marker row with the same uid
+      v2 duplicate ts keys = 5 (v2 key is ts-only)
+      brief-stated 177 (92+85) does not match live file; frozen=190
+
+    A7. DATA-QUALITY (decides ship/no-ship)
+      1. LIVE LEDGER: mutates during read; no number is reproducible without
+    a pinned snapshot.  (blocking)
+      2. DUPLICATE UIDs: 37 merged windows appear twice (delta+marker). Naive
+    sum double-counts; must filter row_kind!=merged_marker.  (blocking if
+    unfiltered)
+      3. DEAD WRITE COLUMN: all d_cache_write=0,
+    write_field_trust=dead(56)/unknown(5). 0 is UNVERIFIED, not "no writes";
+    cache-write cost unmeasurable.  (blocking for cost math)
+      4. MERGED WINDOWS: 37 windows aggregate 142 calls; per-call split
+    unavailable; hit rate is per-window aggregate.
+      5. deepseek lane reports cr=0 on every window -> 0.00000. Either
+    genuinely no cache or cache not instrumented. CANNOT distinguish. Don't
+    publish deepseek 0% as a real miss rate.
+      6. tick_s not always 60 (observed {60,49,12,30,6,24}); idle_s null on 5
+    rows -> boundary drift.
+      7. Composition mismatch vs brief (177 vs 190) depends on read time.
+      8. 10 compaction events reference sessions with no ledger rows -> their
+    cost receipts are unconstructable.
+      9. First v3 window mid-v3.1-deploy (tick 49, idle null; seed marker
+    11:39:01).
+     10. A break does NOT guarantee full re-bill: both idle-break windows
+    retained cache hits (0.7461, 0.9938).
+
+    VERDICT: the instrument's hit-rate math is sound and ships, but only if
+    (a) merged_marker rows are deduped, (b) cache_write is dropped entirely,
+    and (c) every published number is pinned to a frozen ledger snapshot.
+    Publish per-lane only (zai vs custom), never blended.
+
+    R24-BLIND-AUDIT-OK
