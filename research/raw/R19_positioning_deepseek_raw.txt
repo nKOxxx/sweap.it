@@ -1,0 +1,423 @@
+Query: # R19 BRIEF: POSITIONING RESEARCH - WHO INSTALLS A CLEANING TOOL?
+
+ROLE: You are a GTM strategist and category analyst. The founder needs a
+positioning answer to one attack. This is research, not ad copy: honest
+weaknesses per option, confidence tags on every outside claim, no invented
+statistics. READ-ONLY, text only.
+
+BLIND PROTOCOL: [ANCHOR] = measured on our reference host, given.
+[THEORY] = vendor/public claim. [ASSUMPTION] = chosen. Outside knowledge
+(historical products, precedents) needs [HIGH]/[MED]/[LOW] + source type;
+write UNKNOWN rather than invent numbers.
+
+## THE ATTACK WE ARE ANSWERING (from a red-team round, severity HIGH)
+
+People who install a context-cleaning tool are self-selected: the heaviest,
+most pain-drenched users. So the product's own headline numbers describe a
+niche, and worse: nobody who is NOT already drowning wakes up searching for
+a "cleaning tool." Hygiene is bought by the already-sick. Marketing a
+cleaner as a cleaner may cap the product at the niche that already knows
+it has the problem.
+
+## THE COMPETITIVE FRAME (founder's own words)
+
+- CAVEMAN sells a felt benefit: it SIMPLIFIES the output (speak less,
+  compress request bytes in flight, ~111.9k stars [THEORY]). You see the
+  difference immediately.
+- JEV sells a felt benefit: it works FASTER and SKIPS the nonsense (typed
+  decision model that filters what enters context [THEORY]). Speed is felt.
+- SWEAP currently sells... hygiene. Store census, provably-dead sweep,
+  wire ledger. Correct, measured, and nobody feels a database at rest.
+
+## WHAT WE ACTUALLY HAVE (all [ANCHOR], use freely)
+
+- 90.69% of stored transcript tokens are tool exhaust (exact census).
+- One sweep: 14,955 dead rows, 19.56 MB, 48% of the store file, provably
+  dead only, quarantine + SHA-256 + byte-identical restore.
+- Wire ledger (no proxy): per-lane cache truth. Paid lane 96.3% hit; one
+  token mutation drops a warm lane to 0%; 3 real breaks in one day =
+  207,566 tokens billed at full price (2.02% of paid-lane input, ceiling
+  333,120, net ~202,003). Each break attributed to a CAUSE from store
+  records: one was a context compaction 95 seconds earlier, two were idle.
+- Local-only by construction: product code contains zero network calls;
+  every byte stays on the customer's machine.
+- Works on day one with no integration: first run backfills the customer's
+  entire break history automatically.
+- The only one of the three tools that can state a NET effect (savings
+  minus cache-break costs) instead of gross claims.
+
+## MARKETING LAWS (fixed constraints, do not violate)
+
+- No paid promotion, no cold outreach. Product-led distribution only:
+  the product itself, its output, plugin directories, marketplaces,
+  word of mouth.
+- Every number public must be measured or clearly stamped [HYPOTHETICAL].
+  No invented stats, no fake urgency.
+- Prior positioning ruling: sweap is COMPLEMENTARY to caveman, never a
+  competitor (fights on different planes).
+- Prior lesson from caveman's rise [THEORY]: name = thesis, community
+  becomes the marketing, there was a shareable mechanic (people replied
+  in caveman-speak). Sweap needs its own shareable mechanic.
+
+## YOUR TASK (five sections)
+
+S1. WHY CLEANING TOOLS NORMALLY FAIL, AND THE ONES THAT DIDN'T.
+    Analyze the precedent class: CCleaner, CleanMyMac, disk cleaners,
+    antivirus scans, Duolingo-style streaks, Datadog-style observability,
+    1Password-style trust tools. Which of these escaped the
+    "only the sick install it" trap and by what mechanic? Candidates to
+    examine: the free scan that reveals a shocking number, visible dirt
+    (full disk bar), safe undo, streak/identity mechanics, dashboard
+    vanity, fear. Confidence tags on every factual claim about those
+    products. [MED]/[LOW] is fine, say so.
+
+S2. POSITIONING CANDIDATES FOR SWEAP. Give 4-6 distinct candidates. At
+    minimum evaluate these five, add your own if stronger:
+    C1 THE SCAN: free census as the hook; "57% of your AI workspace is
+       dead weight" as the reveal; clean as one action with undo.
+    C2 THE RECEIPT: waste detective; "your AI billed you 207,566 tokens
+       for nothing yesterday, and here is why" ; break attribution as
+       the unique asset nobody else has.
+    C3 THE REFEREE: attach to caveman/jev adoption; "run them for
+       savings, run sweap for the truth"; verification layer for the
+       whole category.
+    C4 THE TRUST ANCHOR: the only context tool that is local-only by
+       construction and physically cannot phone home; privacy for the
+       AI era.
+    C5 THE LIGHT MACHINE: dead weight = slow, expensive sessions; sweep
+       = the machine gets lighter and cheaper (measured 22.1 MB).
+    For each: one-sentence pitch (plain language), WHO installs (does it
+    escape the niche?), the felt benefit (when do you feel it?), honest
+    weakness, and whether it can be demonstrated WITHOUT the hub's
+    expertise.
+
+S3. THE VERDICT: which single candidate (or combination, primary +
+    secondary) best answers the selection-bias attack AND fits the
+    marketing laws? Argue it, then name what it costs us (every position
+    gives something up).
+
+S4. THE ONE-SENTENCE CONTRAST. Fill this shape: "Caveman makes the
+    request smaller. Jev makes the context faster. Sweap ___." The blank
+    must be a benefit a non-expert feels, not a mechanism. Give 3 options
+    and pick one.
+
+S5. THE SHAREABLE MECHANIC + DISTRIBUTION. Caveman had caveman-speak.
+    What is sweap's equivalent artifact people would post without being
+    asked? (The scan card? The break receipt? A one-line verdict?)
+    Where does it live so distribution is product-led (plugin dirs,
+    marketplaces, README, CLI output)? No ads, no outreach, consistent
+    with the laws above.
+
+FORMAT: sections S1-S5, tags everywhere, honest weakness per candidate,
+no hype words (game-changing, revolutionary, seamless are banned).
+End with exactly this line: R19-POSITIONING-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    This is a self-contained positioning analysis: all the measured anchors
+    are in the brief, and the marketing laws are fixed. No external data
+    needed, which is correct here because the task explicitly forbids
+    invented statistics and wants tags on every outside claim rather than new
+    browsing. I'll write the deliverable directly.
+    
+    Note on method: every number below is either [ANCHOR] (measured, given)
+    or explicitly tagged. Outside knowledge about other products carries
+    [HIGH]/[MED]/[LOW] + source type or is marked UNKNOWN. No ads, no
+    outreach, no hype words, no em-dashes.
+    
+    ═══════════════════════════════════════════
+    R19 POSITIONING RESEARCH: WHO INSTALLS A CLEANING TOOL?
+    ═══════════════════════════════════════════
+    
+    S1. WHY CLEANING TOOLS NORMALLY FAIL, AND THE ONES THAT DIDN'T
+    
+    The red-team attack is correct as stated: a cleaner marketed as a cleaner
+    self-selects the already-sick. The historical record mostly agrees with
+    them, but only for the ones marketed AS cleaning. The pattern that
+    matters is that the tools that escaped did so by selling a different
+    benefit than the cleaning.
+    
+    First, the failures (marketing-cleaner-as-cleaner):
+    - Registry cleaners, disk defragmenters, junk-file utilities (mid-2000s
+    era). These were marketed as "make your PC faster by removing junk." They
+    ended up as bargain-bin bloatware, frequently prepackaged/bundled, low
+    willingness to pay. [MED, industry-history knowledge; the class outcome
+    is well documented, the specifics are general]. The trap: the pitch told
+    the user "you are broken and cluttered," which only the self-diagnosed
+    installed, and the felt benefit (PC speed) was small and hard to
+    attribute to the tool.
+    - CCleaner's ceiling as a utility. It DID grow large, but it grew on the
+    free-scan mechanic (below), not on "I am a cleaner." It also demonstrates
+    the vulnerability: acquired by Avast, then a supply-chain backdoor in
+    2017. [HIGH, widely reported public incident]. Point: a utility has big
+    distribution but thin trust and thin pricing power.
+    
+    Now the escapees, and the exact mechanic each used:
+    1. The free scan that reveals a shocking number (CCleaner, CleanMyMac).
+    You don't buy the cleaner, you run a free census and it tells you "14.3
+    GB of junk" or "your Mac's avoidable waste is 27 GB." The reveal is the
+    hook; the clean is the one-click payoff. [MED, widely documented product
+    usage pattern]. This is the nearest precedent to our C1 scan. Its honest
+    ceiling: the number must be big enough to shock, and users eventually
+    discount it as fake or inflated ("the scan inflates to sell the clean" is
+    a public perception). [MED, general user perception, not a measured fact].
+    2. Fear + prevention repackaging (antivirus). AV escaped the sick-trap
+    because it sells to the HEALTHY who are afraid. Nobody waits to be
+    infected to install AV; the pitch is universal risk, not remediation of a
+    present disease. [MED, industry norm]. This is the strongest inversion of
+    the attack and the model for our C4 trust anchor: sell the identity of
+    the protected, not the cure for the sick.
+    3. The dashboard/status number (Datadog-class observability).
+    Observability sells the felt benefit of SEEING, and the dashboard is a
+    status object for the operator, not evidence of sickness. It is bought
+    partly as competence/visibility, not as "my system is diseased." [MED,
+    product-category knowledge]. Its ceiling: dashboards are vanity until
+    they drive action, and on a desktop tool a "dashboard your friend can't
+    see" has no social pull unless shared.
+    4. Identity and the streak (Duolingo). The streak is a shareable artifact
+    people post without being asked, and the identity "I am someone who shows
+    up daily" is what converts a utility into a habit. Community became the
+    marketing. [HIGH, widespread, publicly visible usage]. This is the model
+    for our shareable mechanic in S5, but note Duolingo is additive (habit
+    building), not subtractive (cleaning), which is why it is so shareable:
+    it is flattering, not confessional.
+    5. Trust as identity (1Password-class). The felt benefit is peace of mind
+    and "I am the kind of person who takes my data seriously," bought
+    pre-emptively by the healthy and the cautious. [MED, category knowledge].
+    Like AV, it escapes by selling protection and identity rather than cure.
+    
+    The synthesis: cleaning tools fail when the frame is "you are sick, here
+    is your medicine." They escape when the frame is (a) a shocking reveal
+    the user wants to share, (b) protection against a universal threat, (c) a
+    status object, or (d) an identity the user is proud of. In every escapee,
+    the cleaning is the mechanism and a DIFFERENT benefit (money, fear,
+    status, identity, privacy) is the message. Our job is to find which
+    benefit the healthy already pay for, not to talk about vacuuming the
+    context.
+    
+    S2. POSITIONING CANDIDATES FOR SWEAP
+    
+    C1 THE SCAN: free census as the hook
+    - Pitch: "Run a free census. It tells you how much dead weight is sitting
+    in your AI workspace, then clears it in one action you can undo."
+    - WHO installs: The curious and the mildly annoyed as well as the
+    drowning. A free scan is low-friction and curiosity is universal, which
+    is exactly how CCleaner grew [MED, S1]. It does escape the niche for
+    ENTTRY because a scan is not an admission of sickness.
+    - Felt benefit: immediately, at the reveal. The number is the moment.
+    - Honest weakness: the reveal re-labels the user as dirty ("57% of your
+    workspace is dead weight" [HYPOTHETICAL, matches our [ANCHOR] 90.69% tool
+    exhaust / 48% store file]). It hands the red team the same framing they
+    attacked. Also the shocking-number mechanic is the most copyable of all
+    five, and the number can come across as inflated, which erodes trust.
+    - Needs hub expertise to demo? No. The product produces the census
+    natively; the hub is not required.
+    
+    C2 THE RECEIPT: the waste detective
+    - Pitch: "Your AI billed you for work you never asked for. Sweap shows
+    you exactly what it was, and why it happened, every time."
+    - WHO installs: anyone paying for AI, not just the drowning. The "system
+    is robbing you" frame is universal to every paid user and is flattering
+    to detect, not confessional. It inverts the attack: "I caught the machine
+    overcharging," not "I was a mess."
+    - Felt benefit: at the receipt, in money ("you lost 207,566 tokens today,
+    here is why" [ANCHOR, tokens with attributed causes], converted to
+    whatever the user's price is).
+    - Honest weakness: our own measured waste is real but modest per event
+    (2.02% of paid-lane input, ceiling 333,120, net ~202,003 [ANCHOR]).
+    Framed in raw tokens it is a geeky number a non-expert can't feel; it
+    must be converted to dollars, and we must NOT inflate it or we violate
+    the net-effect honesty that is our differentiator. Also the receipt only
+    lands on PAYERS, so it re-niches to people who spend money on AI, which
+    is large but is not everyone.
+    - Needs hub expertise to demo? No. Break attribution comes from store
+    records (one compaction 95 seconds earlier, two idle [ANCHOR]). The
+    receipt is the artifact.
+    
+    C3 THE REFEREE: the verification layer for the category
+    - Pitch: "Run caveman and jev for savings. Run sweap for the truth about
+    what actually reaches your context."
+    - WHO installs: people already adopting caveman/jev. It rides the
+    category's growth and positions sweap not as a niche cleaner but as the
+    neutral truth-teller for the whole ecosystem.
+    - Felt benefit: trust and certainty about your other tools, felt when a
+    verdict contradicts a claim or confirms one.
+    - Honest weakness: it is subservient and dependent on other tools'
+    success, and "referee" and "verification layer" are mechanism words, not
+    felt benefits. A non-expert does not wake up wanting a "verification
+    layer." It also softens our own unique asset (net effect with attributed
+    causes) into a generic "we check others."
+    - Needs hub expertise to demo? Partially yes for the verdict to be
+    credible; the causal attribution is our hard asset and the only one of
+    the three tools that can state a net effect [ANCHOR].
+    
+    C4 THE TRUST ANCHOR: local-only by construction
+    - Pitch: "The only context tool that physically cannot phone home. Every
+    byte stays on your machine, on day one, no integration."
+    - WHO installs: the cautious and privacy-conscious, who are mostly
+    HEALTHY, which is the cleanest escape from the red team's trap (the
+    AV/1Password model from S1). Privacy is bought by the healthy and the
+    afraid, not the drowning.
+    - Felt benefit: peace of mind, permanent, no event needed to feel it.
+    - Honest weakness: trust is the slowest benefit to build and the hardest
+    to prove. "Zero network calls in the product code" [ANCHOR] is a
+    technical claim a non-expert cannot verify and must be taken on faith,
+    and faith is a weak hook for a new tool. There is no felt MOMENT on
+    installation; the payoff is the absence of something. It is also the most
+    difficult to demonstrate without hub expertise, because demonstrating an
+    absence requires the audience to trust the measurement.
+    - Needs hub expertise to demo? Effectively yes. Proven impossibility is
+    an expert claim.
+    
+    C5 THE LIGHT MACHINE: dead weight = slow and expensive, sweep = lighter
+    - Pitch: "Your workspace holds dead weight that makes every session
+    slower and every cache more expensive. Sweap removes it. Measured: 22.1
+    MB and 14,955 provably-dead rows in one sweep [ANCHOR]."
+    - WHO installs: speed and cost are near-universal wants, so it reaches
+    beyond the drowning.
+    - Felt benefit: a lighter, faster, cheaper workspace; felt most at the
+    cleanup moment and in later session speed.
+    - Honest weakness: the real felt speed change after a clean is often
+    small for casual users, and the people who feel it most are the heaviest
+    users, which is exactly the niche the red team said we were capped at.
+    The 22.1 MB figure is honest but small-sounding to a non-expert who does
+    not know what a good store size is.
+    - Needs hub expertise to demo? No, the product measures it.
+    
+    S3. THE VERDICT
+    
+    Primary: C2 THE RECEIPT. Secondary: C4 THE TRUST ANCHOR.
+    
+    Why the receipt wins the selection-bias argument: it does not tell the
+    user "you are a mess." It tells the user "a system you pay for is wasting
+    your money and I can prove why." That framing applies to every paid AI
+    user regardless of how healthy their workflow is, so it does not
+    self-select the sick, and it is flattering to catch rather than
+    confessional to admit. It is also the only one of the five built on our
+    unique, defensible asset that no competitor can claim: the net effect
+    with attributed causes (one break was a context compaction 95 seconds
+    earlier, two were idle [ANCHOR]). Caveman and jev, per the founder's
+    frame, deal in gross felt benefits; sweap is the only one of the three
+    that can state a net effect instead of a gross claim [ANCHOR]. That is
+    the differentiation, and the receipt is its natural voice.
+    
+    Why the trust anchor is the right secondary: it is the widest funnel
+    because privacy and local-only are bought by the healthy and the
+    cautious, the exact people the attack says we cannot reach. As the
+    identity layer it lets the user self-select as "someone careful with
+    their data" [ANCHOR: local-only by construction, zero network calls]
+    rather than "someone drowning in context." It also reinforces the
+    receipt's credibility: "we tell you this happened, and none of it left
+    your machine" is a coherent pair.
+    
+    The combination reads: "Your AI wastes your money, we prove how, and it
+    never leaves your machine." That is a felt benefit (money) plus an
+    identity (privacy), and neither one requires the user to admit sickness.
+    
+    What it costs us, honestly:
+    - Choosing receipt over scan gives up the widest, lowest-friction
+    curiosity funnel and hands the free-census hook to a potential imitator.
+    The scan reach is broad; the receipt reach is only paid users.
+    - Choosing receipt over referee weakens the "complementary to caveman,
+    never a competitor" framing [prior ruling]. We become the money-truth
+    tool alongside them rather than riding their adoption as a neutral
+    verifier.
+    - Choosing trust as secondary rather than primary gives up selling pure
+    privacy to the broadest healthy audience; privacy becomes our shield and
+    moat rather than our headline, so the people who come only for privacy
+    may not hear us.
+    - The hardest cost is the honesty constraint itself: the receipt's drama
+    depends on converting our modest measured waste (2.02% of paid-lane input
+    [ANCHOR]) into a dollar figure that feels real, without inflating it. If
+    the number is small in a given customer's terms, the receipt is quiet,
+    and we must let it be quiet rather than pump it. We are betting that
+    converting tokens to money plus a privacy identity carries a wider
+    audience than the honest smallness of any single event might suggest.
+    That is a real bet and we should say so.
+    
+    S4. THE ONE-SENTENCE CONTRAST
+    
+    "Caveman makes the request smaller. Jev makes the context faster. Sweap
+    ___."
+    
+    Three options (a benefit a non-expert feels, not a mechanism):
+    1. Sweap stops the waste before it is billed. (felt: money, honest
+    because it is prevention, measured per event)
+    2. Sweap proves where every token went. (felt: certainty/truth, but
+    "token" is mechanism-adjacent for a non-expert)
+    3. Sweap never sends your data anywhere. (felt: peace of mind, but it is
+    the secondary not the primary)
+    
+    Pick option 1. "Stops the waste before it is billed" is the receipt in
+    one line: a non-expert feels money and prevention, it is parallel in
+    cadence to the other two, and it does not claim a cure for sickness.
+    Option 2 leaks mechanism (tokens) and option 3 is our secondary. If
+    option 1 must avoid the implied overclaim of "stops" (we stop the waste
+    we find, we cannot stop what we have not run against), the honest
+    fallback is "Sweap stops paying for AI work you never asked for," which
+    keeps the money benefit and the prevention framing while being strictly
+    true to the net-effect doctrine.
+    
+    S5. THE SHAREABLE MECHANIC + DISTRIBUTION
+    
+    The mechanic: the break receipt card, in effect the "AUDIT VERDICT." A
+    single one-glance card that reads, in plain language: "Yesterday your AI
+    billed you for work you never asked for. Cause: your lane sat idle, then
+    compacted. Sweap caught it, locally, and none of it left your machine."
+    It shows one measured number from the user's own machine [ANCHOR-derived:
+    break attribution and token waste with causes], which is the thing that
+    makes it shareable: it is real, it is the user's own data, and it is a
+    small WIN ("I caught the machine"), not a confession ("I was a mess").
+    That flips the red-team attack into a status object, the
+    Dolingo-streak/identity model from S1 rather than the sick-patient model.
+    
+    What the card must NOT do, to stay inside the laws: it must not leak
+    private transcript content, since local-only is our data point and our
+    identity. Sharing must be a deliberate user action, redacted and
+    aggregated by default, so that the act of sharing reinforces rather than
+    contradicts the privacy position. The number shown shares only the
+    verdict, never the bytes.
+    
+    Where it lives, product-led, no ads, no outreach:
+    - CLI completion output prints the one-line verdict and offers to export
+    a card, so the artifact is born inside the product the user already runs.
+    - The free scan-only, no-signup census generates a shareable verdict
+    card, which is the front door for the curious (the S1 free-scan mechanic)
+    without requiring installation trust upfront.
+    - Plugin directories and marketplaces (caveman and jev directories, per
+    the complementary ruling) surface the verdict card as the README hero
+    image, so the shareable artifact is also the listing that gets seen.
+    - Word of mouth: people post "here is what my AI wasted today" the way
+    they post streaks and screenshots, because it is flattering, one-glance,
+    and carries a mildly provocative truth ("your AI overcharged you") rather
+    than a self-diagnosis.
+    
+    Consistent with the laws: every number on the card is measured from the
+    user's own machine and stamped as such, no fabricated stats, no fake
+    urgency, no paid placement, no cold outreach. The weakness to name: a
+    card that looks like an ad does not get shared, and a user whose measured
+    waste is small gets a quiet card, and we must not gamify or inflate to
+    make the quiet ones louder, because that would destroy the honesty that
+    is our only moat.
+    
+    ═══════════════════════════════════════════
+    Bottom line for the founder, plain words: the red team is right that
+    selling a cleaner as a cleaner caps you at the sickest niche. The escape
+    is to sell a benefit the healthy already pay for. Your unique asset is
+    not the cleaning, it is the proof: you are the only tool that can state a
+    net effect with named causes [ANCHOR]. Put that proof in the format of a
+    money receipt (primary) made credible by a local-only privacy identity
+    (secondary), and make the receipt itself the thing people share. Give up
+    the widest curiosity funnel and the ecosystem-referee role to get there.
+    That is the honest trade.
+    R19-POSITIONING-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261016_174922_c14d60
+
+Session:        20261016_174922_c14d60
+Duration:       2m 24s
+Messages:       2 (1 user, 0 tool calls)

@@ -1,0 +1,113 @@
+# R19 BRIEF: POSITIONING RESEARCH - WHO INSTALLS A CLEANING TOOL?
+
+ROLE: You are a GTM strategist and category analyst. The founder needs a
+positioning answer to one attack. This is research, not ad copy: honest
+weaknesses per option, confidence tags on every outside claim, no invented
+statistics. READ-ONLY, text only.
+
+BLIND PROTOCOL: [ANCHOR] = measured on our reference host, given.
+[THEORY] = vendor/public claim. [ASSUMPTION] = chosen. Outside knowledge
+(historical products, precedents) needs [HIGH]/[MED]/[LOW] + source type;
+write UNKNOWN rather than invent numbers.
+
+## THE ATTACK WE ARE ANSWERING (from a red-team round, severity HIGH)
+
+People who install a context-cleaning tool are self-selected: the heaviest,
+most pain-drenched users. So the product's own headline numbers describe a
+niche, and worse: nobody who is NOT already drowning wakes up searching for
+a "cleaning tool." Hygiene is bought by the already-sick. Marketing a
+cleaner as a cleaner may cap the product at the niche that already knows
+it has the problem.
+
+## THE COMPETITIVE FRAME (founder's own words)
+
+- CAVEMAN sells a felt benefit: it SIMPLIFIES the output (speak less,
+  compress request bytes in flight, ~111.9k stars [THEORY]). You see the
+  difference immediately.
+- JEV sells a felt benefit: it works FASTER and SKIPS the nonsense (typed
+  decision model that filters what enters context [THEORY]). Speed is felt.
+- SWEAP currently sells... hygiene. Store census, provably-dead sweep,
+  wire ledger. Correct, measured, and nobody feels a database at rest.
+
+## WHAT WE ACTUALLY HAVE (all [ANCHOR], use freely)
+
+- 90.69% of stored transcript tokens are tool exhaust (exact census).
+- One sweep: 14,955 dead rows, 19.56 MB, 48% of the store file, provably
+  dead only, quarantine + SHA-256 + byte-identical restore.
+- Wire ledger (no proxy): per-lane cache truth. Paid lane 96.3% hit; one
+  token mutation drops a warm lane to 0%; 3 real breaks in one day =
+  207,566 tokens billed at full price (2.02% of paid-lane input, ceiling
+  333,120, net ~202,003). Each break attributed to a CAUSE from store
+  records: one was a context compaction 95 seconds earlier, two were idle.
+- Local-only by construction: product code contains zero network calls;
+  every byte stays on the customer's machine.
+- Works on day one with no integration: first run backfills the customer's
+  entire break history automatically.
+- The only one of the three tools that can state a NET effect (savings
+  minus cache-break costs) instead of gross claims.
+
+## MARKETING LAWS (fixed constraints, do not violate)
+
+- No paid promotion, no cold outreach. Product-led distribution only:
+  the product itself, its output, plugin directories, marketplaces,
+  word of mouth.
+- Every number public must be measured or clearly stamped [HYPOTHETICAL].
+  No invented stats, no fake urgency.
+- Prior positioning ruling: sweap is COMPLEMENTARY to caveman, never a
+  competitor (fights on different planes).
+- Prior lesson from caveman's rise [THEORY]: name = thesis, community
+  becomes the marketing, there was a shareable mechanic (people replied
+  in caveman-speak). Sweap needs its own shareable mechanic.
+
+## YOUR TASK (five sections)
+
+S1. WHY CLEANING TOOLS NORMALLY FAIL, AND THE ONES THAT DIDN'T.
+    Analyze the precedent class: CCleaner, CleanMyMac, disk cleaners,
+    antivirus scans, Duolingo-style streaks, Datadog-style observability,
+    1Password-style trust tools. Which of these escaped the
+    "only the sick install it" trap and by what mechanic? Candidates to
+    examine: the free scan that reveals a shocking number, visible dirt
+    (full disk bar), safe undo, streak/identity mechanics, dashboard
+    vanity, fear. Confidence tags on every factual claim about those
+    products. [MED]/[LOW] is fine, say so.
+
+S2. POSITIONING CANDIDATES FOR SWEAP. Give 4-6 distinct candidates. At
+    minimum evaluate these five, add your own if stronger:
+    C1 THE SCAN: free census as the hook; "57% of your AI workspace is
+       dead weight" as the reveal; clean as one action with undo.
+    C2 THE RECEIPT: waste detective; "your AI billed you 207,566 tokens
+       for nothing yesterday, and here is why" ; break attribution as
+       the unique asset nobody else has.
+    C3 THE REFEREE: attach to caveman/jev adoption; "run them for
+       savings, run sweap for the truth"; verification layer for the
+       whole category.
+    C4 THE TRUST ANCHOR: the only context tool that is local-only by
+       construction and physically cannot phone home; privacy for the
+       AI era.
+    C5 THE LIGHT MACHINE: dead weight = slow, expensive sessions; sweep
+       = the machine gets lighter and cheaper (measured 22.1 MB).
+    For each: one-sentence pitch (plain language), WHO installs (does it
+    escape the niche?), the felt benefit (when do you feel it?), honest
+    weakness, and whether it can be demonstrated WITHOUT the hub's
+    expertise.
+
+S3. THE VERDICT: which single candidate (or combination, primary +
+    secondary) best answers the selection-bias attack AND fits the
+    marketing laws? Argue it, then name what it costs us (every position
+    gives something up).
+
+S4. THE ONE-SENTENCE CONTRAST. Fill this shape: "Caveman makes the
+    request smaller. Jev makes the context faster. Sweap ___." The blank
+    must be a benefit a non-expert feels, not a mechanism. Give 3 options
+    and pick one.
+
+S5. THE SHAREABLE MECHANIC + DISTRIBUTION. Caveman had caveman-speak.
+    What is sweap's equivalent artifact people would post without being
+    asked? (The scan card? The break receipt? A one-line verdict?)
+    Where does it live so distribution is product-led (plugin dirs,
+    marketplaces, README, CLI output)? No ads, no outreach, consistent
+    with the laws above.
+
+FORMAT: sections S1-S5, tags everywhere, honest weakness per candidate,
+no hype words (game-changing, revolutionary, seamless are banned).
+End with exactly this line: R19-POSITIONING-OK
