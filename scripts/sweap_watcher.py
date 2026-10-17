@@ -32,7 +32,11 @@ def load_rows():
         for line in f:
             line = line.strip()
             if line:
-                rows.append(json.loads(line))
+                r = json.loads(line)
+                # trust boundary: ledger lines must be well-formed dates + numbers
+                if not isinstance(r.get("date"), str) or len(r["date"]) != 10:
+                    continue
+                rows.append(r)
     return rows
 
 
