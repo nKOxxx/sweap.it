@@ -73,7 +73,7 @@
   .btn-chalk:hover { border-color: rgba(243,239,228,.4); }
 
   /* ---- hero: the gym ---- */
-  .hero { padding: 88px 0 72px; position: relative; overflow: hidden; }
+  .hero { padding: 72px 0 72px; position: relative; overflow: hidden; }
   .hero::before {
     content: ""; position: absolute; inset: 0;
     background:
@@ -81,7 +81,7 @@
       repeating-linear-gradient(-45deg, rgba(243,239,228,0.016) 0 2px, transparent 2px 9px);
     pointer-events: none;
   }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: start; position: relative; }
   .hero-brand { margin-top: 30px; }
   .brand-dom {
     font-family: var(--display);
@@ -162,7 +162,7 @@
     border: 1px solid var(--chalk-line);
     border-radius: 18px;
     box-shadow: var(--shadow-iron);
-    padding: 18px 18px 12px;
+    padding: 14px 14px 8px;
     position: relative;
     overflow: hidden;
   }
@@ -174,7 +174,7 @@
   #lifter-canvas { display: block; width: 100%; height: auto; }
   .const-caption {
     display: flex; justify-content: center; gap: 12px; align-items: center;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
     color: var(--chalk-dimmer); text-transform: uppercase; padding: 10px 0 4px;
   }
   .const-dots { color: var(--orange); }
@@ -365,13 +365,9 @@
         <code>gstack</code> makes your AI a team. <code>sweap.it</code> makes your AI weigh less.</p>
     </div>
 
-    <div class="constellation" aria-label="animated constellation of a weightlifter doing the overhead press">
-      <canvas id="lifter-canvas"></canvas>
-      <div class="const-caption"><span>THE OVERHEAD PRESS</span><span class="const-dots">&middot;</span><span>every rep verified</span></div>
-    </div>
-    <div class="board" aria-label="before and after transformation board" style="display:none">
+    <div class="board" aria-label="before and after transformation board">
       <div class="board-head">
-        <span class="board-title">Transformation</span>
+        <span class="board-title">Last weigh-in</span>
         <span class="board-date num">2026-10-17</span>
       </div>
       <div class="board-body">
@@ -406,12 +402,16 @@
         <span class="pr">NEW PR</span>
       </div>
     </div>
+    <div class="constellation" aria-label="animated constellation of a weightlifter doing the overhead press">
+      <canvas id="lifter-canvas"></canvas>
+      <div class="const-caption"><span>THE OVERHEAD PRESS</span><span class="const-dots">&middot;</span><span>every rep verified</span></div>
+    </div>
   </div>
 </header>
 
 <div class="weighbar">
   <div class="wrap weighbar-inner">
-    <span class="wb-label">Last weigh-in</span>
+    <span class="wb-label">Scale today</span>
     <span class="wb-mid">
       <span class="wb-val wb-before">244.1<span class="u"> MB</span></span>
       <span class="wb-arrow">&rarr;</span>
@@ -635,7 +635,7 @@
     function resize() {
       var dpr = window.devicePixelRatio || 1;
       var w = cv.clientWidth || 460;
-      var h = Math.round(w * 0.82);
+      var h = Math.round(w * 0.72);
       cv.width = w * dpr; cv.height = h * dpr;
       cv.style.height = h + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
