@@ -718,3 +718,63 @@ instrument-frozen law applies to surgery, not just measurement.
   month 6 (joke is the funnel, infrastructure is the business); 6 flywheels; 7 ranked
   transferable moves. Sweap relevance: receipt-as-demo mirrors phase 0-1 mechanics;
   our falsifiable number = 90.69% exhaust; monetize only after measured proof.
+
+## Repo presentation pass (2026-10-17): the corpus gets a front door
+
+Question: does the repo read as a body of work or a lab drawer? Bar: the
+craft level of the best research repos in our radar lane.
+
+Round 1 (DeepSeek, proc_869783855a40, 1m38s, needle REPO-PRESENTATION-AUDIT-OK):
+- Scores 8-9 across 7 dimensions; traits T1-T10 mostly PRESENT.
+- One worker error caught on recount: called the index table "16 numbered
+  rows"; it has 25 (its own prose said "25-study corpus" twice).
+- Weakest-element call verified real: every headline number is one machine,
+  recounted by the same hub that measured it ("a self-handshake").
+- Top-5 must-fixes all applied: (1) scripts/repro_receipt.py - synthetic
+  deterministic store, real cli/diet.py classifier, 9/9 checks green twice,
+  RECEIPT-REPRO-OK; planted divergent pairs prove the overreach tripwire
+  fires. (2) Requirements + backup warning in README. (3) Proof-table cells
+  now anchor to their own receipts (90.69% -> R7, $0.49 -> R28, 37.57 MB ->
+  R26). (4) docs/CHANGELOG.md + "figures current as of" stamp. (5) Status
+  rewritten: names the one missing proof layer (independent reproduction on
+  a store we do not own) and what flips the repo public.
+- Bonus surfaces: SECURITY.md, CONTRIBUTING.md, AGENTS.md,
+  receipt_discrepancy issue template, CI workflow receipt_repro.yml.
+- Hub-side own-goal caught pre-audit: CONTRIBUTING briefly said AGPL-3.0;
+  LICENSE on disk says Apache-2.0. Fixed before the round-2 dispatch.
+
+Round 2 dispatched blind (new needle REPO-PRESENTATION-AUDIT-R2-OK) on the
+fixed files; recount owed on return.
+
+### Repo presentation pass, round 2 (2026-10-17): the auditor bites back
+
+Round 2 (DeepSeek, proc_979a6dd85753, 1m46s, needle REPO-PRESENTATION-AUDIT-R2-OK,
+fresh blind brief on the FIXED files incl. repro script + changelog):
+- Scores dipped where they should (evidence 7, navigation 7): the loop works.
+- Worker catch verified real and it was a HUB slip: changelog 0.2.0 said
+  "90.69% now cites R25a" while the README linked R7; both wrong per our own
+  verification. Fixed: the cell now points at the exact census artifact
+  (research/artifacts/tokenizer_exact_out.txt, holds both 90.69 and 37,813),
+  changelog reconciled.
+- $0.49 labeled "suggestive model" in the proof table (R28's own word;
+  measured/hypothetical no longer share a slot unlabeled).
+- R10/R11 numbering gap explained in INDEX (shipped as code, retired numbers).
+- research/artifacts/README.md added: full JSON schemas + provenance note;
+  hub own-goal caught in review (claimed a production date the artifact does
+  not carry; corrected to the log reference).
+- DECISIONS.md + STORY.md now linked from README "For the thorough".
+- Verification floor upgraded: repro_receipt.py is the test (CI-enforced),
+  stated in CONTRIBUTING + AGENTS.
+- Plain "what it does" line added under the README tagline.
+- Hygiene pre-commit catch: 2 tracked .pyc files + no .gitignore; fixed.
+- Left as filed: 5 em-dashes inside R31's verbatim worker transcript
+  (verbatim law; hub-authored files all clean).
+- Worker gap NOT acted on: "resolve the private-status blocker" - going
+  public is the founder's call, gated on the external reproduction; Status
+  already says exactly that honestly.
+
+Loop verdict: round 2's remaining must-fix list is empty of presentation
+items; the one substantive demand (independent reproduction on a store we
+do not own) is the same external proof layer already named in Status.
+Presentation bar reached by the audit's own rubric; the gate that remains
+is evidence, not craft.

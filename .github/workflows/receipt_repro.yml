@@ -1,0 +1,21 @@
+name: receipt-repro
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  repro:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild the synthetic store and re-derive the receipt with the real classifier
+        run: python3 scripts/repro_receipt.py
