@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>sweap: your AI's personal trainer</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="description" content="Your AI carries dead weight and re-reads it at full price after every memory lapse. sweap is the personal trainer: weigh it, diet it, keep it off.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,8 +152,10 @@
   .pr { color: var(--orange); font-weight: 700; }
 
   /* ---- pixel dumbbell divider ---- */
-  .pixel-divider { padding: 8px 0; text-align: center; user-select: none; }
-  .pixel-divider canvas { image-rendering: pixelated; }
+  .pixel-divider { padding: 30px 0 6px; display: flex; justify-content: center; user-select: none; }
+  .bun { display: flex; gap: 38px; align-items: center; opacity: 0.95; }
+  .bun img, .drill-ico, .sec-label img, .wordmark img { image-rendering: pixelated; }
+  .bun img { height: 26px; width: auto; }
 
   /* ---- program: the training plan ---- */
   section { padding: 88px 0; }
@@ -170,6 +173,7 @@
     position: relative;
   }
   .drill:hover { transform: translateY(-3px); border-color: rgba(255,92,31,.4); }
+  .drill-ico { image-rendering: pixelated; height: 32px; width: auto; margin-bottom: 16px; display: block; }
   .drill-tag { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--chalk-dimmer); text-transform: uppercase; }
   .drill h3 { font-family: var(--display); font-size: 24px; text-transform: uppercase; letter-spacing: 0.01em; margin: 12px 0 10px; }
   .drill p { color: var(--chalk-dim); font-size: 14.5px; line-height: 1.65; }
@@ -280,7 +284,7 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a class="wordmark" href="#">sweap<span class="db">&nbsp;</span>it</a>
+    <a class="wordmark" href="#"><img src="assets/favicon.png" alt="" style="width:22px;height:22px;border-radius:6px;">sweap&nbsp;it</a>
     <div class="nav-links">
       <a href="#program">The program</a>
       <a href="#price">Price board</a>
@@ -350,7 +354,13 @@
 </header>
 
 <div class="pixel-divider" aria-hidden="true">
-  <canvas id="dbcanvas" width="330" height="16"></canvas>
+  <div class="bun">
+    <img src="assets/icon-dumbbell.png" alt="">
+    <img src="assets/icon-scale.png" alt="">
+    <img src="assets/icon-kettlebell.png" alt="">
+    <img src="assets/icon-trophy.png" alt="">
+    <img src="assets/icon-dumbbell.png" alt="">
+  </div>
 </div>
 
 <section id="program">
@@ -363,6 +373,7 @@
     </div>
     <div class="plan">
       <div class="drill">
+        <img class="drill-ico" src="assets/icon-scale.png" alt="">
         <div class="drill-tag">Drill 01</div>
         <h3>The weigh-in</h3>
         <p>One command reads your AI's memory and prints the slip: dead weight, duplicate
@@ -371,6 +382,7 @@
         <div class="drill-rep">3 sets &middot; read-only &middot; daily</div>
       </div>
       <div class="drill">
+        <img class="drill-ico" src="assets/icon-dumbbell.png" alt="">
         <div class="drill-tag">Drill 02</div>
         <h3>The cut</h3>
         <p>sweap finds and cleans the dead weight, reversibly. Every row is backed up and
@@ -379,6 +391,7 @@
         <div class="drill-rep">gated &middot; reversible &middot; monthly</div>
       </div>
       <div class="drill">
+        <img class="drill-ico" src="assets/icon-kettlebell.png" alt="">
         <div class="drill-tag">Drill 03</div>
         <h3>Keep it off</h3>
         <p>The trainer watches the scale daily. Quiet days say nothing. When junk creeps back
@@ -393,7 +406,7 @@
 <section id="price" style="padding-top: 0;">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-label">The price board</div>
+      <div class="sec-label"><img src="assets/icon-scale.png" alt="" style="image-rendering:pixelated; height:15px;">The price board</div>
       <h2>What the extra weight costs</h2>
       <p class="sec-sub">After every memory lapse, your AI re-reads the whole pile. Re-read tokens
         bill at the cache-miss rate instead of the cache-hit rate. That gap is the carrying
@@ -430,7 +443,7 @@
 <section id="prs" style="padding-top: 0;">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-label">PR board</div>
+      <div class="sec-label"><img src="assets/icon-trophy.png" alt="" style="image-rendering:pixelated; height:15px;">PR board</div>
       <h2>Personal records, set on a real machine.</h2>
       <p class="sec-sub">Every figure is measured, dated, and reproducible from the tool.
         Run the weigh-in and set your own.</p>
@@ -475,6 +488,7 @@
 
 <section class="final">
   <div class="wrap">
+    <img src="assets/sweap-lifter.png" alt="sweap: pixel weightlifter doing the overhead press" style="image-rendering: pixelated; height: 116px; margin-bottom: 20px;">
     <h2>Day one starts<br>with a weigh-in.</h2>
     <p>Thirty seconds, read-only, your own data. You cannot break anything
       by looking. That one is on the gym rules board.</p>
@@ -497,36 +511,7 @@
   </div>
 </footer>
 
-<script>
-  // pixel dumbbell divider: hand-placed pixels, 2x, chalk-orange + chalk-dim
-  (function () {
-    var c = document.getElementById('dbcanvas');
-    var ctx = c.getContext('2d');
-    var px = 4; // pixel size
-    // pattern: plate,plate,bar,bar,bar,plate,plate  (8px tall grid)
-    var rows = [
-      "..OOOO......OOOO..",
-      ".OPPPO......OPPPO.",
-      "OPPPPPGGGGGGPPPPPO",
-      "OPPPPPGGGGGGPPPPPO",
-      "OPPPPPGGGGGGPPPPPO",
-      ".OPPPO......OPPPO.",
-      "..OOOO......OOOO..",
-      ".................."
-    ];
-    var colors = { O: '#ff5c1f', P: '#f3efe4', G: '#6d7868' };
-    ctx.clearRect(0, 0, c.width, c.height);
-    for (var y = 0; y < rows.length; y++) {
-      for (var x = 0; x < rows[y].length; x++) {
-        var ch = rows[y][x];
-        if (colors[ch]) {
-          ctx.fillStyle = colors[ch];
-          ctx.fillRect(x * px, y * px, px, px);
-        }
-      }
-    }
-  })();
-</script>
+
 
 </body>
 </html>
