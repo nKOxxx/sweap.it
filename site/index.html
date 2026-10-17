@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>sweap: your AI's personal trainer</title>
+<title>sweap.it: your AI's personal trainer</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<meta name="description" content="Your AI carries dead weight and re-reads it at full price after every memory lapse. sweap is the personal trainer: weigh it, diet it, keep it off.">
+<meta name="description" content="Your AI carries dead weight and re-reads it at full price after every memory lapse. sweap.it is the personal trainer: weigh it, diet it, keep it off.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -50,11 +50,11 @@
 
   /* ---- nav: no bar, just the chalk line (refactoring-ui #3) ---- */
   nav { border-bottom: 1px solid var(--chalk-line); background: var(--chalk); }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .wordmark {
-    font-family: var(--mono); font-weight: 700; font-size: 20px;
+    font-family: var(--mono); font-weight: 700; font-size: 21px;
     color: var(--paper); text-decoration: none; letter-spacing: -0.03em;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 12px;
   }
   .wordmark .db { color: var(--orange); }
   .nav-links { display: flex; align-items: center; gap: 26px; }
@@ -82,13 +82,18 @@
     pointer-events: none;
   }
   .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; position: relative; }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 12.5px; font-weight: 700;
-    letter-spacing: 0.14em; color: var(--orange);
-    text-transform: uppercase; margin-bottom: 22px;
+  .hero-brand { margin-top: 30px; }
+  .brand-dom {
+    font-family: var(--display);
+    font-size: clamp(30px, 3.8vw, 46px);
+    color: var(--orange); letter-spacing: -0.01em; line-height: 1;
   }
-  .kicker::before { content: ""; width: 26px; height: 2px; background: var(--orange); }
+  .brand-tag {
+    margin-top: 12px; display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--chalk-dim);
+  }
+  .brand-tag::before, .brand-tag::after { content: ""; height: 1px; width: 26px; background: var(--chalk-line); }
   h1 {
     font-family: var(--display);
     font-size: clamp(46px, 6.4vw, 82px);
@@ -100,7 +105,7 @@
     color: transparent;
     -webkit-text-stroke: 2px var(--paper);
   }
-  .hero-sub { margin-top: 24px; color: var(--chalk-dim); font-size: 17.5px; line-height: 1.65; max-width: 480px; }
+  .hero-sub { margin-top: 20px; color: var(--chalk-dim); font-size: 17.5px; line-height: 1.65; max-width: 480px; }
   .hero-sub b { color: var(--paper); font-weight: 600; }
   .hero-ctas { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
   .family { margin-top: 26px; color: var(--chalk-dimmer); font-size: 13px; line-height: 1.7; }
@@ -284,7 +289,7 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a class="wordmark" href="#"><img src="assets/favicon.png" alt="" style="width:22px;height:22px;border-radius:6px;">sweap&nbsp;it</a>
+    <a class="wordmark" href="#"><img src="assets/sweap-lifter-tile.png" alt="sweap.it logo" style="width:34px;height:34px;">sweap.it</a>
     <div class="nav-links">
       <a href="#program">The program</a>
       <a href="#price">Price board</a>
@@ -297,12 +302,15 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="kicker">Your AI's personal trainer</div>
       <h1>Your AI is <span class="hot">fat.</span><br>Feeding it is<br><span class="hollow">expensive.</span></h1>
+      <div class="hero-brand">
+        <div class="brand-dom">sweap.it</div>
+        <div class="brand-tag">Your AI's personal trainer</div>
+      </div>
       <p class="hero-sub">
         Every conversation drags months of dead weight along, and when the memory lapses,
         <b>the whole pile gets re-read at full price.</b>
-        sweap weighs your AI's memory, puts it on a diet, and keeps it off.
+        sweap.it weighs your AI's memory, puts it on a diet, and keeps it off.
         Local-only. Reversible. Zero dependencies.
       </p>
       <div class="hero-ctas">
@@ -310,7 +318,7 @@
         <a class="btn btn-chalk" href="#program">See the program</a>
       </div>
       <p class="family"><code>caveman</code> makes your AI talk less. <code>jev</code> makes your AI think faster.
-        <code>gstack</code> makes your AI a team. <code>sweap</code> makes your AI weigh less.</p>
+        <code>gstack</code> makes your AI a team. <code>sweap.it</code> makes your AI weigh less.</p>
     </div>
 
     <div class="board" aria-label="before and after transformation board">
@@ -385,7 +393,7 @@
         <img class="drill-ico" src="assets/icon-dumbbell.png" alt="">
         <div class="drill-tag">Drill 02</div>
         <h3>The cut</h3>
-        <p>sweap finds and cleans the dead weight, reversibly. Every row is backed up and
+        <p>sweap.it finds and cleans the dead weight, reversibly. Every row is backed up and
           hash-verified before anything moves, and one command puts every byte back.
           A rehearsal on a copy runs first. Nothing deletes on faith.</p>
         <div class="drill-rep">gated &middot; reversible &middot; monthly</div>
@@ -475,7 +483,7 @@
       <h3>Gym rules</h3>
       <div class="rules-sub">Posted by the door. They are properties of the code, not promises.</div>
       <div class="rules-grid">
-        <div class="rule"><span class="rule-n">1</span><span><b>No network, provably.</b> Zero imports that can open a socket. Unplug the cable; sweap works identically. Verified under a hard firewall.</span></div>
+        <div class="rule"><span class="rule-n">1</span><span><b>No network, provably.</b> Zero imports that can open a socket. Unplug the cable; sweap.it works identically. Verified under a hard firewall.</span></div>
         <div class="rule"><span class="rule-n">2</span><span><b>No dependencies.</b> Nothing to install, nothing to poison. The whole toolkit is Python's standard library.</span></div>
         <div class="rule"><span class="rule-n">3</span><span><b>Reversible with proof.</b> Every cut is quarantined with full-column hashes first; restore is byte-verified, drilled against schema changes.</span></div>
         <div class="rule"><span class="rule-n">4</span><span><b>Never first-run.</b> Destructive steps need a staged manifest and the same id typed twice. A crash rolls back, loudly.</span></div>
@@ -488,7 +496,7 @@
 
 <section class="final">
   <div class="wrap">
-    <img src="assets/sweap-lifter.png" alt="sweap: pixel weightlifter doing the overhead press" style="image-rendering: pixelated; height: 116px; margin-bottom: 20px;">
+    <img src="assets/sweap-lifter.png" alt="sweap.it: pixel weightlifter doing the overhead press" style="image-rendering: pixelated; height: 116px; margin-bottom: 20px;">
     <h2>Day one starts<br>with a weigh-in.</h2>
     <p>Thirty seconds, read-only, your own data. You cannot break anything
       by looking. That one is on the gym rules board.</p>
