@@ -156,28 +156,6 @@
   }
   .pr { color: var(--orange); font-weight: 700; }
 
-  /* ---- the constellation lifter ---- */
-  .constellation {
-    background: var(--chalk-2);
-    border: 1px solid var(--chalk-line);
-    border-radius: 18px;
-    box-shadow: var(--shadow-iron);
-    padding: 14px 14px 8px;
-    position: relative;
-    overflow: hidden;
-  }
-  .constellation::after {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 55% at 50% 42%, rgba(255,92,31,0.07), transparent 70%);
-    pointer-events: none;
-  }
-  #lifter-canvas { display: block; width: 100%; height: auto; }
-  .const-caption {
-    display: flex; justify-content: center; gap: 12px; align-items: center;
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
-    color: var(--chalk-dimmer); text-transform: uppercase; padding: 10px 0 4px;
-  }
-  .const-dots { color: var(--orange); }
 
   /* ---- last weigh-in bar (full-width strip under hero) ---- */
   .weighbar { border-top: 1px solid var(--chalk-line); border-bottom: 1px solid var(--chalk-line); background: var(--chalk-2); }
@@ -402,10 +380,6 @@
         <span class="pr">NEW PR</span>
       </div>
     </div>
-    <div class="constellation" aria-label="animated constellation of a weightlifter doing the overhead press">
-      <canvas id="lifter-canvas"></canvas>
-      <div class="const-caption"><span>THE OVERHEAD PRESS</span><span class="const-dots">&middot;</span><span>every rep verified</span></div>
-    </div>
   </div>
 </header>
 
@@ -584,143 +558,6 @@
 
 
 
-<script>
-  // ============ THE CONSTELLATION LIFTER ============
-  // caveman.so traces hunters in glowing constellations; sweap.it traces its athlete.
-  // Same 19x18 grid as the logo PNG (single source of truth), joints as stars,
-  // body as chalk lines, one slow heavy press every few seconds. No deps.
-  (function () {
-    var cv = document.getElementById('lifter-canvas');
-    if (!cv) return;
-    var ctx = cv.getContext('2d');
-
-    // joint map on the 19x18 grid (x, y) -- matches the logo sprite pose
-    var GRID = { w: 19, h: 18 };
-    var JOINTS = {
-      plateL1: [1.5, 0.8], plateL2: [1.5, 3.2],      // left plates
-      plateR1: [17.5, 0.8], plateR2: [17.5, 3.2],    // right plates
-      barL: [4.6, 2.0], barR: [14.4, 2.0],           // bar endpoints
-      handL: [5.4, 3.6], handR: [13.6, 3.6],         // locked-out hands
-      elbowL: [5.4, 5.2], elbowR: [13.6, 5.2],
-      headL: [8.3, 4.0], headR: [10.7, 4.0],         // head top corners
-      headB: [9.5, 5.6],                              // chin
-      neck: [9.5, 6.4],
-      hipL: [7.0, 11.0], hipR: [12.0, 11.0],
-      kneeL: [7.0, 13.6], kneeR: [12.0, 13.6],
-      footL: [5.6, 16.2], footR: [13.4, 16.2],
-      toeL: [4.6, 17.0], toeR: [14.4, 17.0]
-    };
-    // chalk stick lines: joint -> joint
-    var BONES = [
-      ['barL', 'barR'], ['barL', 'plateL1'], ['barL', 'plateL2'], ['barR', 'plateR1'], ['barR', 'plateR2'],
-      ['handL', 'elbowL'], ['elbowL', 'headL'], ['handR', 'elbowR'], ['elbowR', 'headR'],
-      ['headL', 'headR'], ['headL', 'headB'], ['headR', 'headB'],
-      ['headB', 'neck'], ['neck', 'hipL'], ['neck', 'hipR'], ['hipL', 'hipR'],
-      ['hipL', 'kneeL'], ['kneeL', 'footL'], ['footL', 'toeL'],
-      ['hipR', 'kneeR'], ['kneeR', 'footR'], ['footR', 'toeR'],
-      ['handL', 'barL'], ['handR', 'barR']
-    ];
-
-    // starfield (fixed, seeded-ish via index math for stable layout)
-    var STARS = [];
-    for (var i = 0; i < 90; i++) {
-      STARS.push({
-        x: (i * 97.13) % 100,
-        y: (i * 61.7 + 13) % 100,
-        r: 0.6 + ((i * 37) % 10) / 9 * 0.9,
-        ph: (i * 53) % 628 / 100
-      });
-    }
-
-    function resize() {
-      var dpr = window.devicePixelRatio || 1;
-      var w = cv.clientWidth || 460;
-      var h = Math.round(w * 0.72);
-      cv.width = w * dpr; cv.height = h * dpr;
-      cv.style.height = h + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cv._w = w; cv._h = h;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // press cycle: bar y offset, eased, one slow rep
-    function barDrop(t) {
-      if (reduce) return 0;
-      var period = 6.0;                    // seconds per rep
-      var ph = (t % period) / period;      // 0..1
-      // up 0..0.45, hold 0.45..0.6, down 0.6..0.9, settle 0.9..1
-      var d;
-      if (ph < 0.45) d = ph / 0.45;
-      else if (ph < 0.6) d = 1;
-      else if (ph < 0.9) d = 1 - (ph - 0.6) / 0.3;
-      else d = 0;
-      var ease = d < 0.5 ? 2 * d * d : 1 - Math.pow(-2 * d + 2, 2) / 2; // easeInOutQuad
-      return ease * 2.6;                   // max drop in grid units
-    }
-
-    function jointPx(name, t) {
-      var j = JOINTS[name];
-      var cw = cv._w / GRID.w, ch = cv._h / GRID.h;
-      var x = j[0] * cw, y = j[1] * ch;
-      // everything below the shoulders stays planted; bar+arms ride the press
-      var arm = ['plateL1','plateL2','plateR1','plateR2','barL','barR','handL','handR','elbowL','elbowR','headL','headR','headB'];
-      if (arm.indexOf(name) >= 0) y += barDrop(t) * ch;
-      return [x, y];
-    }
-
-    function star(x, y, r, a, color) {
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, 6.2832);
-      ctx.fillStyle = color;
-      ctx.globalAlpha = a;
-      ctx.fill();
-      // 4-point glint on the bright joints
-      if (r > 2.2) {
-        ctx.globalAlpha = a * 0.35;
-        ctx.fillRect(x - r * 2.6, y - 0.5, r * 5.2, 1);
-        ctx.fillRect(x - 0.5, y - r * 2.6, 1, r * 5.2);
-      }
-      ctx.globalAlpha = 1;
-    }
-
-    function draw(ms) {
-      var t = ms / 1000;
-      var w = cv._w, h = cv._h;
-      ctx.clearRect(0, 0, w, h);
-
-      // starfield twinkle
-      for (var i = 0; i < STARS.length; i++) {
-        var s = STARS[i];
-        var a = 0.18 + 0.5 * Math.pow(Math.sin(t * 0.9 + s.ph) * 0.5 + 0.5, 2);
-        star(s.x / 100 * w, s.y / 100 * h, s.r, a, '#f3efe4');
-      }
-
-      // bones: chalk lines with soft glow
-      ctx.lineWidth = 1.4;
-      for (var b = 0; b < BONES.length; b++) {
-        var p1 = jointPx(BONES[b][0], t), p2 = jointPx(BONES[b][1], t);
-        ctx.strokeStyle = 'rgba(243,239,228,0.5)';
-        ctx.shadowColor = 'rgba(243,239,228,0.55)';
-        ctx.shadowBlur = 6;
-        ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
-      }
-      ctx.shadowBlur = 0;
-
-      // joint stars: orange, glowing
-      for (var name in JOINTS) {
-        var p = jointPx(name, t);
-        var big = name.indexOf('plate') === 0 || name.indexOf('bar') === 0;
-        star(p[0], p[1], big ? 3.4 : 2.3, big ? 0.95 : 0.8, '#ff5c1f');
-      }
-
-      requestAnimationFrame(draw);
-    }
-    requestAnimationFrame(draw);
-  })();
-</script>
 
 </body>
 </html>
