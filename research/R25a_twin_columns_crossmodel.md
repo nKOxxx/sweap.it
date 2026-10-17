@@ -28,8 +28,14 @@ schema-specific, not universal to AI stores.
 
 ## COPY LAW (binding on all published claims)
 
-- TRUE and publishable: "on the Hermes store, every thinking blob is
-  stored twice, across all models tested (9,456 rows, 26.04 MB)."
+- CANONICAL CLAIM (founder wording, 2026-10-17): "On the tested store
+  schema, every thinking blob was stored twice, across all models
+  tested: 9,456 rows, 26 MB."
+  Law: "tested" stays in the sentence; "schema" stays SINGULAR (two
+  schemas were examined and only one duplicates; plural would overclaim).
+- TRUE and publishable: "on the tested store schema (Hermes), every
+  thinking blob is stored twice, across all models tested (9,456 rows,
+  26.04 MB)."
 - NOT publishable: "AI stores carry everything twice." Claude Code does
   not. The accurate frame: SOME store schemas duplicate spent thinking;
   sweap's weigh-in detects which pattern YOUR store has.
