@@ -36,3 +36,14 @@ schema-specific, not universal to AI stores.
 - Second-host check (different machine, same Hermes schema) still owed
   before any universal Hermes-claim; this round only proves cross-MODEL
   on one host.
+
+## SECOND-HOST PATH: DECIDED 2026-10-17 (founder)
+
+No second host is available from the founder's side (single-machine
+setup; not delegating to third parties). Decision: DEFER to natural
+adoption. The v3.1 backfill-on-install design already makes every future
+install widen the evidence automatically; the snapshot script is
+read-only and joins the diet-frame demo. Until then, the twin-column
+claim stays scoped exactly as measured: cross-model, one host, 9,456
+rows, 26.04 MB. Nothing is blocked: the cleanup is safe on this host
+regardless, and the Oct-29 experiment was always a this-host run.
