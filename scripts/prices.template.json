@@ -1,13 +1,14 @@
 {
-  "_comment": "sweap prices template - copy to ~/.sweap/prices.json and fill from your provider console. null prices = ILLUSTRATIVE mode (stamped, exit 1, never publishable). sweap never estimates prices: they are founder-supplied facts.",
+  "_comment": "sweap prices template - copy to ~/.sweap/prices.json. Values below are the REAL z.ai list prices for glm-4.6 (docs.z.ai/guides/overview/pricing, retrieved 2026-10-17): input $0.6/M, cached input $0.11/M, output $2.2/M. Keep source+updated stamped when you re-check.",
   "currency": "USD",
-  "updated": null,
-  "source": "your provider console (paste URL + date when filled)",
+  "updated": "2026-10-17",
+  "source": "https://docs.z.ai/guides/overview/pricing",
   "models": {
     "glm-4.6": {
-      "input_per_1m_usd": null,
-      "cache_read_per_1m_usd": null,
-      "output_per_1m_usd": null
+      "input_per_1m_usd": 0.6,
+      "cache_read_per_1m_usd": 0.11,
+      "output_per_1m_usd": 2.2,
+      "notes": "z.ai list price 2026-10-17; re-stamp updated when you re-check"
     },
     "deepseek-ai/DeepSeek-V4-Flash-0731": {
       "input_per_1m_usd": 0.0,
