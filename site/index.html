@@ -3,183 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>sweap: weigh it, diet it, keep it off</title>
-<meta name="description" content="Your AI carries dead weight and re-reads it at full price after every memory lapse. sweap weighs your AI's memory, diets it reversibly, and keeps it off.">
+<title>sweap: your AI's personal trainer</title>
+<meta name="description" content="Your AI carries dead weight and re-reads it at full price after every memory lapse. sweap is the personal trainer: weigh it, diet it, keep it off.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+  /* ============ sweap GYM IDENTITY v2 ============
+     canvas: chalkboard green-black (the gym wall)
+     paper:  receipt cream (weigh-in slips)
+     ink:    carbon black (the iron)
+     accent: coach orange (the chalk-line / PR plate)
+     temperature: WARM grays (sweat, iron, effort) per Refactoring-UI rule 13 */
   :root {
-    --bg: #050607;
-    --panel: #0b0d0c;
-    --text: #f0f2f1;
-    --silver: #9aa3a0;
-    --dim: #7b8681;
-    --mint: #34d399;
-    --mint-dim: rgba(52, 211, 153, 0.13);
-    --frost: rgba(199, 255, 231, 0.14);
-    --frost-soft: rgba(199, 255, 231, 0.08);
-    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --chalk: #101511;         /* chalkboard green-black */
+    --chalk-2: #161c17;       /* raised wall panel */
+    --chalk-3: #1d2420;       /* deeper panel */
+    --paper: #f3efe4;         /* receipt cream */
+    --paper-2: #eae5d6;
+    --ink: #191c17;           /* carbon black ink */
+    --ink-soft: #33382f;
+    --orange: #ff5c1f;        /* coach orange */
+    --orange-deep: #d94409;
+    --chalk-line: rgba(243, 239, 228, 0.14);
+    --chalk-dim: #9aa694;
+    --chalk-dimmer: #7e8a79;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    --display: 'Archivo Black', 'Inter', sans-serif;
+    --shadow-iron: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.45);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--text);
+    background: var(--chalk);
+    color: var(--paper);
     font-family: var(--sans);
     font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: var(--mint-dim); color: var(--text); }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  ::selection { background: var(--orange); color: var(--ink); }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
   .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 
-  /* nav */
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(5, 6, 7, 0.82);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--frost-soft);
+  /* ---- nav: no bar, just the chalk line (refactoring-ui #3) ---- */
+  nav { border-bottom: 1px solid var(--chalk-line); background: var(--chalk); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .wordmark {
+    font-family: var(--mono); font-weight: 700; font-size: 20px;
+    color: var(--paper); text-decoration: none; letter-spacing: -0.03em;
+    display: flex; align-items: center; gap: 10px;
   }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-  .wordmark { font-family: var(--mono); font-weight: 500; font-size: 18px; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-  .wordmark span { color: var(--mint); }
-  .nav-links { display: flex; align-items: center; gap: 28px; }
-  .nav-links a { color: var(--silver); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.02em; transition: color 180ms ease-out; }
-  .nav-links a:hover { color: var(--text); }
+  .wordmark .db { color: var(--orange); }
+  .nav-links { display: flex; align-items: center; gap: 26px; }
+  .nav-links a:not(.btn) { color: var(--chalk-dim); text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; transition: color 160ms ease-out; }
+  .nav-links a:hover { color: var(--paper); }
 
-  /* buttons: pill, frost */
   .btn {
     display: inline-block; text-decoration: none; cursor: pointer;
-    border-radius: 9999px; font-size: 14px; font-weight: 500;
-    padding: 10px 22px; transition: all 180ms ease-out;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.01em;
+    padding: 13px 26px; border-radius: 10px;
+    transition: transform 160ms ease-out, background 160ms ease-out;
   }
-  .btn-solid { background: var(--mint); color: #04120c; }
-  .btn-solid:hover { background: #4ce0ab; transform: translateY(-1px); }
-  .btn-ghost { color: var(--text); border: 1px solid var(--frost); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(199,255,231,0.3); }
+  .btn-orange { background: var(--orange); color: #1a0d05; box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 26px rgba(255,92,31,.28); }
+  .btn-orange:hover { background: var(--orange-deep); transform: translateY(-1px); }
+  .btn-chalk { color: var(--paper); border: 1.5px solid var(--chalk-line); }
+  .btn-chalk:hover { border-color: rgba(243,239,228,.4); }
 
-  /* hero */
-  .hero { padding: 110px 0 80px; text-align: center; position: relative; overflow: hidden; }
+  /* ---- hero: the gym ---- */
+  .hero { padding: 88px 0 72px; position: relative; overflow: hidden; }
   .hero::before {
-    content: ""; position: absolute; inset: -40% -20% auto; height: 70%;
-    background: radial-gradient(ellipse at 50% 0%, rgba(52, 211, 153, 0.07), transparent 60%);
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 78% -10%, rgba(255,92,31,0.10), transparent 65%),
+      repeating-linear-gradient(-45deg, rgba(243,239,228,0.016) 0 2px, transparent 2px 9px);
     pointer-events: none;
   }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; position: relative; }
   .kicker {
-    display: inline-block; font-family: var(--mono); font-size: 12.5px;
-    color: var(--mint); background: var(--mint-dim);
-    border: 1px solid rgba(52, 211, 153, 0.25);
-    border-radius: 9999px; padding: 5px 14px; margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12.5px; font-weight: 700;
+    letter-spacing: 0.14em; color: var(--orange);
+    text-transform: uppercase; margin-bottom: 22px;
   }
+  .kicker::before { content: ""; width: 26px; height: 2px; background: var(--orange); }
   h1 {
-    font-size: clamp(44px, 7.2vw, 84px); font-weight: 600;
-    letter-spacing: -0.035em; line-height: 1.02;
+    font-family: var(--display);
+    font-size: clamp(46px, 6.4vw, 82px);
+    line-height: 0.98; letter-spacing: -0.015em;
+    text-transform: uppercase;
   }
-  h1 .off { color: var(--mint); }
-  .hero-sub {
-    max-width: 620px; margin: 26px auto 0;
-    color: var(--silver); font-size: 18px; line-height: 1.6;
+  h1 .hot { color: var(--orange); }
+  h1 .hollow {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--paper);
   }
-  .hero-ctas { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-  .family { margin-top: 34px; color: var(--dim); font-size: 13.5px; }
-  .family code { font-family: var(--mono); color: var(--silver); font-size: 12.5px; }
+  .hero-sub { margin-top: 24px; color: var(--chalk-dim); font-size: 17.5px; line-height: 1.65; max-width: 480px; }
+  .hero-sub b { color: var(--paper); font-weight: 600; }
+  .hero-ctas { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .family { margin-top: 26px; color: var(--chalk-dimmer); font-size: 13px; line-height: 1.7; }
+  .family code { font-family: var(--mono); color: var(--chalk-dim); font-size: 12px; }
 
-  /* receipt (hero visual) */
-  .receipt-shell { margin: 64px auto 0; max-width: 720px; text-align: left; }
-  .receipt {
-    background: var(--panel);
-    border: 1px solid var(--frost);
-    border-radius: 16px;
+  /* ---- the transformation board (before/after) ---- */
+  .board {
+    background: var(--chalk-2);
+    border: 1px solid var(--chalk-line);
+    border-radius: 18px;
+    box-shadow: var(--shadow-iron);
     overflow: hidden;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+    position: relative;
   }
-  .receipt-bar {
-    display: flex; align-items: center; gap: 8px;
-    padding: 12px 18px; border-bottom: 1px solid var(--frost-soft);
+  .board::after {  /* punched-plate holes */
+    content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    width: 44px; height: 5px; border-radius: 3px; background: rgba(0,0,0,.5);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.8);
   }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: #1d2320; border: 1px solid var(--frost-soft); }
-  .receipt-title { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--dim); }
-  .receipt-body { padding: 26px 28px 30px; font-family: var(--mono); font-size: 13.5px; line-height: 2.0; }
-  .r-dim { color: var(--dim); }
-  .r-mut { color: var(--silver); }
-  .r-hot { color: var(--mint); }
-  .r-big { font-size: 26px; font-weight: 500; letter-spacing: -0.01em; }
-  .r-row { display: flex; justify-content: space-between; }
-  .r-rule { border: 0; border-top: 1px dashed var(--frost-soft); margin: 14px 0; }
-  .stamp {
-    display: inline-block; margin-top: 16px; font-size: 11px; color: var(--dim);
-    border: 1px solid var(--frost-soft); border-radius: 6px; padding: 3px 10px;
+  .board-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 26px 26px 0;
   }
+  .board-title { font-family: var(--display); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--chalk-dim); }
+  .board-date { font-family: var(--mono); font-size: 11.5px; color: var(--chalk-dimmer); }
+  .board-body { padding: 18px 26px 26px; }
+  .ba-row {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 14px 0; border-bottom: 1px dashed var(--chalk-line);
+  }
+  .ba-row:last-child { border-bottom: 0; }
+  .ba-side { text-align: center; }
+  .ba-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--chalk-dimmer); margin-bottom: 6px; }
+  .ba-val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 700; font-size: 34px; letter-spacing: -0.02em; }
+  .ba-before .ba-val { color: var(--chalk-dim); }
+  .ba-after .ba-val { color: var(--orange); }
+  .ba-mid { font-family: var(--display); font-size: 20px; color: var(--chalk-dimmer); padding: 0 18px; }
+  .ba-delta {
+    margin: 10px auto 0; display: inline-block;
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    background: rgba(255,92,31,0.14); color: var(--orange);
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .board-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 26px; background: var(--chalk-3);
+    font-family: var(--mono); font-size: 11.5px; color: var(--chalk-dim);
+  }
+  .pr { color: var(--orange); font-weight: 700; }
 
-  /* sections */
-  section { padding: 96px 0; }
-  .sec-label { font-family: var(--mono); font-size: 12.5px; color: var(--mint); letter-spacing: 0.08em; margin-bottom: 14px; }
-  h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-  .sec-sub { color: var(--silver); max-width: 640px; margin-top: 16px; font-size: 16.5px; }
+  /* ---- pixel dumbbell divider ---- */
+  .pixel-divider { padding: 8px 0; text-align: center; user-select: none; }
+  .pixel-divider canvas { image-rendering: pixelated; }
 
-  /* steps */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-  .step {
-    background: var(--panel); border: 1px solid var(--frost);
-    border-radius: 16px; padding: 28px 26px;
+  /* ---- program: the training plan ---- */
+  section { padding: 88px 0; }
+  .sec-head { max-width: 640px; }
+  .sec-label { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .sec-label::before { content: ""; width: 22px; height: 2px; background: var(--orange); }
+  h2 { font-family: var(--display); font-size: clamp(30px, 4vw, 46px); line-height: 1.04; letter-spacing: -0.01em; text-transform: uppercase; }
+  .sec-sub { color: var(--chalk-dim); margin-top: 16px; font-size: 16.5px; line-height: 1.65; }
+
+  .plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .drill {
+    background: var(--chalk-2); border: 1px solid var(--chalk-line);
+    border-radius: 16px; padding: 30px 26px;
     transition: transform 180ms ease-out, border-color 180ms ease-out;
+    position: relative;
   }
-  .step:hover { transform: translateY(-2px); border-color: rgba(199,255,231,0.28); }
-  .step-n { font-family: var(--mono); font-size: 12px; color: var(--mint); margin-bottom: 14px; }
-  .step h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 10px; }
-  .step p { color: var(--silver); font-size: 14.5px; line-height: 1.6; }
-  .step p code { font-family: var(--mono); font-size: 12.5px; color: var(--text); background: rgba(255,255,255,0.05); border-radius: 5px; padding: 1.5px 6px; }
+  .drill:hover { transform: translateY(-3px); border-color: rgba(255,92,31,.4); }
+  .drill-tag { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--chalk-dimmer); text-transform: uppercase; }
+  .drill h3 { font-family: var(--display); font-size: 24px; text-transform: uppercase; letter-spacing: 0.01em; margin: 12px 0 10px; }
+  .drill p { color: var(--chalk-dim); font-size: 14.5px; line-height: 1.65; }
+  .drill p code { font-family: var(--mono); font-size: 12.5px; color: var(--paper); background: var(--chalk-3); border: 1px solid var(--chalk-line); border-radius: 6px; padding: 2px 7px; }
+  .drill-rep { margin-top: 18px; font-family: var(--mono); font-size: 12px; color: var(--orange); font-weight: 700; letter-spacing: 0.08em; }
 
-  /* lapse price */
-  .lapse { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 48px; }
-  .lapse-card {
-    background: var(--panel); border: 1px solid var(--frost); border-radius: 16px; padding: 32px 30px;
+  /* ---- lapse price: THE GYM PRICE BOARD ---- */
+  .priceboard {
+    margin-top: 48px;
+    background: var(--ink);
+    border-radius: 18px;
+    padding: 40px 42px;
+    box-shadow: var(--shadow-iron);
+    border: 1px solid #2a2f26;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 44px;
   }
-  .lapse-mech { font-size: 15px; color: var(--silver); line-height: 1.65; }
-  .lapse-price { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 52px; font-weight: 500; color: var(--mint); letter-spacing: -0.02em; line-height: 1.1; margin: 10px 0 6px; }
-  .lapse-price small { font-size: 16px; color: var(--silver); font-weight: 400; }
-  .lapse-note { font-size: 12px; color: var(--dim); font-family: var(--mono); }
-  table.scale { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 13.5px; }
-  table.scale th { text-align: left; color: var(--dim); font-weight: 400; font-size: 12px; padding: 8px 6px; border-bottom: 1px solid var(--frost-soft); }
-  table.scale td { padding: 11px 6px; border-bottom: 1px solid var(--frost-soft); font-variant-numeric: tabular-nums; }
-  table.scale td:last-child, table.scale th:last-child { text-align: right; color: var(--mint); }
+  .pb-left .pb-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--chalk-dimmer); text-transform: uppercase; }
+  .pb-left h3 { font-family: var(--display); font-size: clamp(26px, 3vw, 36px); line-height: 1.06; text-transform: uppercase; margin: 12px 0 18px; }
+  .pb-left h3 .hot { color: var(--orange); }
+  .pb-left p { color: var(--chalk-dim); font-size: 15px; line-height: 1.7; }
+  .pb-left p b { color: var(--paper); font-weight: 600; }
+  .big-price { margin: 26px 0 8px; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .big-price .amount { font-size: 64px; font-weight: 700; color: var(--orange); letter-spacing: -0.03em; line-height: 1; }
+  .big-price .per { color: var(--chalk-dim); font-size: 15px; margin-left: 10px; }
+  .pb-note { font-family: var(--mono); font-size: 11.5px; color: var(--chalk-dimmer); margin-top: 10px; line-height: 1.7; }
+  .pb-right { border-left: 1px dashed #3a4034; padding-left: 44px; display: flex; flex-direction: column; justify-content: center; }
+  table.scale { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 14px; }
+  table.scale th { text-align: left; color: var(--chalk-dimmer); font-weight: 500; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 8px 10px; border-bottom: 1px solid #3a4034; }
+  table.scale td { padding: 13px 8px; border-bottom: 1px dashed #2e3429; font-variant-numeric: tabular-nums; color: var(--paper); }
+  table.scale td:last-child, table.scale th:last-child { text-align: right; }
+  table.scale td.hot { color: var(--orange); font-weight: 700; }
+  .scale-note { font-family: var(--mono); font-size: 11px; color: var(--chalk-dimmer); margin-top: 16px; line-height: 1.7; }
 
-  /* numbers band */
-  .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
-  .stat { border: 1px solid var(--frost-soft); border-radius: 14px; padding: 24px 22px; background: var(--panel); }
-  .stat-v { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 30px; font-weight: 500; color: var(--text); letter-spacing: -0.02em; }
-  .stat-v em { font-style: normal; color: var(--mint); }
-  .stat-k { color: var(--silver); font-size: 13px; margin-top: 8px; line-height: 1.5; }
-  .stat-s { color: var(--dim); font-size: 11px; font-family: var(--mono); margin-top: 10px; }
-
-  /* warranty */
-  .warranty {
-    border: 1px solid var(--frost); border-radius: 16px;
-    background: linear-gradient(180deg, var(--panel), var(--bg));
-    padding: 40px 38px; margin-top: 48px;
+  /* ---- numbers: PR BOARD ---- */
+  .prboard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+  .pr-tile {
+    background: var(--chalk-2); border: 1px solid var(--chalk-line);
+    border-radius: 14px; padding: 24px 20px 20px; position: relative;
   }
-  .warranty h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 18px; }
-  .w-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 32px; }
-  .w-item { display: flex; gap: 12px; font-size: 14.5px; color: var(--silver); line-height: 1.55; }
-  .w-item b { color: var(--text); font-weight: 500; }
-  .tick { color: var(--mint); font-family: var(--mono); flex-shrink: 0; }
+  .pr-tile::before {
+    content: "PR"; position: absolute; top: 14px; right: 14px;
+    font-family: var(--display); font-size: 10px; letter-spacing: 0.1em;
+    color: var(--orange); opacity: 0.85;
+  }
+  .pr-v { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 700; color: var(--paper); letter-spacing: -0.02em; }
+  .pr-v .unit { font-size: 17px; color: var(--chalk-dim); font-weight: 500; }
+  .pr-k { color: var(--chalk-dim); font-size: 13px; margin-top: 10px; line-height: 1.55; }
+  .pr-s { font-family: var(--mono); font-size: 10.5px; color: var(--chalk-dimmer); margin-top: 12px; }
 
-  /* footer */
-  footer { border-top: 1px solid var(--frost-soft); padding: 44px 0 60px; margin-top: 40px; }
-  .foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; color: var(--dim); font-size: 13px; }
-  .foot a { color: var(--silver); text-decoration: none; }
-  .foot a:hover { color: var(--text); }
+  /* ---- warranty: gym rules sign ---- */
+  .rules {
+    margin-top: 48px;
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 18px;
+    padding: 44px 46px;
+    box-shadow: var(--shadow-iron);
+    position: relative;
+  }
+  .rules::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 10px; background: var(--orange); border-radius: 0 0 8px 8px;
+  }
+  .rules h3 { font-family: var(--display); font-size: 26px; text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 8px; }
+  .rules .rules-sub { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 26px; }
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 36px; }
+  .rule { display: flex; gap: 12px; font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+  .rule b { color: var(--ink); font-weight: 700; }
+  .rule-n {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 7px;
+    background: var(--ink); color: var(--paper);
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+
+  /* ---- final CTA ---- */
+  .final { text-align: center; padding: 96px 0 104px; position: relative; overflow: hidden; }
+  .final::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(255,92,31,0.09), transparent 70%);
+    pointer-events: none;
+  }
+  .final h2 { font-size: clamp(34px, 5vw, 58px); }
+  .final p { color: var(--chalk-dim); margin: 18px auto 34px; max-width: 460px; font-size: 16.5px; }
+
+  footer { border-top: 1px solid var(--chalk-line); padding: 40px 0 56px; }
+  .foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; color: var(--chalk-dimmer); font-size: 13px; }
+  .foot a { color: var(--chalk-dim); text-decoration: none; }
+  .foot a:hover { color: var(--paper); }
   .brandnote { font-family: var(--mono); font-size: 12px; }
 
-  @media (max-width: 860px) {
-    .steps, .numbers { grid-template-columns: 1fr; }
-    .lapse { grid-template-columns: 1fr; }
-    .w-list { grid-template-columns: 1fr; }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+    .plan, .prboard { grid-template-columns: 1fr; }
+    .priceboard { grid-template-columns: 1fr; padding: 32px 28px; }
+    .pb-right { border-left: 0; padding-left: 0; border-top: 1px dashed #3a4034; padding-top: 28px; }
+    .rules-grid { grid-template-columns: 1fr; }
     .nav-links a:not(.btn) { display: none; }
-    .receipt-body { font-size: 12px; padding: 20px; }
+    h1 { font-size: clamp(40px, 11vw, 64px); }
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; }
@@ -191,157 +280,205 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a class="wordmark" href="#">sweap<span>.</span>it</a>
+    <a class="wordmark" href="#">sweap<span class="db">&nbsp;</span>it</a>
     <div class="nav-links">
-      <a href="#how">How it works</a>
-      <a href="#price">The lapse price</a>
-      <a href="#numbers">Numbers</a>
-      <a class="btn btn-ghost" href="https://github.com/nKOxxx/sweap.it">GitHub</a>
+      <a href="#program">The program</a>
+      <a href="#price">Price board</a>
+      <a href="#prs">PR board</a>
+      <a class="btn btn-orange" style="padding:9px 18px; font-size:13.5px;" href="https://github.com/nKOxxx/sweap.it">Start training</a>
     </div>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="wrap">
-    <div class="kicker">local-only &middot; reversible &middot; zero dependencies</div>
-    <h1>Weigh it. Diet it.<br><span class="off">Keep it off.</span></h1>
-    <p class="hero-sub">
-      Your AI carries dead weight. Every conversation drags it along, and when the
-      memory lapses, the whole pile gets re-read at full price.
-      sweap weighs your AI's memory, puts it on a diet, and keeps it off.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn btn-solid" href="https://github.com/nKOxxx/sweap.it">Run the weigh-in</a>
-      <a class="btn btn-ghost" href="#how">See how it works</a>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">Your AI's personal trainer</div>
+      <h1>Your AI is <span class="hot">fat.</span><br>Feeding it is<br><span class="hollow">expensive.</span></h1>
+      <p class="hero-sub">
+        Every conversation drags months of dead weight along, and when the memory lapses,
+        <b>the whole pile gets re-read at full price.</b>
+        sweap weighs your AI's memory, puts it on a diet, and keeps it off.
+        Local-only. Reversible. Zero dependencies.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-orange" href="https://github.com/nKOxxx/sweap.it">Run the weigh-in</a>
+        <a class="btn btn-chalk" href="#program">See the program</a>
+      </div>
+      <p class="family"><code>caveman</code> makes your AI talk less. <code>jev</code> makes your AI think faster.
+        <code>gstack</code> makes your AI a team. <code>sweap</code> makes your AI weigh less.</p>
     </div>
-    <p class="family"><code>caveman</code> makes your AI talk less. <code>jev</code> makes your AI think faster.
-      <code>gstack</code> makes your AI a team. <code>sweap</code> makes your AI weigh less.</p>
 
-    <div class="receipt-shell">
-      <div class="receipt">
-        <div class="receipt-bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="receipt-title">sweap diet &middot; receipt</span>
+    <div class="board" aria-label="before and after transformation board">
+      <div class="board-head">
+        <span class="board-title">Transformation</span>
+        <span class="board-date num">2026-10-17</span>
+      </div>
+      <div class="board-body">
+        <div class="ba-row">
+          <div class="ba-side ba-before">
+            <div class="ba-label">Before</div>
+            <div class="ba-val">244.1<span style="font-size:16px; color:var(--chalk-dimmer)"> MB</span></div>
+          </div>
+          <div class="ba-mid">&rarr;</div>
+          <div class="ba-side ba-after">
+            <div class="ba-label">After</div>
+            <div class="ba-val">206.5<span style="font-size:16px; color:var(--chalk-dimmer)"> MB</span></div>
+          </div>
         </div>
-        <div class="receipt-body">
-          <div class="r-dim">STORE CENSUS &middot; 2026-10-17</div>
-          <div class="r-row"><span class="r-mut">weight before</span><span>244.1 MB</span></div>
-          <div class="r-row"><span class="r-mut">weight after</span><span>206.5 MB</span></div>
-          <hr class="r-rule">
-          <div class="r-row"><span class="r-mut">returned to disk</span><span class="r-hot r-big">37.57 MB</span></div>
-          <div class="r-row"><span class="r-mut">information lost</span><span class="r-hot">0 bytes</span></div>
-          <hr class="r-rule">
-          <div class="r-row"><span class="r-dim">duplicate thinking blobs</span><span class="r-dim">9,469 removed</span></div>
-          <div class="r-row"><span class="r-dim">resting tool exhaust</span><span class="r-dim">1,701 rows</span></div>
-          <div class="r-row"><span class="r-dim">undo</span><span class="r-dim">quarantine, hash-verified</span></div>
-          <span class="stamp num">receipt: R26 &middot; restore drill: R27 &middot; security audit: R29 PASS</span>
+        <div style="text-align:center; padding: 14px 0 4px;">
+          <span class="ba-delta">37.57 MB lost &middot; 0 bytes of memory lost</span>
         </div>
+        <div class="ba-row" style="border-top: 1px dashed var(--chalk-line);">
+          <div class="ba-side ba-before">
+            <div class="ba-label">Duplicate blobs</div>
+            <div class="ba-val" style="font-size:22px;">9,469</div>
+          </div>
+          <div class="ba-mid">&rarr;</div>
+          <div class="ba-side ba-after">
+            <div class="ba-label">Info lost</div>
+            <div class="ba-val" style="font-size:22px;">0</div>
+          </div>
+        </div>
+      </div>
+      <div class="board-foot">
+        <span>receipt R26 &middot; drill R27 &middot; audit R29</span>
+        <span class="pr">NEW PR</span>
       </div>
     </div>
   </div>
 </header>
 
-<section id="how">
+<div class="pixel-divider" aria-hidden="true">
+  <canvas id="dbcanvas" width="330" height="16"></canvas>
+</div>
+
+<section id="program">
   <div class="wrap">
-    <div class="sec-label">THE PROGRAM</div>
-    <h2>A trainer, not a cleaner you run once.</h2>
-    <p class="sec-sub">Three moves, all from your own machine, all reversible. The default command touches nothing.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">01 / WEIGH</div>
+    <div class="sec-head">
+      <div class="sec-label">The program</div>
+      <h2>Three drills.<br>Run them for life.</h2>
+      <p class="sec-sub">Not a cleaner you run once: a trainer that stays. Everything runs on your
+        machine, reads your AI's own memory, and reverses with proof.</p>
+    </div>
+    <div class="plan">
+      <div class="drill">
+        <div class="drill-tag">Drill 01</div>
         <h3>The weigh-in</h3>
-        <p>One command reads your AI's memory and prints the receipt: dead weight, duplicate
-          thinking, resting tool exhaust. <code>sweap diet --dry-run</code> measures and modifies nothing.
-          Your numbers, your machine, thirty seconds.</p>
+        <p>One command reads your AI's memory and prints the slip: dead weight, duplicate
+          thinking, resting tool exhaust. <code>--dry-run</code> measures and touches nothing.
+          Thirty seconds, your numbers.</p>
+        <div class="drill-rep">3 sets &middot; read-only &middot; daily</div>
       </div>
-      <div class="step">
-        <div class="step-n">02 / DIET</div>
-        <h3>The diet</h3>
+      <div class="drill">
+        <div class="drill-tag">Drill 02</div>
+        <h3>The cut</h3>
         <p>sweap finds and cleans the dead weight, reversibly. Every row is backed up and
-          hash-verified before anything is touched, and one command puts every byte back.
-          A live rehearsal on a copy runs first. Nothing deletes on faith.</p>
+          hash-verified before anything moves, and one command puts every byte back.
+          A rehearsal on a copy runs first. Nothing deletes on faith.</p>
+        <div class="drill-rep">gated &middot; reversible &middot; monthly</div>
       </div>
-      <div class="step">
-        <div class="step-n">03 / KEEP IT OFF</div>
-        <h3>The trainer</h3>
-        <p>A daily scale check watches the weight. Quiet days say nothing. When junk creeps
-          back it flags you: <em>"Junk is creeping back, up 8.3 MB since Monday. One command:
-          sweap diet."</em> It finds and cleans; it does not pretend to prevent.</p>
+      <div class="drill">
+        <div class="drill-tag">Drill 03</div>
+        <h3>Keep it off</h3>
+        <p>The trainer watches the scale daily. Quiet days say nothing. When junk creeps back
+          it flags you: <em>"Junk is creeping back, up 8.3 MB since Monday. One command:
+          sweap diet."</em> It finds and cleans. It does not pretend to prevent.</p>
+        <div class="drill-rep">automated &middot; flags, never nags</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="price">
+<section id="price" style="padding-top: 0;">
   <div class="wrap">
-    <div class="sec-label">THE LAPSE PRICE</div>
-    <h2>Your junk has a price. It's charged every time your AI forgets.</h2>
-    <p class="sec-sub">After a memory lapse, everything gets re-read. Re-read tokens bill at the
-      cache-miss rate instead of the cache-hit rate. That gap is the carrying charge, and it is
-      arithmetic on list prices, not a prediction.</p>
-    <div class="lapse">
-      <div class="lapse-card">
-        <div class="lapse-mech">The surcharge on GLM-4.6 at z.ai list prices (Oct 2026):</div>
-        <div class="lapse-price">$0.49 <small>per 1M junk tokens, per lapse</small></div>
-        <div class="lapse-note">re-read at $0.60/M instead of $0.11/M &middot; a 5.45&times; surcharge</div>
-        <div class="lapse-mech" style="margin-top:22px">On our own machine, that mechanism was real:
-          <b style="color:var(--text)">49%</b> of all paid uncached tokens were break re-reads
-          (measured, one host, frozen blind audit).</div>
+    <div class="sec-head">
+      <div class="sec-label">The price board</div>
+      <h2>What the extra weight costs</h2>
+      <p class="sec-sub">After every memory lapse, your AI re-reads the whole pile. Re-read tokens
+        bill at the cache-miss rate instead of the cache-hit rate. That gap is the carrying
+        charge, and it is arithmetic on list prices, not a prediction.</p>
+    </div>
+    <div class="priceboard">
+      <div class="pb-left">
+        <div class="pb-eyebrow">GLM-4.6 &middot; z.ai list &middot; Oct 2026</div>
+        <h3>The surcharge on every lapse: <span class="hot">5.45&times;</span></h3>
+        <p>Junk tokens that should have been cache hits at <b>$0.11/M</b> get re-read at the
+          miss rate of <b>$0.60/M</b>. Your junk rides along and pays full fare every time
+          your AI forgets.</p>
+        <div class="big-price">
+          <span class="amount">$0.49</span>
+          <span class="per">per 1M junk tokens, per lapse</span>
+        </div>
+        <div class="pb-note">And it is not hypothetical: on our own machine, 49% of all paid
+          uncached tokens were break re-reads (measured, one host, frozen blind audit).</div>
       </div>
-      <div class="lapse-card">
-        <div class="lapse-mech" style="margin-bottom:14px"><b style="color:var(--text)">What your pile costs per lapse</b> &middot; illustrative scale, your junk &times; your prices:</div>
+      <div class="pb-right">
         <table class="scale">
-          <tr><th>junk in context</th><th>cost per lapse</th><th>weekly lapses</th></tr>
-          <tr><td>5 MB</td><td>$2.06</td><td>~$8/mo</td></tr>
-          <tr><td>20 MB</td><td>$8.23</td><td>~$33/mo</td></tr>
-          <tr><td>50 MB</td><td>$20.58</td><td>~$82/mo</td></tr>
+          <tr><th>Your pile</th><th>per lapse</th><th>weekly</th></tr>
+          <tr><td>5 MB junk</td><td>$2.06</td><td class="hot">~$8/mo</td></tr>
+          <tr><td>20 MB junk</td><td>$8.23</td><td class="hot">~$33/mo</td></tr>
+          <tr><td>50 MB junk</td><td>$20.58</td><td class="hot">~$82/mo</td></tr>
         </table>
-        <div class="lapse-note" style="margin-top:14px">the weigh-in prices YOUR pile on install &middot; measured, not modeled</div>
+        <div class="scale-note">Illustrative scale: your junk &times; your model's prices.
+          The weigh-in prices YOUR pile on install. Measured, not modeled.</div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="numbers">
+<section id="prs" style="padding-top: 0;">
   <div class="wrap">
-    <div class="sec-label">THE NUMBERS</div>
-    <h2>Measured, dated, reproducible.</h2>
-    <p class="sec-sub">Every figure comes from our own machine with its receipt attached. Run the
-      weigh-in and measure yours; that is the entire product.</p>
-    <div class="numbers">
-      <div class="stat">
-        <div class="stat-v"><em>37.57</em> MB</div>
-        <div class="stat-k">returned to disk by one diet, zero information lost</div>
-        <div class="stat-s">2026-10-17 &middot; receipt R26</div>
+    <div class="sec-head">
+      <div class="sec-label">PR board</div>
+      <h2>Personal records, set on a real machine.</h2>
+      <p class="sec-sub">Every figure is measured, dated, and reproducible from the tool.
+        Run the weigh-in and set your own.</p>
+    </div>
+    <div class="prboard">
+      <div class="pr-tile">
+        <div class="pr-v">37.57<span class="unit"> MB</span></div>
+        <div class="pr-k">returned to disk by one diet, zero information lost</div>
+        <div class="pr-s">2026-10-17 &middot; receipt R26</div>
       </div>
-      <div class="stat">
-        <div class="stat-v"><em>90.69</em>%</div>
-        <div class="stat-k">of stored transcript tokens were dead tool output (exact count)</div>
-        <div class="stat-s">n=37,813 rows &middot; one host</div>
+      <div class="pr-tile">
+        <div class="pr-v">90.69<span class="unit">%</span></div>
+        <div class="pr-k">of stored transcript tokens were dead tool output (exact count)</div>
+        <div class="pr-s">n=37,813 rows &middot; one host</div>
       </div>
-      <div class="stat">
-        <div class="stat-v"><em>431</em>/day</div>
-        <div class="stat-k">exhaust rows regrow after a clean: a monthly diet is plenty</div>
-        <div class="stat-s">daily scale, live since 2026-10-17</div>
+      <div class="pr-tile">
+        <div class="pr-v">431<span class="unit">/day</span></div>
+        <div class="pr-k">exhaust rows regrow after a clean: a monthly program is plenty</div>
+        <div class="pr-s">daily scale, live since 2026-10-17</div>
       </div>
-      <div class="stat">
-        <div class="stat-v"><em>5.45</em>&times;</div>
-        <div class="stat-k">surcharge on re-read tokens after a memory lapse (GLM-4.6 list)</div>
-        <div class="stat-s">price arithmetic &middot; Oct 2026</div>
+      <div class="pr-tile">
+        <div class="pr-v">5.45<span class="unit">&times;</span></div>
+        <div class="pr-k">surcharge on re-read tokens after a memory lapse (GLM-4.6 list)</div>
+        <div class="pr-s">price arithmetic &middot; Oct 2026</div>
       </div>
     </div>
 
-    <div class="warranty">
-      <h3>The local-only warranty, as a property of the code</h3>
-      <div class="w-list">
-        <div class="w-item"><span class="tick">&check;</span><span><b>No network, provably.</b> Zero imports that can open a socket. Unplug the cable; sweap works identically. Verified under a hard firewall: every tool passes.</span></div>
-        <div class="w-item"><span class="tick">&check;</span><span><b>No dependencies.</b> Nothing to install, nothing to poison. The whole toolkit is Python's standard library.</span></div>
-        <div class="w-item"><span class="tick">&check;</span><span><b>Reversible with proof.</b> Every diet quarantines full-column hashed copies first; restore is byte-verified, drilled against schema changes.</span></div>
-        <div class="w-item"><span class="tick">&check;</span><span><b>Never first-run.</b> Destructive steps need a staged manifest and the same id typed twice. A crash rolls back, loudly.</span></div>
-        <div class="w-item"><span class="tick">&check;</span><span><b>Honest receipts.</b> Wire savings are stamped $0.00 where they are $0.00. Hypothetical figures are labeled, never blended with measured facts.</span></div>
-        <div class="w-item"><span class="tick">&check;</span><span><b>Security-audited.</b> 18-point baseline audit passed; findings fixed same-day. The scan commands ship in the repo so you can re-run them.</span></div>
+    <div class="rules">
+      <h3>Gym rules</h3>
+      <div class="rules-sub">Posted by the door. They are properties of the code, not promises.</div>
+      <div class="rules-grid">
+        <div class="rule"><span class="rule-n">1</span><span><b>No network, provably.</b> Zero imports that can open a socket. Unplug the cable; sweap works identically. Verified under a hard firewall.</span></div>
+        <div class="rule"><span class="rule-n">2</span><span><b>No dependencies.</b> Nothing to install, nothing to poison. The whole toolkit is Python's standard library.</span></div>
+        <div class="rule"><span class="rule-n">3</span><span><b>Reversible with proof.</b> Every cut is quarantined with full-column hashes first; restore is byte-verified, drilled against schema changes.</span></div>
+        <div class="rule"><span class="rule-n">4</span><span><b>Never first-run.</b> Destructive steps need a staged manifest and the same id typed twice. A crash rolls back, loudly.</span></div>
+        <div class="rule"><span class="rule-n">5</span><span><b>Honest receipts.</b> Wire savings are stamped $0.00 where they are $0.00. Hypothetical figures are labeled, never blended with measured facts.</span></div>
+        <div class="rule"><span class="rule-n">6</span><span><b>Security-audited.</b> 18-point baseline audit passed; findings fixed same-day. The scan commands ship in the repo: re-run them yourself.</span></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Day one starts<br>with a weigh-in.</h2>
+    <p>Thirty seconds, read-only, your own data. You cannot break anything
+      by looking. That one is on the gym rules board.</p>
+    <a class="btn btn-orange" href="https://github.com/nKOxxx/sweap.it">Run the weigh-in</a>
   </div>
 </section>
 
@@ -355,10 +492,41 @@
       <a href="https://github.com/nKOxxx/sweap.it">GitHub</a> &middot;
       <a href="https://github.com/JuliusBrussee/caveman">caveman</a> &middot;
       <a href="https://gstack.run">gstack</a>
-      <div style="margin-top:10px">currently tuned for Hermes Agent stores; weigh-in for Claude Code stores included</div>
+      <div style="margin-top:10px">tuned for Hermes Agent stores; weigh-in for Claude Code stores included</div>
     </div>
   </div>
 </footer>
+
+<script>
+  // pixel dumbbell divider: hand-placed pixels, 2x, chalk-orange + chalk-dim
+  (function () {
+    var c = document.getElementById('dbcanvas');
+    var ctx = c.getContext('2d');
+    var px = 4; // pixel size
+    // pattern: plate,plate,bar,bar,bar,plate,plate  (8px tall grid)
+    var rows = [
+      "..OOOO......OOOO..",
+      ".OPPPO......OPPPO.",
+      "OPPPPPGGGGGGPPPPPO",
+      "OPPPPPGGGGGGPPPPPO",
+      "OPPPPPGGGGGGPPPPPO",
+      ".OPPPO......OPPPO.",
+      "..OOOO......OOOO..",
+      ".................."
+    ];
+    var colors = { O: '#ff5c1f', P: '#f3efe4', G: '#6d7868' };
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (var y = 0; y < rows.length; y++) {
+      for (var x = 0; x < rows[y].length; x++) {
+        var ch = rows[y][x];
+        if (colors[ch]) {
+          ctx.fillStyle = colors[ch];
+          ctx.fillRect(x * px, y * px, px, px);
+        }
+      }
+    }
+  })();
+</script>
 
 </body>
 </html>
