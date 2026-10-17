@@ -13,3 +13,16 @@
 - GTM moves copied (from R12 report): self-describing artifact, receipt-as-demo,
   one falsifiable number in the artifact, ship-raw-fast, no promotion until
   strangers find it, no monetization until demand+metric+gap are all measured.
+
+## 2026-10-17: DNS flip executed by agent (user's GoDaddy API token)
+- User volunteered a GoDaddy API token ("go wild") with standing rules: stored in
+  ~/.hermes/.env (0600), never echoed, never committed.
+- Agent-executed: PUT A/@ -> 185.199.108-111.153 (replaced GoDaddy parking A
+  160.153.0.108; first attempt via /records/A hit INVALID_BODY demanding name/type,
+  /records/A/@ accepted), PUT CNAME/www -> nkoxxx.github.io (replaced @ placeholder).
+  Readback-verified; authoritative NS (ns81/ns82.domaincontrol.com) serving Pages
+  IPs within minutes; public 1.1.1.1 propagated ~2 min (old parking TTL 1h).
+- http://sweap.it serving site (200, verified title) before cert. Cert issuance in
+  progress; https_enforced flip queued once cert lands.
+- Same-day: R30 trim-1 competitive research filed (different layers, complementary;
+  falsifiers on file; site untouched per user law). Gitleaks gate queued at flip.
