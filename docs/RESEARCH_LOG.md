@@ -838,3 +838,14 @@ filed census (2026-10-14). Hub assembly, no workers.
   official sourcing statement at the top of R33 and applies to any
   public use of the table (site, posts, README) when the founder opens
   publicity.
+
+### R33 table LIVE on sweap.it (founder gate opened)
+
+2026-10-18: founder approved publishing the per-vendor carrying-charge
+table on the site. Deployed to nKOxxx/sweap-it-site (Pages, sweap.it),
+rendered inside the existing price-board section, v7 styles unchanged.
+Sourcing line as ruled: "based on calculations and official information/
+data." Numbers identical to R33 in this repo: Claude $2.70 | GLM-4.6
+$0.49 | MiniMax $0.24 | DeepSeek $0.15-0.29 | Codex n/a. Research-law
+note: this is the first research-derived table on the site, published
+by explicit founder decision.
