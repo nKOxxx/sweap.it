@@ -115,6 +115,60 @@ the anchor-honest version is the one filed above. The cross-worker
 consensus on A and B charges ($0.49 / $2.70) and the $8.09 headline is
 therefore double-derived.
 
+## Annex (2026-10-18, same day): DeepSeek and MiniMax at public list prices
+
+User ruling: "Can we just use the public data for deepseek and minimax."
+Done: official public price lists fetched 2026-10-18, applied to our own
+measured per-lane volumes from the filed census
+(`../artifacts/sweap_census_out.json`, 2026-10-14). No worker derivation;
+hub assembly only.
+
+**Prices [THEORY], retrieved 2026-10-18:**
+- DeepSeek (api-docs.deepseek.com/quick_start/pricing), model
+  `deepseek-flash` (DeepSeek-V4.1-Flash-1017): input $0.15/1M off-peak
+  ($0.30 peak), cache-hit input $0.003/1M off-peak ($0.006 peak), output
+  $0.60/1M off-peak. Peak = 01:00-04:00 and 06:00-10:00 UTC Mon-Fri;
+  everything else (incl. weekends) off-peak.
+- MiniMax (platform.minimax.io/docs/pricing/overview), model MiniMax-M3,
+  <=512k tier: input $0.30/1M (permanent 50% off; list $0.60), prompt
+  cache read $0.06/1M (list $0.12), output $1.20/1M. The >512k tier and
+  legacy M2.7 carry the same $0.24 effective charge.
+
+**Volumes [ANCHOR], our store, per-lane census (2026-10-14):**
+
+| Lane | Calls | Uncached input tok | Cache-hit tok | Cache hit % |
+|---|---|---|---|---|
+| deepseek-ai | 1,697 | 127,857,208 | 0 | 0.0% |
+| MiniMaxAI | 51 | 1,861,363 | 0 | 0.0% |
+| glm-4.6 (ref) | 10,093 | 28,296,142 | 739,190,912 | 96.31% |
+
+**Charges (same formula as the main study: input minus cache-read):**
+- DeepSeek flash: **$0.147/1M junk tok off-peak, $0.294 peak** [EXACT
+  arithmetic on public list]
+- MiniMax M3: **$0.24/1M junk tok** (current 50%-off pricing; $0.48 at
+  list) [EXACT arithmetic on public list]
+
+**What our own lanes would have cost at list [HYPOTHETICAL]:** both lanes
+ran at 0.0% measured cache hit, i.e. permanently at lapse pricing. The
+DeepSeek lane's 127,857,208 uncached input tokens = **$19.18-$38.36 at
+list**; applying the store-wide 90.69% exhaust share per-lane (an
+approximation, labeled), **~$17.39-$34.79 of it is junk tax**. The
+MiniMax lane: $0.56 at list, ~$0.51 junk. Per-lane law: these are
+per-lane figures; nothing is blended into the glm-4.6 card.
+
+**Honesty stamps:** in our stack these lanes are free-lane providers and
+billed $0.00 by measurement (prices.json law); every dollar figure in this
+annex is what the IDENTICAL behavior costs at each vendor's public list
+price - a comparison price, not a bill we paid. A paying DeepSeek API
+customer can earn cache hits on repeat context; our free endpoints
+reported none, which is exactly why the whole lane priced at lapse rates.
+
+**The completed per-vendor charge row (carrying charge per 1M junk tok
+per lapse):** glm-4.6 $0.49 | Claude Sonnet-class $2.70 | DeepSeek flash
+$0.147-$0.294 | MiniMax M3 $0.24 | GPT-6.1-Sol unknown (no public list).
+The charge exists on every vendor with published cache pricing; its size
+is set by the vendor's own price spread, not by our tooling.
+
 ## Verdict
 
 The carrying-charge method generalizes. Per-lapse price of forgetting:
@@ -123,3 +177,8 @@ price delta)** on the measured stores. The honest headline is not "A is
 worst" but "the charge exists on every vendor, scaled by store size and
 list price; B's per-token charge is 5.5x A's." Research file only: no
 site, no README table until the founder gates it.
+
+Annex addition (same day): with public lists applied, the per-1M-junk
+charge row is now known for four of five lanes: $0.49 (glm-4.6) | $2.70
+(Sonnet-class) | $0.147–$0.294 (DeepSeek flash, off/peak) | $0.24
+(MiniMax M3, current) | unknown (GPT-6.1-Sol, no public list).

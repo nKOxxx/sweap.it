@@ -813,3 +813,20 @@ filed); R33 C-rows use itemized bytes, 27% marked UNRECONSTRUCTED. R32
 erratum = founder's call.
 
 Research law: nothing promoted to site or README; founder gates that.
+
+### R33 annex (same day): DeepSeek + MiniMax at public list prices
+
+User ruling: "Can we just use the public data for deepseek and minimax."
+Official price lists fetched live 2026-10-18 (api-docs.deepseek.com,
+platform.minimax.io), applied to OUR per-lane measured volumes from the
+filed census (2026-10-14). Hub assembly, no workers.
+
+- Charges per 1M junk tokens: DeepSeek flash $0.147 off-peak / $0.294
+  peak; MiniMax M3 $0.24 (50%-off pricing; $0.48 at list).
+- Our free-lane reality stated in the annex: both lanes measured 0.0%
+  cache hit (permanently lapse-priced); billed $0.00 to us; all dollar
+  figures are comparison prices at list, not bills paid.
+- Completed charge row: glm-4.6 $0.49 | Sonnet-class $2.70 | DeepSeek
+  $0.147-0.294 | MiniMax $0.24 | GPT-6.1-Sol unknown.
+- prices.json untouched (free-lane $0.00-by-measurement law lives there;
+  research stamps its own [THEORY] prices).
