@@ -1,0 +1,77 @@
+CARRYING-CHARGE STUDY, THREE VENDOR STORES (blind; derive, do not agree)
+
+You are given measured constants from three independently-audited local
+stores. You know nothing about who collected them and you need nothing
+about them. Derive every requested figure yourself. If a needed input is
+missing or unverified, write UNKNOWN; never invent a number.
+
+TAGS: [ANCHOR] = measured on a named store, cite as-is. [THEORY] = public
+list price or published mechanism, cite source type + date. [ASSUMPTION] =
+a conversion or modeling choice YOU state explicitly. Mark every output
+figure [EXACT], [ESTIMATE], or [HYPOTHETICAL] accordingly.
+
+## Measured inputs
+
+Store A (CLI coding agent, GLM-4.6 lane, one host, 2026-10):
+- [ANCHOR] stored transcript tokens: 18,210,064 total; tool-role content
+  9,921,737 tok (54.48%) + assistant tool_calls JSON 6,593,594 tok (36.21%)
+  = dead tool output 90.69% of stored tokens (exact count, every row,
+  n=37,813 tool rows)
+- [ANCHOR] healthy-lane cache hit rate: 95.87% over 56 windows / 136 calls;
+  healthy runs hit 98.65%; after a memory lapse hit rate 0.0%
+- [ANCHOR] price, GLM-4.6 (public z.ai list, retrieved 2026-10-17):
+  input $0.60 / 1M tok, cache-read $0.11 / 1M tok, output $2.20 / 1M tok
+
+Store B (Claude Code local .jsonl transcript, one host, 2026-10):
+- [ANCHOR] file total ~1.55 MB; canonical message content 436K bytes
+  (28.1%); bookkeeping/usage receipts 222K (14.3%); toolUseResult
+  structured envelope 256K (16.5%) whose flattened tool_result copy is
+  75K (4.8%); thinking signatures 234.7K (15.1%) with thinking text EMPTY
+  (vendor erasure); attachments/scaffolding 187K (12.0%)
+- [ANCHOR] recoverable-bytes band (reversible dedup only): 75K-230K
+  (4.8%-14.8%), UNPROVEN until a restore test
+- [ANCHOR] price, Claude Sonnet-class (public Anthropic list, retrieved
+  2026-10-17): input $3.00 / 1M tok, cache-read $0.30 / 1M tok, output
+  $15.00 / 1M tok. Cache-write $3.75 / 1M tok.
+- [ANCHOR] chars-per-token for this store: UNKNOWN (not measured); use a
+  stated [ASSUMPTION] and show sensitivity to it
+
+Store C (Codex CLI, v0.163, one host, 2026-10):
+- [ANCHOR] session store 196 KB total; content density 24% (actual
+  conversation 42,132 B of 172,360 B); static turn_context re-dump 27% of
+  session bytes (6 records x 4,124 B, constant part ~3,696 B each,
+  ~18.5 KB delta-encodable); exact-duplicate boilerplate 9.5% proven
+  removable; config delta-encoding ~11% (engineering estimate, untested)
+- [ANCHOR] the bulk of C's 493 MB on-disk footprint is program binaries
+  and packages (~325 MB), never sent as context per turn
+- [ANCHOR] model GPT-6.1-Sol; price: UNKNOWN (no verified public list in
+  hand). If you know a published price, tag it [THEORY][LOW] with source
+  type; otherwise keep the per-1M price as a symbol P_C.
+
+## Derive, per vendor
+
+T1. Dead-weight share of what actually gets re-sent on a cold start
+    (memory lapse): one % per vendor, with the exact numerator/denominator
+    you used. Where a band exists, give the band.
+T2. Carrying charge per 1M junk tokens per lapse = the extra $ paid because
+    that content could not come from cache. Formula from the prices above;
+    show the arithmetic. For C: symbolic in P_C.
+T3. Dollar cost of ONE full cold re-read of each store's dead weight
+    (bytes -> tokens via your [ASSUMPTION] factor; show the sensitivity).
+T4. Dollar savings per lapse if the dead weight were dieted to zero
+    (reversibly, no information loss). Same assumptions, labeled.
+T5. A one-line "two rulers" note: cache hit rate (Store A: 95.87-98.65%
+    healthy, 0.0% after lapse) and dead-weight share (A: 90.69%) are two
+    different measures; explain in two sentences why both are true at once
+    and what the lapse changes.
+T6. The cross-vendor comparison table: vendor | dead-weight % | $ per 1M
+    junk tokens per lapse | $ per lapse on the measured store | savings if
+    dieted. Every cell source-tagged.
+
+FALSIFIED IF: T2 collapses if any vendor's cache-read price equals its
+input price (no carrying charge would exist). State for each vendor
+whether that condition holds.
+
+Constraints: no outside browsing; UNKNOWN over invention; every derived
+number shows its formula; no conclusions beyond the tables requested.
+Your final line, verbatim: R33-CARRYING-CHARGE-OK

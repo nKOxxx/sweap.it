@@ -778,3 +778,38 @@ items; the one substantive demand (independent reproduction on a store we
 do not own) is the same external proof layer already named in Status.
 Presentation bar reached by the audit's own rubric; the gate that remains
 is evidence, not craft.
+
+## 2026-10-18: R33 - the carrying charge, per vendor (user ruling: "for each model the % and also the saving")
+
+Trigger: user asked why the README shows one 90.69% when Hermes used to
+read 96-98; answered with the two-rulers law (cache hit rate vs dead-weight
+share, neither averaged into the other), then ruled "for each model the %
+and the saving; we proved 49c for Hermes, do the same for Claude and
+Codex". User further decreed: "use deepseek and the other one as much as
+possible to get the data."
+
+Brief: blind, measured constants + public list prices only
+(research/briefs/R33_carrying_charge_brief.txt). Worker: DeepSeek
+(proc_b8e35e389586, 2m02s, needle R33-CARRYING-CHARGE-OK last line).
+Hub recount: pre-registered anchors computed BEFORE reading worker output;
+all arithmetic verified exact (charges $0.49/$2.70/symbolic; A savings
+$8.09; B band $0.051-0.155 at 4 B/tok with 3/5 B/tok sensitivity).
+
+Findings (research/R33_carrying_charge/ANALYSIS.md):
+- Charge per 1M junk tokens per lapse: Hermes $0.49, Claude Code $2.70
+  (5.5x - expensive models pay more for the same forgetting), Codex
+  unknown (no verified public price; symbolic).
+- Per lapse on the measured stores: Hermes $8.09, Claude ~$0.05-0.17,
+  Codex 0.004-0.006 x price-delta.
+- Read-across law: the three dead-weight shares are different constructs
+  (stored-token census / dedup band / proven-dup + static surface); the
+  comparable number is the charge per 1M junk tokens, not the store totals.
+
+Ledger: one input problem inherited from filed R32 - its "static re-dump
+27%" headline cannot be reconstructed from its own itemization (6 x 4,124 B
+= 14.4% of 172,360 B; constant part 12.9%). Not a worker error (it used the
+anchored headline mechanically); not silently edited (filed studies stay as
+filed); R33 C-rows use itemized bytes, 27% marked UNRECONSTRUCTED. R32
+erratum = founder's call.
+
+Research law: nothing promoted to site or README; founder gates that.

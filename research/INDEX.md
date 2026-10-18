@@ -49,6 +49,7 @@ numbers are retired, not missing.
 | R30 | [trim-1 study](R30_trim1/ANALYSIS.md) | Complementary or competitor? | different layers, complementary; falsifiers on file |
 | R31 | [Claude Code store census](R31_claude_store/ANALYSIS.md) | Does Claude hide weight like Hermes? | no byte-identical dupes; dual envelopes; 5-15% recoverable (estimate) |
 | R32 | [Codex store census](R32_codex_store/ANALYSIS.md) | Same question, GPT side | lean sessions (24% content), 390 MB program on disk, reasoning encrypted |
+| R33 | [Per-vendor carrying charge](R33_carrying_charge/ANALYSIS.md) | What does one memory lapse cost, per vendor? | $0.49 / $2.70 / unknown per 1M junk tokens; $8.09 per lapse on the measured Hermes store; method generalizes |
 
 ## Reading paths
 
