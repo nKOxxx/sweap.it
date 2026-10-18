@@ -30,9 +30,9 @@ verified public price list in hand; kept symbolic).
 
 | Vendor | Store | Dead weight | Charge $/1M junk tok | $ per lapse (this store) | Savings if dieted |
 |---|---|---|---|---|---|
-| A: Hermes, glm-4.6 | 206.5 MB, 18,210,064 tok measured | **90.69%** exact (n=37,813) | **$0.49** (= $0.60 − $0.11) | **$8.09** | $8.09 [HYPOTHETICAL] |
-| B: Claude Code, Sonnet-class | 1.55 MB | 4.8–14.8% band (75–230 KB, dedup only, UNPROVEN till restore test) | **$2.70** (= $3.00 − $0.30) | $0.056–$0.173 (T3 basis) / $0.051–$0.155 (T4 basis) at 4 B/tok [ESTIMATE] | same [HYPOTHETICAL] |
-| C: Codex CLI, GPT-6.1-Sol | 172,360 B session file (493 MB disk is program, never re-sent) | 9.5% proven dups; itemized static re-dump surface 12.9–14.4%; filed R32 headline 27% UNRECONSTRUCTED (see ledger) | P_C,in − P_C,cr [SYMBOLIC] | 0.0041·(P_C,in − P_C,cr) at 9.5%; 0.0055–0.0062·(ΔP_C) at itemized re-dump [ESTIMATE] | same [HYPOTHETICAL] |
+| A: Hermes, glm-4.6 | 206.5 MB, 18,210,064 tok measured | **90.69%** exact (n=37,813) | **$0.49** (= $0.60 − $0.11) | **$8.09** | $8.09 |
+| B: Claude Code, Sonnet-class | 1.55 MB | 4.8–14.8% band (75–230 KB, dedup only, UNPROVEN till restore test) | **$2.70** (= $3.00 − $0.30) | $0.056–$0.173 (T3 basis) / $0.051–$0.155 (T4 basis) at 4 B/tok | same |
+| C: Codex CLI, GPT-6.1-Sol | 172,360 B session file (493 MB disk is program, never re-sent) | 9.5% proven dups; itemized static re-dump surface 12.9–14.4%; filed R32 headline 27% UNRECONSTRUCTED (see ledger) | P_C,in − P_C,cr (no public Codex price list) | 0.0041·(P_C,in − P_C,cr) at 9.5%; 0.0055–0.0062·(ΔP_C) at itemized re-dump | same |
 
 B bytes→tokens: unmeasured; 4 B/tok assumed (declared), sensitivity shown
 at 3/5 B/tok in the raw ($0.068–$0.207 and $0.041–$0.124 on the T4 basis).
@@ -123,7 +123,7 @@ measured per-lane volumes from the filed census
 (`../artifacts/sweap_census_out.json`, 2026-10-14). No worker derivation;
 hub assembly only.
 
-**Prices [THEORY], retrieved 2026-10-18:**
+**Prices, official public lists retrieved 2026-10-18:**
 - DeepSeek (api-docs.deepseek.com/quick_start/pricing), model
   `deepseek-flash` (DeepSeek-V4.1-Flash-1017): input $0.15/1M off-peak
   ($0.30 peak), cache-hit input $0.003/1M off-peak ($0.006 peak), output
@@ -134,7 +134,7 @@ hub assembly only.
   cache read $0.06/1M (list $0.12), output $1.20/1M. The >512k tier and
   legacy M2.7 carry the same $0.24 effective charge.
 
-**Volumes [ANCHOR], our store, per-lane census (2026-10-14):**
+**Volumes, our store, per-lane census (2026-10-14):**
 
 | Lane | Calls | Uncached input tok | Cache-hit tok | Cache hit % |
 |---|---|---|---|---|
@@ -142,13 +142,13 @@ hub assembly only.
 | MiniMaxAI | 51 | 1,861,363 | 0 | 0.0% |
 | glm-4.6 (ref) | 10,093 | 28,296,142 | 739,190,912 | 96.31% |
 
-**Charges (same formula as the main study: input minus cache-read):**
-- DeepSeek flash: **$0.147/1M junk tok off-peak, $0.294 peak** [EXACT
-  arithmetic on public list]
+**Charges (same formula as the main study: input minus cache-read; exact
+arithmetic on the published prices):**
+- DeepSeek flash: **$0.147/1M junk tok off-peak, $0.294 peak**
 - MiniMax M3: **$0.24/1M junk tok** (current 50%-off pricing; $0.48 at
-  list) [EXACT arithmetic on public list]
+  list)
 
-**What our own lanes would have cost at list [HYPOTHETICAL]:** both lanes
+**What our own lanes would have cost at list:** both lanes
 ran at 0.0% measured cache hit, i.e. permanently at lapse pricing. The
 DeepSeek lane's 127,857,208 uncached input tokens = **$19.18-$38.36 at
 list**; applying the store-wide 90.69% exhaust share per-lane (an
@@ -156,10 +156,11 @@ approximation, labeled), **~$17.39-$34.79 of it is junk tax**. The
 MiniMax lane: $0.56 at list, ~$0.51 junk. Per-lane law: these are
 per-lane figures; nothing is blended into the glm-4.6 card.
 
-**Honesty stamps:** in our stack these lanes are free-lane providers and
-billed $0.00 by measurement (prices.json law); every dollar figure in this
-annex is what the IDENTICAL behavior costs at each vendor's public list
-price - a comparison price, not a bill we paid. A paying DeepSeek API
+**What we actually paid: $0.00.** These lanes are free-lane providers in
+our stack (prices.json carries them at $0.00 by measurement); every
+dollar figure in this annex is what the IDENTICAL behavior costs at each
+vendor's public list price - a comparison price, not a bill we paid. A
+paying DeepSeek API
 customer can earn cache hits on repeat context; our free endpoints
 reported none, which is exactly why the whole lane priced at lapse rates.
 

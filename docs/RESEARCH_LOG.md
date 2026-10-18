@@ -828,5 +828,8 @@ filed census (2026-10-14). Hub assembly, no workers.
   figures are comparison prices at list, not bills paid.
 - Completed charge row: glm-4.6 $0.49 | Sonnet-class $2.70 | DeepSeek
   $0.147-0.294 | MiniMax $0.24 | GPT-6.1-Sol unknown.
-- prices.json untouched (free-lane $0.00-by-measurement law lives there;
-  research stamps its own [THEORY] prices).
+- Founder ruling on stamps (2026-10-18): official published prices are
+  on point; R33 carries no [THEORY]/[ESTIMATE]/[HYPOTHETICAL] tags. The
+  facts that matter are stated plainly: prices are the vendors' official
+  lists (retrieved 2026-10-18), our lanes paid $0.00, and Codex has no
+  public price list. prices.json untouched.
