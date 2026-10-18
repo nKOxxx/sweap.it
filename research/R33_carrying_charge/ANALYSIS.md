@@ -9,6 +9,11 @@ constants + public list prices only, no conclusions seeded).
 worker's answer (pre-registered), then diffed. Zero worker arithmetic
 errors this run; one input problem inherited from filed R32 (ledger below).
 
+**Sources (founder-approved description):** the numbers in this study are
+**based on calculations and official information/data** - usage volumes
+measured on our own stores, prices taken from each vendor's official
+published price list (retrieved 2026-10-18).
+
 ## The question
 
 R28 proved the carrying charge for one lane (Hermes/glm-4.6): $0.49 per

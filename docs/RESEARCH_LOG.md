@@ -833,3 +833,8 @@ filed census (2026-10-14). Hub assembly, no workers.
   facts that matter are stated plainly: prices are the vendors' official
   lists (retrieved 2026-10-18), our lanes paid $0.00, and Codex has no
   public price list. prices.json untouched.
+- Founder-approved description of the numbers (2026-10-18): "based on
+  calculations and official information/data" - this line is now the
+  official sourcing statement at the top of R33 and applies to any
+  public use of the table (site, posts, README) when the founder opens
+  publicity.
