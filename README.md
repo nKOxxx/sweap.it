@@ -70,6 +70,16 @@ sweap makes your AI weigh less.*
 
 ## The weigh-in (30 seconds, read-only, your own data)
 
+Claude Code store? One line, no clone (6 KB of stdlib Python; read it
+first if you like):
+
+```bash
+curl -sL https://raw.githubusercontent.com/nKOxxx/sweap.it/main/cli/weigh_cc.py | python3
+```
+
+Any other agent store, or you prefer the whole repo (receipts, research,
+the lot): clone and weigh.
+
 ```bash
 git clone https://github.com/nKOxxx/sweap.it && cd sweap.it
 python3 cli/diet.py --dry-run
