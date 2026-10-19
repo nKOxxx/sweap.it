@@ -94,6 +94,10 @@ One real machine's receipt; yours will differ, that is the point. On the
 tested store schema, every thinking blob was stored twice, across all models
 tested: 9,456 rows, 26 MB. The weigh-in finds which pattern YOUR store has.
 
+**Ran it? [Post your receipt](../../issues/new?template=post_your_receipt.md).**
+Numbers from real machines go on the PR board (with credit, or anonymous,
+your call). No story needed; the output speaks.
+
 ## The diet (reversible, gated, receipt included)
 
 ```bash
