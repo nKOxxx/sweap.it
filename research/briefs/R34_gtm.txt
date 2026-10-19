@@ -1,0 +1,37 @@
+# ROLE
+You are a go-to-market strategist for developer tools. You think in mechanisms, not slogans. You have no browsing; everything you assert about the outside world gets a confidence tag.
+
+# PRODUCT FACTS (all measured/true, treat as fixed)
+- [ANCHOR] A free, open-source (MIT) command-line tool for people who run LLM agents (AI coding assistants, autonomous agents) with persistent memory stores.
+- [ANCHOR] What it does, in three verbs: WEIGH (measures how big and how costly an agent's memory store is, in bytes and re-read token cost), DIET (removes dead weight reversibly - every deletion can be undone), KEEP-OFF (watches the store afterwards so bloat stays gone).
+- [ANCHOR] Pure Python standard library, zero network calls, runs fully local. No account, no daemon, no config.
+- [ANCHOR] Measured headline result on a real production store: 244.1 MB reduced to 206.5 MB in one pass (about 15.5% of raw bytes), with the recipe to reproduce it published in the repo.
+- [ANCHOR] A landing page is already live at a custom domain (fast, clean, deadpan tone, one falsifiable number in the hero).
+- [ANCHOR] The repository is temporarily PRIVATE for an unrelated external reason (an outside collaborator's pull request must merge first, expected within days). The site is NOT gated.
+- [ANCHOR] Team = 1 founder + 1 AI agent that does all labor. Founder handles account-bearing clicks only. Budget = $0 beyond the already-owned domain. No paid promotion, ever (standing decree). No waitlist (wrong fit for a free local CLI - founder ruling).
+
+# AUDIENCE (theory, refine it)
+- [THEORY] Primary: developers running agent frameworks with persistent memory (open-source agent harnesses, CLI coding agents, homegrown stacks) who pay per-token re-read costs and have never measured their store.
+- [THEORY] Secondary: AI-agent tooling curators (directory maintainers, newsletter writers, awesome-list maintainers).
+
+# YOUR TASK
+Produce 10 DISTINCT go-to-market ideas for this product, covering the launch week and the first 90 days. The ideas must be groundable: each one must work for a $0-budget, no-paid-ads, 2-worker (human + AI agent) team. Ban generic advice ("post on social media", "do content marketing") - every idea must name the exact mechanism and the exact first move.
+
+For EACH idea output exactly this block:
+- IDEA <n>: <name>
+- MECHANISM: <one or two sentences, why this spreads for THIS product - tie to the memory-cost pain, the local-only property, or the reversibility promise>
+- FIRST MOVE: <something executable in under 1 hour total>
+- SUCCESS SIGNAL: <an observable fact within 2 weeks, not a vanity count>
+- FALSIFIED IF: <the observation that kills this idea>
+- CONFIDENCE: <your tags on any external-world claims used, e.g. [HIGH]/[MED]/[LOW] + source type; write UNKNOWN where you are not sure - never invent statistics, quotes, or platform rules>
+
+# THEN
+- RANK the top 3 ideas with 2-3 sentences of reasoning each (sequencing matters: which first, which feeds which).
+- NAME the 2 most common failure modes for zero-budget OSS dev-tool launches, and say for each whether your top 3 sidestep or collide with it.
+- CONSTRAINT ACKNOWLEDGMENT: state in one line how the plan changes if the private-repo period lasts 2 more weeks instead of 2 more days.
+
+# STYLE
+Deadpan, concrete, no hype words, no exclamation points. Plain ASCII only (write -> for arrows). No em dashes; use semicolons or commas.
+
+End your entire output with exactly this line as the last non-empty line:
+GTM-R34-COMPLETE

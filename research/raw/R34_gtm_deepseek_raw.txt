@@ -1,0 +1,301 @@
+Query: # ROLE
+You are a go-to-market strategist for developer tools. You think in mechanisms, 
+not slogans. You have no browsing; everything you assert about the outside world
+gets a confidence tag.
+
+# PRODUCT FACTS (all measured/true, treat as fixed)
+- [ANCHOR] A free, open-source (MIT) command-line tool for people who run LLM 
+agents (AI coding assistants, autonomous agents) with persistent memory stores.
+- [ANCHOR] What it does, in three verbs: WEIGH (measures how big and how costly 
+an agent's memory store is, in bytes and re-read token cost), DIET (removes dead
+weight reversibly - every deletion can be undone), KEEP-OFF (watches the store 
+afterwards so bloat stays gone).
+- [ANCHOR] Pure Python standard library, zero network calls, runs fully local. 
+No account, no daemon, no config.
+- [ANCHOR] Measured headline result on a real production store: 244.1 MB reduced
+to 206.5 MB in one pass (about 15.5% of raw bytes), with the recipe to reproduce
+it published in the repo.
+- [ANCHOR] A landing page is already live at a custom domain (fast, clean, 
+deadpan tone, one falsifiable number in the hero).
+- [ANCHOR] The repository is temporarily PRIVATE for an unrelated external 
+reason (an outside collaborator's pull request must merge first, expected within
+days). The site is NOT gated.
+- [ANCHOR] Team = 1 founder + 1 AI agent that does all labor. Founder handles 
+account-bearing clicks only. Budget = $0 beyond the already-owned domain. No 
+paid promotion, ever (standing decree). No waitlist (wrong fit for a free local 
+CLI - founder ruling).
+
+# AUDIENCE (theory, refine it)
+- [THEORY] Primary: developers running agent frameworks with persistent memory 
+(open-source agent harnesses, CLI coding agents, homegrown stacks) who pay 
+per-token re-read costs and have never measured their store.
+- [THEORY] Secondary: AI-agent tooling curators (directory maintainers, 
+newsletter writers, awesome-list maintainers).
+
+# YOUR TASK
+Produce 10 DISTINCT go-to-market ideas for this product, covering the launch 
+week and the first 90 days. The ideas must be groundable: each one must work for
+a $0-budget, no-paid-ads, 2-worker (human + AI agent) team. Ban generic advice 
+("post on social media", "do content marketing") - every idea must name the 
+exact mechanism and the exact first move.
+
+For EACH idea output exactly this block:
+- IDEA <n>: <name>
+- MECHANISM: <one or two sentences, why this spreads for THIS product - tie to 
+the memory-cost pain, the local-only property, or the reversibility promise>
+- FIRST MOVE: <something executable in under 1 hour total>
+- SUCCESS SIGNAL: <an observable fact within 2 weeks, not a vanity count>
+- FALSIFIED IF: <the observation that kills this idea>
+- CONFIDENCE: <your tags on any external-world claims used, e.g. 
+[HIGH]/[MED]/[LOW] + source type; write UNKNOWN where you are not sure - never 
+invent statistics, quotes, or platform rules>
+
+# THEN
+- RANK the top 3 ideas with 2-3 sentences of reasoning each (sequencing matters:
+which first, which feeds which).
+- NAME the 2 most common failure modes for zero-budget OSS dev-tool launches, 
+and say for each whether your top 3 sidestep or collide with it.
+- CONSTRAINT ACKNOWLEDGMENT: state in one line how the plan changes if the 
+private-repo period lasts 2 more weeks instead of 2 more days.
+
+# STYLE
+Deadpan, concrete, no hype words, no exclamation points. Plain ASCII only (write
+-> for arrows). No em dashes; use semicolons or commas.
+
+End your entire output with exactly this line as the last non-empty line:
+GTM-R34-COMPLETE
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    GTM PLAN - LOCAL-ONLY AGENT MEMORY DIET TOOL
+    (2-worker, $0-budget, repo-private-at-launch)
+    
+    Each idea is groundable: the mechanism names why it spreads for THIS
+    product (reversibility, local-only, or the measured number), and the
+    first move fits under 1 hour of labor split between one human and one AI
+    agent.
+    
+    
+    
+    - IDEA 1: The Receipt Reopen
+    - MECHANISM: The entire case rests on one falsifiable number (244.1 MB ->
+    206.5 MB, ~15.5%). An open reproducible recipe converts skeptics into a
+    verifying audience; a claim anyone can re-run is the strongest asset a $0
+    tool has because it does the selling without paid reach.
+    - FIRST MOVE: Since the repo is private, lift the recipe (exact commands,
+    input store shape, expected output) out of the repo and publish it
+    verbatim on the ungated landing page as a self-contained paste, today.
+    - SUCCESS SIGNAL: A person on a machine you do not control reports their
+    own before/after reduction, in email or an issue, matching rough
+    magnitude with the recipe.
+    - FALSIFIED IF: Two weeks pass and no outside machine has reported a
+    reproduction attempt or a number.
+    - CONFIDENCE: Repo-privacy is temporary [product anchor, the one external
+    blocker]; that store-bloat is measurable by strangers needs a real store
+    [LOW, you depend on their environment]; the pain is product thesis
+    [THEORY].
+    
+    - IDEA 2: The Named-Harness Report Card
+    - MECHANISM: "People running agents" is not an audience; users of ONE
+    agent framework are. A ready-made anatomy of a real store from a named
+    harness (say Claude Code or Codex) gives that exact community a citable,
+    concrete artifact, which is how the tool enters a beachhead instead of a
+    void.
+    - FIRST MOVE: Pick one framework you actually use, run WEIGH on its real
+    store, and tabulate the top offenders (biggest byte and re-read-token
+    contributors) into a short public report on the landing page.
+    - SUCCESS SIGNAL: A member of that framework's community cites the
+    report, links it, or files a "here is my store" message referencing their
+    own harness.
+    - FALSIFIED IF: No one in that specific harness community references the
+    report within two weeks.
+    - CONFIDENCE: That framework stores accumulate unmeasured bloat [MED,
+    domain knowledge of agent memory design]; that the community is reachable
+    via its channels [LOW/UNKNOWN, you must verify where they gather].
+    
+    - IDEA 3: The Undo Wedge
+    - MECHANISM: Destructive pruning tools exist and create fear; this tool's
+    every deletion is reversible. Reversibility lowers the activation barrier
+    for the highest-friction moment, actually trying it on a working store,
+    and it is a property competitors cannot copy by a tweak.
+    - FIRST MOVE: Put a three-step truth-demo on the landing page: run DIET,
+    show bytes removed, run the undo, show the store restored, all as the
+    literal commands with the real output.
+    - SUCCESS SIGNAL: A user reports using the undo/restore path, or files a
+    question about restoring in a corner case.
+    - FALSIFIED IF: The reversibility claim draws zero comment or inquiry
+    within two weeks.
+    - CONFIDENCE: Other tools are irreversible [MED, general knowledge of
+    pruning tools, no vendor named].
+    
+    - IDEA 4: The Watch-Hook
+    - MECHANISM: One-shot cleanup is forgettable; a recurring guard is a
+    habit. KEEP-OFF makes the tool a thing that rides along your agent runs,
+    and a one-line startup hook turns a one-time visitor into a recurring
+    user without any account or daemon.
+    - FIRST MOVE: Publish the exact hook one-liner and a 10-line snippet to
+    attach it to your chosen agent's startup, with a copy of what it prints
+    when it finds re-bloat.
+    - SUCCESS SIGNAL: A user files a request to run it differently, or
+    reports the hook catching re-bloat on a subsequent run.
+    - FALSIFIED IF: The watch/keep-off dimension draws no engagement or
+    feature asks within two weeks.
+    - CONFIDENCE: Agent re-read cost recurs on every run [MED, from the
+    product's own we-make-this-claim anchor]; hook mechanics of third-party
+    agents [LOW/UNKNOWN, verify per harness].
+    
+    - IDEA 5: The Curator Drop
+    - MECHANISM: AI-agent tooling curators (newsletter writers, awesome-list
+    maintainers) constantly need concrete, low-risk tools to feature; a free
+    MIT tool with a published falsifiable number and no account is exactly
+    their low-liability pickup. One listing reaches the secondary audience
+    without paid spend.
+    - FIRST MOVE: Pick five specific curator outlets whose submission rules
+    you read first (no guessing), and submit a three-sentence pitch: what it
+    does, the measured number, the install line, plus a link to the ungated
+    site.
+    - SUCCESS SIGNAL: One named outlet lists or features it.
+    - FALSIFIED IF: Zero pickups or acknowledgments from the five targets
+    within two weeks.
+    - CONFIDENCE: That each listed outlet accepts submissions and their
+    formats [LOW/UNKNOWN, must read each set of rules; I did not check any
+    and will not invent them].
+    
+    - IDEA 6: The Air-Gap Pitch
+    - MECHANISM: Zero network calls and zero telemetry is a moat for a real
+    segment: developers in regulated, finance, or air-gapped environments who
+    cannot use SaaS pruning tools. For them, local-only is not a constraint;
+    it is the entire reason to adopt.
+    - FIRST MOVE: Add one explicit, audit-proof line to the landing page
+    stating the tool makes no network calls and exfiltrates nothing,
+    alongside a one-sentence note aimed at the regulated/air-gapped reader.
+    - SUCCESS SIGNAL: A developer from a privacy-sensitive or locked-down
+    environment asks a question or files an issue about working offline or
+    behind a firewall.
+    - FALSIFIED IF: No privacy/air-gap-oriented engagement within two weeks.
+    - CONFIDENCE: That a privacy-sensitive segment exists [MED, general
+    domain knowledge]; that this tool specifically draws them [LOW].
+    
+    - IDEA 7: The Restore Proof
+    - MECHANISM: The deadliest objection to a "memory diet" tool is data
+    loss: users fear a delete they cannot take back. A delete-then-restore
+    equivalence proof, with real before/after state shown identical, kills
+    that objection better than any slogan.
+    - FIRST MOVE: On a scratch store, run DIET to remove a chunk, run the
+    restore, then diff the resulting store against the original and publish
+    the equivalence check verbatim.
+    - SUCCESS SIGNAL: Someone opens with a data-loss or restore-fidelity
+    question, or a skeptic who asked for proof comes back.
+    - FALSIFIED IF: No one engages with the restore-fidelity claim within two
+    weeks.
+    - CONFIDENCE: That "restore equals original" can be demonstrated
+    byte-identically for your store format [MED, depends on your own store
+    internals, verify on disk].
+    
+    - IDEA 8: The Install-Vector Squeeze
+    - MECHANISM: The repo being private blocks nothing about distribution if
+    the install path is unbundled from it. A tool that installs via a
+    standard package manager and runs with no config removes every friction
+    between the landing page and a user running it, independent of repo
+    visibility.
+    - FIRST MOVE: Publish the package to PyPI so pipx install (or your
+    chosen equivalent) works today, and put that one command on the landing
+    page hero.
+    - SUCCESS SIGNAL: The first issue or usage signal comes from an account
+    or machine that is not the founder's.
+    - FALSIFIED IF: No install and no usage from a non-founder source within
+    two weeks.
+    - CONFIDENCE: PyPI accepts new packages and pipx install works as
+    standard [MED, verifiable, standard ecosystem].
+    
+    - IDEA 9: The Your-Number Challenge
+    - MECHANISM: WEIGH returns a number in seconds, and people share numbers
+    when the act of getting one is instant and low-commitment. The core ask
+    ("how big and how costly is your store") is itself the marketing; each
+    posted number is a fresh piece of user-generated proof.
+    - FIRST MOVE: Publish a one-line "run WEIGH on your store" instruction
+    with a blank for the result, and post your own number as the seed example
+    on the landing page.
+    - SUCCESS SIGNAL: A stranger posts or sends their store number unprompted.
+    - FALSIFIED IF: No stranger supplies a number within two weeks.
+    - CONFIDENCE: That people share cheap measurable numbers [MED,
+    observation of how tools spread]; that enough of your target has stores
+    to run it [LOW/UNKNOWN].
+    
+    - IDEA 10: The Comparison Matrix
+    - MECHANISM: Every alternative is either networked (needs an account or a
+    cloud stop) or irreversible (deletes with no undo). A public head-to-head
+    on a reproducible store documents two properties both alternatives lack:
+    fully local, fully reversible. That is a positional win, not a feature
+    list.
+    - FIRST MOVE: Build a one-page comparison on the landing page naming the
+    categories (local? reversible? account? cost) and mark this tool against
+    the field with facts only, on the same scratch store used elsewhere.
+    - SUCCESS SIGNAL: A visitor or commenter engages with the comparison
+    itself, either disputing or endorsing a square.
+    - FALSIFIED IF: No one engages with the comparison within two weeks.
+    - CONFIDENCE: I have not verified the current feature sets of named
+    alternatives; any claim I made about them would be [LOW/UNKNOWN]; the
+    comparison is only sound if built by reading each alternative's own docs
+    first.
+    
+    
+    
+    RANK (sequencing for launch week and 90 days)
+    
+    1. The Receipt Reopen (idea 1). It is the only one that runs entirely
+    inside the ungated site and does not wait on the repo; it produces the
+    falsifiable artifact every other idea can cite. Every later idea leans on
+    it, so it comes first and stays the load-bearing page.
+    
+    2. The Named-Harness Report Card (idea 2). It converts the anchor number
+    into a beachhead: one concrete victim of the pain, precisely the reader
+    who pays per re-read. It feeds the curator drop by giving that pitch a
+    named, citable artifact instead of a generic claim.
+    
+    3. The Curator Drop (idea 5). It is the distribution layer and runs last
+    because it needs the receipts from 1 and 2 to submit. It reaches the
+    secondary audience (curators) who then reach the primary one, on $0.
+    
+    Sequencing note: 1 builds the proof, 2 aims it at one audience, 5 carries
+    it to the people who repeat it. The watch-hook (4) and install-vector (8)
+    are infrastructure that should be true early but are not the launch
+    moment.
+    
+    
+    
+    TWO COMMON FAILURE MODES, AND HOW THE TOP 3 SIT
+    
+    FM1 - No beachhead / aiming at "everyone running agents" and reaching
+    nobody. The top 3 sidestep it: the report card (2) deliberately chooses
+    one harness, and the receipt (1) is a single reproducible example, not a
+    broad claim. Nothing here is aimed at an all-agents audience.
+    
+    FM2 - Vanity-metric launch / measuring stars and downloads instead of
+    actual adoption. The top 3 sidestep it: every success signal is a
+    real-world adoption fact (a stranger reproducing a number, a
+    harness-community citation, a curator listing), not a download count or a
+    star tally. The your-number challenge (9) even makes adoption itself the
+    metric.
+    
+    
+    
+    CONSTRAINT ACKNOWLEDGMENT
+    If the private-repo period lasts two more weeks instead of two more days:
+    nothing that shipments through the ungated site changes (ideas 1, 3, 6,
+    7, 8 proceed as written), the report card and curator drop continue but
+    link only the landing page, and the only true casualties are repo-native
+    mechanics (Show HN, GitHub-native discovery, the recipe living in-repo),
+    which defer or park on the landing page until the repo opens.
+    
+    GTM-R34-COMPLETE
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261019_145539_3e7a81
+
+Session:        20261019_145539_3e7a81
+Duration:       1m 58s
+Messages:       2 (1 user, 0 tool calls)
