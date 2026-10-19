@@ -71,6 +71,9 @@
   .btn-orange:hover { background: var(--orange-deep); transform: translateY(-1px); }
   .btn-chalk { color: var(--paper); border: 1.5px solid var(--chalk-line); }
   .btn-chalk:hover { border-color: rgba(243,239,228,.4); }
+  .btn svg, .nav-links a svg { width: 16px; height: 16px; fill: currentColor; vertical-align: -2px; }
+  .btn svg { margin-right: 9px; }
+  .nav-links a svg { width: 19px; height: 19px; display: block; }
 
   /* ---- hero: the gym ---- */
   .hero { padding: 72px 0 72px; position: relative; overflow: hidden; }
@@ -217,6 +220,7 @@
     border: 1px solid #2a2f26;
     display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 44px;
   }
+  .vendorboard { margin-top: 44px; }
   .pb-left .pb-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--chalk-dimmer); text-transform: uppercase; }
   .pb-left h3 { font-family: var(--display); font-size: clamp(26px, 3vw, 36px); line-height: 1.06; text-transform: uppercase; margin: 12px 0 18px; }
   .pb-left h3 .hot { color: var(--orange); }
@@ -316,7 +320,9 @@
       <a href="#program">The program</a>
       <a href="#price">Price board</a>
       <a href="#prs">PR board</a>
-      <a class="btn btn-orange" style="padding:9px 18px; font-size:13.5px;" href="https://github.com/nKOxxx/sweap.it">Start training</a>
+      <a href="#receipt">$ CLI</a>
+      <a href="https://github.com/nKOxxx/sweap.it" aria-label="sweap.it on GitHub" style="display:flex;align-items:center;"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+      <a class="btn btn-orange" style="padding:9px 18px; font-size:13.5px;" href="#receipt">Run the tests</a>
     </div>
   </div>
 </nav>
@@ -336,8 +342,9 @@
         Local-only. Reversible. Zero dependencies.
       </p>
       <div class="hero-ctas">
-        <a class="btn btn-orange" href="https://github.com/nKOxxx/sweap.it">Run the weigh-in</a>
+        <a class="btn btn-orange" href="#receipt">Run the weigh-in</a>
         <a class="btn btn-chalk" href="#program">See the program</a>
+        <a class="btn btn-chalk" href="https://github.com/nKOxxx/sweap.it"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
       </div>
       <p class="family"><code>caveman</code> makes your AI talk less. <code>jev</code> makes your AI think faster.
         <code>gstack</code> makes your AI a team. <code>sweap.it</code> makes your AI weigh less.</p>
@@ -534,7 +541,7 @@
 
     <div class="rules">
       <h3>Gym rules</h3>
-      <div class="rules-sub">Posted by the door. They are properties of the code, not promises.</div>
+      <div class="rules-sub">Not marketing claims: properties of the code. Every rule here is checkable in the repo.</div>
       <div class="rules-grid">
         <div class="rule"><span class="rule-n">1</span><span><b>No network, provably.</b> Zero imports that can open a socket. Unplug the cable; sweap.it works identically. Verified under a hard firewall.</span></div>
         <div class="rule"><span class="rule-n">2</span><span><b>No dependencies.</b> Nothing to install, nothing to poison. The whole toolkit is Python's standard library.</span></div>
@@ -547,13 +554,86 @@
   </div>
 </section>
 
+
+<section id="receipt">
+  <style>
+    #receipt .rx-term{background:#0b0e12;border:2px solid #2a2f38;border-radius:6px;padding:18px 20px;margin:26px 0 10px;overflow-x:auto}
+    #receipt .rx-term code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;line-height:1.65;color:#c8d0da;white-space:pre;display:block}
+    #receipt .rx-prompt{color:#5a6472;user-select:none}
+    #receipt .rx-cmd{color:#fff;font-weight:700}
+    #receipt .rx-ok{color:#7ec97e}
+    #receipt .rx-dim{color:#5a6472}
+    #receipt .rx-cap a{color:inherit}
+    #receipt .rx-cap{font-size:12.5px;color:#8b93a0;margin:6px 0 0}
+    #receipt .rx-steps{display:grid;gap:18px;margin-top:10px;padding-bottom:4px}
+    #receipt .rx-step{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start}
+    #receipt .rx-step-n{width:36px;height:36px;border-radius:50%;background:#ff6a00;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+    #receipt .rx-step-body h3{margin:2px 0 8px}
+    #receipt .rx-step .rx-term{margin:0 0 8px}
+    @media(max-width:720px){#receipt .rx-steps{grid-template-columns:1fr}}
+  </style>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">&#9635; Open receipt</div>
+      <h2>Don't trust the numbers.<br>Re-run them.</h2>
+      <p class="sec-sub">One script, Python's standard library, no network. It builds a synthetic store
+        to an exact fixture spec, then re-derives every expected figure with the real classifier.
+        Your output should match ours line for line. It deletes its own temp store on exit.</p>
+    </div>
+
+    <div class="rx-term">
+<code><span class="rx-prompt">$ </span><span class="rx-cmd">python3 scripts/repro_receipt.py</span>
+
+<span class="rx-dim">SWEAP RECEIPT REPRO : synthetic store, real classifier (cli/diet.py)</span>
+<span class="rx-ok">[OK]</span> class A twin rows: 60 (expected 60)
+<span class="rx-ok">[OK]</span> class A mirror bytes: 166,680 (expected 166,680)
+<span class="rx-ok">[OK]</span> class B resting tool rows: 40 (expected 40)
+<span class="rx-ok">[OK]</span> class B resting bytes: 199,840 (expected 199,840)
+<span class="rx-ok">[OK]</span> dry-run total_n: 100 (expected 100)
+<span class="rx-ok">[OK]</span> dry-run names 5 divergent pairs
+
+Every expected number reproduced by the real classifier.
+RECEIPT-REPRO-OK</code>
+    </div>
+
+    <p class="rx-cap" style="margin-top:26px">Now your machine. Three steps &mdash; read-only until you decide otherwise:</p>
+
+    <div class="rx-steps">
+      <div class="rx-step">
+        <div class="rx-step-n">1</div>
+        <div class="rx-step-body">
+          <h3>Weigh your store</h3>
+          <div class="rx-term"><code><span class="rx-prompt">$ </span><span class="rx-cmd">curl -sL https://raw.githubusercontent.com/nKOxxx/sweap.it/main/cli/weigh_cc.py | python3</span></code></div>
+          <p class="rx-cap">Claude Code store: no clone, 30 seconds. Other agent with a local store: clone the repo, then <code>python3 cli/diet.py --dry-run --db path/to/store.db</code>. It reads, prints, touches nothing.</p>
+        </div>
+      </div>
+      <div class="rx-step">
+        <div class="rx-step-n">2</div>
+        <div class="rx-step-body">
+          <h3>File your receipt</h3>
+          <p class="rx-cap">Liked your numbers? Put them on the board: <a href="https://github.com/nKOxxx/sweap.it/issues/new?template=post_your_receipt.md">Post your receipt</a> &mdash; one click with a GitHub login, paste, submit. Credit or anonymous, your call.</p>
+        </div>
+      </div>
+      <div class="rx-step">
+        <div class="rx-step-n">3</div>
+        <div class="rx-step-body">
+          <h3>Diet when you like the numbers</h3>
+          <div class="rx-term"><code><span class="rx-prompt">$ </span><span class="rx-cmd">python3 cli/diet.py --quarantine --db path/to/store.db</span></code></div>
+          <p class="rx-cap">Every cut is backed up and hash-verified before anything moves. One command puts every byte back. Nothing deletes on faith.</p>
+        </div>
+      </div>
+    </div>
+    <p class="rx-cap" style="margin-top:22px;padding-top:16px;border-top:1px solid #232a33">Everything above lives in the <a href="https://github.com/nKOxxx/sweap.it">repo</a>: clone it and re-run every number yourself. Nothing needs the internet; nothing phones home.</p>
+  </div>
+</section>
+
 <section class="final">
   <div class="wrap">
     <img src="assets/sweap-lifter.png" alt="sweap.it: pixel weightlifter doing the overhead press" style="image-rendering: pixelated; height: 116px; margin-bottom: 20px;">
     <h2>Day one starts<br>with a weigh-in.</h2>
     <p>Thirty seconds, read-only, your own data. You cannot break anything
       by looking. That one is on the gym rules board.</p>
-    <a class="btn btn-orange" href="https://github.com/nKOxxx/sweap.it">Run the weigh-in</a>
+    <a class="btn btn-orange" href="#receipt">Run the weigh-in</a>
   </div>
 </section>
 
