@@ -12,6 +12,11 @@ Numbers are measured, dated, and never blended with estimates.
 - `research/R34_gtm/` + `research/R34b_gtm_revisit/`: GTM spine, posting
   schedule v2 (DeepSeek red-teamed), receipt ask template, Show-HN draft.
 - `research/R35_paper/OUTLINE.md`: the paper scope (Status: SCOPING).
+- `research/R36_dual_vendor_charge/`: MiniMax + DeepSeek carrying charges
+  derived from official price lists captured live 2026-10-20; 7 model/tier
+  rows, $0.135-$1.276 per 1M dead tokens, $2.23-$21.07 per lapse on the
+  measured store; 14/14 cells converged across two blind worker lanes and
+  hub recount; hub pre-registration erratum logged, not averaged.
 
 ### Changed
 - README v2 (2026-10-20): eight-card number wall up top, every card
