@@ -1,0 +1,59 @@
+CARRYING-CHARGE STUDY, TWO VENDOR PRICE LISTS (blind; derive, do not agree)
+
+You are given measured constants from one audited local store and two
+official published price lists. You know nothing about who collected them.
+Derive every requested figure yourself. If a needed input is missing,
+write UNKNOWN; never invent a number.
+
+TAGS: [ANCHOR] = measured or quoted verbatim from a named official source,
+cite as-is. [THEORY] = published mechanism. [ASSUMPTION] = a conversion or
+modeling choice YOU state explicitly. Mark every output figure [EXACT],
+[ESTIMATE], or [HYPOTHETICAL] accordingly.
+
+## Measured inputs
+
+Store (local agent memory store, one host, 2026-10):
+- [ANCHOR] stored transcript tokens: 18,210,064 total, of which dead tool
+  output (duplicate reasoning blobs + resting tool exhaust) = 90.69%
+  (exact count, every row, n=37,813 tool rows)
+- [ANCHOR] mechanism: when the agent's session state is healthy, this
+  stored content is served from the provider's prompt cache at a discounted
+  cache-read rate; when the agent's memory lapses (fresh session, cold
+  start), cache hit is 0.0% and ALL stored content is re-read at the full
+  input price. This full-price re-read event is called a lapse.
+
+Price list D, DeepSeek (official docs page api-docs.deepseek.com/quick_start/pricing, retrieved 2026-10-20, USD per 1M tokens):
+- [ANCHOR] model deepseek-flash: input cache HIT $0.003 off-peak / $0.006 peak;
+  input cache MISS $0.15 off-peak / $0.3 peak; output $0.6 off-peak / $1.2 peak.
+  Off-peak window is defined by the vendor; both windows quoted.
+- [ANCHOR] model deepseek-v4-pro: cache HIT $0.022 off-peak / $0.044 peak;
+  cache MISS $0.66 off-peak / $1.32 peak; output $1.98 off-peak / $3.96 peak.
+
+Price list M, MiniMax (official docs page platform.minimax.io/docs/pricing/overview, retrieved 2026-10-20, USD per 1M tokens, current displayed prices):
+- [ANCHOR] model MiniMax-M3.1-Flash: input $0.15, output $0.60,
+  prompt-caching read $0.015.
+- [ANCHOR] model MiniMax-M3, input up to 512k tokens: input $0.30,
+  output $1.20, prompt-caching read $0.06.
+- [ANCHOR] model MiniMax-M3, input above 512k tokens: input $0.60,
+  output $2.40, prompt-caching read $0.12.
+- [ANCHOR] page note: the platform displays a struck-through higher list
+  above the current price; the CURRENT price is the billed one. Use current.
+
+## Derive
+
+T1. Carrying charge per 1M junk tokens per lapse for every priced model and
+    tier/window above: charge = full input price - cached input price.
+    Show the arithmetic per model. For DeepSeek give BOTH windows.
+T2. Dollar cost of ONE lapse on the measured store for every model:
+    dead-weight tokens x charge. Show tokens math (state the dead-weight
+    token count you derived from the anchors and the formula).
+T3. A single comparison table: model | charge $/1M junk tok | $ per lapse
+    on this store. Every cell carries its source (which list, which tier).
+T4. Rank the models by $ per lapse, cheapest first, one line.
+
+FALSIFIED IF: the charge collapses for any model whose cached price equals
+its full input price. State for each model whether that condition holds.
+
+Constraints: no outside browsing; UNKNOWN over invention; every derived
+number shows its formula; no conclusions beyond the tables requested.
+Your final line, verbatim: R36-CARRYING-CHARGE-OK
