@@ -77,3 +77,13 @@ STUDY CONVERGED. All 14 numeric cells double-derived by independent blind
 lanes and hub-recounted. Admitted in full for the paper's Table 3, with
 finding 1's tier note attached. No averaging was performed (none needed;
 no cell diverged).
+
+## Data-source note (for the paper's methods section)
+
+The MiniMax rows' authority is the OFFICIAL PRICE LIST
+(platform.minimax.io/docs/pricing/overview, retrieved 2026-10-20, current
+displayed prices, struck-through list ignored), not a MiniMax worker lane.
+Worker lanes exist to verify the DERIVATION ARITHMETIC blind; vendor data
+comes from vendor-published prices with a retrieval stamp. A MiniMax worker
+lane is therefore unnecessary for these figures and its absence does not
+weaken them. Same principle for every vendor column in Table 3.
