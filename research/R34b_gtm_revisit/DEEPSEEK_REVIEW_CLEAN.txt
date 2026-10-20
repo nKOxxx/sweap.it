@@ -1,0 +1,171 @@
+HOSTILE GTM REVIEW — sweap.it posting schedule (2026-10-20)
+The schedule gets one thing right and I'll quote it so it's earned:
+"Receipts are the content." And: "or honest status + the report card
+link." Those two lines are the correct instinct — restraint-forward, no
+hype, no invented numbers. Everything below is the attack on everything
+around them.
+1. TIMELINE ATTACKS
+(A) THE Show HN DATE IS THE BIGGEST ERROR IN THE DOCUMENT.
+You schedule Show HN for Oct 24 — the single highest-exposure shot a
+dev-tool repo gets, effectively once per repo [HIGH] — while carrying
+exactly 1 receipt, which is the founder's own. Meanwhile you gate Reddit
+(a smaller channel) on "2+ outside receipts." The gating is inverted: the
+highest-stakes channel fires unconditionally, the lower-stakes one waits
+for proof.
+Your own skill (oss-gtm-playbooks, launch-sequencing law) states the
+correct order explicitly: ONE softest technical channel first (e.g.
+r/LocalLLaMA), and the larger HN Show HN only 48–72h later IF the first
+drew organic engagement — "a dead first post predicts a dead second." The
+schedule does the reverse: HN first, Reddit second. That is a flat
+contradiction of the validated playbook. Specific fix: move Show HN off
+Oct 24; schedule it no-earlier-than 48–72h after a soft channel
+(r/LocalLLaMA or r/selfhosted) shows organic engagement AND ≥1 outside
+receipt landed. Realistic result date: ~Nov 3–10, not Oct 24.
+(B) "First outside receipt by Oct 23" is wishful without active
+solicitation (see section 5). Tool = install + run + paste. Three days is
+survivable only if you're actively asking people 1:1; the schedule's Wave
+1 is passive. The Oct 23 follow-up will most likely be the "honest
+status" branch, not the "first outside receipt" branch.
+(C) Reddit dated Oct 27–28 but gated on "2+ outside receipts" is
+self-contradictory. Your own kill-switch clock (see D) makes 2 outside
+receipts by Oct 26 improbable. A gated item should have NO fixed date —
+it should read "slip until gate met." As written, Oct 27–28 is a fiction
+that survives only if the gate is ignored.
+(D) KILL-SWITCH DATES VS. YOUR OWN 2-WEEK SUCCESS GATE — they contradict
+each other.
+Success gate: "at least one outside machine runs within 2 weeks."
+Receipt-kill: "Reopen dead if 2 weeks, no outside reproduction attempt
+(gate: Oct 26)." Launch is Oct 20; 2 weeks = Nov 3. Oct 26 is 6 days. You
+would kill the receipt funnel before your own success window has even
+half-elapsed, immediately after Show HN. Either the clock starts wrong or
+the kill date is wrong. Same smell: Report Card gate "2 weeks" = Nov 2
+(12 days, close but stated as 2 weeks = Nov 3); Curator gate Nov 16 (from
+Oct 31 ≈ 16 days, fine). Fix the receipt gate to Nov 3 at minimum — and
+kill-switches that fire inside the success window are self-sabotage in a
+tool whose whole funnel is a 2-week measurement. [the "2 weeks from Oct
+20 = Nov 3" arithmetic is plain calendar math, not a platform claim]
+(E) CURATOR RESEARCH WINDOW is too tight and the acknowledgment gate too
+eager. Five named outlets with "read each one's submission rules first"
+in 2 days (Oct 31–Nov 2) does not match serious directory vetting. And
+"zero acknowledgments in 2 weeks (Nov 16)" — many curators acknowledge or
+schedule on a 2–4 week lag [MED]. A Nov 16 kill on a process you kicked
+off Oct 31 is cutting a crop before the season.
+2. CHANNEL ATTACKS
+(A) MISSING THE PRIVACY/OFFLINE CHANNEL ENTIRELY. The tool's
+differentiator is "runs offline, no signup, Python stdlib only" — that is
+a local/selfhosted pitch, and the schedule's channel set has no
+selfhosted venue. r/selfhosted is where offline-local-no-trust-required
+tools land [MED/HIGH]; it's a likely richer match than r/AI_Agents. Not
+on the schedule at all.
+(B) r/AI_Agents is a weak bet. Current size/activity UNKNOWN; it reads as
+a thin, promotion-dense subreddit next to r/LocalLLaMA [LOW/MED]. If you
+want agent-community mass, r/ClaudeAI, r/ClaudeCode, r/ChatGPTCoding, and
+the "awesome-claude-code" / "awesome-llm-agents" GitHub lists are more
+concrete proxies [MED].
+(C) X/TWITTER IS A VANITY CHANNEL HERE. A 4-post thread lands on ~zero
+organic reach for a ~zero-follower solo founder [MED]. The R34
+"before/after board story" has value, but X is the wrong first outlet for
+it — that story belongs in the Show HN first comment or a single blog
+post. As positioned, this is founder-effort spent on the lowest-ROI
+surface in the doc.
+(D) ORDERING IS BACKWARDS. Validated sequence is soft channel → Show HN →
+directories. The schedule is Show HN → X → Reddit → curator drop. HN
+exposure is being spent before proof and before any soft-channel test
+(see 1A).
+(E) "CONTINUOUS: Claude Code / Hermes communities — report-card link
+wherever those users gather" is not a channel, it's a vibe. No named
+venue, no cadence, no owner. Citation bait needs concrete lists/forums
+with someone responsible, or it silently doesn't happen. This is where
+r/commandline [MED] and named awesome-lists slot in.
+3. MESSAGE ATTACKS
+(A) THE HYPE RISK IS ACTUALLY LOW — the restraint is the one sound part
+(quoted above). The genuine message risks are structural, not tone:
+(i) Leading posts with the product ("weigh and diet...") instead of
+receipts (board numbers, founder slips included). Every public post
+should lead with the measured artifact, per your own law L1 — the
+self-describing artifact IS the pitch. The Show HN title is fine but
+neutral-descriptive [MED] only if the first comment immediately carries
+the number, not a tagline.
+(ii) "Diet your AI agent's memory store" is the one gimmick word in the
+doc. It reads soft/marketing against the audit-register brand law. Choose
+"shrink," "prune," or "cut" — deadpan. [the brand register rule is from
+your own skill, not an external claim]
+(iii) The 4-post X thread is the risk carriermost likely to read as
+pure promotion, because it has no receipt to hang on — and it's fighting
+for attention it won't get (2C).
+(B) Overclaim exposure is minimal BECAUSE of the honest-positioning
+constraint and the kill-switches — that is genuinely well-built. "I
+draft, founder posts" for every external touch is the correct honesty
+control. Keep it. The risk is the inverse: under-amplifying until the
+proof that unlocks amplification never gets recruited (section 5).
+4. EFFORT ATTACKS
+(A) WAVE 2 IS THREE CAMPAIGNS IN ONE WEEK for a solo non-marketer: Show
+HN (Oct 24) + X thread (25–26) + Reddit (27–28). Show HN alone requires
+the founder to be present and answering comments the whole day — that is
+the highest-value hour of the entire launch and it isn't budgeted as
+labor. You cannot run HN response plus curate an X thread plus prep
+Reddit simultaneously. Cut X, defer Reddit (it's gated anyway).
+Concentrate into one owned venue with the founder free to respond.
+(B) CURATOR OUTREACH over-budgets founder time: 5 outlets × rule-reading
++ drafting + founder approval per send. Cut to 3 outlets on the first
+pass [MED]; batch the approval into one review session instead of
+per-send round-trips.
+(C) The same-day receipt→Report Card permission-check is real admin, but
+it's small and it's the product working. Keep. The automated 09:00 tally
+is correctly zero-effort. Kill-switches are correctly low-effort.
+(D) Every external touch is founder-gated ("founder approves each before
+send") — correct for honesty, but each is a round-trip. Batch approvals
+by date so the founder approves once, not six times.
+5. MISSING (the single biggest gap)
+NOTHING ACTIVELY RECRUITS THE FIRST OUTSIDE RECEIPTS. The entire spine —
+reproducibility, report card, curator drop — is load-bearing on outside
+receipts, and Wave 1's plan for obtaining them is "let receipts gather,"
+"silence is fine," plus one passive Telegram blurb from yesterday.
+Receipts do not gather; they are recruited. This is precisely PG's
+Do-Things-That-Don't-Scale [HIGH, canonical]: the founder should spend
+the next 48h DMing/emailing/pinging 10–20 known agent users (friends,
+telegram group members, anyone who's run Claude Code) a one-liner — "run
+sweap dry-run on your store, paste the output, that's it" — and handle
+the replies. That is the missing motion that unblocks gates 1, 2, the Oct
+23 post, the Reddit gate, and Show HN. Absent it, the schedule's own
+honest funnel fails by design and every downstream date is moot.
+Secondary absences:
+(i) No named "awesome-" / directory seed before the paid-class curator
+drop — cheap citation citation bait that the "continuous" line gestures
+at but never names [MED].
+(ii) No GitHub hygiene item: topics/description/release tags (your
+skill notes topics default empty even on live repos [HIGH]) — needed to
+make the repo citable before you point HN at it.
+(iii) No pre-written Show HN first comment carrying the measured number
+(L3), to be pasted the moment it goes live.
+(iv) The privacy/offline hook is not made the lede anywhere (see 2A).
+6. TOP 5 MUST-FIX (each: item — S/M/L effort)
+1. [M] RECRUIT THE FIRST OUTSIDE RECEIPTS ACTIVELY. 1:1 asks to 10–20
+known agent users within 48h; make it a one-command dry-run + paste.
+Without this, every gate starves. This is the load-bearing omission.
+(founder writes ~10–20 individual asks + handles replies — M)
+2. [S] FIX THE KILL-SWITCH / SUCCESS-GATE CONTRADICTION. 2 weeks ≠ `Oct
+26`. Align the receipt-kill gate to Nov 3 (true 2 weeks) and never kill
+the funnel inside the success window. As written you'd terminate the
+product 6 days after launch. (pure date edit — S, but it's currently a
+logic bug that could end the whole effort)
+3. [M] RE-STAGE SHOW HN. Move off Oct 24; gate it on soft-channel organic
+engagement + ≥1 outside receipt; schedule ~Nov 3–10. In the same move,
+cut/defer the X thread so Wave 2 is one owned venue and the founder is
+free to answer HN comments all day. (reorder + one draft — M)
+4. [S] REDO THE CHANNEL SET. Add r/selfhosted and r/commandline; demote
+r/AI_Agents; demote X to "post-HN follow-up or skip." Make the
+offline/privacy/no-signup fact the lede of the soft-channel posts.
+(copy/plan edit — S)
+5. [M] REPLACE "CONTINUOUS citation bait" WITH 2–3 NAMED GROUND ACTIONS:
+awesome-claude-code / awesome-llm-agents list submissions, GitHub
+topics+release hygiene before HN, and a pre-written Show HN first comment
+carrying the measured number. Make each a named deliverable with an
+owner, not a vibe. (named tasks + drafts — M)
+Bottom line: the honesty architecture (receipts-as-content,
+kill-switches, founder-gated posting) is genuinely good and I quoted the
+lines that earn it. But the schedule passes the hardest channel early
+with no proof, inverts your own validated sequencing law, contradicts its
+own success gate with its kill dates, and — worst — never actually
+recruits the receipts its entire spine depends on. Fix #1 first;
+everything else re-orders around it.
