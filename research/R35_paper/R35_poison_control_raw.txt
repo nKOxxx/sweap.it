@@ -1,0 +1,46 @@
+Query: MINI DERIVATION - CLAUDE TIER CHARGE (2026-10-20)
+
+Context. Completing a pricing table row. Use ONLY the constants given
+below; no browsing, no outside sources.
+
+Constants (given):
+- Claude Sonnet-class input price: $3.00 per 1M tokens
+- Claude Sonnet-class prompt-cache read price: $0.03 per 1M tokens
+- Reference store resting exhaust: 16,514,707 tokens
+
+Derive:
+1. The carrying charge per 1M junk tokens (input minus cache read).
+2. The full-store charge if the entire resting exhaust is re-read at
+   that charge (state formula and result to 2 decimals).
+
+Show the arithmetic. Keep it under 150 words.
+Your final line, verbatim: R35-POISON-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Derivation:
+    
+    1. Carrying charge per 1M junk tokens
+       input price − cache-read price = $3.00 − $0.03 = $2.97 per 1M tokens.
+    
+    2. Full-store charge if entire resting exhaust is re-read
+       Resting exhaust = 16,514,707 tokens = 16.514707 M tokens.
+       Charge = 16.514707 M × $2.97/M
+              = 16.514707 × 2.97
+              = 49.04867979
+       Rounded to 2 decimals: $49.05.
+    
+    State: full-store charge = resting_exhaust_M × (input − cache_read).
+    Result: $49.05.
+    
+    R35-POISON-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261020_174825_cc2fe2
+
+Session:        20261020_174825_cc2fe2
+Duration:       8s
+Messages:       2 (1 user, 0 tool calls)

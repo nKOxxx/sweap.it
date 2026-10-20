@@ -1,0 +1,4 @@
+{"date": "2026-10-17", "db_file_mb": 244.08, "content_mb": 22.97, "tool_rows": 4631, "tool_mb": 15.45, "tool_closed_mb": 7.28, "reasoning_mb": 26.03, "mirror_mb": 26.03, "freelist_mb": 4.91}
+{"date": "2026-10-18", "db_file_mb": 215.28, "content_mb": 17.53, "tool_rows": 3880, "tool_mb": 9.34, "tool_closed_mb": 0.0, "reasoning_mb": 27.44, "mirror_mb": 1.36, "freelist_mb": 0.72}
+{"date": "2026-10-19", "db_file_mb": 233.66, "content_mb": 19.4, "tool_rows": 5450, "tool_mb": 10.7, "tool_closed_mb": 0.0, "reasoning_mb": 29.69, "mirror_mb": 3.6, "freelist_mb": 1.21}
+{"date": "2026-10-20", "db_file_mb": 240.29, "content_mb": 20.31, "tool_rows": 6132, "tool_mb": 11.26, "tool_closed_mb": 0.0, "reasoning_mb": 30.63, "mirror_mb": 4.54, "freelist_mb": 0.03}

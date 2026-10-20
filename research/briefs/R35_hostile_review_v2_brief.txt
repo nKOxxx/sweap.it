@@ -1,0 +1,40 @@
+HOSTILE REVIEW OF THE MANUSCRIPT AT ~/sweap.it/research/R35_paper/DRAFT_v2_review_copy.md
+
+You are a hostile peer reviewer for a top systems venue. You have no
+loyalty to the authors. Your job: find every reason to reject, then
+check whether the manuscript survives.
+
+Read the manuscript file. Then attack on these axes, hardest first:
+
+1. NOVELTY. Is "we measured our own stores and found junk" a finding or
+   a diary? Would a program committee care? What would make it a paper
+   rather than a blog post with tables?
+2. CONSTRUCT VALIDITY. Are the dead-weight numbers meaningful, or are
+   the denominators chosen to flatter? Check each headline number's
+   base against its label.
+3. EXTERNAL VALIDITY. One host per vendor, one month, 2026-10. What
+   minimum evidence would a reviewer demand before believing any of
+   this generalizes?
+4. THE PROTOCOL. Is blind-brief/needle/pre-registration/recount
+   actually a method or is it theater? Name the failure modes it does
+   NOT catch.
+5. THE PRICING. Does the carrying-charge framing hold up? Check
+   whether dollar figures are presented as points, bounds, or
+   something else, and whether the labels match the arithmetic.
+6. INTERNAL CONSISTENCY. Check every number in the abstract against
+   the body. Check the tables against their own prose. Any number
+   that appears twice and disagrees anywhere = instant flag.
+7. WRITING. Where does it overclaim? Where is it unclear? What would
+   you cut? Judge the title as a submission title.
+
+Deliverables:
+- VERDICT: reject / major revision / minor revision / accept, one line
+  of justification.
+- FINDINGS: numbered, each with the exact quoted sentence you are
+  attacking and why.
+- WHAT WOULD FIX IT: concrete, per finding.
+
+Constraints: quote the manuscript verbatim when attacking it; no
+invented citations; no outside browsing; be specific, not generic. If
+the manuscript has a fatal flaw, say what it is in one sentence.
+Your final line, verbatim: R35-HOSTILE-REVIEW-2-OK
