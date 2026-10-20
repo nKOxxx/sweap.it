@@ -1,18 +1,12 @@
-# Dead Weight in AI Agent Memory Stores (title options in header note)
+# Written Twice, Billed Once: The Defect Inside Agent Memory
 
-Draft v2, 2026-10-20. Founder review copy. Built from v1 + hostile-review
-adjudication (REVIEW_ADJUDICATION.md: 8 findings accepted, 1 rejected on
-filed facts, 1 partially accepted).
-
-TITLE OPTIONS (founder picks):
-  T1 (twin-led, reviewer F10 endorses): "Mirrored Twice, Billed Once:
-      Structural Duplication and Measured Dead Weight in AI Agent
-      Memory Stores"
-  T2 (balanced): "Dead Weight in AI Agent Memory Stores: An Exact
-      Census on One Store, Byte Bands on Two More, and a Reversible
-      Diet"
-  T3 (price-led): "The Carrying Charge of Agent Memory: Pricing and
-      Reversibly Removing Dead Weight in Local Agent Stores"
+Draft v2, 2026-10-20. Founder review copy. TITLE CHOSEN (founder,
+2026-10-20). Earlier options retired for the record: T1 "Mirrored
+Twice, Billed Once..." / T2 "Dead Weight in AI Agent Memory Stores..."
+/ T3 "The Carrying Charge of Agent Memory..." / v3 batch incl. "90.7%
+of Our AI Agent's Memory Is Dead Weight" and "We Put Our AI Agent's
+Memory on a Diet: 37.6 MB Gone, Nothing Lost" (kept as candidate Show
+HN / section headlines).
 
 Changes v1 -> v2 per finding: F1 third content state; F2 mirror stated
 outside the 90.69%; F3 census renamed; F4 law -> measured rate; F5
