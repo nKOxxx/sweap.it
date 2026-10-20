@@ -3,6 +3,22 @@
 All notable changes to the sweap repo and its receipts.
 Numbers are measured, dated, and never blended with estimates.
 
+## [Unreleased]
+
+### Added
+- `research/R33_carrying_charge/`: the carrying charge priced on official
+  vendor lists ($8.09 per memory lapse on the measured store; $0.49-$2.70
+  per 1M dead tokens across four vendors).
+- `research/R34_gtm/` + `research/R34b_gtm_revisit/`: GTM spine, posting
+  schedule v2 (DeepSeek red-teamed), receipt ask template, Show-HN draft.
+- `research/R35_paper/OUTLINE.md`: the paper scope (Status: SCOPING).
+
+### Changed
+- README v2 (2026-10-20): eight-card number wall up top, every card
+  receipt-linked; prose cut by a third; stale status and study count fixed.
+- Report Card site: plain-language token rows, zero-free copy, og/twitter
+  share card (2026-10-20).
+
 ## [0.2.0] - 2026-10-17
 
 ### Added
