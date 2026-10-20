@@ -1,0 +1,52 @@
+TITLE ARRANGEMENT CHECK FOR A SHOW HN LAUNCH (2026-10-20)
+
+Context. We are a two-person research effort launching a paper on Show
+HN in early November. The paper is finished and its title is LOCKED -
+not up for review:
+
+  "Written Twice, Billed Once: The Defect Inside Agent Memory"
+
+The paper's content, in one paragraph: AI agent platforms (Hermes,
+Claude Code, Codex CLI) keep local memory stores. We found a structural
+defect: model reasoning is persisted twice, byte-identical, under two
+column names, on 100 percent of rows that carry it. Beyond the defect,
+90.69 percent of 18.2M stored tokens in our reference store serve no
+future purpose, and because providers bill cache misses at full input
+price, a memory lapse re-transmits that junk at 0.135 to 2.70 USD per
+million tokens (four vendors' official price lists). We removed 37.57
+MB reversibly with zero loss, and measured regrowth at ~431 rows/day.
+The work is receipt-heavy: every number comes from a filed, blinded,
+double-derived study. Repo is public with full measurement record.
+
+The question. Show HN has two surfaces: the link headline (what
+appears in the list; HN prepends "Show HN:") and the first comment
+(the launch comment from the author, where readers land after
+clicking). We must split our two strongest lines across these two
+surfaces. Two arrangements:
+
+  ARRANGEMENT A:
+    Headline: "Show HN: Written Twice, Billed Once: The Defect Inside
+    Agent Memory"
+    First comment opens with the stat wall: "We weighed our agent's
+    memory. 90.69% of 18.2M stored tokens are dead weight. Removing
+    37.57 MB cost nothing. A cache lapse re-bills junk at full price."
+
+  ARRANGEMENT B:
+    Headline: "Show HN: 90.7% of Our AI Agent's Memory Is Dead Weight"
+    First comment opens with the defect line: "Written twice, billed
+    once. That is the defect we found in how agent platforms persist
+    model reasoning..." then the same stat wall follows.
+
+Deliverables:
+- PICK: A or B (or C if you propose a better split - then give the
+  exact headline text and exact first line).
+- REASONING: HN-specific. How do headline stats vs headline hooks
+  perform in the HN list? What does the voting audience click? What
+  makes a launch comment convert readers into repo visitors? Be
+  concrete about HN norms (title restraint, number-led curiosity,
+  anti-marketing filter).
+- RISKS: one risk per arrangement (A risk and B risk).
+
+Constraints: no browsing; judge from HN norms as you know them; be
+decisive - one pick, no hedging between arrangements.
+Your final line, verbatim: R35-HN-TITLE-OK

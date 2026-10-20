@@ -1,0 +1,133 @@
+Query: TITLE ARRANGEMENT CHECK FOR A SHOW HN LAUNCH (2026-10-20)
+
+Context. We are a two-person research effort launching a paper on Show
+HN in early November. The paper is finished and its title is LOCKED -
+not up for review:
+
+  "Written Twice, Billed Once: The Defect Inside Agent Memory"
+
+The paper's content, in one paragraph: AI agent platforms (Hermes,
+Claude Code, Codex CLI) keep local memory stores. We found a structural
+defect: model reasoning is persisted twice, byte-identical, under two
+column names, on 100 percent of rows that carry it. Beyond the defect,
+90.69 percent of 18.2M stored tokens in our reference store serve no
+future purpose, and because providers bill cache misses at full input
+price, a memory lapse re-transmits that junk at 0.135 to 2.70 USD per
+million tokens (four vendors' official price lists). We removed 37.57
+MB reversibly with zero loss, and measured regrowth at ~431 rows/day.
+The work is receipt-heavy: every number comes from a filed, blinded,
+double-derived study. Repo is public with full measurement record.
+
+The question. Show HN has two surfaces: the link headline (what
+appears in the list; HN prepends "Show HN:") and the first comment
+(the launch comment from the author, where readers land after
+clicking). We must split our two strongest lines across these two
+surfaces. Two arrangements:
+
+  ARRANGEMENT A:
+    Headline: "Show HN: Written Twice, Billed Once: The Defect Inside
+    Agent Memory"
+    First comment opens with the stat wall: "We weighed our agent's
+    memory. 90.69% of 18.2M stored tokens are dead weight. Removing
+    37.57 MB cost nothing. A cache lapse re-bills junk at full price."
+
+  ARRANGEMENT B:
+    Headline: "Show HN: 90.7% of Our AI Agent's Memory Is Dead Weight"
+    First comment opens with the defect line: "Written twice, billed
+    once. That is the defect we found in how agent platforms persist
+    model reasoning..." then the same stat wall follows.
+
+Deliverables:
+- PICK: A or B (or C if you propose a better split - then give the
+  exact headline text and exact first line).
+- REASONING: HN-specific. How do headline stats vs headline hooks
+  perform in the HN list? What does the voting audience click? What
+  makes a launch comment convert readers into repo visitors? Be
+  concrete about HN norms (title restraint, number-led curiosity,
+  anti-marketing filter).
+- RISKS: one risk per arrangement (A risk and B risk).
+
+Constraints: no browsing; judge from HN norms as you know them; be
+decisive - one pick, no hedging between arrangements.
+Your final line, verbatim: R35-HN-TITLE-OK
+Initializing agent...
+────────────────────────────────────────
+
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    PICK: B
+    
+    The split: number hook in the headline (drives clicks in the list),
+    memorable defect thesis + stat wall in the first comment (drives
+    conversion to the repo). Exact text:
+    
+      Headline (HN prepends "Show HN:"): "90.7% of Our AI Agent's Memory Is
+    Dead Weight"
+      First comment, first line: "Written twice, billed once. That is the
+    defect we found in how agent platforms persist model reasoning..." then
+    the same stat wall follows.
+    
+    REASONING (HN-specific)
+    
+    The list is a fast-scrolling, judgement-in-under-a-second surface.
+    Readers never open your post to appreciate your title — they vote/skip in
+    the same glance. What wins that glance is a concrete, self-measured
+    number, because it converts instantly to "how did they know that?"
+    curiosity without asking the reader to do any interpretive work.
+    
+    "Written Twice, Billed Once: The Defect Inside Agent Memory" fails that
+    glance test in two ways. First, "Written Twice, Billed Once" is clever
+    but opaque — the reader must translate it before it pays out, and
+    translation in a scroll doesn't happen. Second, "The Defect Inside Agent
+    Memory" is a book-jacket subtitle: it reads as stylized abstraction, and
+    HN's anti-marketing filter is exactly tuned to bounce abstract,
+    self-important phrasing. It doesn't signal substance; it signals a press
+    release. It also happens to be the kind of title that drags the wrong
+    crowd into the thread — generic "here's another AI agent hot take"
+    arguers — before they've seen any receipts.
+    
+    "90.7% of Our AI Agent's Memory Is Dead Weight" is the opposite. It is a
+    precise, non-round, honest number about your OWN system ("Our Agent"),
+    which is the single most HN-native credibility move there is: measured,
+    self-directed, no hype. The odd precision (90.7, not 90) reads as genuine
+    measurement, not a rounded marketing figure. It creates a clean curiosity
+    gap — "how do they know that?" — that the first comment must immediately
+    reward.
+    
+    Which is exactly the handoff B sets up. The first comment is where clicks
+    convert into repo visitors. So put the conversion engine there: open with
+    the punchline ("Written twice, billed once") — the memorable line every
+    reader will echo in the thread and actually quote back at you — then hand
+    them the stat wall with the receipts. Because your launch comment's real
+    job is not to be clever, it's to establish "we filed this, we blinded it,
+    we double-derived it" fast enough that a skeptic scrolls to the repo
+    instead of firing off a "source?" reply. The stat wall does that; the
+    catchy title does not. In B, both surfaces are doing their highest-value
+    job.
+    
+    Title restraint also favors B: 90.7% is exact and small, not an
+    exclamation. It respects the norm that numbers on HN must be true — and
+    they are your whole case.
+    
+    RISK A: The vague, stylized locked-title headline gets scrolled past in
+    the list, so the post never earns the early upvote burst Show HN ranking
+    depends on — your best material never reaches an audience because nobody
+    clicked to see it.
+    
+    RISK B: In a post-HN thread, a few commenters will needle "number-led
+    headline = linkbait" or snipe that the headline buries your actual thesis
+    word ("defect"); the clever "Written Twice, Billed Once" line never
+    appears in the main feed, so readers who never click the post miss it.
+    Mitigation is built-in: your first-line comment surfaces the phrase
+    immediately, and your receipts make the number defensible — but that
+    sniping is the tax B pays.
+    
+    R35-HN-TITLE-OK
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261020_170736_dab99b
+
+Session:        20261020_170736_dab99b
+Duration:       28s
+Messages:       2 (1 user, 0 tool calls)
