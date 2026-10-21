@@ -78,6 +78,7 @@ def main():
             tb = tool_result_bytes(row)
             xb = text_bytes(row)
             tk = 0
+            tu = 0
             msg = row.get("message") or {}
             c = msg.get("content")
             if row.get("type") == "assistant" and isinstance(c, list):
@@ -85,14 +86,14 @@ def main():
                     if isinstance(blk, dict) and blk.get("type") == "thinking":
                         tk += len(json.dumps(blk).encode("utf-8", "replace"))
                     elif isinstance(blk, dict) and blk.get("type") == "tool_use":
-                        tk += len(json.dumps(blk).encode("utf-8", "replace"))
+                        tu += len(json.dumps(blk).encode("utf-8", "replace"))
             ab = len(json.dumps(row).encode("utf-8", "replace")) if row.get("type") == "attachment" else 0
             S["tool_bytes"] += tb
             S["text_bytes"] += xb
             S["thinking_bytes"] += tk
-            S["tool_use_bytes"] += max(0, tk)
+            S["tool_use_bytes"] += tu
             S["attach_bytes"] += ab
-            accounted += tb + xb + tk + ab
+            accounted += tb + xb + tk + tu + ab
         S["scaffolding_bytes"] += max(0, len(raw) - accounted)
         for row in iter_rows(path):
             msg = row.get("message") or {}
@@ -113,6 +114,7 @@ def main():
     print("  dead exhaust:            {:.1f} MB  ({:.1f}%: tool results + spent thinking)".format(mb(S["tool_bytes"] + S["thinking_bytes"]), exhaust_pct))
     print("    tool results:          {:.1f} MB".format(mb(S["tool_bytes"])))
     print("    spent thinking:        {:.1f} MB".format(mb(S["thinking_bytes"])))
+    print("  tool calls (envelopes):  {:.1f} MB  (request records, not classified)".format(mb(S["tool_use_bytes"])))
     print("  answered text (live):    {:.1f} MB".format(mb(S["text_bytes"])))
     print("  attachments:             {:.1f} MB".format(mb(S["attach_bytes"])))
     print("  scaffolding (envelope):  {:.1f} MB".format(mb(S["scaffolding_bytes"])))
@@ -125,6 +127,7 @@ def main():
                 total_mb=round(mb(S["bytes_total"]), 2),
                 tool_exhaust_mb=round(mb(S["tool_bytes"]), 2),
                 thinking_mb=round(mb(S["thinking_bytes"]), 2),
+                tool_use_mb=round(mb(S["tool_use_bytes"]), 2),
                 exhaust_pct=round(exhaust_pct, 2),
                 calls=S["calls"], cache_read=S["cache_read"],
                 cache_create=S["cache_create"], input=S["input"],
