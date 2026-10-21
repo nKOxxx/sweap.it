@@ -6,6 +6,10 @@
 
 **Weigh it. Diet it. Keep it off.**
 
+**AI agents keep a second copy of everything they think, and it can bill you
+again on every memory lapse.** We measured one real store: 90.7% of its
+stored transcript tokens were dead weight.
+
 sweap weighs your AI agent's memory store, diets the dead weight out of it
 reversibly, and watches so it stays off. Local-only, stdlib-only, no network.
 
@@ -20,7 +24,7 @@ reversibly, and watches so it stays off. Local-only, stdlib-only, no network.
 <tr>
 <td align="center" width="25%"><h3>37.57 MB</h3>of dead weight returned in one diet, reversible<br><sub><a href="research/R26_diet_v2_receipt.md">zero rows lost, hash-verified restore (R26)</a></sub></td>
 <td align="center" width="25%"><h3>90.69%</h3>of stored transcript tokens were dead tool output<br><sub><a href="research/artifacts/tokenizer_exact_out.txt">exact count, n=37,813 rows, one host</a></sub></td>
-<td align="center" width="25%"><h3>431 rows/day</h3>is how fast the dead weight grows back<br><sub><a href="research/R25_regrowth_baseline.md">the watcher speaks when it does (R25)</a></sub></td>
+<td align="center" width="25%"><h3>1.6 MB/day</h3>is how fast the dead twins grow back: diet zeroed them, three days later they were re-accreting<br><sub><a href="research/artifacts/regrowth_daily_20261020.jsonl">mirror 26.03 &rarr; 1.36 &rarr; 3.60 &rarr; 4.54 MB, daily ledger</a></sub></td>
 <td align="center" width="25%"><h3>244.1 &rarr; 206.5 MB</h3>the store after that diet, everything intact<br><sub><a href="research/R26_diet_v2_receipt.md">duplicates went, originals stayed</a></sub></td>
 </tr>
 <tr>
@@ -54,7 +58,7 @@ python3 cli/diet.py --dry-run
 ```
 
 No config, no API key, nothing leaves your machine, nothing is modified.
-One real machine's numbers:
+One real machine's numbers (measured 2026-10-17):
 
 ```
 CLASS A - reasoning mirror (dedup, zero loss):
