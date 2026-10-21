@@ -1,7 +1,26 @@
 # Sweeper: Research Log
 
 Product thesis + lab notebook for paper #2. Every entry dated, every number
-measured, nothing invented. Em-dashes banned per house law.
+measured, nothing invented. Em-dash banned per house law.
+
+## 2026-10-21: external audit lands a real classifier bug in weigh_cc; fixed red-before-green
+
+A stranger tested sweap.it and reported: a synthetic transcript holding ONLY
+a tool_use block came back "55.75% dead exhaust." Mechanism confirmed at
+hub: cli/weigh_cc.py lines 83-88 accumulated tool_use envelopes into the
+same counter as thinking blocks (tk), which the output labelled "spent
+thinking" and exhaust_pct counted as dead. The tool_use_bytes field existed
+and was never surfaced. Red reproduced locally: pure-tool_use fixture read
+45.2% exhaust (byte ratio differs, mechanism identical). Fix: split
+counters, tool_use gets its own line ("request records, not classified")
+and card field tool_use_mb. Green: same fixture now 0.0%. Real-store delta
+(founder machine, 1.73 MB, 382 calls): exhaust 24.9% -> 18.4%; 0.11 MB of
+what the old build called dead thinking was tool-call request records.
+CI gate RECEIPT-REPRO-OK unchanged. Credit: external auditor, reported
+2026-10-21. Two of the auditor's three limits were already paper law (disk
+footprint vs billed usage are separate axes; re-billing shown only on
+lapses, never asserted as every-session); the third (Hermes SQLite not
+scanned by weigh_cc) is by design, diet.py owns that store.
 
 ## 2026-10-13: R4C scope verdict: three variants priced, MVP defined, honest desirability
 
