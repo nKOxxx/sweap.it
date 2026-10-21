@@ -43,17 +43,25 @@ reversibly, and watches so it stays off. Local-only, stdlib-only, no network.
 
 ## The weigh-in
 
-One command, 30 seconds, read-only. Claude Code stores need no clone:
+One front door, read-only. It weighs every agent store it finds on the
+machine (Claude Code transcripts, Hermes session DB) and says plainly which
+ones are missing. If it finds nothing you get an honest zero, not an error.
+
+```bash
+git clone https://github.com/nKOxxx/sweap.it && cd sweap.it
+python3 cli/weigh.py
+```
+
+Claude Code only, no clone (weighs the same store):
 
 ```bash
 curl -sL https://raw.githubusercontent.com/nKOxxx/sweap.it/main/cli/weigh_cc.py | python3
 ```
 
-Any other store (reference host: Hermes, `~/.hermes/state.db`), or if you
-prefer the whole repo: Python 3.9+, macOS or Linux, nothing to install.
+Deeper look, or a reversible diet (reference host: Hermes,
+`~/.hermes/state.db`): Python 3.9+, macOS or Linux, nothing to install.
 
 ```bash
-git clone https://github.com/nKOxxx/sweap.it && cd sweap.it
 python3 cli/diet.py --dry-run
 ```
 
@@ -111,6 +119,7 @@ Honest verbs: it finds and cleans, it does not claim to prevent.
 | `cli/diet.py --quarantine` | stage a diet: hashed copies | `~/.sweap/quarantine/` |
 | `cli/diet.py --apply-manifest ID x2` | execute the diet (double flag = human gate) | store, reversible |
 | `cli/diet.py --restore ID` | put every row back, byte-verified | store |
+| `cli/weigh.py` | one front door: weighs every store it finds | nothing |
 | `cli/weigh_cc.py` | weigh-in for Claude Code stores | nothing |
 | `scripts/sweap_regrowth_snapshot.py` | daily scale line | `~/.sweap/` |
 | `scripts/sweap_watcher.py` | the trainer's voice | `~/.sweap/` |
