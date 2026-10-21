@@ -43,10 +43,18 @@ the protocol caught it and the erratum is filed in the repo.
 The tooling is free, Apache-2.0, Python stdlib only, runs offline, no
 account. Two commands:
 
-Weigh (read-only, 30s, Claude Code stores, nothing to clone):
+Weigh (read-only, 30s, one front door: weighs every agent store it
+finds, Claude Code + Hermes, honest zero if none):
+
+  git clone https://github.com/nKOxxx/sweap.it && cd sweap.it
+  python3 cli/weigh.py
+
+Claude Code only, nothing to clone:
+
   curl -sL https://raw.githubusercontent.com/nKOxxx/sweap.it/main/cli/weigh_cc.py | python3
 
 Diet (reversible, gated, hash-verified backup first):
+
   python3 cli/diet.py --dry-run
 
 Don't trust our numbers - re-run them. There's a self-testing receipt
