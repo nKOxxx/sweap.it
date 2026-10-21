@@ -880,3 +880,15 @@ data." Numbers identical to R33 in this repo: Claude $2.70 | GLM-4.6
 $0.49 | MiniMax $0.24 | DeepSeek $0.15-0.29 | Codex n/a. Research-law
 note: this is the first research-derived table on the site, published
 by explicit founder decision.
+
+## 2026-10-21, evening: hardening + authorship + receipt #3
+
+Three founder calls executed same day. (1) repro_receipt.py hardening
+(suggested by the day's external reviewers): the receipt now asserts
+divergent-pair IDENTITY, not just count. build_store returns the planted
+row IDs, classify() re-selects the IDs the tripwire flags, main asserts
+set equality. Green locally: tripwire IDs [61,62,63,64,65] == planted.
+(2) Authorship option 1 locked into DRAFT_v3: Nikola Stojanow sole
+author, swarm contribution line under byline and in Section 2
+disclosure. (3) Receipt #3 filed (issue #4, repro-class, Friend A,
+permission via founder). Real-store board: 2/10.

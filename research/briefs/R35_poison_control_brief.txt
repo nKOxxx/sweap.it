@@ -1,0 +1,17 @@
+MINI DERIVATION - CLAUDE TIER CHARGE (2026-10-20)
+
+Context. Completing a pricing table row. Use ONLY the constants given
+below; no browsing, no outside sources.
+
+Constants (given):
+- Claude Sonnet-class input price: $3.00 per 1M tokens
+- Claude Sonnet-class prompt-cache read price: $0.03 per 1M tokens
+- Reference store resting exhaust: 16,514,707 tokens
+
+Derive:
+1. The carrying charge per 1M junk tokens (input minus cache read).
+2. The full-store charge if the entire resting exhaust is re-read at
+   that charge (state formula and result to 2 decimals).
+
+Show the arithmetic. Keep it under 150 words.
+Your final line, verbatim: R35-POISON-OK

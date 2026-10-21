@@ -1,5 +1,10 @@
 # Written Twice, Billed Once: The Defect Inside Agent Memory
 
+**Nikola Stojanow** (nKOxxx)
+
+*Measured, analyzed, and drafted by the sweap agent swarm under founder
+direction; every number recounted at the hub.*
+
 Draft v3, 2026-10-20. Founder review copy. TITLE LOCKED (founder,
 2026-10-20, twice confirmed). Earlier options retired for the record:
 T1 "Mirrored Twice, Billed Once..." / T2 "Dead Weight in AI Agent
@@ -20,7 +25,8 @@ F9 sweep-vs-diet ledger table added; F10 title presented, founder
 call; F11 "on the public record" scoping; F12 per-model twin table +
 cross-store negative control added. Hub self-catch: re-sent volume
 statistic corrected to median 76,041.5 (v2 said averages 76,044; filed
-census says median). Authorship line: TBD (founder).
+census says median). Authorship: option 1 locked (founder, 2026-10-21):
+Nikola Stojanow sole author; swarm contribution line under the byline.
 
 ## Abstract
 
@@ -118,12 +124,14 @@ Our contributions:
 Three content classes fill agent stores with weight that serves no
 future purpose.
 
-**Authorship disclosure.** The authors are users of the affected
+**Authorship disclosure.** The author is a user of the affected
 platform (Hermes Agent, by Nous Research), not its maintainers or
 affiliates. Every finding here was made from outside the vendor, on a
 production store we run, while measuring our own costs. A user-side
 finding is the point: the defect ships to every user of the platform,
-and no user caused it.
+and no user caused it. The measurement, analysis, and drafting were
+performed by the sweap agent swarm under the author's direction; every
+number in this paper was recounted at the hub before filing.
 
 **Mirror writes (structural).** The Hermes schema stores model
 reasoning in a `reasoning` column and, on the same rows, a

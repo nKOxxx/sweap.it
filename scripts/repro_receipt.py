@@ -74,6 +74,7 @@ def build_store(out_path):
         con.execute("INSERT INTO messages VALUES (?,?,?,?,?,?,?)",
                     (mid, sid, role, content, reasoning, reasoning_content,
                      "2026-10-17 08:05:00"))
+        return mid
 
     # class A: byte twins in ended sessions
     for i in range(TWIN_ROWS_PER_GROUP):
@@ -82,9 +83,11 @@ def build_store(out_path):
         add(1 + i % 10, "assistant", "assistant prose",
             TWIN_TEXT_B, TWIN_TEXT_B)
     # divergent pairs: must never be classified
+    divergent_ids = []
     for i in range(N_DIVERGENT):
-        add(1 + i % 10, "assistant", "assistant prose",
-            "thinking-v1", "thinking-v2-diverged")
+        divergent_ids.append(
+            add(1 + i % 10, "assistant", "assistant prose",
+                "thinking-v1", "thinking-v2-diverged"))
     # assistant rows with NULL reasoning
     for i in range(N_NULL_REASONING):
         add(1 + i % 10, "assistant", "assistant prose")
@@ -100,6 +103,7 @@ def build_store(out_path):
         add(1 + i % 10, "user", "user prose")
     con.commit()
     con.close()
+    return divergent_ids
 
 
 def classify(db_path):
@@ -115,12 +119,12 @@ def classify(db_path):
         "SELECT COUNT(*), COALESCE(SUM(LENGTH(COALESCE(m.content,''))),0) "
         "FROM messages m LEFT JOIN sessions s ON s.id = m.session_id "
         "WHERE m.role='tool' AND s.ended_at IS NOT NULL")
-    diverge = q(
-        "SELECT COUNT(*) FROM messages WHERE role='assistant' "
+    diverge_ids = [r[0] for r in con.execute(
+        "SELECT id FROM messages WHERE role='assistant' "
         "AND reasoning IS NOT NULL AND reasoning_content IS NOT NULL "
-        "AND reasoning != reasoning_content")[0]
+        "AND reasoning != reasoning_content").fetchall()]
     con.close()
-    return twins_n, twins_b, rest_n, rest_b, diverge
+    return twins_n, twins_b, rest_n, rest_b, diverge_ids
 
 
 def run_weighin(db_path):
@@ -164,9 +168,9 @@ def main():
 
     tmp = tempfile.mkdtemp(prefix="sweap_repro_")
     db = os.path.join(tmp, "sweap_repro_demo.db")
-    build_store(db)
+    planted = build_store(db)
 
-    twins_n, twins_b, rest_n, rest_b, diverge = classify(db)
+    twins_n, twins_b, rest_n, rest_b, diverge_ids = classify(db)
     out = run_weighin(db)
     got = parse_weighin(out)
 
@@ -181,7 +185,7 @@ def main():
         ("class A mirror bytes", twins_b, EXPECT_TWINS_B),
         ("class B resting tool rows", rest_n, EXPECT_REST_N),
         ("class B resting bytes", rest_b, EXPECT_REST_B),
-        ("divergent pairs (tripwire must see them)", diverge, EXPECT_DIVERGE),
+        ("divergent pairs (tripwire must see them)", len(diverge_ids), EXPECT_DIVERGE),
     ]
     ok = True
     for name, got_v, exp_v in checks:
@@ -201,6 +205,12 @@ def main():
     good = ("divergent pairs (would be overreach): 5" in out)
     ok = ok and good
     print(f"  [{'OK ' if good else 'MISMATCH'}] dry-run names 5 divergent pairs")
+    # identity, not just count: the flagged IDs must be exactly the planted
+    # ones. A count can be right by coincidence; a set cannot.
+    ident = set(diverge_ids) == set(planted)
+    ok = ok and ident
+    print(f"  [{'OK ' if ident else 'MISMATCH'}] divergent identity: "
+          f"tripwire IDs == planted IDs {sorted(planted)}")
 
     if not a.keep:
         try:
