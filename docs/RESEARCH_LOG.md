@@ -22,6 +22,18 @@ footprint vs billed usage are separate axes; re-billing shown only on
 lapses, never asserted as every-session); the third (Hermes SQLite not
 scanned by weigh_cc) is by design, diet.py owns that store.
 
+## 2026-10-21, later: fix independently re-verified by a second external party
+
+Third party ("DEV") re-tested the weigh_cc fix on their side: "his
+classification fix passed our test." Same-day chain now reads: external
+bug report, hub red-green fix (b78889c), independent external pass.
+DEV's other verdicts adjudicated: "not a proven savings tool" matches
+house labeling exactly (the dry-run's HONEST LEDGER stamps wire savings
+$0.00; paper cost claims are wire-side lapse-basis, never delete-equals-
+savings); "no Hermes adapter yet" is stale, weigh.py and the BC receipt
+(issue #3) shipped the same day. No repo change required; feedback kept
+as external confirmation.
+
 ## 2026-10-13: R4C scope verdict: three variants priced, MVP defined, honest desirability
 
 R4C report 10.4K chars, needle-verified, glyph-clean.
